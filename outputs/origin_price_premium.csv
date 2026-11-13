@@ -1,0 +1,81 @@
+item_id,origin,rel_price,weeks
+apples,Canada,0.987769004489859,231
+apples,Italy,0.8508415554265815,52
+apples,New Zealand,1.455487877244496,60
+apples,United States,1.0,264
+apples,Washington,1.0,265
+asparagus,Canada,0.8531228451461086,42
+asparagus,Mexico,1.0,166
+asparagus,Peru,1.0,232
+avocados,Mexico,1.0,213
+avocados,Peru,1.0,66
+bananas,Costa Rica,1.0,46
+bananas,Ecuador,1.0,209
+blueberries,California,1.0,27
+blueberries,Mexico,1.0,45
+blueberries,United States,1.0,141
+broccoli,California,1.0,36
+broccoli,Canada,0.7745765370138018,68
+broccoli,United States,1.045523984112435,242
+brussels,Canada,1.0,71
+brussels,Mexico,1.0,114
+brussels,United States,1.0,118
+carrots,Canada,1.0,212
+carrots,Mexico,1.041804180418042,27
+carrots,United States,1.0,39
+cauli,California,1.0,158
+cauli,Canada,0.7319756554307116,75
+cauli,Mexico,0.9329378368914386,48
+cauli,United States,1.0,255
+celery,California,1.0,113
+celery,Canada,0.8610909090909091,70
+celery,Mexico,0.9626600627712532,32
+celery,United States,1.0,188
+cucumbers,Canada,1.0,251
+cucumbers,Mexico,1.0,97
+garlic,Mexico,1.0,78
+garlic,Spain,1.0,172
+kale,Canada,1.0,99
+kale,Texas,1.1087184953650668,78
+kale,United States,1.0,127
+lemons,Argentina,1.0,46
+lemons,South Africa,1.0,68
+lemons,Spain,1.0,88
+let_green,California,1.0,100
+let_green,Canada,1.0,83
+let_green,Mexico,0.934190250194517,26
+let_green,United States,1.0,105
+let_ice,California,1.0,102
+let_ice,Canada,0.9035642162679824,99
+let_ice,Mexico,1.0,53
+let_ice,United States,1.0236220472440947,211
+let_rom,California,1.0,137
+let_rom,Canada,1.0,89
+let_rom,United States,1.0,71
+limes,Brazil,1.0,37
+limes,Mexico,1.0,264
+mushrooms,Canada,1.0,256
+onions,Canada,1.0,255
+onions,United States,1.0,173
+parsley,Canada,1.0,64
+parsley,Texas,1.0,100
+parsley,United States,1.0,112
+peppers,Canada,1.0,73
+peppers,Florida,1.1283476009554496,74
+peppers,Mexico,1.0,120
+potatoes,California,1.4149004495825304,82
+potatoes,Canada,0.96875,242
+potatoes,Florida,1.1702092653965321,114
+potatoes,Washington,1.0,66
+raspberries,United States,1.0,221
+spinach,Canada,1.0,61
+spinach,United States,1.0,148
+strawberries,California,1.0,174
+strawberries,United States,1.0,71
+tom_field,Florida,1.0,224
+tom_grape,Canada,1.0,125
+tom_grape,Florida,1.021190130624093,60
+tom_grape,Mexico,1.0,104
+tom_roma,Canada,1.0,57
+tom_roma,Mexico,1.0,238
+zucchini,Mexico,1.0,145

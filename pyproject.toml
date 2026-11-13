@@ -1,0 +1,9 @@
+[tool.ruff]
+line-length = 120
+[tool.ruff.lint]
+select = ["E", "F", "W", "B"]
+ignore = ["E501"]
+[tool.ruff.lint.per-file-ignores]
+"add_native_pivot.py" = ["E402"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]

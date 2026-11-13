@@ -1,0 +1,31 @@
+item_id,display_name,commodity,package,category,unit_note,target_margin,weekly_cases
+tom_roma,Roma tomatoes,"Tomatoes, Plum Type",25 lb cartons loose,Tomatoes,25 lb case,0.28,40
+tom_field,Field tomatoes,Tomatoes,25 lb cartons loose,Tomatoes,25 lb case,0.28,30
+tom_grape,Grape tomatoes,"Tomatoes, Grape Type",flats 12 1-pint containers with lids,Tomatoes,12 x 1 pint,0.30,25
+let_rom,Romaine lettuce,"Lettuce, Romaine",cartons,Leafy & lettuce,case,0.27,45
+let_ice,Iceberg lettuce,"Lettuce, Iceberg",cartons,Leafy & lettuce,case,0.25,25
+let_green,Green leaf lettuce,"Lettuce, Green Leaf",cartons,Leafy & lettuce,case,0.27,20
+spinach,Spinach (bunched),Spinach,cartons bunched,Leafy & lettuce,case,0.30,15
+kale,Kale (bunched),"Greens, Kale",cartons/crates bunched,Leafy & lettuce,case,0.30,12
+parsley,Parsley (bunched),Parsley,cartons bunched,Herbs,case,0.32,15
+broccoli,Broccoli,Broccoli,cartons,Brassicas,case,0.27,30
+cauli,Cauliflower,Cauliflower,cartons film wrapped,Brassicas,case,0.27,20
+brussels,Brussels sprouts,Brussels Sprouts,25 lb cartons,Brassicas,25 lb case,0.28,10
+celery,Celery,Celery,cartons,Staples,case,0.25,30
+carrots,Carrots,Carrots,50 lb sacks loose,Staples,50 lb sack,0.22,35
+onions,Yellow onions,"Onions, Dry",50 lb sacks,Staples,50 lb sack,0.22,50
+potatoes,Potatoes,Potatoes,50 lb cartons,Staples,50 lb case,0.22,45
+garlic,Garlic,Garlic,30 lb cartons,Staples,30 lb case,0.25,10
+cucumbers,English cucumbers,Cucumbers,cartons film wrapped,Greenhouse veg,case,0.27,25
+peppers,Bell peppers,"Peppers, Bell Type",25 lb cartons,Greenhouse veg,25 lb case,0.28,30
+zucchini,Zucchini,"Squash, Zucchini",25 lb containers,Greenhouse veg,25 lb case,0.27,15
+mushrooms,Mushrooms,Mushrooms,5 lb cartons,Specialty,5 lb case,0.30,40
+asparagus,Asparagus,Asparagus,11 lb cartons bunched,Specialty,11 lb case,0.30,15
+avocados,Avocados,Avocados,cartons 1 layer,Fruit,1-layer case,0.28,30
+limes,Limes,Limes,40 lb cartons,Fruit,40 lb case,0.28,15
+lemons,Lemons,Lemons,15 kg cartons,Fruit,15 kg case,0.28,15
+strawberries,Strawberries,Strawberries,flats 8 1-lb containers with lids,Berries,8 x 1 lb,0.30,25
+raspberries,Raspberries,Raspberries,flats 12 6-oz cups with lids,Berries,12 x 6 oz,0.32,12
+blueberries,Blueberries,Blueberries,flats 12 6-oz cups with lids,Berries,12 x 6 oz,0.32,15
+bananas,Bananas,Bananas,40 lb cartons,Fruit,40 lb case,0.20,20
+apples,Apples (tray pack),Apples,cartons tray pack,Fruit,tray-pack case,0.25,15

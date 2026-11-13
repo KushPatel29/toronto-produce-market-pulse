@@ -1,0 +1,122 @@
+{
+  "quotes_raw": 68593,
+  "report_weeks": 269,
+  "date_min": "2017-01-02",
+  "date_max": "2024-01-30",
+  "basket_items": 30,
+  "basket_quotes": 17296,
+  "item_weeks": 7199,
+  "excluded_weeks": [
+    {
+      "date": "2020-08-31",
+      "basket_ratio": 1.3038535438617993,
+      "diagnosis": "prices published in CAD but labelled USD (ratio = USD/CAD)"
+    },
+    {
+      "date": "2023-03-14",
+      "basket_ratio": 1.3836614352638028,
+      "diagnosis": "prices published in CAD but labelled USD (ratio = USD/CAD)"
+    },
+    {
+      "date": "2023-04-25",
+      "basket_ratio": 1.815585815246293,
+      "diagnosis": "prices converted twice (ratio = USD/CAD squared)"
+    },
+    {
+      "date": "2023-05-02",
+      "basket_ratio": 1.843699410095112,
+      "diagnosis": "prices converted twice (ratio = USD/CAD squared)"
+    }
+  ],
+  "basket_change_2019_2023_geo": 0.09966150796905904,
+  "items_up_2019_2023": 22,
+  "items_compared": 28,
+  "index_2023_avg": 110.66425901186399,
+  "index_2019_avg": 97.45376243115135,
+  "policy": {
+    "band": {
+      "avg_margin": 0.2648,
+      "margin_sd": 0.1264,
+      "breach_rate": 0.1164,
+      "changes_per_year": 22.6996
+    },
+    "monthly": {
+      "avg_margin": 0.2472,
+      "margin_sd": 0.1946,
+      "breach_rate": 0.1959,
+      "changes_per_year": 12.7919
+    },
+    "weekly": {
+      "avg_margin": 0.2636,
+      "margin_sd": 0.1253,
+      "breach_rate": 0.1156,
+      "changes_per_year": 51.449
+    }
+  },
+  "cadence_counts": {
+    "weekly": 21,
+    "band": 6,
+    "monthly": 3
+  },
+  "wape_1wk": {
+    "blend": 0.0899,
+    "ma4": 0.1195,
+    "naive": 0.0762,
+    "seasonal_naive": 0.0956,
+    "ses": 0.0971
+  },
+  "budget_wape_3m": {
+    "flat": 0.2837,
+    "seasonal": 0.2604
+  },
+  "budget_wape_6m": {
+    "flat": 0.2728,
+    "seasonal": 0.2405
+  },
+  "budget": [
+    {
+      "scenario": "base",
+      "revenue": 1880609.94,
+      "cogs": 1374497.35,
+      "gross_margin": 506112.59,
+      "gm_pct": 0.27,
+      "gm_vs_base": 0.0
+    },
+    {
+      "scenario": "cad_weaker_5pct",
+      "revenue": 1946094.96,
+      "cogs": 1426832.55,
+      "gross_margin": 519262.41,
+      "gm_pct": 0.27,
+      "gm_vs_base": 13149.82
+    },
+    {
+      "scenario": "lettuce_tomato_shock",
+      "revenue": 1898924.7,
+      "cogs": 1400919.55,
+      "gross_margin": 498005.14,
+      "gm_pct": 0.26,
+      "gm_vs_base": -8107.45
+    },
+    {
+      "scenario": "handling_up_10pct",
+      "revenue": 1880609.94,
+      "cogs": 1382277.52,
+      "gross_margin": 498332.42,
+      "gm_pct": 0.26,
+      "gm_vs_base": -7780.17
+    },
+    {
+      "scenario": "volume_down_5pct",
+      "revenue": 1786579.44,
+      "cogs": 1305772.48,
+      "gross_margin": 480806.96,
+      "gm_pct": 0.27,
+      "gm_vs_base": -25305.63
+    }
+  ],
+  "spike_p90": {
+    "Leafy & lettuce": 1.383,
+    "Tomatoes": 1.414
+  }
+}
