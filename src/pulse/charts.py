@@ -222,3 +222,60 @@ def tornado(sens: pd.DataFrame, path):
     fig.tight_layout()
     fig.savefig(path, dpi=160)
     plt.close(fig)
+
+
+def terms_risk(seg: pd.DataFrame, path):
+    d = seg.sort_values("breach_rate")
+    fig, axes = plt.subplots(1, 2, figsize=(9, 2.9), sharey=True)
+    for ax, col, title, fmt, scale in [
+        (axes[0], "breach_rate", "Weeks >10 pts under target margin (%)", "{:.0f}%", 100),
+        (axes[1], "sd", "Monthly margin swing vs target (sd, pts)", "{:.1f}", 1),
+    ]:
+        v = d[col] * scale
+        ax.barh(
+            d.segment
+            + "\n"
+            + d.pricing_policy.map({"weekly": "weekly sheet", "band": "band rule", "monthly": "fixed monthly list"}),
+            v,
+            color=BLUE,
+            height=0.55,
+        )
+        for y, x in enumerate(v):
+            ax.text(x + v.max() * 0.02, y, fmt.format(x), va="center", fontsize=9, color=INK)
+        ax.set_xlim(0, v.max() * 1.18)
+        ax.grid(axis="y", visible=False)
+        ax.set_title(title, loc="left", fontsize=10)
+        ax.tick_params(axis="y", labelsize=8)
+    fig.tight_layout()
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+
+
+def margin_variance(mv: pd.DataFrame, path):
+    d = mv.assign(m=pd.to_datetime(mv.month)).set_index("m")
+    fig, ax = plt.subplots(figsize=(9, 3.4))
+    pos = lambda s: s.clip(lower=0) / 1000  # noqa: E731
+    neg = lambda s: s.clip(upper=0) / 1000  # noqa: E731
+    a, b = d.var_cost_timing, d.var_price_hold
+    ax.bar(d.index, pos(a), width=22, color=BLUE, label="Cost timing (one-week quote lag)")
+    ax.bar(d.index, pos(b), width=22, bottom=pos(a), color=ORANGE, label="Price hold (list or band terms)")
+    ax.bar(d.index, neg(a), width=22, color=BLUE)
+    ax.bar(d.index, neg(b), width=22, bottom=neg(a), color=ORANGE)
+    ax.axhline(0, color=INK2, lw=0.8)
+    ax.axvspan(pd.Timestamp("2021-05-01"), pd.Timestamp("2022-10-31"), color=MID, zorder=0)
+    w = d.var_total.idxmin()
+    ax.annotate(
+        f"{w:%b %Y}: {d.gap_pts[w]:.0f} pts vs target\n(lettuce cost tripled in one week)",
+        xy=(w, d.var_total[w] / 1000),
+        xytext=(pd.Timestamp("2019-06-01"), d.var_total[w] / 1000 + 1),
+        arrowprops=dict(arrowstyle="-", color=INK2, lw=0.8),
+        fontsize=8,
+        color=INK,
+    )
+    ax.set_ylabel("Gross margin vs target ($k CAD)")
+    ax.grid(axis="x", visible=False)
+    ax.legend(frameon=False, fontsize=8, loc="upper left", ncol=2)
+    ax.set_title("Monthly gross margin against target, by cause", loc="left")
+    fig.tight_layout()
+    fig.savefig(path, dpi=160)
+    plt.close(fig)

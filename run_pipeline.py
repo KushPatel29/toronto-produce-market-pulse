@@ -170,6 +170,69 @@ def charts():
     ch.tornado(pd.read_csv(OUT / "budget_sensitivity.csv"), img / "budget_tornado.png")
 
 
+def terms():
+    """Customer pricing terms on real costs, margin-variance bridge, ERP price list and the star schema."""
+    from pulse import charts as ch
+    from pulse import datamodel as dm
+    from pulse import terms as tm
+    from pulse.panel import build
+
+    _, _, panel, _ = build(save=False)
+    basket = pd.read_csv("config/basket.csv")
+    segs = pd.read_csv("config/customer_terms.csv")
+    sd = tm.replay(panel, basket, segs)
+    pnl = segs[["segment_id", "segment", "pricing_policy"]].merge(
+        tm.segment_pnl(sd).merge(tm.monthly_gap_spread(sd), on="segment_id"), on="segment_id"
+    )
+    mvar = tm.monthly_variance(sd)
+    yvar = tm.variance_by(sd.assign(year=sd.date.dt.year), ["year"])
+    whatif = tm.contract_whatif(panel, basket, segs, sd)
+    pnl.to_csv(OUT / "terms_profitability.csv", index=False)
+    tm.segment_category(sd).to_csv(OUT / "terms_category_profitability.csv", index=False)
+    mvar.to_csv(OUT / "margin_variance_by_month.csv", index=False)
+    yvar.to_csv(OUT / "margin_variance_by_year.csv", index=False)
+    tm.variance_by(sd, ["category"]).to_csv(OUT / "margin_variance_by_category.csv", index=False)
+    whatif.to_csv(OUT / "contract_escalator_whatif.csv", index=False)
+    plist = tm.price_list(sd, basket, segs, REPORT_WEEKS[0])
+    plist.to_csv(OUT / f"erp_price_list_upload_{REPORT_WEEKS[0]}.csv", index=False)
+    star = OUT / "star_schema"
+    db = star / "market_pulse.sqlite"
+    star.mkdir(exist_ok=True)
+    dm.build(dm.tables(panel, basket, segs, sd), db, star)
+    for q in ["01_terms_profitability", "02_margin_variance_by_month", "03_reprice_list"]:
+        dm.run_query(db, f"{q}.sql").to_csv(star / f"query_{q}.csv", index=False)
+    alt = tm.replay(panel, basket, segs[segs.segment_id == "contract"], {"contract": "band"})
+    worst = mvar.sort_values("gap_pts").iloc[0]
+    facts = {
+        "terms": pnl.set_index("segment_id")[["gm_pct", "target_pct", "gap_pts", "breach_rate", "sd", "worst", "best"]]
+        .round(4)
+        .to_dict("index"),
+        "contract_band_breach_rate": round(float(alt.breach.mean()), 4),
+        "worst_month": {
+            k: (v if isinstance(v, str) else round(float(v), 2))
+            for k, v in worst[["month", "gap_pts", "var_total", "var_cost_timing", "var_price_hold"]].items()
+        },
+        "variance_total": round(float(sd.var_total.sum()), 2),
+        "variance_cost_timing": round(float(sd.var_cost_timing.sum()), 2),
+        "variance_price_hold": round(float(sd.var_price_hold.sum()), 2),
+        "timing_share_of_abs_monthly_variance": round(
+            float(mvar.var_cost_timing.abs().sum() / (mvar.var_cost_timing.abs() + mvar.var_price_hold.abs()).sum()), 4
+        ),
+        "months_timing_larger": round(float((mvar.var_cost_timing.abs() > mvar.var_price_hold.abs()).mean()), 4),
+        "revenue_replayed": round(float(sd.revenue.sum()), 2),
+        "item_weeks_scored": int(len(sd)),
+        "price_list_rows": int(len(plist)),
+        "price_list_week": REPORT_WEEKS[0],
+    }
+    (OUT / "terms_facts.json").write_text(json.dumps(facts, indent=2), encoding="utf-8")
+    img = OUT / "img"
+    ch.terms_risk(pnl, img / "terms_risk.png")
+    ch.margin_variance(mvar, img / "margin_variance.png")
+    print(json.dumps({k: facts[k] for k in ["terms", "contract_band_breach_rate", "worst_month"]}, indent=1))
+    return facts
+
+
 if __name__ == "__main__":
     main()
     charts()
+    terms()

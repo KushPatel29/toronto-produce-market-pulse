@@ -1,0 +1,57 @@
+{
+  "terms": {
+    "fine_dining": {
+      "gm_pct": 0.2984,
+      "target_pct": 0.2978,
+      "gap_pts": 0.054,
+      "breach_rate": 0.1076,
+      "sd": 2.0321,
+      "worst": -7.9956,
+      "best": 6.0376
+    },
+    "casual": {
+      "gm_pct": 0.2697,
+      "target_pct": 0.2678,
+      "gap_pts": 0.1967,
+      "breach_rate": 0.113,
+      "sd": 2.1779,
+      "worst": -8.3529,
+      "best": 6.5297
+    },
+    "hotels": {
+      "gm_pct": 0.2797,
+      "target_pct": 0.2778,
+      "gap_pts": 0.1959,
+      "breach_rate": 0.1117,
+      "sd": 2.1529,
+      "worst": -8.275,
+      "best": 6.4402
+    },
+    "contract": {
+      "gm_pct": 0.2285,
+      "target_pct": 0.2277,
+      "gap_pts": 0.0755,
+      "breach_rate": 0.1919,
+      "sd": 5.7759,
+      "worst": -20.0669,
+      "best": 10.8829
+    }
+  },
+  "contract_band_breach_rate": 0.117,
+  "worst_month": {
+    "month": "2018-11",
+    "gap_pts": -10.22,
+    "var_total": -11966.53,
+    "var_cost_timing": -9936.8,
+    "var_price_hold": -2029.73
+  },
+  "variance_total": 10246.84,
+  "variance_cost_timing": 4440.22,
+  "variance_price_hold": 5806.62,
+  "timing_share_of_abs_monthly_variance": 0.7242,
+  "months_timing_larger": 0.8769,
+  "revenue_replayed": 7922862.05,
+  "item_weeks_scored": 27928,
+  "price_list_rows": 92,
+  "price_list_week": "2024-01-30"
+}

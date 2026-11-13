@@ -1,0 +1,5 @@
+segment_id,segment,volume_share,margin_adj,pricing_policy,terms
+fine_dining,Independent & fine dining,0.30,0.03,weekly,Weekly market price sheet
+casual,Casual & chain restaurants,0.35,0.00,band,Price held until margin drifts 5 pts
+hotels,Hotels & catering,0.15,0.01,band,Price held until margin drifts 5 pts
+contract,Institutional contracts,0.20,-0.04,monthly,Fixed monthly contract price list

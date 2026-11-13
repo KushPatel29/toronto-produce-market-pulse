@@ -17,6 +17,8 @@ from pulse import pricing as pr  # noqa: E402
 from pulse import report as rp  # noqa: E402
 from pulse import commercial as cm  # noqa: E402
 from pulse import procurement as pc  # noqa: E402
+from pulse import datamodel as dm  # noqa: E402
+from pulse import terms as ct  # noqa: E402
 
 st.set_page_config(page_title="Toronto Produce Market Pulse", page_icon="🥬", layout="wide")
 
@@ -51,7 +53,24 @@ def budget_base(panel, rows, basket, shrink):
     return bg.build_budget(panel, rows, basket, shrink=shrink)
 
 
+@st.cache_data
+def terms_replay(_panel, _basket):
+    segs = pd.read_csv(ROOT / "config/customer_terms.csv")
+    return segs, ct.replay(_panel, _basket, segs)
+
+
+@st.cache_resource
+def star_db(_panel, _basket):
+    import tempfile
+
+    segs, d = terms_replay(_panel, _basket)
+    path = Path(tempfile.gettempdir()) / "market_pulse_app.sqlite"
+    dm.build(dm.tables(_panel, _basket, segs, d), path)
+    return path
+
+
 basket, panel, rows, facts, dq = load()
+tfacts = json.loads((OUT / "terms_facts.json").read_text(encoding="utf-8"))
 idx, chg, si, vol, detail, summ, rec = derived(panel, basket)
 names = dict(zip(basket.item_id, basket.display_name, strict=True))
 ids = {v: k for k, v in names.items()}
@@ -94,6 +113,7 @@ tabs = st.tabs(
         "Method & data quality",
         "Customer & pricing desk",
         "Supplier comparison",
+        "Customer terms & margin variance",
     ]
 )
 
@@ -517,7 +537,20 @@ Budget-horizon results and seasonal-strength validation are downloadable from th
         w.rename(columns={"flat": "Flat (WAPE)", "seasonal": "Half-strength seasonal (WAPE)"}).style.format("{:.1%}"),
         width="stretch",
     )
-    st.caption("Reproduce everything: `python run_pipeline.py && python build_workbook.py && pytest -q`")
+    st.subheader("Data model and SQL")
+    st.markdown(
+        "The real-cost pricing replay is also built as a star schema (`sql/star_schema/schema.sql`): `dim_item`, "
+        "`dim_segment`, `dim_date`, `fact_market_price` and `fact_sales_price`. The pipeline writes it to SQLite and to "
+        "CSVs for Power BI (`outputs/star_schema/`, measures in `powerbi/measures.dax`). The queries below run live on it."
+    )
+    qname = st.selectbox(
+        "Star-schema query",
+        ["01_terms_profitability.sql", "02_margin_variance_by_month.sql", "03_reprice_list.sql"],
+        key="sqlq",
+    )
+    st.code((ROOT / "sql" / "star_schema" / qname).read_text(encoding="utf-8"), language="sql")
+    st.dataframe(dm.run_query(star_db(panel, basket), qname), width="stretch", height=280, hide_index=True)
+    st.caption("Reproduce everything: `python run_pipeline.py && python build_commercial_demo.py && pytest -q`")
 
 # ---------------------------------------------------------------- 8. commercial decision workflow
 with tabs[7]:
@@ -606,3 +639,168 @@ with tabs[8]:
         st.dataframe(evaluated, hide_index=True)
     st.download_button("Download supplier review queue", supplier_queue.to_csv(index=False), "SYNTHETIC_supplier_review.csv")
     st.download_button("Download evaluated supplier bids", evaluated.to_csv(index=False), "SYNTHETIC_supplier_evaluation.csv")
+
+# ---------------------------------------------------------------- 10. customer terms & margin variance
+with tabs[9]:
+    segs, sd = terms_replay(panel, basket)
+    st.markdown(
+        "Four customer types buy the basket on different pricing terms. Prices are replayed on the real weekly cost path, "
+        "so the difference between segments comes from how each set of terms copes with real market moves. "
+        "Segment terms and volume shares are assumptions (`config/customer_terms.csv`). These are not the synthetic customers on the pricing desk."
+    )
+    spnl = segs[["segment_id", "segment", "pricing_policy", "terms"]].merge(ct.segment_pnl(sd), on="segment_id")
+    spnl = spnl.merge(ct.monthly_gap_spread(sd), on="segment_id")
+    k = st.columns(4)
+    con = spnl.set_index("segment_id").loc["contract"]
+    others = spnl[spnl.segment_id != "contract"]
+    k[0].metric(
+        "Gross margin, all segments",
+        f"{spnl.gm.sum() / spnl.revenue.sum():.1%}",
+        help="Seven years of replayed weekly pricing, 2017-2024.",
+    )
+    k[1].metric(
+        "Contract weeks >10 pts under target",
+        f"{con.breach_rate:.0%}",
+        delta=f"{con.breach_rate - others.breach_rate.mean():+.0%} vs other segments",
+        delta_color="inverse",
+    )
+    k[2].metric(
+        "Contract monthly margin swing",
+        f"{con.sd:.1f} pts",
+        help="Standard deviation of monthly gross margin % around target.",
+    )
+    k[3].metric("Worst contract month", f"{con.worst:.0f} pts vs target")
+    st.dataframe(
+        spnl.set_index("segment")[["terms", "revenue", "gm_pct", "target_pct", "breach_rate", "sd", "worst"]]
+        .rename(
+            columns={
+                "terms": "Pricing terms",
+                "revenue": "Revenue",
+                "gm_pct": "GM %",
+                "target_pct": "Target GM %",
+                "breach_rate": "Weeks >10 pts under",
+                "sd": "Monthly swing (pts)",
+                "worst": "Worst month (pts)",
+            }
+        )
+        .style.format(
+            {
+                "Revenue": "${:,.0f}",
+                "GM %": "{:.1%}",
+                "Target GM %": "{:.1%}",
+                "Weeks >10 pts under": "{:.0%}",
+                "Monthly swing (pts)": "{:.1f}",
+                "Worst month (pts)": "{:.1f}",
+            }
+        ),
+        width="stretch",
+    )
+    st.info(
+        "Every segment lands on target over seven years; the difference is risk. A fixed monthly contract list "
+        f"spends {con.breach_rate:.0%} of item-weeks more than 10 points under target. Replayed with a band-rule escalator clause, "
+        f"that falls to {tfacts['contract_band_breach_rate']:.0%}."
+    )
+
+    st.subheader("Gross margin against target, by month and cause")
+    seg_pick = st.multiselect("Segments", list(segs.segment), default=list(segs.segment), key="var_segs")
+    cat_pick = st.multiselect(
+        "Categories", sorted(basket.category.unique()), default=[], key="var_cats", placeholder="All categories"
+    )
+    f = sd[sd.segment_id.isin(segs[segs.segment.isin(seg_pick)].segment_id)]
+    if cat_pick:
+        f = f[f.category.isin(cat_pick)]
+    if f.empty:
+        st.warning("Pick at least one segment.")
+    else:
+        mv = ct.monthly_variance(f)
+        long = mv.melt("month", ["var_cost_timing", "var_price_hold"], var_name="cause", value_name="cad")
+        long["cause"] = long.cause.map(
+            {"var_cost_timing": "Cost timing (one-week quote lag)", "var_price_hold": "Price hold (list or band terms)"}
+        )
+        long["month"] = pd.to_datetime(long.month)
+        st.altair_chart(
+            alt.Chart(long)
+            .mark_bar(width=6)
+            .encode(
+                x=alt.X("month:T", title=None),
+                y=alt.Y("sum(cad):Q", title="GM vs target (CAD)", stack="zero"),
+                color=alt.Color(
+                    "cause:N", scale=alt.Scale(range=[BLUE, ORANGE]), legend=alt.Legend(orient="bottom", title=None)
+                ),
+                tooltip=[alt.Tooltip("month:T", format="%b %Y"), "cause", alt.Tooltip("cad:Q", format="$,.0f")],
+            )
+            .properties(height=300),
+            width="stretch",
+        )
+        w = mv.sort_values("gap_pts").head(5)[
+            ["month", "revenue", "gm_pct", "target_pct", "gap_pts", "var_cost_timing", "var_price_hold"]
+        ]
+        st.caption("Five worst months for this selection")
+        st.dataframe(
+            w.rename(
+                columns={
+                    "month": "Month",
+                    "revenue": "Revenue",
+                    "gm_pct": "GM %",
+                    "target_pct": "Target %",
+                    "gap_pts": "Gap (pts)",
+                    "var_cost_timing": "Cost timing",
+                    "var_price_hold": "Price hold",
+                }
+            )
+            .set_index("Month")
+            .style.format(
+                {
+                    "Revenue": "${:,.0f}",
+                    "GM %": "{:.1%}",
+                    "Target %": "{:.1%}",
+                    "Gap (pts)": "{:.1f}",
+                    "Cost timing": "${:,.0f}",
+                    "Price hold": "${:,.0f}",
+                }
+            ),
+            width="stretch",
+        )
+        st.caption(
+            "Cost timing: quotes go out on last week's cost, so a week where cost jumps costs margin under any terms. "
+            "Price hold: the extra cost of keeping a list or band price instead of resetting to last week's cost. "
+            "The two add up exactly to gross margin minus gross margin at target."
+        )
+
+    st.subheader("Contract escalator clause: what it would change")
+    wi = ct.contract_whatif(panel, basket, segs, sd)
+    st.dataframe(
+        wi.set_index("category")
+        .rename(
+            columns={
+                "gm_pct_monthly": "GM %, monthly list",
+                "gm_pct_band": "GM %, band clause",
+                "breach_monthly": "Breach weeks, monthly",
+                "breach_band": "Breach weeks, band",
+                "gm_gain": "GM change ($)",
+            }
+        )
+        .style.format(
+            {
+                "GM %, monthly list": "{:.1%}",
+                "GM %, band clause": "{:.1%}",
+                "Breach weeks, monthly": "{:.0%}",
+                "Breach weeks, band": "{:.0%}",
+                "GM change ($)": "${:,.0f}",
+            }
+        ),
+        width="stretch",
+    )
+
+    st.subheader("ERP price-list upload")
+    weeks_b = sorted(sd.date.dt.date.unique(), reverse=True)
+    wk = st.selectbox("Effective week", weeks_b[:-1], key="pl_week")
+    plist = ct.price_list(sd, basket, segs, str(wk))
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Price lines", len(plist))
+    c2.metric("Increases", int((plist.reason == "COST_UP").sum()))
+    c3.metric("Decreases", int((plist.reason == "COST_DOWN").sum()))
+    st.dataframe(plist, width="stretch", height=300, hide_index=True)
+    st.download_button(
+        "Download price-list CSV", plist.to_csv(index=False), file_name=f"price_list_{wk}.csv", mime="text/csv"
+    )

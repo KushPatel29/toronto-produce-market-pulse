@@ -1,0 +1,31 @@
+item_id,item_name,category,uom,target_margin,weekly_cases
+tom_roma,Roma tomatoes,Tomatoes,25 lb case,0.28,40
+tom_field,Field tomatoes,Tomatoes,25 lb case,0.28,30
+tom_grape,Grape tomatoes,Tomatoes,12 x 1 pint,0.3,25
+let_rom,Romaine lettuce,Leafy & lettuce,case,0.27,45
+let_ice,Iceberg lettuce,Leafy & lettuce,case,0.25,25
+let_green,Green leaf lettuce,Leafy & lettuce,case,0.27,20
+spinach,Spinach (bunched),Leafy & lettuce,case,0.3,15
+kale,Kale (bunched),Leafy & lettuce,case,0.3,12
+parsley,Parsley (bunched),Herbs,case,0.32,15
+broccoli,Broccoli,Brassicas,case,0.27,30
+cauli,Cauliflower,Brassicas,case,0.27,20
+brussels,Brussels sprouts,Brassicas,25 lb case,0.28,10
+celery,Celery,Staples,case,0.25,30
+carrots,Carrots,Staples,50 lb sack,0.22,35
+onions,Yellow onions,Staples,50 lb sack,0.22,50
+potatoes,Potatoes,Staples,50 lb case,0.22,45
+garlic,Garlic,Staples,30 lb case,0.25,10
+cucumbers,English cucumbers,Greenhouse veg,case,0.27,25
+peppers,Bell peppers,Greenhouse veg,25 lb case,0.28,30
+zucchini,Zucchini,Greenhouse veg,25 lb case,0.27,15
+mushrooms,Mushrooms,Specialty,5 lb case,0.3,40
+asparagus,Asparagus,Specialty,11 lb case,0.3,15
+avocados,Avocados,Fruit,1-layer case,0.28,30
+limes,Limes,Fruit,40 lb case,0.28,15
+lemons,Lemons,Fruit,15 kg case,0.28,15
+strawberries,Strawberries,Berries,8 x 1 lb,0.3,25
+raspberries,Raspberries,Berries,12 x 6 oz,0.32,12
+blueberries,Blueberries,Berries,12 x 6 oz,0.32,15
+bananas,Bananas,Fruit,40 lb case,0.2,20
+apples,Apples (tray pack),Fruit,tray-pack case,0.25,15

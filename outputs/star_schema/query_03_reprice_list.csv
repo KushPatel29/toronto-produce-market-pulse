@@ -1,0 +1,37 @@
+item_name,segment,current_price,landed_cost,margin_now,target_margin,price_at_target,action
+Zucchini,Institutional contracts,53.93,65.12,-0.207,0.23,84.57,RAISE
+Asparagus,Institutional contracts,69.07,66.17,0.042,0.26,89.42,RAISE
+Yellow onions,Institutional contracts,35.07,35.19,-0.003,0.18,42.91,RAISE
+Zucchini,Casual & chain restaurants,74.49,65.12,0.126,0.27,89.2,RAISE
+Zucchini,Hotels & catering,75.52,65.12,0.138,0.28,90.44,RAISE
+Zucchini,Independent & fine dining,77.68,65.12,0.162,0.3,93.02,RAISE
+Field tomatoes,Institutional contracts,62.35,53.57,0.141,0.24,70.48,RAISE
+Yellow onions,Independent & fine dining,42.64,35.19,0.175,0.25,46.91,RAISE
+Yellow onions,Casual & chain restaurants,41.45,35.19,0.151,0.22,45.11,RAISE
+Yellow onions,Hotels & catering,41.98,35.19,0.162,0.23,45.7,RAISE
+Potatoes,Institutional contracts,30.51,26.79,0.122,0.18,32.67,RAISE
+Iceberg lettuce,Institutional contracts,55.43,46.61,0.159,0.21,59.0,RAISE
+Asparagus,Independent & fine dining,107.42,66.17,0.384,0.33,98.76,ROOM TO SHARPEN
+Asparagus,Casual & chain restaurants,102.81,66.17,0.356,0.3,94.53,ROOM TO SHARPEN
+Asparagus,Hotels & catering,104.3,66.17,0.366,0.31,95.9,ROOM TO SHARPEN
+Roma tomatoes,Independent & fine dining,62.97,39.39,0.374,0.31,57.09,ROOM TO SHARPEN
+Cauliflower,Institutional contracts,56.69,39.65,0.301,0.23,51.49,ROOM TO SHARPEN
+Cauliflower,Independent & fine dining,63.59,39.65,0.377,0.3,56.64,ROOM TO SHARPEN
+Cauliflower,Hotels & catering,61.82,39.65,0.359,0.28,55.07,ROOM TO SHARPEN
+Raspberries,Hotels & catering,72.39,42.8,0.409,0.33,63.88,ROOM TO SHARPEN
+Cauliflower,Casual & chain restaurants,60.98,39.65,0.35,0.27,54.31,ROOM TO SHARPEN
+Raspberries,Casual & chain restaurants,71.33,42.8,0.4,0.32,62.94,ROOM TO SHARPEN
+Blueberries,Independent & fine dining,60.89,34.66,0.431,0.35,53.32,ROOM TO SHARPEN
+Raspberries,Independent & fine dining,75.25,42.8,0.431,0.35,65.85,ROOM TO SHARPEN
+Blueberries,Casual & chain restaurants,58.21,34.66,0.405,0.32,50.97,ROOM TO SHARPEN
+Brussels sprouts,Independent & fine dining,59.88,36.24,0.395,0.31,52.52,ROOM TO SHARPEN
+Brussels sprouts,Hotels & catering,58.19,36.24,0.377,0.29,51.04,ROOM TO SHARPEN
+Brussels sprouts,Casual & chain restaurants,57.38,36.24,0.369,0.28,50.33,ROOM TO SHARPEN
+Parsley (bunched),Institutional contracts,75.06,47.39,0.369,0.28,65.83,ROOM TO SHARPEN
+Roma tomatoes,Hotels & catering,63.45,39.39,0.379,0.29,55.48,ROOM TO SHARPEN
+Roma tomatoes,Casual & chain restaurants,62.57,39.39,0.37,0.28,54.71,ROOM TO SHARPEN
+Blueberries,Hotels & catering,60.59,34.66,0.428,0.33,51.73,ROOM TO SHARPEN
+Blueberries,Institutional contracts,56.38,34.66,0.385,0.28,48.14,ROOM TO SHARPEN
+Roma tomatoes,Institutional contracts,67.43,39.39,0.416,0.24,51.83,ROOM TO SHARPEN
+Brussels sprouts,Institutional contracts,67.6,36.24,0.464,0.24,47.68,ROOM TO SHARPEN
+Strawberries,Institutional contracts,67.63,33.09,0.511,0.26,44.71,ROOM TO SHARPEN

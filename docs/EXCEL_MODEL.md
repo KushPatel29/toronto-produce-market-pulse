@@ -19,3 +19,7 @@ The combined FX/supply cost multiplier is shifted by calendar month to determine
 - Rendered and inspected all five sheets. The workbook is saved on Summary with Base selected.
 
 Base annual revenue is CAD 1,623,277.57, COGS CAD 1,188,115.15 and gross margin CAD 435,162.42. The supply-shock illustration produces gross margin CAD 443,672.64 under fixed-volume cost-plus assumptions. That model result is not a claim that a supply disruption improves actual business outcomes: demand response and customer contract constraints are not estimated.
+
+## Margin variance and customer terms workbook
+
+`outputs/Margin_Variance_and_Terms.xlsx` is rebuilt by `python build_terms_workbook.py` from the pipeline outputs. Sheets: Terms_Profitability (GM % and gap to target by customer pricing terms), Margin_Variance (monthly bridge), ERP_Price_List (item × price group upload for the last report week) and Contract_Escalator. Ratios, variances and the Check columns are live formulas; every Check is 0 and the totals match `outputs/terms_facts.json`. Recalculated with no formula errors.

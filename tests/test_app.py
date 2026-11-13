@@ -10,7 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_app_default_and_commercial_and_budget_controls():
     app = AppTest.from_file(str(ROOT / "app.py"), default_timeout=90).run()
     assert not app.exception
-    assert len(app.tabs) == 9
+    assert len(app.tabs) == 10
+    assert any("Customer terms & margin variance" == tab.label for tab in app.tabs)
     assert any("Customer & pricing desk" == tab.label for tab in app.tabs)
     assert any("Supplier comparison" == tab.label for tab in app.tabs)
     for slider in app.slider:
@@ -42,3 +43,18 @@ def test_app_default_and_commercial_and_budget_controls():
             break
     app.run()
     assert not app.exception
+
+
+def test_app_terms_tab_and_star_schema_controls():
+    app = AppTest.from_file(str(ROOT / "app.py"), default_timeout=90).run()
+    app.multiselect(key="var_cats").set_value(["Leafy & lettuce"]).run()
+    app.multiselect(key="var_segs").set_value(["Institutional contracts"]).run()
+    assert not app.exception
+    week = app.selectbox(key="pl_week")
+    week.set_value(week.options[5]).run()
+    for q in ["02_margin_variance_by_month.sql", "03_reprice_list.sql"]:
+        app.selectbox(key="sqlq").set_value(q).run()
+    assert not app.exception
+    app.multiselect(key="var_segs").set_value([]).run()
+    assert not app.exception
+    assert any("Pick at least one" in w.value for w in app.warning)

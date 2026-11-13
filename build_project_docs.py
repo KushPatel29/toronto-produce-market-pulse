@@ -10,6 +10,10 @@ OUT = ROOT / "outputs"
 def main():
     f = json.loads((OUT / "headline_facts.json").read_text(encoding="utf-8"))
     c = json.loads((OUT / "commercial_demo/validation_summary.json").read_text(encoding="utf-8"))
+    t = json.loads((OUT / "terms_facts.json").read_text(encoding="utf-8"))
+    tc = t["terms"]["contract"]
+    others = [t["terms"][k]["breach_rate"] for k in ("fine_dining", "casual", "hotels")]
+    wm = t["worst_month"]
     policy_rows = "\n".join(
         f"| {label} | {f['policy'][key]['breach_rate']:.1%} | {f['policy'][key]['changes_per_year']:.1f} |"
         for key, label in [("monthly", "Monthly list"), ("band", "Margin band"), ("weekly", "Weekly repricing")]
@@ -18,7 +22,7 @@ def main():
 
 Pricing, market intelligence and procurement decisions for a foodservice produce distributor.
 
-[Open the live app](https://toronto-fresh-market-pulse.streamlit.app) · [Stakeholder briefing](outputs/Produce_Pricing_Decision_Brief.pptx) · [Excel decision model](outputs/Pricing_Decision_Workbook.xlsx)
+[Open the live app](https://toronto-fresh-market-pulse.streamlit.app) · [Stakeholder briefing](outputs/Produce_Pricing_Decision_Brief.pptx) · [Excel decision model](outputs/Pricing_Decision_Workbook.xlsx) · [Margin variance workbook](outputs/Margin_Variance_and_Terms.xlsx) · [Power BI model](powerbi/README.md)
 
 **Historical portfolio case study.** Public terminal quotes run from {f['date_min']} to {f['date_max']}. Customers, competitors, suppliers, demand, freight and spoilage are synthetic assumptions. No Bondi company data, actual ERP integration or realised business savings are claimed.
 
@@ -30,6 +34,7 @@ Pricing, market intelligence and procurement decisions for a foodservice produce
 4. **Customer & pricing desk:** net prices after discounts/rebates, contribution after variable service costs, segment-specific competitor comparisons and explicit review thresholds.
 5. **Supplier comparison:** three fictional suppliers compared on full order cost, usable yield, MOQ, capacity, lead time, reliability and quote validity. Escalate items with no feasible single supplier.
 6. **Finance and stakeholder reporting:** reconciled contribution bridge, generated written brief, SQLite views and editable Excel/PowerPoint deliverables.
+7. **Customer terms & margin variance:** four customer types on weekly, band or fixed monthly terms, replayed on real costs; monthly margin variance split into cost timing and price hold; contract escalator test; ERP-style price-list upload for any week.
 
 ## What the evidence supports
 
@@ -47,19 +52,29 @@ Cadence choices are retrospective selections on the same history, not validated 
 
 **Forecasts versus a baseline.** In the calendar-2023 budget holdout, half-strength seasonality has 3-month WAPE {f['budget_wape_3m']['seasonal']:.1%} versus flat {f['budget_wape_3m']['flat']:.1%}; 6-month WAPE is {f['budget_wape_6m']['seasonal']:.1%} versus flat {f['budget_wape_6m']['flat']:.1%}. Strength 0.5 remains the narrow joint minimum over 3/6-month validation horizons with origins in 2019–2020. Seasonal estimates use complete 12-month item-years with equal month weights. Weekly horizons are calendar days with a two-day report tolerance; training years precede each origin.
 
+**Customer terms change risk, not margin.** Four customer types buy the basket on different terms, replayed on real weekly costs with the same gap rules as the policy backtest. Each lands within 0.2 points of its target margin over the cycle, but a fixed monthly contract list spends {tc['breach_rate']:.1%} of scored weeks more than 10 points under target, against {min(others):.1%}–{max(others):.1%} for the others, and its monthly margin swings {tc['sd']:.1f} points against about 2. A band-rule escalator clause cuts contract breach weeks to {t['contract_band_breach_rate']:.1%}. Customer shares and terms are assumptions in `config/customer_terms.csv`, separate from the synthetic pricing-desk customers.
+
+![Breach weeks and margin swing by customer terms](outputs/img/terms_risk.png)
+
+**Margin variance by cause.** Gross margin minus margin at target splits exactly into *cost timing* (quotes go out on last week's cost) and *price hold* (the extra cost of keeping a list or band price). Month by month, cost timing is {t['timing_share_of_abs_monthly_variance']:.0%} of the absolute swing and the larger cause in {t['months_timing_larger']:.0%} of months. The worst month, {wm['month']}, was {abs(wm['gap_pts']):.1f} points under target when lettuce costs tripled in one week; CAD {-wm['var_cost_timing']:,.0f} of the CAD {-wm['var_total']:,.0f} shortfall was cost timing. The bridge reconciles in Python, SQL and Excel.
+
+![Monthly margin variance by cause](outputs/img/margin_variance.png)
+
 **Commercial reconciliation.** The latest synthetic week has CAD {c['revenue']:,.0f} revenue and CAD {c['contribution']:,.0f} contribution. Independent SQL/Python contribution totals agree within CAD 0.001. Contribution includes variable delivery/spoilage and excludes fixed overhead; historical policy gross margin uses a different cost basis.
 
 ## Evidence for the role
 
 | Skill | Reviewable evidence |
 |---|---|
-| Python, analysis and BI | Nine-tab Streamlit/Altair app; calendar backtests; scenario modules |
+| Python, analysis and BI | Ten-tab Streamlit/Altair app; calendar backtests; scenario modules |
+| Power BI-ready model | Star schema (`sql/star_schema/`) exported to CSV with DAX measures and relationships in `powerbi/`; no .pbix file is claimed |
+| Margin variance | Monthly bridge: cost timing + price hold = gross margin − margin at target, tested to reconcile in Python, SQL and Excel |
 | Advanced Excel | New editable decision model, formulas and customer summary; [Excel verification](docs/EXCEL_MODEL.md) |
 | Financial analysis | Reconciled contribution bridge; revenue-weighted customer and product margins |
 | Market/competitor intelligence | Public historical quotes and segment-specific synthetic net-price comparisons |
 | Procurement | Yield/freight-adjusted order costs with capacity and service constraints |
-| ERP-style data / SQL | Validated synthetic sales schema, SQLite facts/dimension and financial views |
-| Communication | Generated stakeholder brief and editable five-slide PowerPoint briefing |
+| ERP-style data / SQL | Validated synthetic sales schema, SQLite facts/dimension and financial views; star-schema queries; ERP-style price-list upload file |
+| Communication | Generated stakeholder brief and editable seven-slide PowerPoint briefing |
 | Automation / detail | Deterministic exports, source checksums, regression tests, app controls and CI |
 
 [Full JD map and interview walkthrough](docs/ROLE_COVERAGE.md). Work samples cannot establish a degree, industry tenure or real employer collaboration.
@@ -70,6 +85,8 @@ Cadence choices are retrospective selections on the same history, not validated 
 python -m pip install -r requirements-lock.txt
 python run_pipeline.py
 python build_commercial_demo.py
+python build_terms_workbook.py
+python add_terms_slides.py
 python build_project_docs.py
 python build_report_page.py
 python validate_release.py
@@ -78,7 +95,7 @@ ruff check .
 streamlit run app.py
 ```
 
-Tested on Python 3.12. CSV/Markdown/SQLite/HTML files regenerate from committed sources. Excel and PowerPoint are editable delivery snapshots. The original 13-sheet workbook is retained separately as a historical artifact.
+Tested on Python 3.12. CSV/Markdown/SQLite/HTML files regenerate from committed sources. The decision workbook and the five base briefing slides are editable delivery snapshots; the margin-variance workbook and the two customer-terms slides are rebuilt by script. The original 13-sheet workbook is retained separately as a historical artifact.
 
 ```
 src/pulse/panel.py        cleaning, FX and retrospective anomaly detection
@@ -88,7 +105,11 @@ src/pulse/forecast.py     calendar origins and prior-year training
 src/pulse/budget.py       scenarios and lagged shock reversal
 src/pulse/commercial.py   net-price comparability and customer contribution
 src/pulse/procurement.py  synthetic supplier feasibility and order cost
+src/pulse/terms.py        customer pricing terms, margin-variance bridge, ERP price list
+src/pulse/datamodel.py    star schema -> SQLite and Power BI CSVs
 sql/commercial_views.sql financial and customer views
+sql/star_schema/          star schema and three analysis queries
+powerbi/                  DAX measures and model notes
 outputs/commercial_demo/ exports and SQLite database
 ```
 

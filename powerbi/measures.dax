@@ -1,0 +1,66 @@
+// Power BI measures for the Market Pulse star schema (load the CSVs in outputs/powerbi/).
+// Relationships (single direction, many-to-one):
+//   fact_sales_price[item_id]    -> dim_item[item_id]
+//   fact_sales_price[segment_id] -> dim_segment[segment_id]
+//   fact_sales_price[date_key]   -> dim_date[date_key]
+//   fact_market_price[item_id]   -> dim_item[item_id]
+//   fact_market_price[date_key]  -> dim_date[date_key]
+
+Revenue = SUMX ( fact_sales_price, fact_sales_price[sell_price] * fact_sales_price[cases] )
+
+COGS = SUMX ( fact_sales_price, fact_sales_price[landed_cost] * fact_sales_price[cases] )
+
+Gross Margin = [Revenue] - [COGS]
+
+GM % = DIVIDE ( [Gross Margin], [Revenue] )
+
+GM at Target =
+SUMX (
+    fact_sales_price,
+    fact_sales_price[sell_price] * fact_sales_price[cases] * fact_sales_price[target_margin]
+)
+
+Target GM % = DIVIDE ( [GM at Target], [Revenue] )
+
+Margin Variance = [Gross Margin] - [GM at Target]
+
+Margin Gap (pts) = ( [GM %] - [Target GM %] ) * 100
+
+Variance - Cost Timing =
+SUMX (
+    fact_sales_price,
+    fact_sales_price[cases] * ( fact_sales_price[prior_cost] - fact_sales_price[landed_cost] )
+)
+
+Variance - Price Hold =
+SUMX (
+    fact_sales_price,
+    fact_sales_price[cases]
+        * ( fact_sales_price[sell_price] * ( 1 - fact_sales_price[target_margin] ) - fact_sales_price[prior_cost] )
+)
+
+// Share of item-weeks where realised margin sits more than 10 points under target
+Breach Rate =
+AVERAGEX (
+    fact_sales_price,
+    IF (
+        1 - DIVIDE ( fact_sales_price[landed_cost], fact_sales_price[sell_price] )
+            < fact_sales_price[target_margin] - 0.10,
+        1,
+        0
+    )
+)
+
+Price Changes = SUM ( fact_sales_price[price_changed] )
+
+Avg Terminal Price (CAD) = AVERAGE ( fact_market_price[terminal_cad] )
+
+Terminal Price vs Prior Year =
+VAR cur = [Avg Terminal Price (CAD)]
+VAR py =
+    CALCULATE (
+        [Avg Terminal Price (CAD)],
+        FILTER ( ALL ( dim_date ), dim_date[year] = MAX ( dim_date[year] ) - 1 ),
+        VALUES ( dim_item[item_id] )
+    )
+RETURN DIVIDE ( cur - py, py )
