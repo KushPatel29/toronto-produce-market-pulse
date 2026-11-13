@@ -75,10 +75,11 @@ flowchart LR
     D --> G[Forecast and budget<br/>backtests, FY scenarios, sensitivity]
     D --> H[Margin variance<br/>cost timing vs price hold]
     S[Synthetic sales, competitor<br/>and supplier data] --> I[Pricing desk and procurement<br/>net price, contribution, supplier feasibility]
-    E & F & G & H & I --> J[Streamlit app]
-    E & F & G & H & I --> K[Excel models]
-    E & F & G & H & I --> L[SQL star schema + Power BI measures]
-    E & F & G & H & I --> M[Weekly market update + briefing deck]
+    E & F & G & H & I --> O[(Validated outputs<br/>CSV, SQLite, JSON<br/>tested and reconciled)]
+    O --> J[Streamlit app]
+    O --> K[Excel models]
+    O --> L[SQL star schema +<br/>Power BI measures]
+    O --> M[Weekly market update +<br/>briefing deck]
 ```
 
 ## What the evidence supports
