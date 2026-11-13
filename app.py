@@ -27,6 +27,19 @@ OUT = ROOT / "outputs"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
+
+def money(v: float) -> str:
+    """Whole-dollar CAD with the sign in front: -$9,937, not $-9,937."""
+    return f"-${abs(v):,.0f}" if v < 0 else f"${v:,.0f}"
+
+
+def break_gaps(df: pd.DataFrame, days: int = 14) -> pd.DataFrame:
+    """Number each run of weekly observations so charts never draw a line across a gap in the source."""
+    df = df.sort_values("date").copy()
+    df["run"] = (df.date.diff().dt.days > days).cumsum()
+    return df
+
+
 @st.cache_data
 def load():
     basket = pd.read_csv(ROOT / "config/basket.csv")
@@ -226,7 +239,7 @@ with tabs[1]:
 with tabs[2]:
     nm = st.selectbox("Item", basket.display_name, index=list(basket.display_name).index("Romaine lettuce"))
     item = ids[nm]
-    s = panel[panel.item_id == item].sort_values("date")
+    s = break_gaps(panel[panel.item_id == item])
     v = vol.set_index("item_id").loc[item]
     r = rec.set_index("item_id").loc[item]
     k = st.columns(4)
@@ -240,7 +253,7 @@ with tabs[2]:
     band = (
         alt.Chart(s)
         .mark_area(color=BLUE, opacity=0.15)
-        .encode(x=alt.X("date:T", title=None), y=alt.Y("low_cad:Q", title="CAD per case"), y2="high_cad:Q")
+        .encode(x=alt.X("date:T", title=None), y=alt.Y("low_cad:Q", title="CAD per case"), y2="high_cad:Q", detail="run:N")
     )
     ln = (
         alt.Chart(s)
@@ -248,6 +261,7 @@ with tabs[2]:
         .encode(
             x="date:T",
             y="price_cad:Q",
+            detail="run:N",
             tooltip=[
                 alt.Tooltip("date:T", format="%Y-%m-%d"),
                 alt.Tooltip("price_cad:Q", format="$.2f", title="Typical price"),
@@ -258,6 +272,7 @@ with tabs[2]:
         )
     )
     st.altair_chart((band + ln).properties(height=300, title=f"{nm}: weekly price and low-high range"), width="stretch")
+    st.caption("Breaks in the line are weeks with no Toronto quote for this item, including the April 2021 - November 2022 source gap.")
     a, b = st.columns(2)
     if item in si.index:
         sd = pd.DataFrame({"month": MONTHS, "index": si.loc[item].values})
@@ -384,8 +399,8 @@ with tabs[4]:
         ["B_2022_2024", "A_2017_2021"],
         format_func={"A_2017_2021": "2017-2021", "B_2022_2024": "2022-2024"}.get,
     )
-    d = detail[(detail.item_id == ids[nm]) & (detail.policy == polname) & (detail.period == period)]
-    long = d.melt("date", ["cost", "price"], var_name="series", value_name="cad")
+    d = break_gaps(detail[(detail.item_id == ids[nm]) & (detail.policy == polname) & (detail.period == period)])
+    long = d.melt(["date", "run"], ["cost", "price"], var_name="series", value_name="cad")
     long["series"] = long.series.map({"cost": "Landed cost", "price": "Sell price"})
     c2.altair_chart(
         alt.Chart(long)
@@ -396,6 +411,7 @@ with tabs[4]:
             color=alt.Color(
                 "series:N", scale=alt.Scale(range=[ORANGE, BLUE]), legend=alt.Legend(orient="bottom", title=None)
             ),
+            detail="run:N",
             tooltip=[alt.Tooltip("date:T", format="%Y-%m-%d"), "series", alt.Tooltip("cad:Q", format="$.2f")],
         )
         .properties(height=280),
@@ -725,7 +741,9 @@ with tabs[9]:
                 x=alt.X("month:T", title=None),
                 y=alt.Y("sum(cad):Q", title="GM vs target (CAD)", stack="zero"),
                 color=alt.Color(
-                    "cause:N", scale=alt.Scale(range=[BLUE, ORANGE]), legend=alt.Legend(orient="bottom", title=None)
+                    "cause:N",
+                    scale=alt.Scale(range=[BLUE, ORANGE]),
+                    legend=alt.Legend(orient="bottom", title=None, labelLimit=400),
                 ),
                 tooltip=[alt.Tooltip("month:T", format="%b %Y"), "cause", alt.Tooltip("cad:Q", format="$,.0f")],
             )
@@ -755,8 +773,8 @@ with tabs[9]:
                     "GM %": "{:.1%}",
                     "Target %": "{:.1%}",
                     "Gap (pts)": "{:.1f}",
-                    "Cost timing": "${:,.0f}",
-                    "Price hold": "${:,.0f}",
+                    "Cost timing": money,
+                    "Price hold": money,
                 }
             ),
             width="stretch",
@@ -786,7 +804,7 @@ with tabs[9]:
                 "GM %, band clause": "{:.1%}",
                 "Breach weeks, monthly": "{:.0%}",
                 "Breach weeks, band": "{:.0%}",
-                "GM change ($)": "${:,.0f}",
+                "GM change ($)": money,
             }
         ),
         width="stretch",
