@@ -10,6 +10,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 from pulse import commercial as cm  # noqa: E402
+from pulse import procurement as pc  # noqa: E402
 
 
 def main():
@@ -21,6 +22,8 @@ def main():
     competitors = cm.demo_competitors(sales)
     recs = cm.recommendations(sales, competitors)
     alerts = cm.procurement_alerts(panel, sales.date.max())
+    bids = pc.demo_supplier_bids(panel, basket, sales.date.max())
+    evaluated_bids, supplier_recs = pc.compare_supplier_bids(bids, basket, sales.date.max())
     tables = {
         "SYNTHETIC_sales": sales,
         "SYNTHETIC_competitors": competitors,
@@ -28,6 +31,9 @@ def main():
         "procurement_alerts": alerts,
         "contribution_variance_bridge": cm.variance_bridge(sales),
         "customer_profitability": cm.profitability(sales),
+        "SYNTHETIC_supplier_bids": bids,
+        "supplier_bid_evaluation": evaluated_bids,
+        "supplier_review_queue": supplier_recs,
     }
     for name, table in tables.items():
         table.to_csv(out / f"{name}.csv", index=False)
@@ -37,6 +43,7 @@ def main():
         basket.to_sql("dim_item", conn, if_exists="replace", index=False)
         panel.to_sql("fact_market_quotes", conn, if_exists="replace", index=False)
         competitors.to_sql("fact_competitor_quotes", conn, if_exists="replace", index=False)
+        bids.to_sql("fact_supplier_bids", conn, if_exists="replace", index=False)
         conn.executescript((ROOT / "sql" / "commercial_views.sql").read_text(encoding="utf-8"))
         sql_total = conn.execute("SELECT SUM(contribution) FROM v_customer_margin").fetchone()[0]
         py_total = cm.profitability(sales).contribution.sum()
@@ -49,6 +56,7 @@ def main():
         contribution=float(py_total), sql_contribution=float(sql_total),
         finance_review_candidates=int((recs.approval == "Finance + Sales review").sum()),
         procurement_review_items=int(alerts.review.sum()),
+        supplier_items_requiring_escalation=int(supplier_recs.supplier.eq("No feasible single supplier").sum()),
     )
     (out / "validation_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print(json.dumps(summary, indent=2))

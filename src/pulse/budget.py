@@ -25,6 +25,7 @@ def import_share(rows: pd.DataFrame) -> pd.DataFrame:
 
 def base_levels(panel: pd.DataFrame, si: pd.DataFrame, weeks: int = 8) -> pd.Series:
     p = panel[panel.period == "B_2022_2024"].sort_values("date")
+    p = p[p.item_id.isin(si.index) & (p.date >= panel.date.max() - pd.Timedelta(weeks=weeks))]
     last = p.groupby("item_id").tail(weeks).copy()
     last["deseason"] = last.apply(lambda r: r.price_cad / si.loc[r.item_id, r.date.month], axis=1)
     return last.groupby("item_id").deseason.mean()
@@ -75,7 +76,13 @@ def historical_spike_quantiles(panel: pd.DataFrame, cats=("Leafy & lettuce", "To
         .price_cad.mean()
         .reset_index()
     )
-    p["trail"] = p.groupby("item_id").price_cad.transform(lambda s: s.rolling(12, min_periods=8).mean().shift(1))
+    # Calendar months, not the last 12 observations: missing periods stay missing.
+    p["trail"] = np.nan
+    for _, g in p.groupby("item_id"):
+        s = g.set_index("m").price_cad
+        calendar = s.reindex(pd.period_range(s.index.min(), s.index.max(), freq="M"))
+        trail = calendar.shift(1).rolling(12, min_periods=8).mean()
+        p.loc[g.index, "trail"] = g.m.map(trail).to_numpy()
     p["ratio"] = p.price_cad / p.trail
     q = p[p.category.isin(cats)].dropna().groupby("category").ratio.quantile([0.5, 0.9, 0.95]).unstack()
     q.columns = ["p50", "p90", "p95"]
@@ -83,28 +90,18 @@ def historical_spike_quantiles(panel: pd.DataFrame, cats=("Leafy & lettuce", "To
 
 
 def apply_scenario(bud: pd.DataFrame, name: str) -> pd.DataFrame:
-    d = bud.copy()
     if name == "base":
-        pass
-    elif name == "cad_weaker_5pct":  # import cost +5% on the imported share from Feb; prices catch up in Mar
-        f = 1 + 0.05 * d.import_share
-        d["landed_cost"] *= f
-        d["sell_price"] *= np.where(d.month == d.month.min(), 1.0, f)
-    elif name == "lettuce_tomato_shock":  # +40% cost for Mar-Apr on leafy + tomatoes, prices lag 1 month
-        hit = d.category.isin(["Leafy & lettuce", "Tomatoes"]) & d.month.isin(["2024-03", "2024-04"])
-        d.loc[hit, "landed_cost"] *= 1.40
-        lag = hit & (d.month == "2024-03")  # March priced off February cost; April repriced
-        d.loc[hit & ~lag, "sell_price"] *= 1.40
+        return custom_scenario(bud)
+    elif name == "cad_weaker_5pct":
+        return custom_scenario(bud, fx_shock=0.05)
+    elif name == "lettuce_tomato_shock":
+        return custom_scenario(bud, supply_shock=0.40)
     elif name == "handling_up_10pct":  # freight/fuel allowance +10%, not passed to customers
-        d["landed_cost"] *= (1 + HANDLING * 1.10) / (1 + HANDLING)
+        return custom_scenario(bud, handling_up=0.10)
     elif name == "volume_down_5pct":
-        d["cases"] *= 0.95
+        return custom_scenario(bud, volume_change=-0.05)
     else:
         raise ValueError(name)
-    d["revenue"] = d.sell_price * d.cases
-    d["cogs"] = d.landed_cost * d.cases
-    d["gross_margin"] = d.revenue - d.cogs
-    return d
 
 
 SCENARIOS = ["base", "cad_weaker_5pct", "lettuce_tomato_shock", "handling_up_10pct", "volume_down_5pct"]
@@ -129,15 +126,22 @@ def scenario_table(bud: pd.DataFrame) -> pd.DataFrame:
 
 
 def sensitivity(bud: pd.DataFrame) -> pd.DataFrame:
-    """One-at-a-time swings on annual gross margin dollars."""
+    """One-at-a-time annual gross-margin deltas, re-evaluated by the scenario engine."""
     base = bud.gross_margin.sum()
     rev, cogs = bud.revenue.sum(), bud.cogs.sum()
-    cases_gm = base
+    cats = tuple(bud.category.unique())
+    months = tuple(bud.month.unique())
+    immediate = [custom_scenario(bud, supply_shock=x, shock_categories=cats,
+                                shock_months=months, price_lag_months=0).gross_margin.sum() - base
+                 for x in [-0.10, 0.10]]
+    lagged = [custom_scenario(bud, supply_shock=x, shock_categories=cats,
+                             shock_months=months, price_lag_months=1).gross_margin.sum() - base
+              for x in [-0.10, 0.10]]
     rows = [
-        ("Volume +/-10%", cases_gm * 0.10, -cases_gm * 0.10),
+        ("Volume +/-10%", base * 0.10, -base * 0.10),
         ("Achieved margin +/-2 pts", rev * 0.02, -rev * 0.02),
-        ("Produce cost +/-10%, passed through", base * 0.10, -base * 0.10),
-        ("Produce cost +/-10%, held 1 month", (cogs * 0.10) / 12, -(cogs * 0.10) / 12),
+        ("Cost +/-10%, immediate pass-through", max(immediate), min(immediate)),
+        ("Cost +/-10%, one-month price lag", max(lagged), min(lagged)),
         ("Handling allowance +/-1 pt, absorbed", (cogs / (1 + HANDLING)) * 0.01, -(cogs / (1 + HANDLING)) * 0.01),
     ]
     t = pd.DataFrame(rows, columns=["driver", "upside", "downside"])
@@ -155,20 +159,33 @@ def custom_scenario(
     volume_change: float = 0.0,
     price_lag_months: int = 1,
 ) -> pd.DataFrame:
-    """All levers at once. Cost shocks hit immediately; sell prices catch up after price_lag_months
-    (0 = same month). Handling increases are absorbed (not priced)."""
+    """Apply shocks and shift their combined price multiplier by calendar months.
+
+    Both the onset AND reversal are delayed. The baseline seasonal price path is
+    unchanged; only the scenario multiplier is lagged. Pre-horizon multiplier = 1.
+    Handling increases are absorbed and demand is fixed apart from volume_change.
+    """
+    shocks = [fx_shock, supply_shock, handling_up, volume_change]
+    if not np.isfinite(shocks).all() or any(x < -1 for x in shocks):
+        raise ValueError("Scenario changes must be finite and at least -100%")
+    if not isinstance(price_lag_months, (int, np.integer)) or not 0 <= price_lag_months <= 12:
+        raise ValueError("Price lag must be an integer from 0 to 12 months")
+    if bud.duplicated(["item_id", "month"]).any():
+        raise ValueError("Budget must be unique by item and month")
     d = bud.copy()
-    months = sorted(d.month.unique())
-    lagged = set(months[:price_lag_months])
     fx = 1 + fx_shock * d.import_share
-    d["landed_cost"] *= fx
-    d["sell_price"] *= np.where(d.month.isin(lagged), 1.0, fx)
-    if supply_shock:
-        sm = sorted(shock_months)
-        hit = d.category.isin(shock_categories) & d.month.isin(sm)
-        lag = hit & d.month.isin(sm[:price_lag_months])
-        d.loc[hit, "landed_cost"] *= 1 + supply_shock
-        d.loc[hit & ~lag, "sell_price"] *= 1 + supply_shock
+    hit = d.category.isin(shock_categories) & d.month.isin(shock_months)
+    d["cost_multiplier"] = fx * np.where(hit, 1 + supply_shock, 1.0)
+    periods = pd.PeriodIndex(d.month, freq="M")
+    multipliers = pd.Series(d.cost_multiplier.to_numpy(), index=pd.MultiIndex.from_arrays([d.item_id, periods]))
+    lag_keys = pd.MultiIndex.from_arrays([d.item_id, periods - price_lag_months])
+    # Missing months inside the supplied horizon cannot silently become a neutral multiplier.
+    missing_inside = ~lag_keys.isin(multipliers.index) & ((periods - price_lag_months) >= periods.min())
+    if missing_inside.any():
+        raise ValueError("Budget has missing item/month history needed for the selected price lag")
+    d["price_multiplier"] = multipliers.reindex(lag_keys, fill_value=1.0).to_numpy()
+    d["landed_cost"] *= d.cost_multiplier
+    d["sell_price"] *= d.price_multiplier
     d["landed_cost"] *= (1 + HANDLING * (1 + handling_up)) / (1 + HANDLING)
     d["cases"] *= 1 + volume_change
     d["revenue"] = d.sell_price * d.cases

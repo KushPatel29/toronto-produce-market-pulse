@@ -83,7 +83,7 @@ def price_change(chg: pd.DataFrame, path):
             color=INK,
         )
     ax.axvline(0, color=INK2, lw=0.8)
-    ax.set_title("Average CAD price per case, 2023 vs 2019", loc="left")
+    ax.set_title("Matched-month CAD case prices, 2023 vs 2019 (10+ shared months)", loc="left")
     ax.set_xlabel("% change")
     ax.grid(axis="y", visible=False)
     lo, hi = ax.get_xlim()
@@ -126,7 +126,7 @@ def policies(summ: pd.DataFrame, path):
         axs,
         [
             ("breach_rate", "Weeks >10 pts below target margin", "{:.0%}"),
-            ("changes_per_year", "Customer price changes per year", "{:.0f}"),
+            ("changes_per_year", "Price changes per 52 scored observations", "{:.0f}"),
             ("avg_margin", "Average realised margin", "{:.1%}"),
         ],
         strict=True,

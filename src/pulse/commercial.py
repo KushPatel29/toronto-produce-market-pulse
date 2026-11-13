@@ -55,6 +55,11 @@ def demo_sales(panel, basket, week=None):
 
 
 def validate_sales(sales):
+    """Return a canonical copy; reject unusable keys and financial records.
+
+    Dates are daily UTC-naive keys. Numeric CSV strings are accepted and converted,
+    so passing validation also guarantees that subsequent arithmetic is numeric.
+    """
     required = {
         "date", "item_id", "customer", "target_margin", "budget_cases", "actual_cases",
         "budget_net_price", "actual_net_price", "budget_unit_cost", "actual_unit_cost",
@@ -62,25 +67,42 @@ def validate_sales(sales):
     missing = required - set(sales.columns)
     if missing:
         raise ValueError(f"Missing required fields: {', '.join(sorted(missing))}")
-    if sales.empty or sales.duplicated(["date", "item_id", "customer"]).any():
+    d = sales.copy()
+    for key in ["item_id", "customer"]:
+        if d[key].isna().any() or not d[key].map(lambda v: isinstance(v, str) and bool(v.strip())).all():
+            raise ValueError(f"{key} must contain nonempty text keys")
+        d[key] = d[key].str.strip()
+    d["date"] = pd.to_datetime(d.date, errors="coerce", format="mixed", utc=True).dt.tz_localize(None).dt.normalize()
+    if d.date.isna().any():
+        raise ValueError("Sales dates must be valid")
+    if d.empty or d.duplicated(["date", "item_id", "customer"]).any():
         raise ValueError("Sales must be nonempty and unique by date, item and customer")
     numeric = list(required - {"date", "item_id", "customer"})
+    numeric += [c for c in ["discount", "rebate", "spoilage_rate", "actual_list_price", "service_cost_per_case"]
+                if c in d.columns]
     try:
-        values = sales[numeric].to_numpy(dtype=float)
+        for col in numeric:
+            if d[col].map(lambda v: isinstance(v, (bool, np.bool_))).any():
+                raise ValueError("Boolean financial values are not valid")
+            d[col] = pd.to_numeric(d[col], errors="raise")
+        values = d[numeric].to_numpy(dtype=float)
     except (ValueError, TypeError) as exc:
         raise ValueError("Financial fields must be numeric") from exc
     if not np.isfinite(values).all() or (values < 0).any():
         raise ValueError("Financial values must be finite and nonnegative")
-    if (sales[["budget_net_price", "actual_net_price"]] <= 0).any().any():
+    if (d[["budget_net_price", "actual_net_price"]] <= 0).any().any():
         raise ValueError("Net prices must be positive")
-    if not sales.target_margin.between(0, 0.95, inclusive="left").all():
+    if not d.target_margin.between(0, 0.95, inclusive="left").all():
         raise ValueError("Target margin must be at least zero and below 95%")
+    for col in ["discount", "rebate", "spoilage_rate"]:
+        if col in d.columns and not d[col].between(0, 1, inclusive="left").all():
+            raise ValueError(f"{col} must be at least zero and below 100%")
+    return d
 
 
 def profitability(sales):
     """Contribution after illustrative variable delivery/spoilage, before fixed overhead."""
-    validate_sales(sales)
-    d = sales.copy()
+    d = validate_sales(sales)
     d["revenue"] = d.actual_cases * d.actual_net_price
     d["variable_cost"] = d.actual_cases * d.actual_unit_cost
     d["contribution"] = d.revenue - d.variable_cost
@@ -106,13 +128,19 @@ def variance_bridge(sales):
 
 
 def demo_competitors(sales):
-    """Five fictional comparators; identical item/package/CAD basis for demo only."""
+    """Five fictional competitors with segment-specific net quotes, not list prices.
+
+    The same fictional companies quote each customer segment. Comparator prices
+    include the simulated customer's discounts/rebates through actual_net_price.
+    """
+    sales = validate_sales(sales)
     rows = []
-    for _, r in sales.groupby("item_id", sort=True).first().reset_index().iterrows():
+    for _, r in sales.sort_values(["date", "item_id", "customer"]).iterrows():
         for i, factor in enumerate([0.94, 0.98, 1.00, 1.03, 1.08], 1):
             rows.append(dict(
-                item_id=r.item_id, unit=r.unit, currency="CAD", quote_date=r.date,
-                competitor=f"Demo comparator {i}", price=r.budget_net_price * factor,
+                item_id=r.item_id, customer=r.customer, unit=r.unit, currency="CAD", quote_date=r.date,
+                competitor=f"Demo comparator {i}", price=r.actual_net_price * factor,
+                price_basis="net_after_discounts_rebates",
                 data_status="SYNTHETIC; not observed competitor pricing",
             ))
     return pd.DataFrame(rows)
@@ -122,22 +150,42 @@ def recommendations(sales, competitors, max_increase=0.10):
     """Cost-plus quote guidance with explicit approvals; no automated price changes.
 
     Competitor median +5% is an illustrative review threshold, not an optimum.
-    Only same-unit CAD quotes dated within the previous 14 days are comparable.
+    Only same-segment, same-unit, net CAD quotes dated within the previous 14 days
+    are comparable. One latest quote per competitor is used; contradictory prices
+    for the same competitor/date are excluded rather than averaged.
     """
     if not 0 <= max_increase <= 1:
         raise ValueError("Max increase must be between 0 and 100%")
     d = profitability(sales)
+    required = {"item_id", "customer", "unit", "currency", "quote_date", "competitor", "price", "price_basis"}
+    if missing := required - set(competitors.columns):
+        raise ValueError(f"Missing competitor fields: {', '.join(sorted(missing))}")
+    competitors = competitors.copy()
+    competitors["quote_date"] = pd.to_datetime(competitors.quote_date, errors="coerce", format="mixed", utc=True).dt.tz_localize(None)
+    competitors["price"] = pd.to_numeric(competitors.price, errors="coerce")
+    competitor_key = competitors.competitor.map(lambda v: isinstance(v, str) and bool(v.strip()))
+    competitors = competitors[competitor_key]
     out = []
     for _, r in d.iterrows():
         c = competitors[(competitors.item_id == r.item_id) & (competitors.unit == r.unit)
-                        & (competitors.currency == "CAD")].copy()
-        age = (r.date - pd.to_datetime(c.quote_date)).dt.days
+                        & (competitors.customer == r.customer) & (competitors.currency == "CAD")
+                        & (competitors.price_basis == "net_after_discounts_rebates")].copy()
+        age = (r.date - c.quote_date).dt.days
         c = c[age.between(0, 14) & np.isfinite(c.price) & (c.price > 0)]
+        c = c.drop_duplicates(["competitor", "quote_date", "price"])
+        # Do not fall back to an older quote when the latest date has conflicting
+        # prices: that supplier's current price is ambiguous and needs review.
+        c = c[c.quote_date == c.groupby("competitor").quote_date.transform("max")]
+        c = c[~c.duplicated(["competitor", "quote_date"], keep=False)]
+        c = c.sort_values("quote_date").groupby("competitor").tail(1)
         median = float(c.price.median()) if len(c) else np.nan
         floor = r.actual_unit_cost / (1 - r.target_margin)
         suggested = max(r.actual_net_price, floor)
         increase = suggested / r.actual_net_price - 1
-        conflict = bool(pd.notna(median) and suggested > median * 1.05)
+        # A held price can already be above market even when the target floor is
+        # covered. Do not mislabel that as a target/market conflict.
+        conflict = bool(pd.notna(median) and floor > median * 1.05)
+        current_above_market = bool(pd.notna(median) and r.actual_net_price > median * 1.05)
         review = conflict or increase > max_increase
         out.append(dict(
             item_id=r.item_id, item=r.item, customer=r.customer,
@@ -145,10 +193,12 @@ def recommendations(sales, competitors, max_increase=0.10):
             suggested_net_price=suggested, increase_pct=increase,
             competitor_median=median, comparable_quotes=len(c),
             market_guardrail_conflict=conflict,
+            current_above_market=current_above_market,
             approval="Finance + Sales review" if review else "Sales review",
             reason="Target exceeds market review threshold" if conflict else
                    "Increase exceeds approval threshold" if increase > max_increase else
-                   "Recover target margin" if increase > 0 else "Hold; target covered",
+                   "Recover target margin" if increase > 0 else
+                   "Hold; review existing above-market position" if current_above_market else "Hold; target covered",
             indicative_contribution_change=(suggested - r.actual_net_price) * r.actual_cases,
         ))
     return pd.DataFrame(out)
@@ -176,12 +226,13 @@ def executive_brief(sales, recs, alerts):
     d = profitability(sales)
     rev, contribution = d.revenue.sum(), d.contribution.sum()
     bridge = variance_bridge(sales)
+    margin = f"{contribution / rev:.1%}" if rev else "n/a; no actual sales"
     return (
         f"# Commercial decision brief — {pd.Timestamp(d.date.max()).date()}\n\n"
         "**Historical portfolio simulation. All customers, competitor prices, discounts, volumes, "
         "delivery and spoilage costs are synthetic assumptions. No Bondi company data.**\n\n"
         f"- Net revenue: CAD {rev:,.0f}; contribution after variable service costs: CAD {contribution:,.0f} "
-        f"({contribution / rev:.1%}). Fixed overhead excluded.\n"
+        f"({margin}). Fixed overhead excluded.\n"
         f"- Contribution variance vs illustrative budget: CAD {bridge.cad.iloc[-1] - bridge.cad.iloc[0]:+,.0f}.\n"
         f"- Finance: reconcile the price/volume/cost bridge; review {int(recs.market_guardrail_conflict.sum())} "
         "quotes where the margin floor exceeds the illustrative market threshold.\n"

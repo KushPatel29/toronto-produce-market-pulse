@@ -20,15 +20,21 @@ def _simulate(cost: np.ndarray, dates: pd.Series, m: float, policy: str) -> tupl
     price = np.full(n, np.nan)
     changed = np.zeros(n, dtype=bool)
     for t in range(1, n):
+        # The first quote after an item-specific gap has no recent quoting basis.
+        # Leave it unscored; the next observation can use this new cost and start
+        # a fresh list. A broad source-period label alone misses seasonal gaps.
+        if (dates.iloc[t] - dates.iloc[t - 1]).days > 14:
+            continue
+        restarting = not np.isfinite(price[t - 1])
         basis = cost[t - 1]  # last known cost
         target = basis / (1 - m)
         if policy == "weekly":
             price[t] = target
         elif policy == "monthly":
-            new_month = t == 1 or dates.iloc[t].month != dates.iloc[t - 1].month
+            new_month = restarting or dates.iloc[t].to_period("M") != dates.iloc[t - 1].to_period("M")
             price[t] = target if new_month else price[t - 1]
         elif policy == "band":
-            if t == 1:
+            if restarting:
                 price[t] = target
             else:
                 held = price[t - 1]
@@ -38,7 +44,7 @@ def _simulate(cost: np.ndarray, dates: pd.Series, m: float, policy: str) -> tupl
                 price[t] = target if (drift or (new_month and abs(margin_at_held - m) > BAND / 2)) else held
         else:
             raise ValueError(policy)
-        changed[t] = t > 1 and not np.isclose(price[t], price[t - 1])
+        changed[t] = not restarting and not np.isclose(price[t], price[t - 1])
     return price, changed
 
 
@@ -46,7 +52,8 @@ def backtest(
     panel: pd.DataFrame, basket: pd.DataFrame, policies=("weekly", "band", "monthly")
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Returns (weekly detail, item x policy summary). Runs separately within each source period so the
-    2021-2022 gap is never treated as one week."""
+    2021-2022 gap is never treated as one week. Item-specific gaps longer than
+    14 days also restart the simulation; the first returning quote is unscored."""
     tgt = basket.set_index("item_id").target_margin
     detail = []
     for (item, per), s in panel.sort_values("date").groupby(["item_id", "period"]):

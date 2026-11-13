@@ -37,8 +37,8 @@ Source: USDA AMS Market News, Toronto terminal market (data from Infohort, Agric
 
 ## Next 4 weeks: seasonal outlook (half-strength seasonal index, 2017-2020)
 
-- Typically **easing**: Strawberries (-15%), Romaine lettuce (-12%), Green leaf lettuce (-12%), Iceberg lettuce (-9%).
-- Typically **firming**: Zucchini (+19%), English cucumbers (+11%), Limes (+11%), Asparagus (+6%).
+- Typically **easing**: Strawberries (-20%), Green leaf lettuce (-15%), Celery (-14%), Iceberg lettuce (-9%).
+- Typically **firming**: Zucchini (+33%), Limes (+15%), English cucumbers (+12%), Avocados (+10%).
 - Seasonal outlook is a planning signal, not a weekly forecast: week to week, the latest price is the best predictor (see backtest).
 
 ## Full item table

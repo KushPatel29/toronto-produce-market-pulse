@@ -39,19 +39,26 @@ def backtest(panel: pd.DataFrame, windows=None, horizons=(1, 2, 4)) -> pd.DataFr
         windows = [("2019-01-01", "2021-04-30", (2017, 2018)), ("2023-01-01", "2024-01-31", (2017, 2018, 2019, 2020))]
     out = []
     for start, end, years in windows:
-        si_all = seasonal_index(panel, years)
+        si_cache = {}
         for item, s in panel.sort_values("date").groupby("item_id"):
             s = s.reset_index(drop=True)
-            si = si_all.loc[item] if item in si_all.index else None
             test_idx = s.index[(s.date >= start) & (s.date <= end)]
             for i in test_idx:
                 for h in horizons:
-                    o = i - h
+                    desired = s.date[i] - pd.Timedelta(weeks=h)
+                    distance = (s.date - desired).dt.days.abs()
+                    candidates = s.index[(distance <= 2) & (s.date < s.date[i])]
+                    if not len(candidates):
+                        continue
+                    o = int(distance.loc[candidates].idxmin())
                     if o < 8:
                         continue
-                    # never forecast across a gap: origin and target must be <= 7*h+7 days apart
-                    if (s.date[i] - s.date[o]).days > 7 * h + 7:
-                        continue
+                    # Only complete training years before the forecast origin are eligible.
+                    eligible = tuple(y for y in years if y < s.date[o].year)
+                    if eligible not in si_cache:
+                        si_cache[eligible] = seasonal_index(panel, eligible)
+                    si_all = si_cache[eligible]
+                    si = si_all.loc[item] if item in si_all.index else None
                     hist = s.iloc[: o + 1]
                     # Restart model state after a missing-data period.
                     starts = hist.date.diff().dt.days.gt(14)
@@ -59,8 +66,9 @@ def backtest(panel: pd.DataFrame, windows=None, horizons=(1, 2, 4)) -> pd.DataFr
                         hist = hist.loc[starts[starts].index[-1]:]
                     f = predict(hist, s.date[i], si)
                     for mname, val in f.items():
-                        out.append((item, start[:4], h, s.date[i], mname, val, s.price_cad[i]))
-    return pd.DataFrame(out, columns=["item_id", "window", "h", "date", "model", "fcst", "actual"])
+                        out.append((item, start[:4], h, s.date[i], mname, val, s.price_cad[i], s.date[o],
+                                    (s.date[i] - s.date[o]).days))
+    return pd.DataFrame(out, columns=["item_id", "window", "h", "date", "model", "fcst", "actual", "origin_date", "elapsed_days"])
 
 
 def score(bt: pd.DataFrame) -> pd.DataFrame:

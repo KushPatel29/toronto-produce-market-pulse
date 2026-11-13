@@ -35,8 +35,8 @@ Source: USDA AMS Market News, Toronto terminal market (data from Infohort, Agric
 
 ## Next 4 weeks: seasonal outlook (half-strength seasonal index, 2017-2020)
 
-- Typically **easing**: Zucchini (-16%), Field tomatoes (-15%), Roma tomatoes (-15%), Brussels sprouts (-10%).
-- Typically **firming**: Bananas (+5%), Garlic (+1%), Cauliflower (+1%), Apples (tray pack) (0%).
+- Typically **easing**: Zucchini (-18%), Field tomatoes (-16%), Brussels sprouts (-14%), Roma tomatoes (-11%).
+- Typically **firming**: Bananas (+6%), Garlic (+1%), Cauliflower (0%), Apples (tray pack) (0%).
 - Seasonal outlook is a planning signal, not a weekly forecast: week to week, the latest price is the best predictor (see backtest).
 
 ## Full item table

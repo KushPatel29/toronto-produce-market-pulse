@@ -16,10 +16,11 @@ from pulse import market as mk  # noqa: E402
 from pulse import pricing as pr  # noqa: E402
 from pulse import report as rp  # noqa: E402
 from pulse import commercial as cm  # noqa: E402
+from pulse import procurement as pc  # noqa: E402
 
 st.set_page_config(page_title="Toronto Produce Market Pulse", page_icon="🥬", layout="wide")
 
-BLUE, ORANGE, AQUA, RED, MID, INK2 = "#2a78d6", "#eb6834", "#1baf7a", "#e34948", "#f0efec", "#52514e"
+BLUE, ORANGE, AQUA, RED, MID, INK2 = "#16324f", "#9c6500", "#26734d", "#b32632", "#eef2f4", "#5a6b75"
 OUT = ROOT / "outputs"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -71,9 +72,17 @@ with st.sidebar:
         "Target margins, case volumes and the 6% freight & handling allowance are illustrative assumptions. "
         "No source reports exist between April 2021 and November 2022."
     )
+    st.markdown("### Project downloads")
+    for label, filename, mime in [
+        ("Excel decision model", "Pricing_Decision_Workbook.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
+        ("Stakeholder presentation", "Produce_Pricing_Decision_Brief.pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation"),
+    ]:
+        if (OUT / filename).exists():
+            st.download_button(label, (OUT / filename).read_bytes(), filename, mime=mime)
+    st.caption("Built for a produce-distributor pricing workflow. Independent portfolio project; no employer affiliation.")
 
 st.title("Toronto Produce Market Pulse")
-st.info("Historical case study · source ends January 2024. Commercial demo uses synthetic customers and competitors. No Bondi company data.")
+st.caption("Historical case study through January 2024. Customer, competitor and supplier examples are synthetic. No Bondi company data.")
 tabs = st.tabs(
     [
         "Market overview",
@@ -84,6 +93,7 @@ tabs = st.tabs(
         "Budget & scenarios",
         "Method & data quality",
         "Customer & pricing desk",
+        "Supplier comparison",
     ]
 )
 
@@ -92,9 +102,9 @@ with tabs[0]:
     pol = facts["policy"]
     c = st.columns(4)
     c[0].metric(
-        "Basket price change, 2019 to 2023",
+        "Matched-month price change, 2019 to 2023",
         f"+{facts['basket_change_2019_2023_geo']:.0%}",
-        help=f"Geometric mean across {facts['items_compared']} items with full-year data; {facts['items_up_2019_2023']} rose.",
+        help=f"Geometric mean across {facts['items_compared']} items; same calendar months compared within each item; {facts['items_up_2019_2023']} rose.",
     )
     c[1].metric(
         "Weeks >10 pts under target margin",
@@ -103,7 +113,7 @@ with tabs[0]:
         delta_color="inverse",
     )
     c[2].metric(
-        "Customer price changes / year (band rule)",
+        "Price changes / 52 observations (band)",
         f"{pol['band']['changes_per_year']:.0f}",
         delta=f"{pol['band']['changes_per_year'] - pol['weekly']['changes_per_year']:+.0f} vs weekly repricing",
         delta_color="inverse",
@@ -145,7 +155,8 @@ with tabs[0]:
         "Grey band: no Toronto reports from USDA, April 2021 to November 2022. The late-2022 peak is the Salinas Valley lettuce crisis (INSV crop loss)."
     )
 
-    st.subheader("Average CAD price per case, 2023 vs 2019")
+    st.subheader("Matched-month CAD price per case, 2023 vs 2019")
+    st.caption("At least 10 calendar months observed in both years per item, with equal month weights. This selected-basket case-price comparison is not a full-year produce inflation estimate.")
     ch = chg.assign(direction=np.where(chg.pct_chg > 0, "Up", "Down"))
     bars = (
         alt.Chart(ch)
@@ -312,8 +323,8 @@ with tabs[3]:
 with tabs[4]:
     st.markdown(
         "Three policies replayed against every real weekly cost. Prices are set from **last week's** cost (quotes go out before "
-        "the market week); margin is measured against **this week's** cost. Over a full cycle, gross-margin dollars are within 1% "
-        "across policies; the difference is risk and customer friction."
+        "the market week); margin is measured against **this week's** cost. Item-specific gaps over 14 days restart the replay. "
+        "Volumes and demand response are not estimated. Cadence choices are retrospective and have not been validated on future data."
     )
     agg = (
         summ.groupby("policy")[["breach_rate", "margin_sd", "changes_per_year", "avg_margin"]]
@@ -326,14 +337,14 @@ with tabs[4]:
             columns={
                 "breach_rate": "Weeks >10 pts under target",
                 "margin_sd": "Margin volatility (sd)",
-                "changes_per_year": "Price changes / year",
+                "changes_per_year": "Changes / 52 scored observations",
                 "avg_margin": "Average realised margin",
             }
         ).style.format(
             {
                 "Weeks >10 pts under target": "{:.0%}",
                 "Margin volatility (sd)": "{:.1%}",
-                "Price changes / year": "{:.0f}",
+                "Changes / 52 scored observations": "{:.0f}",
                 "Average realised margin": "{:.1%}",
             }
         ),
@@ -372,9 +383,9 @@ with tabs[4]:
     )
     rr = summ[(summ.item_id == ids[nm]) & (summ.policy == polname)].iloc[0]
     c1.caption(
-        f"Breach weeks {rr.breach_rate:.0%} · average margin {rr.avg_margin:.1%} · {rr.changes_per_year:.0f} price changes a year"
+        f"Breach weeks {rr.breach_rate:.0%} · average margin {rr.avg_margin:.1%} · {rr.changes_per_year:.0f} price changes per 52 scored observations"
     )
-    st.subheader("Recommended repricing cadence by item")
+    st.subheader("Retrospective repricing cadence by item")
     show = rec.assign(Item=rec.item_id.map(names)).set_index("Item")[
         ["recommended_policy", "breach_rate_monthly_list", "breach_rate_recommended", "changes_per_year_recommended"]
     ]
@@ -384,13 +395,13 @@ with tabs[4]:
                 "recommended_policy": "Recommended",
                 "breach_rate_monthly_list": "Breach weeks, monthly list",
                 "breach_rate_recommended": "Breach weeks, recommended",
-                "changes_per_year_recommended": "Price changes / year",
+                "changes_per_year_recommended": "Changes / 52 scored observations",
             }
         ).style.format(
             {
                 "Breach weeks, monthly list": "{:.0%}",
                 "Breach weeks, recommended": "{:.0%}",
-                "Price changes / year": "{:.0f}",
+                "Changes / 52 scored observations": "{:.0f}",
             }
         ),
         width="stretch",
@@ -402,6 +413,7 @@ with tabs[5]:
     st.markdown(
         "FY budget, Feb 2024 to Jan 2025. Cost path = recent deseasonalised level × seasonal index. Move the levers; everything recalculates."
     )
+    st.caption("Price delay applies to the scenario cost multiplier at both onset and reversal. A March–April shock with one-month lag affects customer prices in April–May. Demand is fixed apart from the volume control.")
     l1, l2, l3 = st.columns(3)
     shrink = l1.slider("Seasonal strength", 0.0, 1.0, 0.5, 0.25, help="0.5 was chosen on 2019-2020 and tested on 2023.")
     fx = l1.slider("CAD weaker vs USD (on imported share)", -0.10, 0.15, 0.0, 0.01, format="%.2f")
@@ -412,7 +424,7 @@ with tabs[5]:
         0.0,
         0.05,
         format="%.2f",
-        help=f"A 1-in-10 month historically runs ~{facts['spike_p90']['Leafy & lettuce'] - 1:.0%} above the trailing-year average.",
+        help=f"A 1-in-10 month historically runs ~{facts['spike_p90']['Leafy & lettuce'] - 1:.0%} above its trailing 12-calendar-month reference (at least 8 observed months).",
     )
     lag = l2.select_slider("Months before prices catch up", [0, 1, 2], value=1)
     handling_up = l3.slider("Freight & handling cost increase (absorbed)", 0.0, 0.5, 0.0, 0.05, format="%.2f")
@@ -431,7 +443,7 @@ with tabs[5]:
         delta=f"{scen.gross_margin.sum() - base.gross_margin.sum():+,.0f}",
     )
     m[2].metric("Gross margin %", f"{scen.gross_margin.sum() / scen.revenue.sum():.1%}")
-    m[3].metric("Items budgeted", scen.item_id.nunique(), help="Spinach has no 2022-2024 quotes, so it is left out.")
+    m[3].metric("Items budgeted", scen.item_id.nunique(), help="Only items with recent cost quotes and complete-year seasonal support are budgeted.")
     mon = pd.concat(
         [
             base.groupby("month").gross_margin.sum().rename("Base"),
@@ -493,7 +505,8 @@ Week-over-week changes compare identical quotes only (same origin, size, package
 The most common week-over-week USD ratio across all quotes reveals that conversion factor; dividing it out makes an unchanged price read exactly 0.0%.
 
 **Forecasting.** One to four weeks ahead, the latest price beat a moving average, exponential smoothing and seasonal models.
-At budget horizons a half-strength seasonal index wins: strength chosen on 2019-2020, tested once on 2023.
+Seasonal indices use complete item-years with equal month weights. Weekly horizons use 7 × h calendar days with a two-day reporting tolerance; training years must precede the forecast origin.
+Budget-horizon results and seasonal-strength validation are downloadable from the repository. The default 0.5 strength is a configurable assumption; compare it with the recomputed validation grid rather than treating it as guaranteed best.
 """
     )
     w = pd.read_csv(OUT / "budget_horizon_forecast_test_2023.csv").pivot(
@@ -549,7 +562,7 @@ with tabs[7]:
         st.dataframe(bridge, hide_index=True)
         st.caption("Exact bridge: budget contribution + volume/mix + net price/discount + variable cost = actual contribution. Each effect is calculated by item and customer; aggregation preserves mix.")
         st.subheader("Sales: quote recommendations & approvals")
-        st.caption("Suggested net price preserves the target margin; competitor median +5% and the increase threshold trigger review. Uplift assumes unchanged demand; no price elasticity has been estimated. Contract terms and approvals must be checked before use.")
+        st.caption("Suggested net price preserves the target margin. Competitor quotes are segment-specific and net of discounts/rebates; median +5% and the increase threshold trigger review. Uplift assumes unchanged demand. Contract terms require review.")
         st.dataframe(recommendations, hide_index=True)
         st.subheader("Procurement: supply-risk review queue")
         st.caption("Alerts: quote breadth below 60% of its recent median, lead-origin change or cost jump above 15%. These signals do not confirm a shortage or actual stock availability.")
@@ -563,3 +576,33 @@ with tabs[7]:
         with st.expander("Competitor evidence & comparability"):
             st.dataframe(competitors, hide_index=True)
             st.caption("Five fictional comparators; only nonfuture CAD quotes with matching case units and age at most 14 days qualify. Replace with lawfully sourced, timestamped observations for a real implementation.")
+
+# ---------------------------------------------------------------- 9. procurement decisions
+with tabs[8]:
+    st.subheader("Supplier bids: cost, yield & availability")
+    st.info("Synthetic procurement case. Three fictional suppliers quote each supported item. Capacities, freight, spoilage, lead times and reliability are assumptions; terminal quotes provide the historical cost anchor.")
+    constraints, context = st.columns([1, 2])
+    with constraints:
+        supplier_week = st.selectbox("Supplier quote date", sorted(panel.date.unique(), reverse=True),
+                                     format_func=lambda d: str(pd.Timestamp(d).date()))
+        lead_limit = st.slider("Maximum supplier lead time (days)", 0, 7, 2)
+        reliability_floor = st.slider("Minimum assumed delivery reliability", 0.80, 1.0, 0.95, 0.01)
+    bids = pc.demo_supplier_bids(panel, basket, supplier_week)
+    evaluated, supplier_queue = pc.compare_supplier_bids(bids, basket, supplier_week, lead_limit, reliability_floor)
+    supported = supplier_queue.supplier.ne("No feasible single supplier")
+    with context:
+        a, b = st.columns(2)
+        a.metric("Items with a feasible single supplier", int(supported.sum()))
+        b.metric("Items requiring sourcing review", int((~supported).sum()))
+        st.caption("Weekly demand is usable cases. Orders include expected spoilage and must meet MOQ and capacity constraints. Quotes must match CAD and the case unit and be valid on the selected date.")
+    st.dataframe(supplier_queue.rename(columns={
+        "item": "Item", "supplier": "Supplier for review", "unit": "Case unit",
+        "demand_usable_cases": "Usable cases needed", "order_cases": "Cases to order",
+        "total_order_cost": "Order cost (CAD)", "cost_per_demand_case": "CAD per needed case",
+        "single_supplier_shortfall_cases": "Single-supplier shortfall", "status": "Next action",
+    }), hide_index=True)
+    st.caption("The review choice has the lowest full-order cost among feasible single-supplier bids. MOQ surplus is charged to this week's demand. Split sourcing, shelf-life timing, inventory and customer demand response are outside this model.")
+    with st.expander("Compare bids and exclusion reasons"):
+        st.dataframe(evaluated, hide_index=True)
+    st.download_button("Download supplier review queue", supplier_queue.to_csv(index=False), "SYNTHETIC_supplier_review.csv")
+    st.download_button("Download evaluated supplier bids", evaluated.to_csv(index=False), "SYNTHETIC_supplier_evaluation.csv")

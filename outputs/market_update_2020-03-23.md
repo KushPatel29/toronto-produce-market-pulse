@@ -43,8 +43,8 @@ Source: USDA AMS Market News, Toronto terminal market (data from Infohort, Agric
 
 ## Next 4 weeks: seasonal outlook (half-strength seasonal index, 2017-2020)
 
-- Typically **easing**: English cucumbers (-8%), Cauliflower (-7%), Roma tomatoes (-6%), Field tomatoes (-4%).
-- Typically **firming**: Green leaf lettuce (+20%), Celery (+14%), Romaine lettuce (+11%), Brussels sprouts (+10%).
+- Typically **easing**: Field tomatoes (-14%), English cucumbers (-9%), Spinach (bunched) (-6%), Bananas (-5%).
+- Typically **firming**: Green leaf lettuce (+32%), Iceberg lettuce (+21%), Romaine lettuce (+18%), Celery (+13%).
 - Seasonal outlook is a planning signal, not a weekly forecast: week to week, the latest price is the best predictor (see backtest).
 
 ## Full item table

@@ -5,6 +5,7 @@
   "revenue": 31947.140574698475,
   "contribution": 8075.67662723419,
   "sql_contribution": 8075.676627234189,
-  "finance_review_candidates": 13,
-  "procurement_review_items": 0
+  "finance_review_candidates": 24,
+  "procurement_review_items": 0,
+  "supplier_items_requiring_escalation": 7
 }

@@ -20,7 +20,7 @@ def market_update(panel: pd.DataFrame, basket: pd.DataFrame, week: str, list_pri
     # A four-week reference must not borrow quotes from before a source gap.
     hist = p[(p.date < wk) & (p.date >= wk - pd.Timedelta(days=35))]
     prev4 = hist.groupby("item_id").tail(4).groupby("item_id").price_cad.mean()
-    prev1 = hist.groupby("item_id").tail(1).set_index("item_id")
+    prev1 = hist[hist.date >= wk - pd.Timedelta(days=14)].groupby("item_id").tail(1).set_index("item_id")
     si = 1 + SHRINK * (seasonal_index(panel[panel.date < wk], (2017, 2018, 2019, 2020)) - 1)
     b = basket.set_index("item_id")
     rows = []

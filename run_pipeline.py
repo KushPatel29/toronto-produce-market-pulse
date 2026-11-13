@@ -56,6 +56,8 @@ def main():
     test = fc.monthly_backtest(
         panel, (1, 3, 6), si_years=(2017, 2018, 2019, 2020), origin_range=("2022-11", "2023-12"), shrink=0.5
     )
+    # Score the declared holdout calendar year only; origins may precede it.
+    test = test[test.target_month.str.startswith("2023-")]
 
     def wape(t):
         return (
@@ -111,6 +113,8 @@ def main():
         "basket_change_2019_2023_geo": geo,
         "items_up_2019_2023": int((chg.pct_chg > 0).sum()),
         "items_compared": int(len(chg)),
+        "comparison_min_shared_months": int(chg.n_months.min()),
+        "comparison_max_shared_months": int(chg.n_months.max()),
         "index_2023_avg": float(idx[idx.month_start.dt.year == 2023]["index"].mean()),
         "index_2019_avg": float(idx[idx.month_start.dt.year == 2019]["index"].mean()),
         "policy": pol.round(4).to_dict("index"),

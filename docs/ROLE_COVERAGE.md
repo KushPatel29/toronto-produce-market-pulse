@@ -14,9 +14,10 @@ This is a portfolio case study aligned to the supplied job description, not work
 | Sales, Procurement, Operations, Finance | Sales quote queue, Procurement signal queue, service-cost assumptions, reconciled Finance bridge | Simulates stakeholder handoffs; does not prove real workplace collaboration |
 | Forecasting | Rolling-origin naive, moving-average, exponential smoothing and seasonal comparisons | Short-horizon models use a retrospectively cleaned panel; anomaly exclusions are not an as-of live cleaning simulation |
 | Budgeting and projections | Historical FY2024 revenue/cost/gross-margin budget, scenarios and sensitivity | No actual company budget or realised outcomes |
-| Dashboards / BI | Eight-tab interactive Streamlit/Altair app | This is the JD's “or similar” BI evidence; no Power BI or Tableau file is claimed |
-| Reporting / presentations | Markdown weekly updates, commercial executive brief, walkthrough and decision tables | A written brief is included; no PowerPoint presentation is claimed |
-| Advanced Excel / Office | Existing workbook with formulas, structured tables and native PivotTable | Existing workbook retained; this upgrade does not claim new Excel recalculation validation |
+| Dashboards / BI | Nine-tab interactive Streamlit/Altair app | This is the JD's “or similar” BI evidence; no Power BI or Tableau file is claimed |
+| Reporting / presentations | Markdown reports and an editable five-slide PowerPoint decision briefing | Slides rendered and inspected; no actual employer presentation is claimed |
+| Advanced Excel / Office | New decision workbook with live scenario formulas and a real customer PivotTable | Monthly and annual figures tie to Python; native Excel recalculation and PivotTable refresh checked; see EXCEL_MODEL.md |
+| Ad-hoc procurement | Three synthetic supplier bids per supported item with freight, spoilage, MOQ, capacity, lead time, reliability and validity checks | Compares feasible single-supplier orders; inventory and split-sourcing optimisation are excluded |
 | ERP / data management | Validated ERP-style sales schema; runnable SQLite facts, item dimension and financial views; SQL/Python total reconciliation | No SAP, NetSuite, Dynamics or other live ERP integration |
 | Scenario / sensitivity / problem-solving | Combined FX, cost, volume and pricing-delay controls; pricing policy stress replay | Fixed demand and simplified pricing-delay assumptions; not an optimisation engine |
 | Process improvement / automation | Reproducible exports, generated brief, tests and CI configuration | Refresh is a reproducible historical build, not an automatic live data feed |
@@ -28,10 +29,10 @@ This is a portfolio case study aligned to the supplied job description, not work
 2. Show December 2022 in the weekly report. Explain why last-known cost causes margin risk when lettuce spikes.
 3. Compare monthly, band and weekly policies. Describe risk and customer price-change frequency rather than claiming revenue uplift.
 4. Open Customer & pricing desk. Explain net price after discounts/rebates, service costs, weighted contribution, and a market-threshold conflict requiring Finance review.
-5. Reconcile the Finance bridge and show Procurement's proxy alerts. Close with what would be needed in production: actual invoices, inventory, supplier quotes, contract terms and approved competitor evidence.
+5. Reconcile the Finance bridge and show Procurement's proxy alerts and supplier comparisons. Explain why the cheapest nominal supplier may fail the capacity or lead-time constraint. Open the Excel scenario model and briefing. Close with what would be needed in production: actual invoices, inventory, supplier quotes, contract terms and approved competitor evidence.
 
 ## Resume wording supported by the upgraded project
 
-“Built a Python/Streamlit produce pricing case study using public Toronto wholesale market data, with pricing-policy backtests, seasonal budgeting, and a synthetic customer-profitability workflow covering discount/rebate waterfalls, competitor comparability, procurement alerts, and a reconciled price-volume-cost contribution bridge. Added SQLite analytics views with SQL/Python reconciliation.”
+“Built a Python/SQL/Streamlit produce pricing case study using public Toronto wholesale data, with calendar-aware policy backtests, seasonal budgeting, customer contribution analysis and synthetic supplier comparisons. Developed an Excel scenario model with a native PivotTable, reconciled financial outputs across Python/SQL/Excel, and produced a stakeholder decision briefing.”
 
 Do not describe simulated recovery as achieved savings or say this project supplies years of food-manufacturing experience.

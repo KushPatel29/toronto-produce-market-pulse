@@ -1,0 +1,70 @@
+item_id,item,supplier,unit,currency,quote_date,valid_until,quoted_price,freight_per_case,spoilage_rate,moq_cases,capacity_cases,lead_days,reliability,data_status
+apples,Apples (tray pack),Demo supplier 1,tray-pack case,CAD,2024-01-30,2024-02-06,56.11,2.26,0.04,8,11,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+apples,Apples (tray pack),Demo supplier 2,tray-pack case,CAD,2024-01-30,2024-02-06,59.01,2.73,0.02,4,18,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+apples,Apples (tray pack),Demo supplier 3,tray-pack case,CAD,2024-01-30,2024-02-06,61.24,3.21,0.01,12,24,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+asparagus,Asparagus,Demo supplier 1,11 lb case,CAD,2024-01-30,2024-02-06,58.28,2.37,0.04,8,11,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+asparagus,Asparagus,Demo supplier 2,11 lb case,CAD,2024-01-30,2024-02-06,63.01,2.87,0.02,4,18,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+asparagus,Asparagus,Demo supplier 3,11 lb case,CAD,2024-01-30,2024-02-06,64.72,3.37,0.01,12,24,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+bananas,Bananas,Demo supplier 1,40 lb case,CAD,2024-01-30,2024-02-06,30.02,1.2,0.04,10,15,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+bananas,Bananas,Demo supplier 2,40 lb case,CAD,2024-01-30,2024-02-06,31.5,1.46,0.02,5,24,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+bananas,Bananas,Demo supplier 3,40 lb case,CAD,2024-01-30,2024-02-06,32.95,1.71,0.01,15,33,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+blueberries,Blueberries,Demo supplier 1,12 x 6 oz,CAD,2024-01-30,2024-02-06,30.47,1.24,0.04,8,11,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+blueberries,Blueberries,Demo supplier 2,12 x 6 oz,CAD,2024-01-30,2024-02-06,32.43,1.5,0.02,4,18,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+blueberries,Blueberries,Demo supplier 3,12 x 6 oz,CAD,2024-01-30,2024-02-06,34.22,1.77,0.01,12,24,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+broccoli,Broccoli,Demo supplier 1,case,CAD,2024-01-30,2024-02-06,42.4,1.7,0.04,15,22,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+broccoli,Broccoli,Demo supplier 2,case,CAD,2024-01-30,2024-02-06,44.72,2.06,0.02,8,36,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+broccoli,Broccoli,Demo supplier 3,case,CAD,2024-01-30,2024-02-06,46.35,2.42,0.01,23,49,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+brussels,Brussels sprouts,Demo supplier 1,25 lb case,CAD,2024-01-30,2024-02-06,31.84,1.3,0.04,5,7,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+brussels,Brussels sprouts,Demo supplier 2,25 lb case,CAD,2024-01-30,2024-02-06,34.15,1.57,0.02,3,12,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+brussels,Brussels sprouts,Demo supplier 3,25 lb case,CAD,2024-01-30,2024-02-06,35.54,1.85,0.01,8,16,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+cauli,Cauliflower,Demo supplier 1,case,CAD,2024-01-30,2024-02-06,34.86,1.42,0.04,10,15,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+cauli,Cauliflower,Demo supplier 2,case,CAD,2024-01-30,2024-02-06,37.24,1.72,0.02,5,24,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+cauli,Cauliflower,Demo supplier 3,case,CAD,2024-01-30,2024-02-06,38.85,2.02,0.01,15,33,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+celery,Celery,Demo supplier 1,case,CAD,2024-01-30,2024-02-06,48.43,1.96,0.04,15,22,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+celery,Celery,Demo supplier 2,case,CAD,2024-01-30,2024-02-06,52.04,2.37,0.02,8,36,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+celery,Celery,Demo supplier 3,case,CAD,2024-01-30,2024-02-06,53.75,2.78,0.01,23,49,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+cucumbers,English cucumbers,Demo supplier 1,case,CAD,2024-01-30,2024-02-06,14.43,0.58,0.04,13,18,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+cucumbers,English cucumbers,Demo supplier 2,case,CAD,2024-01-30,2024-02-06,15.34,0.71,0.02,7,30,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+cucumbers,English cucumbers,Demo supplier 3,case,CAD,2024-01-30,2024-02-06,16.08,0.83,0.01,19,41,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+garlic,Garlic,Demo supplier 1,30 lb case,CAD,2024-01-30,2024-02-06,107.81,4.37,0.04,5,7,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+garlic,Garlic,Demo supplier 2,30 lb case,CAD,2024-01-30,2024-02-06,115.04,5.29,0.02,3,12,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+garlic,Garlic,Demo supplier 3,30 lb case,CAD,2024-01-30,2024-02-06,118.93,6.21,0.01,8,16,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+let_green,Green leaf lettuce,Demo supplier 1,case,CAD,2024-01-30,2024-02-06,31.73,1.27,0.04,10,15,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+let_green,Green leaf lettuce,Demo supplier 2,case,CAD,2024-01-30,2024-02-06,33.21,1.54,0.02,5,24,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+let_green,Green leaf lettuce,Demo supplier 3,case,CAD,2024-01-30,2024-02-06,34.76,1.81,0.01,15,33,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+let_ice,Iceberg lettuce,Demo supplier 1,case,CAD,2024-01-30,2024-02-06,40.93,1.67,0.04,13,18,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+let_ice,Iceberg lettuce,Demo supplier 2,case,CAD,2024-01-30,2024-02-06,43.94,2.02,0.02,7,30,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+let_ice,Iceberg lettuce,Demo supplier 3,case,CAD,2024-01-30,2024-02-06,46.09,2.37,0.01,19,41,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+let_rom,Romaine lettuce,Demo supplier 1,case,CAD,2024-01-30,2024-02-06,37.07,1.51,0.04,23,33,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+let_rom,Romaine lettuce,Demo supplier 2,case,CAD,2024-01-30,2024-02-06,39.27,1.82,0.02,12,54,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+let_rom,Romaine lettuce,Demo supplier 3,case,CAD,2024-01-30,2024-02-06,41.41,2.14,0.01,34,74,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+limes,Limes,Demo supplier 1,40 lb case,CAD,2024-01-30,2024-02-06,47.45,1.92,0.04,8,11,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+limes,Limes,Demo supplier 2,40 lb case,CAD,2024-01-30,2024-02-06,50.98,2.32,0.02,4,18,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+limes,Limes,Demo supplier 3,40 lb case,CAD,2024-01-30,2024-02-06,52.85,2.73,0.01,12,24,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+mushrooms,Mushrooms,Demo supplier 1,5 lb case,CAD,2024-01-30,2024-02-06,15.84,0.64,0.04,20,30,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+mushrooms,Mushrooms,Demo supplier 2,5 lb case,CAD,2024-01-30,2024-02-06,16.7,0.77,0.02,10,48,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+mushrooms,Mushrooms,Demo supplier 3,5 lb case,CAD,2024-01-30,2024-02-06,17.59,0.91,0.01,30,66,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+onions,Yellow onions,Demo supplier 1,50 lb sack,CAD,2024-01-30,2024-02-06,30.92,1.26,0.04,25,37,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+onions,Yellow onions,Demo supplier 2,50 lb sack,CAD,2024-01-30,2024-02-06,33.51,1.53,0.02,13,60,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+onions,Yellow onions,Demo supplier 3,50 lb sack,CAD,2024-01-30,2024-02-06,34.71,1.79,0.01,38,82,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+parsley,Parsley (bunched),Demo supplier 1,case,CAD,2024-01-30,2024-02-06,42.03,1.7,0.04,8,11,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+parsley,Parsley (bunched),Demo supplier 2,case,CAD,2024-01-30,2024-02-06,44.69,2.06,0.02,4,18,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+parsley,Parsley (bunched),Demo supplier 3,case,CAD,2024-01-30,2024-02-06,46.07,2.41,0.01,12,24,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+potatoes,Potatoes,Demo supplier 1,50 lb case,CAD,2024-01-30,2024-02-06,23.98,0.96,0.04,23,33,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+potatoes,Potatoes,Demo supplier 2,50 lb case,CAD,2024-01-30,2024-02-06,25.31,1.16,0.02,12,54,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+potatoes,Potatoes,Demo supplier 3,50 lb case,CAD,2024-01-30,2024-02-06,26.54,1.36,0.01,34,74,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+raspberries,Raspberries,Demo supplier 1,12 x 6 oz,CAD,2024-01-30,2024-02-06,38.15,1.53,0.04,6,9,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+raspberries,Raspberries,Demo supplier 2,12 x 6 oz,CAD,2024-01-30,2024-02-06,40.75,1.86,0.02,3,14,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+raspberries,Raspberries,Demo supplier 3,12 x 6 oz,CAD,2024-01-30,2024-02-06,42.33,2.18,0.01,9,19,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+strawberries,Strawberries,Demo supplier 1,8 x 1 lb,CAD,2024-01-30,2024-02-06,29.46,1.19,0.04,13,18,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+strawberries,Strawberries,Demo supplier 2,8 x 1 lb,CAD,2024-01-30,2024-02-06,31.43,1.44,0.02,7,30,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+strawberries,Strawberries,Demo supplier 3,8 x 1 lb,CAD,2024-01-30,2024-02-06,32.46,1.69,0.01,19,41,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+tom_field,Field tomatoes,Demo supplier 1,25 lb case,CAD,2024-01-30,2024-02-06,47.85,1.92,0.04,15,22,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+tom_field,Field tomatoes,Demo supplier 2,25 lb case,CAD,2024-01-30,2024-02-06,51.03,2.32,0.02,8,36,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+tom_field,Field tomatoes,Demo supplier 3,25 lb case,CAD,2024-01-30,2024-02-06,52.68,2.73,0.01,23,49,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+tom_roma,Roma tomatoes,Demo supplier 1,25 lb case,CAD,2024-01-30,2024-02-06,35.17,1.41,0.04,20,30,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+tom_roma,Roma tomatoes,Demo supplier 2,25 lb case,CAD,2024-01-30,2024-02-06,37.15,1.71,0.02,10,48,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+tom_roma,Roma tomatoes,Demo supplier 3,25 lb case,CAD,2024-01-30,2024-02-06,38.77,2.01,0.01,30,66,2,0.97,SYNTHETIC supplier bid; public historical cost proxy
+zucchini,Zucchini,Demo supplier 1,25 lb case,CAD,2024-01-30,2024-02-06,57.61,2.33,0.04,8,11,3,0.92,SYNTHETIC supplier bid; public historical cost proxy
+zucchini,Zucchini,Demo supplier 2,25 lb case,CAD,2024-01-30,2024-02-06,60.95,2.83,0.02,4,18,1,0.98,SYNTHETIC supplier bid; public historical cost proxy
+zucchini,Zucchini,Demo supplier 3,25 lb case,CAD,2024-01-30,2024-02-06,64.49,3.32,0.01,12,24,2,0.97,SYNTHETIC supplier bid; public historical cost proxy

@@ -1,4 +1,4 @@
-item_id,item,customer,current_net_price,target_net_price,suggested_net_price,increase_pct,competitor_median,comparable_quotes,market_guardrail_conflict,approval,reason,indicative_contribution_change
+item_id,item,customer,current_net_price,target_net_price,suggested_net_price,increase_pct,competitor_median,comparable_quotes,market_guardrail_conflict,current_above_market,approval,reason,indicative_contribution_change
 apples,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           apples
 item                                                  Apples (tray pack)
@@ -25,7 +25,7 @@ margin_pct                                                      0.253513
 margin_gap_pp                                                   0.351349
 target_gap_dollars                                                   0.0
 budget_contribution                                           166.953452
-Name: 0, dtype: object>",Independent restaurant,88.15142246204083,87.73846342857144,88.15142246204083,0.0,89.04184087074832,5,False,Sales review,Hold; target covered,0.0
+Name: 0, dtype: object>",Independent restaurant,88.15142246204083,87.73846342857144,88.15142246204083,0.0,88.15142246204083,5,False,False,Sales review,Hold; target covered,0.0
 apples,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           apples
 item                                                  Apples (tray pack)
@@ -52,7 +52,7 @@ margin_pct                                                      0.206466
 margin_gap_pp                                                  -4.353396
 target_gap_dollars                                             14.330504
 budget_contribution                                            99.422071
-Name: 1, dtype: object>",Restaurant group,82.29496221884082,87.07179676190476,87.07179676190476,0.05804528508514606,89.04184087074832,5,False,Sales review,Recover target margin,19.107338172255766
+Name: 1, dtype: object>",Restaurant group,82.29496221884082,87.07179676190476,87.07179676190476,0.05804528508514606,82.29496221884082,5,True,False,Finance + Sales review,Target exceeds market review threshold,19.107338172255766
 apples,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           apples
 item                                                  Apples (tray pack)
@@ -79,7 +79,7 @@ margin_pct                                                      0.230421
 margin_gap_pp                                                  -1.957854
 target_gap_dollars                                              5.060429
 budget_contribution                                            67.281381
-Name: 2, dtype: object>",Catering,86.15605063893334,88.4051300952381,88.4051300952381,0.02610471858477248,89.04184087074832,5,False,Sales review,Recover target margin,6.74723836891431
+Name: 2, dtype: object>",Catering,86.15605063893334,88.4051300952381,88.4051300952381,0.02610471858477248,86.15605063893334,5,False,False,Sales review,Recover target margin,6.74723836891431
 asparagus,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        asparagus
 item                                                           Asparagus
@@ -106,7 +106,7 @@ margin_pct                                                      0.348783
 margin_gap_pp                                                   4.878316
 target_gap_dollars                                                   0.0
 budget_contribution                                           240.871849
-Name: 3, dtype: object>",Independent restaurant,105.98361369533531,98.59759190962099,105.98361369533531,0.0,107.05415524781344,5,False,Sales review,Hold; target covered,0.0
+Name: 3, dtype: object>",Independent restaurant,105.98361369533531,98.59759190962099,105.98361369533531,0.0,105.98361369533531,5,False,False,Sales review,Hold; target covered,0.0
 asparagus,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        asparagus
 item                                                           Asparagus
@@ -133,7 +133,7 @@ margin_pct                                                      0.308061
 margin_gap_pp                                                   0.806137
 target_gap_dollars                                                   0.0
 budget_contribution                                           143.558824
-Name: 4, dtype: object>",Restaurant group,99.02368650962103,97.88330619533528,99.02368650962103,0.0,107.05415524781344,5,False,Sales review,Hold; target covered,0.0
+Name: 4, dtype: object>",Restaurant group,99.02368650962103,97.88330619533528,99.02368650962103,0.0,99.02368650962103,5,False,False,Sales review,Hold; target covered,0.0
 asparagus,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        asparagus
 item                                                           Asparagus
@@ -160,7 +160,7 @@ margin_pct                                                      0.328331
 margin_gap_pp                                                   2.833073
 target_gap_dollars                                                   0.0
 budget_contribution                                            96.991597
-Name: 5, dtype: object>",Catering,103.50081070000003,99.31187762390671,103.50081070000003,0.0,107.05415524781344,5,False,Sales review,Hold; target covered,0.0
+Name: 5, dtype: object>",Catering,103.50081070000003,99.31187762390671,103.50081070000003,0.0,103.50081070000003,5,False,False,Sales review,Hold; target covered,0.0
 bananas,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          bananas
 item                                                             Bananas
@@ -187,7 +187,7 @@ margin_pct                                                      0.203499
 margin_gap_pp                                                   0.349905
 target_gap_dollars                                                   0.0
 budget_contribution                                            90.782122
-Name: 6, dtype: object>",Independent restaurant,44.93715041020408,44.740603647959176,44.93715041020408,0.0,45.391061020408166,5,False,Sales review,Hold; target covered,0.0
+Name: 6, dtype: object>",Independent restaurant,44.93715041020408,44.740603647959176,44.93715041020408,0.0,44.93715041020408,5,False,False,Sales review,Hold; target covered,0.0
 bananas,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          bananas
 item                                                             Bananas
@@ -214,7 +214,7 @@ margin_pct                                                      0.153376
 margin_gap_pp                                                  -4.662359
 target_gap_dollars                                             11.661349
 budget_contribution                                            53.719273
-Name: 7, dtype: object>",Restaurant group,41.68615602220408,44.115603647959176,44.115603647959176,0.05827948310851827,45.391061020408166,5,False,Sales review,Recover target margin,14.576685754530573
+Name: 7, dtype: object>",Restaurant group,41.68615602220408,44.115603647959176,44.115603647959176,0.05827948310851827,41.68615602220408,5,True,False,Finance + Sales review,Target exceeds market review threshold,14.576685754530573
 bananas,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          bananas
 item                                                             Bananas
@@ -241,7 +241,7 @@ margin_pct                                                      0.178788
 margin_gap_pp                                                  -2.121163
 target_gap_dollars                                              2.812269
 budget_contribution                                            36.812849
-Name: 8, dtype: object>",Catering,44.193825004000004,45.365603647959176,45.365603647959176,0.02651453328271791,45.391061020408166,5,False,Sales review,Recover target margin,3.515335931877516
+Name: 8, dtype: object>",Catering,44.193825004000004,45.365603647959176,45.365603647959176,0.02651453328271791,44.193825004000004,5,False,False,Sales review,Recover target margin,3.515335931877516
 blueberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                      blueberries
 item                                                         Blueberries
@@ -268,7 +268,7 @@ margin_pct                                                      0.395489
 margin_gap_pp                                                   7.548921
 target_gap_dollars                                                   0.0
 budget_contribution                                           147.843626
-Name: 9, dtype: object>",Independent restaurant,60.98549590426172,54.21528022208883,60.98549590426172,0.0,61.60151101440577,5,False,Sales review,Hold; target covered,0.0
+Name: 9, dtype: object>",Independent restaurant,60.98549590426172,54.21528022208883,60.98549590426172,0.0,60.98549590426172,5,False,False,Sales review,Hold; target covered,0.0
 blueberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                      blueberries
 item                                                         Blueberries
@@ -295,7 +295,7 @@ margin_pct                                                      0.358376
 margin_gap_pp                                                   3.837553
 target_gap_dollars                                                   0.0
 budget_contribution                                            87.647352
-Name: 10, dtype: object>",Restaurant group,56.678621174261714,53.47998610444177,56.678621174261714,0.0,61.60151101440577,5,False,Sales review,Hold; target covered,0.0
+Name: 10, dtype: object>",Restaurant group,56.678621174261714,53.47998610444177,56.678621174261714,0.0,56.678621174261714,5,False,False,Sales review,Hold; target covered,0.0
 blueberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                      blueberries
 item                                                         Blueberries
@@ -322,7 +322,7 @@ margin_pct                                                      0.375856
 margin_gap_pp                                                   5.585649
 target_gap_dollars                                                   0.0
 budget_contribution                                            59.843333
-Name: 11, dtype: object>",Catering,59.86826764882353,54.95057433973589,59.86826764882353,0.0,61.60151101440577,5,False,Sales review,Hold; target covered,0.0
+Name: 11, dtype: object>",Catering,59.86826764882353,54.95057433973589,59.86826764882353,0.0,59.86826764882353,5,False,False,Sales review,Hold; target covered,0.0
 broccoli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         broccoli
 item                                                            Broccoli
@@ -349,7 +349,7 @@ margin_pct                                                        0.2733
 margin_gap_pp                                                   0.330037
 target_gap_dollars                                                   0.0
 budget_contribution                                           281.451327
-Name: 12, dtype: object>",Independent restaurant,68.79921327425218,68.48816792703384,68.79921327425218,0.0,69.49415482247696,5,False,Sales review,Hold; target covered,0.0
+Name: 12, dtype: object>",Independent restaurant,68.79921327425218,68.48816792703384,68.79921327425218,0.0,68.79921327425218,5,False,False,Sales review,Hold; target covered,0.0
 broccoli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         broccoli
 item                                                            Broccoli
@@ -376,7 +376,7 @@ margin_pct                                                      0.227526
 margin_gap_pp                                                  -4.247363
 target_gap_dollars                                              27.21504
 budget_contribution                                           167.206413
-Name: 13, dtype: object>",Restaurant group,64.07514875151246,67.80323642018453,67.80323642018453,0.058183051328212,69.49415482247696,5,False,Sales review,Recover target margin,37.280876686720745
+Name: 13, dtype: object>",Restaurant group,64.07514875151246,67.80323642018453,67.80323642018453,0.058183051328212,64.07514875151246,5,True,False,Finance + Sales review,Target exceeds market review threshold,37.280876686720745
 broccoli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         broccoli
 item                                                            Broccoli
@@ -403,7 +403,7 @@ margin_pct                                                      0.250796
 margin_gap_pp                                                  -1.920425
 target_gap_dollars                                                7.7662
 budget_contribution                                            113.69012
-Name: 14, dtype: object>",Catering,67.39999451068495,69.17309943388315,69.17309943388315,0.026307196848764036,69.49415482247696,5,False,Sales review,Recover target margin,10.638629539189225
+Name: 14, dtype: object>",Catering,67.39999451068495,69.17309943388315,69.17309943388315,0.026307196848764036,67.39999451068495,5,False,False,Sales review,Recover target margin,10.638629539189225
 brussels,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         brussels
 item                                                    Brussels sprouts
@@ -430,7 +430,7 @@ margin_pct                                                      0.359064
 margin_gap_pp                                                   7.906382
 target_gap_dollars                                                   0.0
 budget_contribution                                            84.894997
-Name: 15, dtype: object>",Independent restaurant,60.032890836734694,53.44062777777778,60.032890836734694,0.0,60.639283673469386,5,False,Sales review,Hold; target covered,0.0
+Name: 15, dtype: object>",Independent restaurant,60.032890836734694,53.44062777777778,60.032890836734694,0.0,60.032890836734694,5,False,False,Sales review,Hold; target covered,0.0
 brussels,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         brussels
 item                                                    Brussels sprouts
@@ -457,7 +457,7 @@ margin_pct                                                      0.319656
 margin_gap_pp                                                   3.965567
 target_gap_dollars                                                   0.0
 budget_contribution                                            50.353665
-Name: 16, dtype: object>",Restaurant group,55.82063429006802,52.746183333333335,55.82063429006802,0.0,60.639283673469386,5,False,Sales review,Hold; target covered,0.0
+Name: 16, dtype: object>",Restaurant group,55.82063429006802,52.746183333333335,55.82063429006802,0.0,55.82063429006802,5,False,False,Sales review,Hold; target covered,0.0
 brussels,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         brussels
 item                                                    Brussels sprouts
@@ -484,7 +484,7 @@ margin_pct                                                      0.338302
 margin_gap_pp                                                   5.830218
 target_gap_dollars                                                   0.0
 budget_contribution                                            34.346888
-Name: 17, dtype: object>",Catering,58.904912484444445,54.13507222222223,58.904912484444445,0.0,60.639283673469386,5,False,Sales review,Hold; target covered,0.0
+Name: 17, dtype: object>",Catering,58.904912484444445,54.13507222222223,58.904912484444445,0.0,58.904912484444445,5,False,False,Sales review,Hold; target covered,0.0
 cauli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                            cauli
 item                                                         Cauliflower
@@ -511,7 +511,7 @@ margin_pct                                                       0.34066
 margin_gap_pp                                                   7.065979
 target_gap_dollars                                                   0.0
 budget_contribution                                           173.547739
-Name: 18, dtype: object>",Independent restaurant,63.63417106220296,57.47475014677103,63.63417106220296,0.0,64.27694046687168,5,False,Sales review,Hold; target covered,0.0
+Name: 18, dtype: object>",Independent restaurant,63.63417106220296,57.47475014677103,63.63417106220296,0.0,63.63417106220296,5,False,False,Sales review,Hold; target covered,0.0
 cauli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                            cauli
 item                                                         Cauliflower
@@ -538,7 +538,7 @@ margin_pct                                                       0.29992
 margin_gap_pp                                                   2.991974
 target_gap_dollars                                                   0.0
 budget_contribution                                           103.019055
-Name: 19, dtype: object>",Restaurant group,59.21687874357283,56.78981863992171,59.21687874357283,0.0,64.27694046687168,5,False,Sales review,Hold; target covered,0.0
+Name: 19, dtype: object>",Restaurant group,59.21687874357283,56.78981863992171,59.21687874357283,0.0,59.21687874357283,5,False,False,Sales review,Hold; target covered,0.0
 cauli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                            cauli
 item                                                         Cauliflower
@@ -565,7 +565,7 @@ margin_pct                                                       0.31949
 margin_gap_pp                                                   4.949049
 target_gap_dollars                                                   0.0
 budget_contribution                                            70.158822
-Name: 20, dtype: object>",Catering,62.389381843561644,58.159681653620346,62.389381843561644,0.0,64.27694046687168,5,False,Sales review,Hold; target covered,0.0
+Name: 20, dtype: object>",Catering,62.389381843561644,58.159681653620346,62.389381843561644,0.0,62.389381843561644,5,False,False,Sales review,Hold; target covered,0.0
 celery,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           celery
 item                                                              Celery
@@ -592,7 +592,7 @@ margin_pct                                                      0.267136
 margin_gap_pp                                                   1.713579
 target_gap_dollars                                                   0.0
 budget_contribution                                           295.821238
-Name: 21, dtype: object>",Independent restaurant,78.09680695591838,76.31247321088436,78.09680695591838,0.0,78.88566359183675,5,False,Sales review,Hold; target covered,0.0
+Name: 21, dtype: object>",Independent restaurant,78.09680695591838,76.31247321088436,78.09680695591838,0.0,78.09680695591838,5,False,False,Sales review,Hold; target covered,0.0
 celery,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           celery
 item                                                              Celery
@@ -619,7 +619,7 @@ margin_pct                                                      0.221083
 margin_gap_pp                                                  -2.891651
 target_gap_dollars                                             18.955867
 budget_contribution                                           175.992743
-Name: 22, dtype: object>",Restaurant group,72.83752993671837,75.64580654421769,75.64580654421769,0.03855535202716465,78.88566359183675,5,False,Sales review,Recover target margin,25.274489467493908
+Name: 22, dtype: object>",Restaurant group,72.83752993671837,75.64580654421769,75.64580654421769,0.03855535202716465,72.83752993671837,5,False,False,Sales review,Recover target margin,25.274489467493908
 celery,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           celery
 item                                                              Celery
@@ -646,7 +646,7 @@ margin_pct                                                      0.244335
 margin_gap_pp                                                  -0.566492
 target_gap_dollars                                              2.164057
 budget_contribution                                           119.328495
-Name: 23, dtype: object>",Catering,76.40205798026668,76.97913987755102,76.97913987755102,0.007553224514363244,78.88566359183675,5,False,Sales review,Recover target margin,2.8854094864217217
+Name: 23, dtype: object>",Catering,76.40205798026668,76.97913987755102,76.97913987755102,0.007553224514363244,76.40205798026668,5,False,False,Sales review,Recover target margin,2.8854094864217217
 cucumbers,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        cucumbers
 item                                                   English cucumbers
@@ -673,7 +673,7 @@ margin_pct                                                      0.272682
 margin_gap_pp                                                   0.268241
 target_gap_dollars                                                   0.0
 budget_contribution                                             84.91606
-Name: 24, dtype: object>",Independent restaurant,24.908711032149853,24.81718325412357,24.908711032149853,0.0,25.16031417388874,5,False,Sales review,Hold; target covered,0.0
+Name: 24, dtype: object>",Independent restaurant,24.908711032149853,24.81718325412357,24.908711032149853,0.0,24.908711032149853,5,False,False,Sales review,Hold; target covered,0.0
 cucumbers,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        cucumbers
 item                                                   English cucumbers
@@ -700,7 +700,7 @@ margin_pct                                                      0.227056
 margin_gap_pp                                                  -4.294439
 target_gap_dollars                                              8.808894
 budget_contribution                                             49.56265
-Name: 25, dtype: object>",Restaurant group,22.79147633954711,24.132251747274253,24.132251747274253,0.05882793144912113,25.16031417388874,5,False,Sales review,Recover target margin,12.06697866954429
+Name: 25, dtype: object>",Restaurant group,22.79147633954711,24.132251747274253,24.132251747274253,0.05882793144912113,22.79147633954711,5,True,False,Finance + Sales review,Target exceeds market review threshold,12.06697866954429
 cucumbers,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        cucumbers
 item                                                   English cucumbers
@@ -727,7 +727,7 @@ margin_pct                                                      0.249991
 margin_gap_pp                                                  -2.000859
 target_gap_dollars                                              2.483244
 budget_contribution                                            34.891082
-Name: 26, dtype: object>",Catering,24.821773951780823,25.502114760972884,25.502114760972884,0.02740903250967075,25.16031417388874,5,False,Sales review,Recover target margin,3.401704045960301
+Name: 26, dtype: object>",Catering,24.821773951780823,25.502114760972884,25.502114760972884,0.02740903250967075,24.821773951780823,5,False,False,Sales review,Recover target margin,3.401704045960301
 garlic,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           garlic
 item                                                              Garlic
@@ -754,7 +754,7 @@ margin_pct                                                      0.253561
 margin_gap_pp                                                   0.356086
 target_gap_dollars                                                   0.0
 budget_contribution                                           212.839777
-Name: 27, dtype: object>",Independent restaurant,168.56910322775514,167.76876917006803,168.56910322775514,0.0,170.2718214421769,5,False,Sales review,Hold; target covered,0.0
+Name: 27, dtype: object>",Independent restaurant,168.56910322775514,167.76876917006803,168.56910322775514,0.0,168.56910322775514,5,False,False,Sales review,Hold; target covered,0.0
 garlic,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           garlic
 item                                                              Garlic
@@ -781,7 +781,7 @@ margin_pct                                                      0.206474
 margin_gap_pp                                                    -4.3526
 target_gap_dollars                                              20.62301
 budget_contribution                                           127.203866
-Name: 28, dtype: object>",Restaurant group,157.9363201269551,167.10210250340137,167.10210250340137,0.05803467099321091,170.2718214421769,5,False,Sales review,Recover target margin,27.497347129338777
+Name: 28, dtype: object>",Restaurant group,157.9363201269551,167.10210250340137,167.10210250340137,0.05803467099321091,157.9363201269551,5,True,False,Finance + Sales review,Target exceeds market review threshold,27.497347129338777
 garlic,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           garlic
 item                                                              Garlic
@@ -808,7 +808,7 @@ margin_pct                                                       0.23051
 margin_gap_pp                                                  -1.948954
 target_gap_dollars                                              6.399168
 budget_contribution                                            85.469244
-Name: 29, dtype: object>",Catering,164.16932397973335,168.43543583673468,168.43543583673468,0.025986047536676216,170.2718214421769,5,False,Sales review,Recover target margin,8.532223714002669
+Name: 29, dtype: object>",Catering,164.16932397973335,168.43543583673468,168.43543583673468,0.025986047536676216,164.16932397973335,5,False,False,Sales review,Recover target margin,8.532223714002669
 let_green,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        let_green
 item                                                  Green leaf lettuce
@@ -835,7 +835,7 @@ margin_pct                                                      0.293331
 margin_gap_pp                                                   2.333132
 target_gap_dollars                                                   0.0
 budget_contribution                                           145.388262
-Name: 30, dtype: object>",Independent restaurant,53.30902926223092,51.60523462398658,53.30902926223092,0.0,53.84750430528376,5,False,Sales review,Hold; target covered,0.0
+Name: 30, dtype: object>",Independent restaurant,53.30902926223092,51.60523462398658,53.30902926223092,0.0,53.30902926223092,5,False,False,Sales review,Hold; target covered,0.0
 let_green,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        let_green
 item                                                  Green leaf lettuce
@@ -862,7 +862,7 @@ margin_pct                                                       0.24913
 margin_gap_pp                                                  -2.087022
 target_gap_dollars                                              6.199081
 budget_contribution                                            86.123368
-Name: 31, dtype: object>",Restaurant group,49.50498778990215,50.920303117137266,50.920303117137266,0.02858934807219171,53.84750430528376,5,False,Sales review,Recover target margin,8.49189196341068
+Name: 31, dtype: object>",Restaurant group,49.50498778990215,50.920303117137266,50.920303117137266,0.02858934807219171,49.50498778990215,5,False,False,Sales review,Recover target margin,8.49189196341068
 let_green,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        let_green
 item                                                  Green leaf lettuce
@@ -889,7 +889,7 @@ margin_pct                                                      0.271154
 margin_gap_pp                                                    0.11539
 target_gap_dollars                                                   0.0
 budget_contribution                                            58.895031
-Name: 32, dtype: object>",Catering,52.37295135397261,52.2901661308359,52.37295135397261,0.0,53.84750430528376,5,False,Sales review,Hold; target covered,0.0
+Name: 32, dtype: object>",Catering,52.37295135397261,52.2901661308359,52.37295135397261,0.0,52.37295135397261,5,False,False,Sales review,Hold; target covered,0.0
 let_ice,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          let_ice
 item                                                     Iceberg lettuce
@@ -916,7 +916,7 @@ margin_pct                                                      0.198629
 margin_gap_pp                                                  -5.137149
 target_gap_dollars                                             31.449858
 budget_contribution                                           193.246362
-Name: 33, dtype: object>",Independent restaurant,61.2204475322449,65.4137619659864,65.4137619659864,0.06849532472843944,61.838835891156464,5,True,Finance + Sales review,Target exceeds market review threshold,41.93314433741499
+Name: 33, dtype: object>",Independent restaurant,61.2204475322449,65.4137619659864,65.4137619659864,0.06849532472843944,61.2204475322449,5,True,False,Finance + Sales review,Target exceeds market review threshold,41.93314433741499
 let_ice,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          let_ice
 item                                                     Iceberg lettuce
@@ -943,7 +943,7 @@ margin_pct                                                      0.147519
 margin_gap_pp                                                 -10.248099
 target_gap_dollars                                             40.863749
 budget_contribution                                           114.697817
-Name: 34, dtype: object>",Restaurant group,56.963523981844894,64.74709529931972,64.74709529931972,0.13664132366451853,61.838835891156464,5,False,Finance + Sales review,Increase exceeds approval threshold,54.484999222323815
+Name: 34, dtype: object>",Restaurant group,56.963523981844894,64.74709529931972,64.74709529931972,0.13664132366451853,56.963523981844894,5,True,False,Finance + Sales review,Target exceeds market review threshold,54.484999222323815
 let_ice,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          let_ice
 item                                                     Iceberg lettuce
@@ -970,7 +970,7 @@ margin_pct                                                      0.174411
 margin_gap_pp                                                  -7.558865
 target_gap_dollars                                             27.225648
 budget_contribution                                            78.131878
-Name: 35, dtype: object>",Catering,60.03028465653333,66.08042863265307,66.08042863265307,0.10078486235299366,61.838835891156464,5,True,Finance + Sales review,Target exceeds market review threshold,36.30086385671841
+Name: 35, dtype: object>",Catering,60.03028465653333,66.08042863265307,66.08042863265307,0.10078486235299366,60.03028465653333,5,True,False,Finance + Sales review,Target exceeds market review threshold,36.30086385671841
 let_rom,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          let_rom
 item                                                     Romaine lettuce
@@ -997,7 +997,7 @@ margin_pct                                                      0.306783
 margin_gap_pp                                                   3.678348
 target_gap_dollars                                                   0.0
 budget_contribution                                           392.757144
-Name: 36, dtype: object>",Independent restaurant,64.00486787168019,60.77976947162427,64.00486787168019,0.0,64.65138168856585,5,False,Sales review,Hold; target covered,0.0
+Name: 36, dtype: object>",Independent restaurant,64.00486787168019,60.77976947162427,64.00486787168019,0.0,64.00486787168019,5,False,False,Sales review,Hold; target covered,0.0
 let_rom,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          let_rom
 item                                                     Romaine lettuce
@@ -1024,7 +1024,7 @@ margin_pct                                                      0.263513
 margin_gap_pp                                                  -0.648653
 target_gap_dollars                                              5.022863
 budget_contribution                                           233.157711
-Name: 37, dtype: object>",Restaurant group,59.56555840921443,60.09483796477496,60.09483796477496,0.008885664294866258,64.65138168856585,5,False,Sales review,Recover target margin,6.880634222286865
+Name: 37, dtype: object>",Restaurant group,59.56555840921443,60.09483796477496,60.09483796477496,0.008885664294866258,59.56555840921443,5,False,False,Sales review,Recover target margin,6.880634222286865
 let_rom,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          let_rom
 item                                                     Romaine lettuce
@@ -1051,7 +1051,7 @@ margin_pct                                                      0.284941
 margin_gap_pp                                                   1.494103
 target_gap_dollars                                                   0.0
 budget_contribution                                           158.767241
-Name: 38, dtype: object>",Catering,62.74899519287672,61.46470097847359,62.74899519287672,0.0,64.65138168856585,5,False,Sales review,Hold; target covered,0.0
+Name: 38, dtype: object>",Catering,62.74899519287672,61.46470097847359,62.74899519287672,0.0,62.74899519287672,5,False,False,Sales review,Hold; target covered,0.0
 limes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                            limes
 item                                                               Limes
@@ -1078,7 +1078,7 @@ margin_pct                                                      0.283248
 margin_gap_pp                                                   0.324814
 target_gap_dollars                                                   0.0
 budget_contribution                                           166.205667
-Name: 39, dtype: object>",Independent restaurant,78.35410011224492,78.0006212159864,78.35410011224492,0.0,79.14555566893426,5,False,Sales review,Hold; target covered,0.0
+Name: 39, dtype: object>",Independent restaurant,78.35410011224492,78.0006212159864,78.35410011224492,0.0,78.35410011224492,5,False,False,Sales review,Hold; target covered,0.0
 limes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                            limes
 item                                                               Limes
@@ -1105,7 +1105,7 @@ margin_pct                                                      0.238088
 margin_gap_pp                                                  -4.191167
 target_gap_dollars                                             12.247206
 budget_contribution                                              98.8484
-Name: 40, dtype: object>",Restaurant group,73.05367477224492,77.30617677154196,77.30617677154196,0.058210651449838835,79.14555566893426,5,False,Sales review,Recover target margin,17.010007997188154
+Name: 40, dtype: object>",Restaurant group,73.05367477224492,77.30617677154196,77.30617677154196,0.058210651449838835,73.05367477224492,5,True,False,Finance + Sales review,Target exceeds market review threshold,17.010007997188154
 limes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                            limes
 item                                                               Limes
@@ -1132,7 +1132,7 @@ margin_pct                                                      0.261063
 margin_gap_pp                                                  -1.893684
 target_gap_dollars                                              4.356136
 budget_contribution                                              67.0656
-Name: 41, dtype: object>",Catering,76.67833610888891,78.69506566043084,78.69506566043084,0.026301164760252682,79.14555566893426,5,False,Sales review,Recover target margin,6.050188654625785
+Name: 41, dtype: object>",Catering,76.67833610888891,78.69506566043084,78.69506566043084,0.026301164760252682,76.67833610888891,5,False,False,Sales review,Recover target margin,6.050188654625785
 mushrooms,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        mushrooms
 item                                                           Mushrooms
@@ -1159,7 +1159,7 @@ margin_pct                                                      0.302562
 margin_gap_pp                                                    0.25616
 target_gap_dollars                                                   0.0
 budget_contribution                                           171.364317
-Name: 42, dtype: object>",Independent restaurant,28.275112309329458,28.171641559766766,28.275112309329458,0.0,28.56071950437319,5,False,Sales review,Hold; target covered,0.0
+Name: 42, dtype: object>",Independent restaurant,28.275112309329458,28.171641559766766,28.275112309329458,0.0,28.275112309329458,5,False,False,Sales review,Hold; target covered,0.0
 mushrooms,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        mushrooms
 item                                                           Mushrooms
@@ -1186,7 +1186,7 @@ margin_pct                                                      0.258785
 margin_gap_pp                                                    -4.1215
 target_gap_dollars                                             14.962216
 budget_contribution                                           100.247162
-Name: 43, dtype: object>",Restaurant group,25.930599145329456,27.45735584548105,27.45735584548105,0.058878573981064,28.56071950437319,5,False,Sales review,Recover target margin,21.37459380212232
+Name: 43, dtype: object>",Restaurant group,25.930599145329456,27.45735584548105,27.45735584548105,0.058878573981064,25.930599145329456,5,True,False,Finance + Sales review,Target exceeds market review threshold,21.37459380212232
 mushrooms,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        mushrooms
 item                                                           Mushrooms
@@ -1213,7 +1213,7 @@ margin_pct                                                      0.280824
 margin_gap_pp                                                  -1.917606
 target_gap_dollars                                              4.852337
 budget_contribution                                            70.260013
-Name: 44, dtype: object>",Catering,28.11571501200001,28.88592727405248,28.88592727405248,0.027394368655527357,28.56071950437319,5,False,Sales review,Recover target margin,6.931910358472241
+Name: 44, dtype: object>",Catering,28.11571501200001,28.88592727405248,28.88592727405248,0.027394368655527357,28.11571501200001,5,False,False,Sales review,Recover target margin,6.931910358472241
 onions,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           onions
 item                                                       Yellow onions
@@ -1240,7 +1240,7 @@ margin_pct                                                      0.136643
 margin_gap_pp                                                  -8.335673
 target_gap_dollars                                             90.281929
 budget_contribution                                           240.684239
-Name: 45, dtype: object>",Independent restaurant,43.323163066719,47.95300559916275,47.95300559916275,0.1068676016410357,43.76077077446364,5,True,Finance + Sales review,Target exceeds market review threshold,115.74606331109382
+Name: 45, dtype: object>",Independent restaurant,43.323163066719,47.95300559916275,47.95300559916275,0.1068676016410357,43.323163066719,5,True,False,Finance + Sales review,Target exceeds market review threshold,115.74606331109382
 onions,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           onions
 item                                                       Yellow onions
@@ -1267,7 +1267,7 @@ margin_pct                                                      0.080934
 margin_gap_pp                                                 -13.906573
 target_gap_dollars                                             83.758817
 budget_contribution                                           142.295159
-Name: 46, dtype: object>",Restaurant group,40.15310666825746,47.31197995813711,47.31197995813711,0.17828939984708603,43.76077077446364,5,True,Finance + Sales review,Target exceeds market review threshold,107.38309934819476
+Name: 46, dtype: object>",Restaurant group,40.15310666825746,47.31197995813711,47.31197995813711,0.17828939984708603,40.15310666825746,5,True,False,Finance + Sales review,Target exceeds market review threshold,107.38309934819476
 onions,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                           onions
 item                                                       Yellow onions
@@ -1294,7 +1294,7 @@ margin_pct                                                      0.111157
 margin_gap_pp                                                 -10.884255
 target_gap_dollars                                             51.055684
 budget_contribution                                            97.683952
-Name: 47, dtype: object>",Catering,42.6434852774359,48.59403124018839,48.59403124018839,0.13954173595424035,43.76077077446364,5,True,Finance + Sales review,Target exceeds market review threshold,65.45600559027741
+Name: 47, dtype: object>",Catering,42.6434852774359,48.59403124018839,48.59403124018839,0.13954173595424035,42.6434852774359,5,True,False,Finance + Sales review,Target exceeds market review threshold,65.45600559027741
 parsley,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          parsley
 item                                                   Parsley (bunched)
@@ -1321,7 +1321,7 @@ margin_pct                                                      0.286607
 margin_gap_pp                                                  -3.339269
 target_gap_dollars                                             14.003765
 budget_contribution                                           169.440867
-Name: 48, dtype: object>",Independent restaurant,69.89435783508405,73.32665313625452,73.32665313625452,0.04910690086414382,70.60036144957985,5,False,Sales review,Recover target margin,20.59377180702282
+Name: 48, dtype: object>",Independent restaurant,69.89435783508405,73.32665313625452,73.32665313625452,0.04910690086414382,69.89435783508405,5,False,False,Sales review,Recover target margin,20.59377180702282
 parsley,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          parsley
 item                                                   Parsley (bunched)
@@ -1348,7 +1348,7 @@ margin_pct                                                      0.241264
 margin_gap_pp                                                  -7.873617
 target_gap_dollars                                             20.489783
 budget_contribution                                           100.605697
-Name: 49, dtype: object>",Restaurant group,65.05835069949582,72.59135901860745,72.59135901860745,0.11578849199400332,70.60036144957985,5,False,Finance + Sales review,Increase exceeds approval threshold,30.13203327644652
+Name: 49, dtype: object>",Restaurant group,65.05835069949582,72.59135901860745,72.59135901860745,0.11578849199400332,65.05835069949582,5,True,False,Finance + Sales review,Target exceeds market review threshold,30.13203327644652
 parsley,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                          parsley
 item                                                   Parsley (bunched)
@@ -1375,7 +1375,7 @@ margin_pct                                                      0.264902
 margin_gap_pp                                                  -5.509798
 target_gap_dollars                                               7.54961
 budget_contribution                                            68.482229
-Name: 50, dtype: object>",Catering,68.51076360676473,74.06194725390158,74.06194725390158,0.08102644540643733,70.60036144957985,5,False,Sales review,Recover target margin,11.102367294273705
+Name: 50, dtype: object>",Catering,68.51076360676473,74.06194725390158,74.06194725390158,0.08102644540643733,68.51076360676473,5,True,False,Finance + Sales review,Target exceeds market review threshold,11.102367294273705
 potatoes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         potatoes
 item                                                            Potatoes
@@ -1402,7 +1402,7 @@ margin_pct                                                      0.223129
 margin_gap_pp                                                   0.312874
 target_gap_dollars                                                   0.0
 budget_contribution                                           185.576769
-Name: 51, dtype: object>",Independent restaurant,37.115353897959196,36.966476543694405,37.115353897959196,0.0,37.490256462585045,5,False,Sales review,Hold; target covered,0.0
+Name: 51, dtype: object>",Independent restaurant,37.115353897959196,36.966476543694405,37.115353897959196,0.0,37.115353897959196,5,False,False,Sales review,Hold; target covered,0.0
 potatoes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         potatoes
 item                                                            Potatoes
@@ -1429,7 +1429,7 @@ margin_pct                                                      0.174277
 margin_gap_pp                                                   -4.57227
 target_gap_dollars                                             20.396074
 budget_contribution                                           109.442216
-Name: 52, dtype: object>",Restaurant group,34.31400374103611,36.32545090266876,36.32545090266876,0.058618841940241584,37.490256462585045,5,False,Sales review,Recover target margin,26.148813101224484
+Name: 52, dtype: object>",Restaurant group,34.31400374103611,36.32545090266876,36.32545090266876,0.058618841940241584,34.31400374103611,5,True,False,Finance + Sales review,Target exceeds market review threshold,26.148813101224484
 potatoes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         potatoes
 item                                                            Potatoes
@@ -1456,7 +1456,7 @@ margin_pct                                                      0.198994
 margin_gap_pp                                                  -2.100556
 target_gap_dollars                                              6.154006
 budget_contribution                                            75.499939
-Name: 53, dtype: object>",Catering,36.6212833323077,37.60750218472004,37.60750218472004,0.026930210049255443,37.490256462585045,5,False,Sales review,Recover target margin,7.88975081929874
+Name: 53, dtype: object>",Catering,36.6212833323077,37.60750218472004,37.60750218472004,0.026930210049255443,36.6212833323077,5,False,False,Sales review,Recover target margin,7.88975081929874
 raspberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                      raspberries
 item                                                         Raspberries
@@ -1483,7 +1483,7 @@ margin_pct                                                      0.396423
 margin_gap_pp                                                   7.642301
 target_gap_dollars                                                   0.0
 budget_contribution                                           145.153755
-Name: 54, dtype: object>",Independent restaurant,74.84490469717889,66.43332711584634,74.84490469717889,0.0,75.60091383553423,5,False,Sales review,Hold; target covered,0.0
+Name: 54, dtype: object>",Independent restaurant,74.84490469717889,66.43332711584634,74.84490469717889,0.0,74.84490469717889,5,False,False,Sales review,Hold; target covered,0.0
 raspberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                      raspberries
 item                                                         Raspberries
@@ -1510,7 +1510,7 @@ margin_pct                                                       0.35918
 margin_gap_pp                                                   3.918025
 target_gap_dollars                                                   0.0
 budget_contribution                                            86.245194
-Name: 55, dtype: object>",Restaurant group,69.71486508129654,65.69803299819928,69.71486508129654,0.0,75.60091383553423,5,False,Sales review,Hold; target covered,0.0
+Name: 55, dtype: object>",Restaurant group,69.71486508129654,65.69803299819928,69.71486508129654,0.0,69.71486508129654,5,False,False,Sales review,Hold; target covered,0.0
 raspberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                      raspberries
 item                                                         Raspberries
@@ -1537,7 +1537,7 @@ margin_pct                                                      0.376993
 margin_gap_pp                                                   5.699345
 target_gap_dollars                                                   0.0
 budget_contribution                                            58.626208
-Name: 56, dtype: object>",Catering,73.3132941182353,67.1686212334934,73.3132941182353,0.0,75.60091383553423,5,False,Sales review,Hold; target covered,0.0
+Name: 56, dtype: object>",Catering,73.3132941182353,67.1686212334934,73.3132941182353,0.0,73.3132941182353,5,False,False,Sales review,Hold; target covered,0.0
 strawberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                     strawberries
 item                                                        Strawberries
@@ -1564,7 +1564,7 @@ margin_pct                                                      0.257806
 margin_gap_pp                                                  -4.219438
 target_gap_dollars                                             28.066068
 budget_contribution                                            179.96789
-Name: 57, dtype: object>",Independent restaurant,47.51152297346939,50.375407478134115,50.375407478134115,0.06027768266371769,47.99143734693878,5,False,Sales review,Recover target margin,40.09438306530615
+Name: 57, dtype: object>",Independent restaurant,47.51152297346939,50.375407478134115,50.375407478134115,0.06027768266371769,47.51152297346939,5,True,False,Finance + Sales review,Target exceeds market review threshold,40.09438306530615
 strawberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                     strawberries
 item                                                        Strawberries
@@ -1591,7 +1591,7 @@ margin_pct                                                      0.210376
 margin_gap_pp                                                  -8.962392
 target_gap_dollars                                             27.619527
 budget_contribution                                           106.373591
-Name: 58, dtype: object>",Restaurant group,44.02448360032654,49.6611217638484,49.6611217638484,0.1280341687751234,47.99143734693878,5,False,Finance + Sales review,Increase exceeds approval threshold,39.45646714465301
+Name: 58, dtype: object>",Restaurant group,44.02448360032654,49.6611217638484,49.6611217638484,0.1280341687751234,44.02448360032654,5,True,False,Finance + Sales review,Target exceeds market review threshold,39.45646714465301
 strawberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                     strawberries
 item                                                        Strawberries
@@ -1618,7 +1618,7 @@ margin_pct                                                      0.235462
 margin_gap_pp                                                   -6.45382
 target_gap_dollars                                             15.094509
 budget_contribution                                            73.058585
-Name: 59, dtype: object>",Catering,46.776976428000005,51.08969319241983,51.08969319241983,0.0921974247535653,47.99143734693878,5,True,Finance + Sales review,Target exceeds market review threshold,21.563583822099126
+Name: 59, dtype: object>",Catering,46.776976428000005,51.08969319241983,51.08969319241983,0.0921974247535653,46.776976428000005,5,True,False,Finance + Sales review,Target exceeds market review threshold,21.563583822099126
 tom_field,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        tom_field
 item                                                      Field tomatoes
@@ -1645,7 +1645,7 @@ margin_pct                                                      0.247337
 margin_gap_pp                                                  -3.266269
 target_gap_dollars                                             36.557242
 budget_contribution                                           316.551418
-Name: 60, dtype: object>",Independent restaurant,74.61569143622448,78.0006212159864,78.0006212159864,0.0453648517437526,75.36938528911564,5,False,Sales review,Recover target margin,50.77394669642878
+Name: 60, dtype: object>",Independent restaurant,74.61569143622448,78.0006212159864,78.0006212159864,0.0453648517437526,74.61569143622448,5,False,False,Sales review,Recover target margin,50.77394669642878
 tom_field,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        tom_field
 item                                                      Field tomatoes
@@ -1672,7 +1672,7 @@ margin_pct                                                       0.19956
 margin_gap_pp                                                   -8.04401
 target_gap_dollars                                             44.748702
 budget_contribution                                           188.180851
-Name: 61, dtype: object>",Restaurant group,69.53730491455781,77.30617677154196,77.30617677154196,0.11172236063117413,75.36938528911564,5,False,Finance + Sales review,Increase exceeds approval threshold,62.15097485587319
+Name: 61, dtype: object>",Restaurant group,69.53730491455781,77.30617677154196,77.30617677154196,0.11172236063117413,69.53730491455781,5,True,False,Finance + Sales review,Target exceeds market review threshold,62.15097485587319
 tom_field,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                        tom_field
 item                                                      Field tomatoes
@@ -1699,7 +1699,7 @@ margin_pct                                                      0.224379
 margin_gap_pp                                                  -5.562118
 target_gap_dollars                                             20.316109
 budget_contribution                                           127.787234
-Name: 62, dtype: object>",Catering,73.0517020761111,78.69506566043084,78.69506566043084,0.0772516371821157,75.36938528911564,5,False,Sales review,Recover target margin,28.216817921598718
+Name: 62, dtype: object>",Catering,73.0517020761111,78.69506566043084,78.69506566043084,0.0772516371821157,73.0517020761111,5,True,False,Finance + Sales review,Target exceeds market review threshold,28.216817921598718
 tom_roma,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         tom_roma
 item                                                       Roma tomatoes
@@ -1726,7 +1726,7 @@ margin_pct                                                      0.338428
 margin_gap_pp                                                   5.842764
 target_gap_dollars                                                   0.0
 budget_contribution                                           356.502901
-Name: 63, dtype: object>",Independent restaurant,63.024620031887764,57.91020393282314,63.024620031887764,0.0,63.66123235544219,5,False,Sales review,Hold; target covered,0.0
+Name: 63, dtype: object>",Independent restaurant,63.024620031887764,57.91020393282314,63.024620031887764,0.0,63.024620031887764,5,False,False,Sales review,Hold; target covered,0.0
 tom_roma,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         tom_roma
 item                                                       Roma tomatoes
@@ -1753,7 +1753,7 @@ margin_pct                                                      0.297423
 margin_gap_pp                                                   1.742344
 target_gap_dollars                                                   0.0
 budget_contribution                                           211.568407
-Name: 64, dtype: object>",Restaurant group,58.6346729027211,57.21575948837869,58.6346729027211,0.0,63.66123235544219,5,False,Sales review,Hold; target covered,0.0
+Name: 64, dtype: object>",Restaurant group,58.6346729027211,57.21575948837869,58.6346729027211,0.0,58.6346729027211,5,False,False,Sales review,Hold; target covered,0.0
 tom_roma,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         tom_roma
 item                                                       Roma tomatoes
@@ -1780,7 +1780,7 @@ margin_pct                                                      0.317307
 margin_gap_pp                                                   3.730685
 target_gap_dollars                                                   0.0
 budget_contribution                                           144.156716
-Name: 65, dtype: object>",Catering,61.807191998611124,58.60464837726758,61.807191998611124,0.0,63.66123235544219,5,False,Sales review,Hold; target covered,0.0
+Name: 65, dtype: object>",Catering,61.807191998611124,58.60464837726758,61.807191998611124,0.0,61.807191998611124,5,False,False,Sales review,Hold; target covered,0.0
 zucchini,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         zucchini
 item                                                            Zucchini
@@ -1807,7 +1807,7 @@ margin_pct                                                      0.120811
 margin_gap_pp                                                 -14.918921
 target_gap_dollars                                            103.765092
 budget_contribution                                           158.074274
-Name: 66, dtype: object>",Independent restaurant,77.28075627509088,93.07452973161867,93.07452973161867,0.20436877455375568,78.06136997483928,5,True,Finance + Sales review,Target exceeds market review threshold,142.1439611087501
+Name: 66, dtype: object>",Independent restaurant,77.28075627509088,93.07452973161867,93.07452973161867,0.20436877455375568,77.28075627509088,5,True,False,Finance + Sales review,Target exceeds market review threshold,142.1439611087501
 zucchini,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         zucchini
 item                                                            Zucchini
@@ -1834,7 +1834,7 @@ margin_pct                                                       0.06396
 margin_gap_pp                                                 -20.603963
 target_gap_dollars                                             59.383043
 budget_contribution                                            94.012373
-Name: 67, dtype: object>",Restaurant group,72.05293950139225,92.38959822476936,92.38959822476936,0.28224606607457225,78.06136997483928,5,True,Finance + Sales review,Target exceeds market review threshold,81.34663489350845
+Name: 67, dtype: object>",Restaurant group,72.05293950139225,92.38959822476936,92.38959822476936,0.28224606607457225,72.05293950139225,5,True,False,Finance + Sales review,Target exceeds market review threshold,81.34663489350845
 zucchini,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
 item_id                                                         zucchini
 item                                                            Zucchini
@@ -1861,4 +1861,4 @@ margin_pct                                                      0.094985
 margin_gap_pp                                                 -17.501473
 target_gap_dollars                                             39.708014
 budget_contribution                                            63.784504
-Name: 68, dtype: object>",Catering,75.62794794301372,93.75946123846799,93.75946123846799,0.23974620214628217,78.06136997483928,5,True,Finance + Sales review,Target exceeds market review threshold,54.39453988636281
+Name: 68, dtype: object>",Catering,75.62794794301372,93.75946123846799,93.75946123846799,0.23974620214628217,75.62794794301372,5,True,False,Finance + Sales review,Target exceeds market review threshold,54.39453988636281

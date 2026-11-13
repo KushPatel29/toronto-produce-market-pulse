@@ -1,116 +1,346 @@
-item_id,unit,currency,quote_date,competitor,price,data_status
-apples,tray-pack case,CAD,2024-01-30,Demo comparator 1,83.69933041850341,SYNTHETIC; not observed competitor pricing
-apples,tray-pack case,CAD,2024-01-30,Demo comparator 2,87.26100405333335,SYNTHETIC; not observed competitor pricing
-apples,tray-pack case,CAD,2024-01-30,Demo comparator 3,89.04184087074832,SYNTHETIC; not observed competitor pricing
-apples,tray-pack case,CAD,2024-01-30,Demo comparator 4,91.71309609687077,SYNTHETIC; not observed competitor pricing
-apples,tray-pack case,CAD,2024-01-30,Demo comparator 5,96.16518814040819,SYNTHETIC; not observed competitor pricing
-asparagus,11 lb case,CAD,2024-01-30,Demo comparator 1,100.63090593294463,SYNTHETIC; not observed competitor pricing
-asparagus,11 lb case,CAD,2024-01-30,Demo comparator 2,104.91307214285717,SYNTHETIC; not observed competitor pricing
-asparagus,11 lb case,CAD,2024-01-30,Demo comparator 3,107.05415524781344,SYNTHETIC; not observed competitor pricing
-asparagus,11 lb case,CAD,2024-01-30,Demo comparator 4,110.26577990524785,SYNTHETIC; not observed competitor pricing
-asparagus,11 lb case,CAD,2024-01-30,Demo comparator 5,115.61848766763852,SYNTHETIC; not observed competitor pricing
-bananas,40 lb case,CAD,2024-01-30,Demo comparator 1,42.667597359183674,SYNTHETIC; not observed competitor pricing
-bananas,40 lb case,CAD,2024-01-30,Demo comparator 2,44.4832398,SYNTHETIC; not observed competitor pricing
-bananas,40 lb case,CAD,2024-01-30,Demo comparator 3,45.391061020408166,SYNTHETIC; not observed competitor pricing
-bananas,40 lb case,CAD,2024-01-30,Demo comparator 4,46.75279285102041,SYNTHETIC; not observed competitor pricing
-bananas,40 lb case,CAD,2024-01-30,Demo comparator 5,49.022345902040826,SYNTHETIC; not observed competitor pricing
-blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,57.90542035354142,SYNTHETIC; not observed competitor pricing
-blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,60.369480794117656,SYNTHETIC; not observed competitor pricing
-blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,61.60151101440577,SYNTHETIC; not observed competitor pricing
-blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,63.449556344837944,SYNTHETIC; not observed competitor pricing
-blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,66.52963189555824,SYNTHETIC; not observed competitor pricing
-broccoli,case,CAD,2024-01-30,Demo comparator 1,65.32450553312833,SYNTHETIC; not observed competitor pricing
-broccoli,case,CAD,2024-01-30,Demo comparator 2,68.10427172602742,SYNTHETIC; not observed competitor pricing
-broccoli,case,CAD,2024-01-30,Demo comparator 3,69.49415482247696,SYNTHETIC; not observed competitor pricing
-broccoli,case,CAD,2024-01-30,Demo comparator 4,71.57897946715127,SYNTHETIC; not observed competitor pricing
-broccoli,case,CAD,2024-01-30,Demo comparator 5,75.05368720827512,SYNTHETIC; not observed competitor pricing
-brussels,25 lb case,CAD,2024-01-30,Demo comparator 1,57.00092665306122,SYNTHETIC; not observed competitor pricing
-brussels,25 lb case,CAD,2024-01-30,Demo comparator 2,59.426497999999995,SYNTHETIC; not observed competitor pricing
-brussels,25 lb case,CAD,2024-01-30,Demo comparator 3,60.639283673469386,SYNTHETIC; not observed competitor pricing
-brussels,25 lb case,CAD,2024-01-30,Demo comparator 4,62.45846218367347,SYNTHETIC; not observed competitor pricing
-brussels,25 lb case,CAD,2024-01-30,Demo comparator 5,65.49042636734694,SYNTHETIC; not observed competitor pricing
-cauli,case,CAD,2024-01-30,Demo comparator 1,60.42032403885938,SYNTHETIC; not observed competitor pricing
-cauli,case,CAD,2024-01-30,Demo comparator 2,62.99140165753425,SYNTHETIC; not observed competitor pricing
-cauli,case,CAD,2024-01-30,Demo comparator 3,64.27694046687168,SYNTHETIC; not observed competitor pricing
-cauli,case,CAD,2024-01-30,Demo comparator 4,66.20524868087783,SYNTHETIC; not observed competitor pricing
-cauli,case,CAD,2024-01-30,Demo comparator 5,69.41909570422142,SYNTHETIC; not observed competitor pricing
-celery,case,CAD,2024-01-30,Demo comparator 1,74.15252377632653,SYNTHETIC; not observed competitor pricing
-celery,case,CAD,2024-01-30,Demo comparator 2,77.30795032,SYNTHETIC; not observed competitor pricing
-celery,case,CAD,2024-01-30,Demo comparator 3,78.88566359183675,SYNTHETIC; not observed competitor pricing
-celery,case,CAD,2024-01-30,Demo comparator 4,81.25223349959185,SYNTHETIC; not observed competitor pricing
-celery,case,CAD,2024-01-30,Demo comparator 5,85.19651667918369,SYNTHETIC; not observed competitor pricing
-cucumbers,case,CAD,2024-01-30,Demo comparator 1,23.650695323455412,SYNTHETIC; not observed competitor pricing
-cucumbers,case,CAD,2024-01-30,Demo comparator 2,24.657107890410963,SYNTHETIC; not observed competitor pricing
-cucumbers,case,CAD,2024-01-30,Demo comparator 3,25.16031417388874,SYNTHETIC; not observed competitor pricing
-cucumbers,case,CAD,2024-01-30,Demo comparator 4,25.915123599105403,SYNTHETIC; not observed competitor pricing
-cucumbers,case,CAD,2024-01-30,Demo comparator 5,27.17313930779984,SYNTHETIC; not observed competitor pricing
-garlic,30 lb case,CAD,2024-01-30,Demo comparator 1,160.05551215564628,SYNTHETIC; not observed competitor pricing
-garlic,30 lb case,CAD,2024-01-30,Demo comparator 2,166.86638501333337,SYNTHETIC; not observed competitor pricing
-garlic,30 lb case,CAD,2024-01-30,Demo comparator 3,170.2718214421769,SYNTHETIC; not observed competitor pricing
-garlic,30 lb case,CAD,2024-01-30,Demo comparator 4,175.37997608544222,SYNTHETIC; not observed competitor pricing
-garlic,30 lb case,CAD,2024-01-30,Demo comparator 5,183.89356715755108,SYNTHETIC; not observed competitor pricing
-let_green,case,CAD,2024-01-30,Demo comparator 1,50.61665404696674,SYNTHETIC; not observed competitor pricing
-let_green,case,CAD,2024-01-30,Demo comparator 2,52.77055421917809,SYNTHETIC; not observed competitor pricing
-let_green,case,CAD,2024-01-30,Demo comparator 3,53.84750430528376,SYNTHETIC; not observed competitor pricing
-let_green,case,CAD,2024-01-30,Demo comparator 4,55.46292943444228,SYNTHETIC; not observed competitor pricing
-let_green,case,CAD,2024-01-30,Demo comparator 5,58.155304649706466,SYNTHETIC; not observed competitor pricing
-let_ice,case,CAD,2024-01-30,Demo comparator 1,58.12850573768707,SYNTHETIC; not observed competitor pricing
-let_ice,case,CAD,2024-01-30,Demo comparator 2,60.60205917333333,SYNTHETIC; not observed competitor pricing
-let_ice,case,CAD,2024-01-30,Demo comparator 3,61.838835891156464,SYNTHETIC; not observed competitor pricing
-let_ice,case,CAD,2024-01-30,Demo comparator 4,63.69400096789116,SYNTHETIC; not observed competitor pricing
-let_ice,case,CAD,2024-01-30,Demo comparator 5,66.78594276244898,SYNTHETIC; not observed competitor pricing
-let_rom,case,CAD,2024-01-30,Demo comparator 1,60.77229878725189,SYNTHETIC; not observed competitor pricing
-let_rom,case,CAD,2024-01-30,Demo comparator 2,63.35835405479453,SYNTHETIC; not observed competitor pricing
-let_rom,case,CAD,2024-01-30,Demo comparator 3,64.65138168856585,SYNTHETIC; not observed competitor pricing
-let_rom,case,CAD,2024-01-30,Demo comparator 4,66.59092313922282,SYNTHETIC; not observed competitor pricing
-let_rom,case,CAD,2024-01-30,Demo comparator 5,69.82349222365112,SYNTHETIC; not observed competitor pricing
-limes,40 lb case,CAD,2024-01-30,Demo comparator 1,74.39682232879821,SYNTHETIC; not observed competitor pricing
-limes,40 lb case,CAD,2024-01-30,Demo comparator 2,77.56264455555558,SYNTHETIC; not observed competitor pricing
-limes,40 lb case,CAD,2024-01-30,Demo comparator 3,79.14555566893426,SYNTHETIC; not observed competitor pricing
-limes,40 lb case,CAD,2024-01-30,Demo comparator 4,81.51992233900229,SYNTHETIC; not observed competitor pricing
-limes,40 lb case,CAD,2024-01-30,Demo comparator 5,85.477200122449,SYNTHETIC; not observed competitor pricing
-mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 1,26.847076334110795,SYNTHETIC; not observed competitor pricing
-mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 2,27.989505114285723,SYNTHETIC; not observed competitor pricing
-mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 3,28.56071950437319,SYNTHETIC; not observed competitor pricing
-mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 4,29.417541089504386,SYNTHETIC; not observed competitor pricing
-mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 5,30.845577064723045,SYNTHETIC; not observed competitor pricing
-onions,50 lb sack,CAD,2024-01-30,Demo comparator 1,41.13512452799581,SYNTHETIC; not observed competitor pricing
-onions,50 lb sack,CAD,2024-01-30,Demo comparator 2,42.885555358974365,SYNTHETIC; not observed competitor pricing
-onions,50 lb sack,CAD,2024-01-30,Demo comparator 3,43.76077077446364,SYNTHETIC; not observed competitor pricing
-onions,50 lb sack,CAD,2024-01-30,Demo comparator 4,45.07359389769755,SYNTHETIC; not observed competitor pricing
-onions,50 lb sack,CAD,2024-01-30,Demo comparator 5,47.26163243642073,SYNTHETIC; not observed competitor pricing
-parsley,case,CAD,2024-01-30,Demo comparator 1,66.36433976260506,SYNTHETIC; not observed competitor pricing
-parsley,case,CAD,2024-01-30,Demo comparator 2,69.18835422058825,SYNTHETIC; not observed competitor pricing
-parsley,case,CAD,2024-01-30,Demo comparator 3,70.60036144957985,SYNTHETIC; not observed competitor pricing
-parsley,case,CAD,2024-01-30,Demo comparator 4,72.71837229306725,SYNTHETIC; not observed competitor pricing
-parsley,case,CAD,2024-01-30,Demo comparator 5,76.24839036554624,SYNTHETIC; not observed competitor pricing
-potatoes,50 lb case,CAD,2024-01-30,Demo comparator 1,35.24084107482994,SYNTHETIC; not observed competitor pricing
-potatoes,50 lb case,CAD,2024-01-30,Demo comparator 2,36.74045133333334,SYNTHETIC; not observed competitor pricing
-potatoes,50 lb case,CAD,2024-01-30,Demo comparator 3,37.490256462585045,SYNTHETIC; not observed competitor pricing
-potatoes,50 lb case,CAD,2024-01-30,Demo comparator 4,38.6149641564626,SYNTHETIC; not observed competitor pricing
-potatoes,50 lb case,CAD,2024-01-30,Demo comparator 5,40.48947697959185,SYNTHETIC; not observed competitor pricing
-raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,71.06485900540217,SYNTHETIC; not observed competitor pricing
-raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,74.08889555882354,SYNTHETIC; not observed competitor pricing
-raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,75.60091383553423,SYNTHETIC; not observed competitor pricing
-raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,77.86894125060026,SYNTHETIC; not observed competitor pricing
-raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,81.64898694237698,SYNTHETIC; not observed competitor pricing
-strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 1,45.111951106122454,SYNTHETIC; not observed competitor pricing
-strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 2,47.031608600000006,SYNTHETIC; not observed competitor pricing
-strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 3,47.99143734693878,SYNTHETIC; not observed competitor pricing
-strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 4,49.43118046734695,SYNTHETIC; not observed competitor pricing
-strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 5,51.830752334693884,SYNTHETIC; not observed competitor pricing
-tom_field,25 lb case,CAD,2024-01-30,Demo comparator 1,70.84722217176869,SYNTHETIC; not observed competitor pricing
-tom_field,25 lb case,CAD,2024-01-30,Demo comparator 2,73.86199758333332,SYNTHETIC; not observed competitor pricing
-tom_field,25 lb case,CAD,2024-01-30,Demo comparator 3,75.36938528911564,SYNTHETIC; not observed competitor pricing
-tom_field,25 lb case,CAD,2024-01-30,Demo comparator 4,77.63046684778911,SYNTHETIC; not observed competitor pricing
-tom_field,25 lb case,CAD,2024-01-30,Demo comparator 5,81.3989361122449,SYNTHETIC; not observed competitor pricing
-tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 1,59.84155841411565,SYNTHETIC; not observed competitor pricing
-tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 2,62.38800770833334,SYNTHETIC; not observed competitor pricing
-tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 3,63.66123235544219,SYNTHETIC; not observed competitor pricing
-tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 4,65.57106932610546,SYNTHETIC; not observed competitor pricing
-tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 5,68.75413094387757,SYNTHETIC; not observed competitor pricing
-zucchini,25 lb case,CAD,2024-01-30,Demo comparator 1,73.37768777634892,SYNTHETIC; not observed competitor pricing
-zucchini,25 lb case,CAD,2024-01-30,Demo comparator 2,76.5001425753425,SYNTHETIC; not observed competitor pricing
-zucchini,25 lb case,CAD,2024-01-30,Demo comparator 3,78.06136997483928,SYNTHETIC; not observed competitor pricing
-zucchini,25 lb case,CAD,2024-01-30,Demo comparator 4,80.40321107408447,SYNTHETIC; not observed competitor pricing
-zucchini,25 lb case,CAD,2024-01-30,Demo comparator 5,84.30627957282643,SYNTHETIC; not observed competitor pricing
+item_id,customer,unit,currency,quote_date,competitor,price,price_basis,data_status
+apples,Catering,tray-pack case,CAD,2024-01-30,Demo comparator 1,80.98668760059734,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Catering,tray-pack case,CAD,2024-01-30,Demo comparator 2,84.43292962615467,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Catering,tray-pack case,CAD,2024-01-30,Demo comparator 3,86.15605063893334,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Catering,tray-pack case,CAD,2024-01-30,Demo comparator 4,88.74073215810134,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Catering,tray-pack case,CAD,2024-01-30,Demo comparator 5,93.04853469004802,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Independent restaurant,tray-pack case,CAD,2024-01-30,Demo comparator 1,82.86233711431838,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Independent restaurant,tray-pack case,CAD,2024-01-30,Demo comparator 2,86.3883940128,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Independent restaurant,tray-pack case,CAD,2024-01-30,Demo comparator 3,88.15142246204083,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Independent restaurant,tray-pack case,CAD,2024-01-30,Demo comparator 4,90.79596513590205,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Independent restaurant,tray-pack case,CAD,2024-01-30,Demo comparator 5,95.2035362590041,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Restaurant group,tray-pack case,CAD,2024-01-30,Demo comparator 1,77.35726448571037,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Restaurant group,tray-pack case,CAD,2024-01-30,Demo comparator 2,80.649062974464,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Restaurant group,tray-pack case,CAD,2024-01-30,Demo comparator 3,82.29496221884082,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Restaurant group,tray-pack case,CAD,2024-01-30,Demo comparator 4,84.76381108540605,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+apples,Restaurant group,tray-pack case,CAD,2024-01-30,Demo comparator 5,88.87855919634809,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Catering,11 lb case,CAD,2024-01-30,Demo comparator 1,97.29076205800003,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Catering,11 lb case,CAD,2024-01-30,Demo comparator 2,101.43079448600002,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Catering,11 lb case,CAD,2024-01-30,Demo comparator 3,103.50081070000003,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Catering,11 lb case,CAD,2024-01-30,Demo comparator 4,106.60583502100003,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Catering,11 lb case,CAD,2024-01-30,Demo comparator 5,111.78087555600004,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Independent restaurant,11 lb case,CAD,2024-01-30,Demo comparator 1,99.62459687361519,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Independent restaurant,11 lb case,CAD,2024-01-30,Demo comparator 2,103.8639414214286,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Independent restaurant,11 lb case,CAD,2024-01-30,Demo comparator 3,105.98361369533531,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Independent restaurant,11 lb case,CAD,2024-01-30,Demo comparator 4,109.16312210619537,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Independent restaurant,11 lb case,CAD,2024-01-30,Demo comparator 5,114.46230279096214,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Restaurant group,11 lb case,CAD,2024-01-30,Demo comparator 1,93.08226531904376,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Restaurant group,11 lb case,CAD,2024-01-30,Demo comparator 2,97.0432127794286,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Restaurant group,11 lb case,CAD,2024-01-30,Demo comparator 3,99.02368650962103,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Restaurant group,11 lb case,CAD,2024-01-30,Demo comparator 4,101.99439710490967,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+asparagus,Restaurant group,11 lb case,CAD,2024-01-30,Demo comparator 5,106.94558143039072,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Catering,40 lb case,CAD,2024-01-30,Demo comparator 1,41.54219550376,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Catering,40 lb case,CAD,2024-01-30,Demo comparator 2,43.309948503920005,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Catering,40 lb case,CAD,2024-01-30,Demo comparator 3,44.193825004000004,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Catering,40 lb case,CAD,2024-01-30,Demo comparator 4,45.51963975412001,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Catering,40 lb case,CAD,2024-01-30,Demo comparator 5,47.72933100432001,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 1,42.24092138559183,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 2,44.038407402,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 3,44.93715041020408,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 4,46.28526492251021,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 5,48.53212244302041,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 1,39.184986660871836,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 2,40.85243290176,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 3,41.68615602220408,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 4,42.9367407028702,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+bananas,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 5,45.02104850398041,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,56.27617158989412,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,58.670902295847064,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,59.86826764882353,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,61.66431567828824,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,64.65772906072942,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,57.32636615000601,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,59.76578598617648,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,60.98549590426172,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,62.81506078138957,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,65.86433557660266,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,53.277903903806006,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,55.54504875077648,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,56.678621174261714,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,58.378979809489564,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+blueberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,61.212910868202655,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Catering,case,CAD,2024-01-30,Demo comparator 1,63.35599484004385,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Catering,case,CAD,2024-01-30,Demo comparator 2,66.05199462047125,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Catering,case,CAD,2024-01-30,Demo comparator 3,67.39999451068495,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Catering,case,CAD,2024-01-30,Demo comparator 4,69.4219943460055,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Catering,case,CAD,2024-01-30,Demo comparator 5,72.79199407153975,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 1,64.67126047779705,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 2,67.42322900876714,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 3,68.79921327425218,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 4,70.86318967247975,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 5,74.30315033619236,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Restaurant group,case,CAD,2024-01-30,Demo comparator 1,60.23063982642171,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Restaurant group,case,CAD,2024-01-30,Demo comparator 2,62.79364577648221,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Restaurant group,case,CAD,2024-01-30,Demo comparator 3,64.07514875151246,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Restaurant group,case,CAD,2024-01-30,Demo comparator 4,65.99740321405784,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+broccoli,Restaurant group,case,CAD,2024-01-30,Demo comparator 5,69.20116065163346,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Catering,25 lb case,CAD,2024-01-30,Demo comparator 1,55.37061773537778,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Catering,25 lb case,CAD,2024-01-30,Demo comparator 2,57.72681423475556,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Catering,25 lb case,CAD,2024-01-30,Demo comparator 3,58.904912484444445,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Catering,25 lb case,CAD,2024-01-30,Demo comparator 4,60.67205985897778,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Catering,25 lb case,CAD,2024-01-30,Demo comparator 5,63.617305483200006,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 1,56.43091738653061,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 2,58.83223302,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 3,60.032890836734694,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 4,61.833877561836736,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 5,64.83552210367347,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 1,52.471396232663935,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 2,54.70422160426666,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 3,55.82063429006802,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 4,57.49525331877006,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+brussels,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 5,60.286285033273465,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Catering,case,CAD,2024-01-30,Demo comparator 1,58.64601893294794,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Catering,case,CAD,2024-01-30,Demo comparator 2,61.14159420669041,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Catering,case,CAD,2024-01-30,Demo comparator 3,62.389381843561644,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Catering,case,CAD,2024-01-30,Demo comparator 4,64.26106329886849,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Catering,case,CAD,2024-01-30,Demo comparator 5,67.38053239104659,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 1,59.81612079847078,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 2,62.3614876409589,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 3,63.63417106220296,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 4,65.54319619406905,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Independent restaurant,case,CAD,2024-01-30,Demo comparator 5,68.7249047471792,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Restaurant group,case,CAD,2024-01-30,Demo comparator 1,55.66386601895845,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Restaurant group,case,CAD,2024-01-30,Demo comparator 2,58.03254116870137,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Restaurant group,case,CAD,2024-01-30,Demo comparator 3,59.21687874357283,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Restaurant group,case,CAD,2024-01-30,Demo comparator 4,60.993385105880016,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cauli,Restaurant group,case,CAD,2024-01-30,Demo comparator 5,63.95422904305866,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Catering,case,CAD,2024-01-30,Demo comparator 1,71.81793450145067,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Catering,case,CAD,2024-01-30,Demo comparator 2,74.87401682066134,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Catering,case,CAD,2024-01-30,Demo comparator 3,76.40205798026668,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Catering,case,CAD,2024-01-30,Demo comparator 4,78.69411971967467,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Catering,case,CAD,2024-01-30,Demo comparator 5,82.51422261868801,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Independent restaurant,case,CAD,2024-01-30,Demo comparator 1,73.41099853856328,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Independent restaurant,case,CAD,2024-01-30,Demo comparator 2,76.53487081680001,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Independent restaurant,case,CAD,2024-01-30,Demo comparator 3,78.09680695591838,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Independent restaurant,case,CAD,2024-01-30,Demo comparator 4,80.43971116459593,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Independent restaurant,case,CAD,2024-01-30,Demo comparator 5,84.34455151239186,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Restaurant group,case,CAD,2024-01-30,Demo comparator 1,68.46727814051526,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Restaurant group,case,CAD,2024-01-30,Demo comparator 2,71.380779337984,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Restaurant group,case,CAD,2024-01-30,Demo comparator 3,72.83752993671837,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Restaurant group,case,CAD,2024-01-30,Demo comparator 4,75.02265583481991,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+celery,Restaurant group,case,CAD,2024-01-30,Demo comparator 5,78.66453233165585,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Catering,case,CAD,2024-01-30,Demo comparator 1,23.332467514673972,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Catering,case,CAD,2024-01-30,Demo comparator 2,24.325338472745205,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Catering,case,CAD,2024-01-30,Demo comparator 3,24.821773951780823,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Catering,case,CAD,2024-01-30,Demo comparator 4,25.566427170334247,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Catering,case,CAD,2024-01-30,Demo comparator 5,26.80751586792329,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Independent restaurant,case,CAD,2024-01-30,Demo comparator 1,23.41418837022086,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Independent restaurant,case,CAD,2024-01-30,Demo comparator 2,24.410536811506855,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Independent restaurant,case,CAD,2024-01-30,Demo comparator 3,24.908711032149853,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Independent restaurant,case,CAD,2024-01-30,Demo comparator 4,25.655972363114348,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Independent restaurant,case,CAD,2024-01-30,Demo comparator 5,26.901407914721844,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Restaurant group,case,CAD,2024-01-30,Demo comparator 1,21.42398775917428,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Restaurant group,case,CAD,2024-01-30,Demo comparator 2,22.335646812756167,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Restaurant group,case,CAD,2024-01-30,Demo comparator 3,22.79147633954711,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Restaurant group,case,CAD,2024-01-30,Demo comparator 4,23.475220629733524,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+cucumbers,Restaurant group,case,CAD,2024-01-30,Demo comparator 5,24.61479444671088,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Catering,30 lb case,CAD,2024-01-30,Demo comparator 1,154.31916454094934,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Catering,30 lb case,CAD,2024-01-30,Demo comparator 2,160.88593750013868,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Catering,30 lb case,CAD,2024-01-30,Demo comparator 3,164.16932397973335,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Catering,30 lb case,CAD,2024-01-30,Demo comparator 4,169.09440369912537,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Catering,30 lb case,CAD,2024-01-30,Demo comparator 5,177.30286989811202,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Independent restaurant,30 lb case,CAD,2024-01-30,Demo comparator 1,158.45495703408983,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Independent restaurant,30 lb case,CAD,2024-01-30,Demo comparator 2,165.19772116320004,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Independent restaurant,30 lb case,CAD,2024-01-30,Demo comparator 3,168.56910322775514,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Independent restaurant,30 lb case,CAD,2024-01-30,Demo comparator 4,173.6261763245878,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Independent restaurant,30 lb case,CAD,2024-01-30,Demo comparator 5,182.05463148597556,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Restaurant group,30 lb case,CAD,2024-01-30,Demo comparator 1,148.4601409193378,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Restaurant group,30 lb case,CAD,2024-01-30,Demo comparator 2,154.777593724416,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Restaurant group,30 lb case,CAD,2024-01-30,Demo comparator 3,157.9363201269551,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Restaurant group,30 lb case,CAD,2024-01-30,Demo comparator 4,162.67440973076376,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+garlic,Restaurant group,30 lb case,CAD,2024-01-30,Demo comparator 5,170.57122573711152,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Catering,case,CAD,2024-01-30,Demo comparator 1,49.23057427273425,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Catering,case,CAD,2024-01-30,Demo comparator 2,51.325492326893155,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Catering,case,CAD,2024-01-30,Demo comparator 3,52.37295135397261,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Catering,case,CAD,2024-01-30,Demo comparator 4,53.94413989459179,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Catering,case,CAD,2024-01-30,Demo comparator 5,56.56278746229042,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Independent restaurant,case,CAD,2024-01-30,Demo comparator 1,50.110487506497066,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Independent restaurant,case,CAD,2024-01-30,Demo comparator 2,52.242848676986306,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Independent restaurant,case,CAD,2024-01-30,Demo comparator 3,53.30902926223092,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Independent restaurant,case,CAD,2024-01-30,Demo comparator 4,54.90830014009785,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Independent restaurant,case,CAD,2024-01-30,Demo comparator 5,57.5737516032094,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Restaurant group,case,CAD,2024-01-30,Demo comparator 1,46.53468852250802,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Restaurant group,case,CAD,2024-01-30,Demo comparator 2,48.51488803410411,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Restaurant group,case,CAD,2024-01-30,Demo comparator 3,49.50498778990215,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Restaurant group,case,CAD,2024-01-30,Demo comparator 4,50.990137423599215,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_green,Restaurant group,case,CAD,2024-01-30,Demo comparator 5,53.46538681309433,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Catering,case,CAD,2024-01-30,Demo comparator 1,56.428467577141326,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Catering,case,CAD,2024-01-30,Demo comparator 2,58.829678963402664,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Catering,case,CAD,2024-01-30,Demo comparator 3,60.03028465653333,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Catering,case,CAD,2024-01-30,Demo comparator 4,61.831193196229336,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Catering,case,CAD,2024-01-30,Demo comparator 5,64.832707429056,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Independent restaurant,case,CAD,2024-01-30,Demo comparator 1,57.5472206803102,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Independent restaurant,case,CAD,2024-01-30,Demo comparator 2,59.9960385816,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Independent restaurant,case,CAD,2024-01-30,Demo comparator 3,61.2204475322449,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Independent restaurant,case,CAD,2024-01-30,Demo comparator 4,63.05706095821225,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Independent restaurant,case,CAD,2024-01-30,Demo comparator 5,66.11808333482449,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Restaurant group,case,CAD,2024-01-30,Demo comparator 1,53.5457125429342,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Restaurant group,case,CAD,2024-01-30,Demo comparator 2,55.824253502207995,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Restaurant group,case,CAD,2024-01-30,Demo comparator 3,56.963523981844894,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Restaurant group,case,CAD,2024-01-30,Demo comparator 4,58.672429701300246,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_ice,Restaurant group,case,CAD,2024-01-30,Demo comparator 5,61.52060590039249,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Catering,case,CAD,2024-01-30,Demo comparator 1,58.98405548130411,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Catering,case,CAD,2024-01-30,Demo comparator 2,61.49401528901918,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Catering,case,CAD,2024-01-30,Demo comparator 3,62.74899519287672,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Catering,case,CAD,2024-01-30,Demo comparator 4,64.63146504866302,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Catering,case,CAD,2024-01-30,Demo comparator 5,67.76891480830686,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Independent restaurant,case,CAD,2024-01-30,Demo comparator 1,60.16457579937938,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Independent restaurant,case,CAD,2024-01-30,Demo comparator 2,62.724770514246586,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Independent restaurant,case,CAD,2024-01-30,Demo comparator 3,64.00486787168019,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Independent restaurant,case,CAD,2024-01-30,Demo comparator 4,65.9250139078306,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Independent restaurant,case,CAD,2024-01-30,Demo comparator 5,69.1252573014146,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Restaurant group,case,CAD,2024-01-30,Demo comparator 1,55.99162490466156,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Restaurant group,case,CAD,2024-01-30,Demo comparator 2,58.37424724103014,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Restaurant group,case,CAD,2024-01-30,Demo comparator 3,59.56555840921443,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Restaurant group,case,CAD,2024-01-30,Demo comparator 4,61.35252516149087,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+let_rom,Restaurant group,case,CAD,2024-01-30,Demo comparator 5,64.33080308195159,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Catering,40 lb case,CAD,2024-01-30,Demo comparator 1,72.07763594235557,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Catering,40 lb case,CAD,2024-01-30,Demo comparator 2,75.14476938671113,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Catering,40 lb case,CAD,2024-01-30,Demo comparator 3,76.67833610888891,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Catering,40 lb case,CAD,2024-01-30,Demo comparator 4,78.97868619215558,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Catering,40 lb case,CAD,2024-01-30,Demo comparator 5,82.81260299760004,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 1,73.65285410551022,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 2,76.78701811000002,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 3,78.35410011224492,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 4,80.70472311561227,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Independent restaurant,40 lb case,CAD,2024-01-30,Demo comparator 5,84.62242812122452,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 1,68.67045428591022,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 2,71.59260127680002,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 3,73.05367477224492,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 4,75.24528501541226,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+limes,Restaurant group,40 lb case,CAD,2024-01-30,Demo comparator 5,78.89796875402452,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Catering,5 lb case,CAD,2024-01-30,Demo comparator 1,26.428772111280008,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Catering,5 lb case,CAD,2024-01-30,Demo comparator 2,27.55340071176001,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Catering,5 lb case,CAD,2024-01-30,Demo comparator 3,28.11571501200001,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Catering,5 lb case,CAD,2024-01-30,Demo comparator 4,28.959186462360012,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Catering,5 lb case,CAD,2024-01-30,Demo comparator 5,30.364972212960012,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Independent restaurant,5 lb case,CAD,2024-01-30,Demo comparator 1,26.57860557076969,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Independent restaurant,5 lb case,CAD,2024-01-30,Demo comparator 2,27.70961006314287,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Independent restaurant,5 lb case,CAD,2024-01-30,Demo comparator 3,28.275112309329458,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Independent restaurant,5 lb case,CAD,2024-01-30,Demo comparator 4,29.123365678609343,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Independent restaurant,5 lb case,CAD,2024-01-30,Demo comparator 5,30.537121294075817,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Restaurant group,5 lb case,CAD,2024-01-30,Demo comparator 1,24.37476319660969,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Restaurant group,5 lb case,CAD,2024-01-30,Demo comparator 2,25.411987162422868,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Restaurant group,5 lb case,CAD,2024-01-30,Demo comparator 3,25.930599145329456,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Restaurant group,5 lb case,CAD,2024-01-30,Demo comparator 4,26.70851711968934,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+mushrooms,Restaurant group,5 lb case,CAD,2024-01-30,Demo comparator 5,28.005047076955815,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Catering,50 lb sack,CAD,2024-01-30,Demo comparator 1,40.08487616078975,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Catering,50 lb sack,CAD,2024-01-30,Demo comparator 2,41.79061557188718,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Catering,50 lb sack,CAD,2024-01-30,Demo comparator 3,42.6434852774359,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Catering,50 lb sack,CAD,2024-01-30,Demo comparator 4,43.92278983575898,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Catering,50 lb sack,CAD,2024-01-30,Demo comparator 5,46.05496409963077,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Independent restaurant,50 lb sack,CAD,2024-01-30,Demo comparator 1,40.723773282715854,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Independent restaurant,50 lb sack,CAD,2024-01-30,Demo comparator 2,42.456699805384616,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Independent restaurant,50 lb sack,CAD,2024-01-30,Demo comparator 3,43.323163066719,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Independent restaurant,50 lb sack,CAD,2024-01-30,Demo comparator 4,44.622857958720566,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Independent restaurant,50 lb sack,CAD,2024-01-30,Demo comparator 5,46.78901611205652,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Restaurant group,50 lb sack,CAD,2024-01-30,Demo comparator 1,37.74392026816201,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Restaurant group,50 lb sack,CAD,2024-01-30,Demo comparator 2,39.350044534892305,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Restaurant group,50 lb sack,CAD,2024-01-30,Demo comparator 3,40.15310666825746,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Restaurant group,50 lb sack,CAD,2024-01-30,Demo comparator 4,41.35769986830518,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+onions,Restaurant group,50 lb sack,CAD,2024-01-30,Demo comparator 5,43.36535520171806,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Catering,case,CAD,2024-01-30,Demo comparator 1,64.40011779035883,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Catering,case,CAD,2024-01-30,Demo comparator 2,67.14054833462943,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Catering,case,CAD,2024-01-30,Demo comparator 3,68.51076360676473,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Catering,case,CAD,2024-01-30,Demo comparator 4,70.56608651496767,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Catering,case,CAD,2024-01-30,Demo comparator 5,73.99162469530592,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Independent restaurant,case,CAD,2024-01-30,Demo comparator 1,65.70069636497901,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Independent restaurant,case,CAD,2024-01-30,Demo comparator 2,68.49647067838237,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Independent restaurant,case,CAD,2024-01-30,Demo comparator 3,69.89435783508405,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Independent restaurant,case,CAD,2024-01-30,Demo comparator 4,71.99118857013657,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Independent restaurant,case,CAD,2024-01-30,Demo comparator 5,75.48590646189078,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Restaurant group,case,CAD,2024-01-30,Demo comparator 1,61.154849657526064,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Restaurant group,case,CAD,2024-01-30,Demo comparator 2,63.7571836855059,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Restaurant group,case,CAD,2024-01-30,Demo comparator 3,65.05835069949582,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Restaurant group,case,CAD,2024-01-30,Demo comparator 4,67.01010122048069,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+parsley,Restaurant group,case,CAD,2024-01-30,Demo comparator 5,70.26301875545549,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Catering,50 lb case,CAD,2024-01-30,Demo comparator 1,34.42400633236923,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Catering,50 lb case,CAD,2024-01-30,Demo comparator 2,35.88885766566154,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Catering,50 lb case,CAD,2024-01-30,Demo comparator 3,36.6212833323077,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Catering,50 lb case,CAD,2024-01-30,Demo comparator 4,37.71992183227693,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Catering,50 lb case,CAD,2024-01-30,Demo comparator 5,39.550985998892315,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Independent restaurant,50 lb case,CAD,2024-01-30,Demo comparator 1,34.88843266408164,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Independent restaurant,50 lb case,CAD,2024-01-30,Demo comparator 2,36.37304682000001,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Independent restaurant,50 lb case,CAD,2024-01-30,Demo comparator 3,37.115353897959196,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Independent restaurant,50 lb case,CAD,2024-01-30,Demo comparator 4,38.22881451489797,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Independent restaurant,50 lb case,CAD,2024-01-30,Demo comparator 5,40.08458220979593,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Restaurant group,50 lb case,CAD,2024-01-30,Demo comparator 1,32.255163516573944,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Restaurant group,50 lb case,CAD,2024-01-30,Demo comparator 2,33.62772366621539,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Restaurant group,50 lb case,CAD,2024-01-30,Demo comparator 3,34.31400374103611,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Restaurant group,50 lb case,CAD,2024-01-30,Demo comparator 4,35.3434238532672,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+potatoes,Restaurant group,50 lb case,CAD,2024-01-30,Demo comparator 5,37.059124040319,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,68.91449647114118,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,71.8470282358706,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,73.3132941182353,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,75.51269294178236,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Catering,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,79.17835764769413,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,70.35421041534815,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,73.3480066032353,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,74.84490469717889,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,77.09025183809426,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Independent restaurant,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,80.8324970729532,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,65.53197317641875,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,68.32056777967061,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,69.71486508129654,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,71.80631103373544,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+raspberries,Restaurant group,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,75.29205428780027,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Catering,8 x 1 lb,CAD,2024-01-30,Demo comparator 1,43.97035784232,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Catering,8 x 1 lb,CAD,2024-01-30,Demo comparator 2,45.841436899440005,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Catering,8 x 1 lb,CAD,2024-01-30,Demo comparator 3,46.776976428000005,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Catering,8 x 1 lb,CAD,2024-01-30,Demo comparator 4,48.180285720840004,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Catering,8 x 1 lb,CAD,2024-01-30,Demo comparator 5,50.51913454224001,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Independent restaurant,8 x 1 lb,CAD,2024-01-30,Demo comparator 1,44.660831595061225,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Independent restaurant,8 x 1 lb,CAD,2024-01-30,Demo comparator 2,46.561292514,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Independent restaurant,8 x 1 lb,CAD,2024-01-30,Demo comparator 3,47.51152297346939,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Independent restaurant,8 x 1 lb,CAD,2024-01-30,Demo comparator 4,48.936868662673476,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Independent restaurant,8 x 1 lb,CAD,2024-01-30,Demo comparator 5,51.31244481134694,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Restaurant group,8 x 1 lb,CAD,2024-01-30,Demo comparator 1,41.38301458430695,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Restaurant group,8 x 1 lb,CAD,2024-01-30,Demo comparator 2,43.14399392832001,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Restaurant group,8 x 1 lb,CAD,2024-01-30,Demo comparator 3,44.02448360032654,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Restaurant group,8 x 1 lb,CAD,2024-01-30,Demo comparator 4,45.34521810833634,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+strawberries,Restaurant group,8 x 1 lb,CAD,2024-01-30,Demo comparator 5,47.546442288352665,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Catering,25 lb case,CAD,2024-01-30,Demo comparator 1,68.66859995154442,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Catering,25 lb case,CAD,2024-01-30,Demo comparator 2,71.59066803458887,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Catering,25 lb case,CAD,2024-01-30,Demo comparator 3,73.0517020761111,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Catering,25 lb case,CAD,2024-01-30,Demo comparator 4,75.24325313839444,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Catering,25 lb case,CAD,2024-01-30,Demo comparator 5,78.89583824219999,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 1,70.13874995005101,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 2,73.12337760749999,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 3,74.61569143622448,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 4,76.85416217931122,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 5,80.58494675112244,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 1,65.36506661968434,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 2,68.14655881626665,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 3,69.53730491455781,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 4,71.62342406199454,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_field,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 5,75.10028930772243,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Catering,25 lb case,CAD,2024-01-30,Demo comparator 1,58.09876047869445,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Catering,25 lb case,CAD,2024-01-30,Demo comparator 2,60.5710481586389,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Catering,25 lb case,CAD,2024-01-30,Demo comparator 3,61.807191998611124,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Catering,25 lb case,CAD,2024-01-30,Demo comparator 4,63.66140775856946,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Catering,25 lb case,CAD,2024-01-30,Demo comparator 5,66.75176735850002,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 1,59.243142829974495,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 2,61.764127631250005,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 3,63.024620031887764,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 4,64.9153586328444,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 5,68.06658963443878,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 1,55.11659252855783,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 2,57.461979444666675,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 3,58.6346729027211,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 4,60.39371308980274,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+tom_roma,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 5,63.325446734938794,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Catering,25 lb case,CAD,2024-01-30,Demo comparator 1,71.09027106643289,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Catering,25 lb case,CAD,2024-01-30,Demo comparator 2,74.11538898415344,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Catering,25 lb case,CAD,2024-01-30,Demo comparator 3,75.62794794301372,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Catering,25 lb case,CAD,2024-01-30,Demo comparator 4,77.89678638130414,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Catering,25 lb case,CAD,2024-01-30,Demo comparator 5,81.67818377845482,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 1,72.64391089858542,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 2,75.73514114958905,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 3,77.28075627509088,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 4,79.5991789633436,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Independent restaurant,25 lb case,CAD,2024-01-30,Demo comparator 5,83.46321677709815,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 1,67.7297631313087,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 2,70.61188071136439,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 3,72.05293950139225,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 4,74.21452768643401,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing
+zucchini,Restaurant group,25 lb case,CAD,2024-01-30,Demo comparator 5,77.81717466150363,net_after_discounts_rebates,SYNTHETIC; not observed competitor pricing

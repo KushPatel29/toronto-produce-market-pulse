@@ -1,0 +1,7 @@
+{
+  "description": "Public historical snapshot; hashes establish byte integrity, not independent publisher verification.",
+  "sha256": {
+    "data/raw/boc_usdcad_on_report_dates.csv": "901667065c8061daf212d37567b6d81fc02eebee0bbeff97419539936e5a514c",
+    "data/raw/toronto_terminal_prices_2017_2024.csv": "50f9ec259e1747f904df2b086a6bdaa87213e8d5152f4920138b0c301e0e183f"
+  }
+}

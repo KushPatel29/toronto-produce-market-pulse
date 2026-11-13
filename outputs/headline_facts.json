@@ -28,95 +28,97 @@
       "diagnosis": "prices converted twice (ratio = USD/CAD squared)"
     }
   ],
-  "basket_change_2019_2023_geo": 0.09966150796905904,
-  "items_up_2019_2023": 22,
-  "items_compared": 28,
+  "basket_change_2019_2023_geo": 0.1424813954766626,
+  "items_up_2019_2023": 15,
+  "items_compared": 18,
+  "comparison_min_shared_months": 10,
+  "comparison_max_shared_months": 11,
   "index_2023_avg": 110.66425901186399,
   "index_2019_avg": 97.45376243115135,
   "policy": {
     "band": {
-      "avg_margin": 0.2648,
-      "margin_sd": 0.1264,
-      "breach_rate": 0.1164,
-      "changes_per_year": 22.6996
+      "avg_margin": 0.2662,
+      "margin_sd": 0.1199,
+      "breach_rate": 0.1119,
+      "changes_per_year": 21.8615
     },
     "monthly": {
-      "avg_margin": 0.2472,
-      "margin_sd": 0.1946,
-      "breach_rate": 0.1959,
-      "changes_per_year": 12.7919
+      "avg_margin": 0.2507,
+      "margin_sd": 0.1825,
+      "breach_rate": 0.1849,
+      "changes_per_year": 11.8665
     },
     "weekly": {
-      "avg_margin": 0.2636,
-      "margin_sd": 0.1253,
-      "breach_rate": 0.1156,
-      "changes_per_year": 51.449
+      "avg_margin": 0.2649,
+      "margin_sd": 0.1188,
+      "breach_rate": 0.1113,
+      "changes_per_year": 50.4669
     }
   },
   "cadence_counts": {
-    "weekly": 21,
+    "weekly": 20,
     "band": 6,
-    "monthly": 3
+    "monthly": 4
   },
   "wape_1wk": {
-    "blend": 0.0897,
-    "ma4": 0.1159,
-    "naive": 0.0762,
-    "seasonal_naive": 0.0956,
-    "ses": 0.0964
+    "blend": 0.0872,
+    "ma4": 0.114,
+    "naive": 0.0722,
+    "seasonal_naive": 0.0935,
+    "ses": 0.0937
   },
   "budget_wape_3m": {
-    "flat": 0.2837,
-    "seasonal": 0.2604
+    "flat": 0.2915,
+    "seasonal": 0.2739
   },
   "budget_wape_6m": {
-    "flat": 0.2728,
-    "seasonal": 0.2405
+    "flat": 0.2702,
+    "seasonal": 0.2445
   },
   "budget": [
     {
       "scenario": "base",
-      "revenue": 1880609.94,
-      "cogs": 1374497.35,
-      "gross_margin": 506112.59,
+      "revenue": 1623277.57,
+      "cogs": 1188115.15,
+      "gross_margin": 435162.42,
       "gm_pct": 0.27,
       "gm_vs_base": 0.0
     },
     {
       "scenario": "cad_weaker_5pct",
-      "revenue": 1946094.96,
-      "cogs": 1426832.55,
-      "gross_margin": 519262.41,
+      "revenue": 1680696.94,
+      "cogs": 1234217.13,
+      "gross_margin": 446479.81,
       "gm_pct": 0.27,
-      "gm_vs_base": 13149.82
+      "gm_vs_base": 11317.39
     },
     {
       "scenario": "lettuce_tomato_shock",
-      "revenue": 1898924.7,
-      "cogs": 1400919.55,
-      "gross_margin": 498005.14,
-      "gm_pct": 0.26,
-      "gm_vs_base": -8107.45
+      "revenue": 1656107.82,
+      "cogs": 1212435.18,
+      "gross_margin": 443672.64,
+      "gm_pct": 0.27,
+      "gm_vs_base": 8510.22
     },
     {
       "scenario": "handling_up_10pct",
-      "revenue": 1880609.94,
-      "cogs": 1382277.52,
-      "gross_margin": 498332.42,
+      "revenue": 1623277.57,
+      "cogs": 1194840.33,
+      "gross_margin": 428437.24,
       "gm_pct": 0.26,
-      "gm_vs_base": -7780.17
+      "gm_vs_base": -6725.18
     },
     {
       "scenario": "volume_down_5pct",
-      "revenue": 1786579.44,
-      "cogs": 1305772.48,
-      "gross_margin": 480806.96,
+      "revenue": 1542113.69,
+      "cogs": 1128709.39,
+      "gross_margin": 413404.3,
       "gm_pct": 0.27,
-      "gm_vs_base": -25305.63
+      "gm_vs_base": -21758.12
     }
   ],
   "spike_p90": {
-    "Leafy & lettuce": 1.383,
-    "Tomatoes": 1.414
+    "Leafy & lettuce": 1.285,
+    "Tomatoes": 1.384
   }
 }
