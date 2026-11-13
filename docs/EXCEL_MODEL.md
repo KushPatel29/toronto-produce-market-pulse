@@ -22,4 +22,14 @@ Base annual revenue is CAD 1,623,277.57, COGS CAD 1,188,115.15 and gross margin 
 
 ## Margin variance and customer terms workbook
 
-`outputs/Margin_Variance_and_Terms.xlsx` is rebuilt by `python build_terms_workbook.py` from the pipeline outputs. Sheets: Terms_Profitability (GM % and gap to target by customer pricing terms), Margin_Variance (monthly bridge), ERP_Price_List (item × price group upload for the last report week) and Contract_Escalator. Ratios, variances and the Check columns are live formulas; every Check is 0 and the totals match `outputs/terms_facts.json`. Recalculated with no formula errors.
+`outputs/Margin_Variance_and_Terms.xlsx` is rebuilt by `python build_terms_workbook.py` from the pipeline outputs. Sheets: Terms_Profitability (GM % and gap to target by customer pricing terms), Margin_Variance (monthly bridge), ERP_Price_List (item × price group upload for the last report week), Contract_Escalator, and three revenue-growth sheets:
+
+- **PVM_Inputs:** per-item cases, list, net and cost per case for 2019 and 2023 (blue = pipeline values), with every effect as a live formula and a total row.
+- **PVM_Bridge:** the gross margin bridge pulled from those totals, a native stacked-column waterfall chart (invisible base series) and a check cell that must be 0. Matches `outputs/rgm/rgm_facts.json` to the cent.
+- **Promo_Breakeven:** yellow inputs for margin, price cut, event fee and baseline revenue; the break-even lift formula, which returns "No lift breaks even" when the cut exceeds the margin; and a margin × cut grid with a colour scale.
+
+Ratios, variances and the Check columns are live formulas; every Check is 0 and the totals match `outputs/terms_facts.json`. Recalculated with no formula errors (840 formulas) and rendered to check the waterfall chart.
+
+## VBA monthly pack
+
+`excel_vba/` holds three modules that turn this workbook into a monthly reporting run: validate every check and formula, rebuild a summary sheet, export a dated PDF, log the run, draft (never send) an Outlook email, and validate and export the ERP price-list CSV. See [excel_vba/README.md](../excel_vba/README.md).

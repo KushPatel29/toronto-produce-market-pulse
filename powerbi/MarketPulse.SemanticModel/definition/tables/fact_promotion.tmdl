@@ -1,0 +1,148 @@
+/// One row per SYNTHETIC promotion event: estimated lift, break-even lift, trade spend and verdict.
+table fact_promotion
+
+	column event
+		dataType: string
+		summarizeBy: none
+		sourceColumn: event
+
+	column item_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: item_id
+
+	column year
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: year
+
+	column start
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: start
+
+	column depth
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: depth
+
+	column planted_uplift
+		dataType: double
+		formatString: 0.00
+		summarizeBy: none
+		sourceColumn: planted_uplift
+
+	column baseline_cases
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: baseline_cases
+
+	column promo_cases
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: promo_cases
+
+	column est_uplift
+		dataType: double
+		formatString: 0.00
+		summarizeBy: none
+		sourceColumn: est_uplift
+
+	column incremental_cases
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: incremental_cases
+
+	column dip_cases
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: dip_cases
+
+	column breakeven_uplift
+		dataType: double
+		formatString: 0.00
+		summarizeBy: none
+		sourceColumn: breakeven_uplift
+
+	column trade_spend
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		summarizeBy: none
+		sourceColumn: trade_spend
+
+	column net_incremental_margin
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		summarizeBy: none
+		sourceColumn: net_incremental_margin
+
+	column roi
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: roi
+
+	column uplift_error_pts
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: uplift_error_pts
+
+	column verdict
+		dataType: string
+		summarizeBy: none
+		sourceColumn: verdict
+
+	/// Number of promotion events.
+	measure 'Promo Events' = COUNTROWS ( fact_promotion )
+		formatString: #,0
+		displayFolder: Promotions
+
+	/// Price investment plus fixed promotion fee.
+	measure 'Trade Spend' = SUM ( fact_promotion[trade_spend] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Promotions
+
+	/// Incremental margin after trade spend and the post-promotion dip.
+	measure 'Net Incremental Margin' = SUM ( fact_promotion[net_incremental_margin] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Promotions
+
+	/// Net incremental margin per dollar of trade spend.
+	measure 'Promo ROI' = DIVIDE ( [Net Incremental Margin], [Trade Spend] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Promotions
+
+	/// Events with positive ROI.
+	measure 'Events Paid Back' = COUNTROWS ( FILTER ( fact_promotion, fact_promotion[roi] > 0 ) )
+		formatString: #,0
+		displayFolder: Promotions
+
+	/// Lift needed to pay back the price cut and fee.
+	measure 'Median Break-even Lift' = MEDIAN ( fact_promotion[breakeven_uplift] )
+		formatString: 0.00
+		displayFolder: Promotions
+
+	/// Mean absolute gap between estimated and planted lift, in points.
+	measure 'Lift Estimate Error (pts)' = AVERAGE ( fact_promotion[uplift_error_pts] )
+		formatString: 0.0
+		displayFolder: Promotions
+
+	partition fact_promotion = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(SourceRoot, [RelativePath = "rgm/promotion_events.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"event", type text}, {"item_id", type text}, {"year", Int64.Type}, {"start", type date}, {"depth", type number}, {"planted_uplift", type number}, {"baseline_cases", type number}, {"promo_cases", type number}, {"est_uplift", type number}, {"incremental_cases", type number}, {"dip_cases", type number}, {"breakeven_uplift", type number}, {"trade_spend", type number}, {"net_incremental_margin", type number}, {"roi", type number}, {"uplift_error_pts", type number}, {"verdict", type text}}, "en-US")
+				in
+				    Typed
+

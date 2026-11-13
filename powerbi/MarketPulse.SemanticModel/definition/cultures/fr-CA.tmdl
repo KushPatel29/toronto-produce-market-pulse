@@ -1,0 +1,332 @@
+cultureInfo fr-CA
+
+	translations
+
+		model Model
+
+			table dim_item
+				translatedCaption: Article
+
+				column item_id
+					translatedCaption: Code article
+
+				column item_name
+					translatedCaption: Article
+
+				column category
+					translatedCaption: Catégorie
+
+				column uom
+					translatedCaption: Unité
+
+				column target_margin
+					translatedCaption: Marge cible
+
+				column weekly_cases
+					translatedCaption: Caisses par semaine
+
+			table dim_segment
+				translatedCaption: Segment client
+
+				column segment_id
+					translatedCaption: Code segment
+
+				column segment
+					translatedCaption: Segment
+
+				column volume_share
+					translatedCaption: Part du volume
+
+				column margin_adj
+					translatedCaption: Ajustement de marge
+
+				column pricing_policy
+					translatedCaption: Politique de prix
+
+				column terms
+					translatedCaption: Conditions
+
+			table dim_date
+				translatedCaption: Date
+
+				column date_key
+					translatedCaption: Semaine
+
+				column year
+					translatedCaption: Année
+
+				column month
+					translatedCaption: Mois
+
+				column year_month
+					translatedCaption: Année-mois
+
+				column period
+					translatedCaption: Période
+
+			table fact_market_price
+				translatedCaption: Prix du marché
+
+				column item_id
+					translatedCaption: Code article
+
+				column date_key
+					translatedCaption: Semaine
+
+				column terminal_cad
+					translatedCaption: Prix terminal ($ CA)
+
+				column landed_cost
+					translatedCaption: Coût rendu
+
+				column n_quotes
+					translatedCaption: Nombre de cotes
+
+				measure 'Avg Terminal Price (CAD)'
+					translatedCaption: Prix terminal moyen ($ CA)
+
+				measure 'Terminal Price vs Prior Year'
+					translatedCaption: Prix terminal vs année précédente
+
+			table fact_sales_price
+				translatedCaption: Prix de vente
+
+				column item_id
+					translatedCaption: Code article
+
+				column segment_id
+					translatedCaption: Code segment
+
+				column date_key
+					translatedCaption: Semaine
+
+				column cases
+					translatedCaption: Caisses
+
+				column sell_price
+					translatedCaption: Prix de vente
+
+				column landed_cost
+					translatedCaption: Coût rendu
+
+				column prior_cost
+					translatedCaption: Coût précédent
+
+				column target_margin
+					translatedCaption: Marge cible
+
+				column price_changed
+					translatedCaption: Prix modifié
+
+				measure Revenue
+					translatedCaption: Revenu
+
+				measure COGS
+					translatedCaption: Coût des ventes
+
+				measure 'Gross Margin'
+					translatedCaption: Marge brute
+
+				measure 'GM %'
+					translatedCaption: Marge brute %
+
+				measure 'GM at Target'
+					translatedCaption: Marge à la cible
+
+				measure 'Target GM %'
+					translatedCaption: Marge cible %
+
+				measure 'Margin Variance'
+					translatedCaption: Écart de marge
+
+				measure 'Margin Gap (pts)'
+					translatedCaption: Écart de marge (pts)
+
+				measure 'Variance - Cost Timing'
+					translatedCaption: Écart - décalage des coûts
+
+				measure 'Variance - Price Hold'
+					translatedCaption: Écart - prix maintenu
+
+				measure 'Variance Check'
+					translatedCaption: Contrôle de l'écart
+
+				measure 'Breach Rate'
+					translatedCaption: Taux de dépassement
+
+				measure 'Price Changes'
+					translatedCaption: Changements de prix
+
+			table fact_shipments
+				translatedCaption: Expéditions
+
+				column item_id
+					translatedCaption: Code article
+
+				column category
+					translatedCaption: Catégorie
+
+				column channel
+					translatedCaption: Canal
+
+				column year
+					translatedCaption: Année
+
+				column date
+					translatedCaption: Semaine
+
+				column cases
+					translatedCaption: Caisses
+
+				column list_price
+					translatedCaption: Prix courant
+
+				column net_price
+					translatedCaption: Prix net
+
+				column unit_cost
+					translatedCaption: Coût unitaire
+
+				column promo
+					translatedCaption: Promotion
+
+				column promo_depth
+					translatedCaption: Profondeur de promotion
+
+				column data_status
+					translatedCaption: Statut des données
+
+				column revenue
+					translatedCaption: Revenu net
+
+				column list_revenue
+					translatedCaption: Revenu au prix courant
+
+				column cogs
+					translatedCaption: Coût des ventes
+
+				column gm
+					translatedCaption: Marge brute
+
+				measure 'Net Revenue'
+					translatedCaption: Revenu net
+
+				measure 'List Revenue'
+					translatedCaption: Revenu au prix courant
+
+				measure 'Discounts & Promotions'
+					translatedCaption: Remises et promotions
+
+				measure 'Discount Rate'
+					translatedCaption: Taux de remise
+
+				measure 'Shipment GM'
+					translatedCaption: Marge brute (expéditions)
+
+				measure 'Shipment GM %'
+					translatedCaption: Marge brute % (expéditions)
+
+				measure 'Cases Shipped'
+					translatedCaption: Caisses expédiées
+
+				measure 'Promo Share of Cases'
+					translatedCaption: Part des caisses en promotion
+
+				measure 'PVM GM 2019'
+					translatedCaption: Marge brute 2019
+
+				measure 'PVM GM 2023'
+					translatedCaption: Marge brute 2023
+
+				measure 'PVM Volume'
+					translatedCaption: Effet volume
+
+				measure 'PVM Mix'
+					translatedCaption: Effet de composition
+
+				measure 'PVM List Price'
+					translatedCaption: Effet prix courant
+
+				measure 'PVM Discounts & Promotions'
+					translatedCaption: Effet remises et promotions
+
+				measure 'PVM Cost'
+					translatedCaption: Effet coût
+
+				measure 'PVM Check'
+					translatedCaption: Contrôle du pont
+
+			table fact_promotion
+				translatedCaption: Promotions
+
+				column event
+					translatedCaption: Événement
+
+				column item_id
+					translatedCaption: Code article
+
+				column year
+					translatedCaption: Année
+
+				column start
+					translatedCaption: Début
+
+				column depth
+					translatedCaption: Profondeur
+
+				column planted_uplift
+					translatedCaption: Hausse simulée
+
+				column baseline_cases
+					translatedCaption: Caisses de base
+
+				column promo_cases
+					translatedCaption: Caisses en promotion
+
+				column est_uplift
+					translatedCaption: Hausse estimée
+
+				column incremental_cases
+					translatedCaption: Caisses incrémentales
+
+				column dip_cases
+					translatedCaption: Creux après promotion
+
+				column breakeven_uplift
+					translatedCaption: Hausse au seuil de rentabilité
+
+				column trade_spend
+					translatedCaption: Dépenses commerciales
+
+				column net_incremental_margin
+					translatedCaption: Marge incrémentale nette
+
+				column roi
+					translatedCaption: Rendement
+
+				column uplift_error_pts
+					translatedCaption: Erreur de hausse (pts)
+
+				column verdict
+					translatedCaption: Décision
+
+				measure 'Promo Events'
+					translatedCaption: Événements promotionnels
+
+				measure 'Trade Spend'
+					translatedCaption: Dépenses commerciales
+
+				measure 'Net Incremental Margin'
+					translatedCaption: Marge incrémentale nette
+
+				measure 'Promo ROI'
+					translatedCaption: Rendement promotionnel
+
+				measure 'Events Paid Back'
+					translatedCaption: Événements rentables
+
+				measure 'Median Break-even Lift'
+					translatedCaption: Hausse médiane au seuil
+
+				measure 'Lift Estimate Error (pts)'
+					translatedCaption: Erreur d'estimation (pts)

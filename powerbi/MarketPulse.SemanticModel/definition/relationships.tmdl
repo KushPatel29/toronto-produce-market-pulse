@@ -1,0 +1,27 @@
+relationship fact_sales_price_item_id_to_dim_item
+	fromColumn: fact_sales_price.item_id
+	toColumn: dim_item.item_id
+
+relationship fact_sales_price_segment_id_to_dim_segment
+	fromColumn: fact_sales_price.segment_id
+	toColumn: dim_segment.segment_id
+
+relationship fact_sales_price_date_key_to_dim_date
+	fromColumn: fact_sales_price.date_key
+	toColumn: dim_date.date_key
+
+relationship fact_market_price_item_id_to_dim_item
+	fromColumn: fact_market_price.item_id
+	toColumn: dim_item.item_id
+
+relationship fact_market_price_date_key_to_dim_date
+	fromColumn: fact_market_price.date_key
+	toColumn: dim_date.date_key
+
+relationship fact_shipments_item_id_to_dim_item
+	fromColumn: fact_shipments.item_id
+	toColumn: dim_item.item_id
+
+relationship fact_promotion_item_id_to_dim_item
+	fromColumn: fact_promotion.item_id
+	toColumn: dim_item.item_id

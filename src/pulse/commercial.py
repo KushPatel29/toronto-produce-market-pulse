@@ -188,7 +188,7 @@ def recommendations(sales, competitors, max_increase=0.10):
         current_above_market = bool(pd.notna(median) and r.actual_net_price > median * 1.05)
         review = conflict or increase > max_increase
         out.append(dict(
-            item_id=r.item_id, item=r.item, customer=r.customer,
+            item_id=r.item_id, item=r["item"], customer=r.customer,
             current_net_price=r.actual_net_price, target_net_price=floor,
             suggested_net_price=suggested, increase_pct=increase,
             competitor_median=median, comparable_quotes=len(c),

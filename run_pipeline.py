@@ -232,7 +232,54 @@ def terms():
     return facts
 
 
+def rgm():
+    """Price-volume-mix bridge (2023 vs 2019) and promotion evaluation on synthetic volumes, real costs."""
+    from pulse import charts as ch
+    from pulse import rgm as rg
+    from pulse.panel import build
+
+    _, _, panel, _ = build(save=False)
+    basket = pd.read_csv("config/basket.csv")
+    w, ev = rg.simulate(panel, basket)
+    bridge, detail = rg.pvm(w, 2019, 2023)
+    promos = rg.promo_eval(w, ev)
+    out = OUT / "rgm"
+    out.mkdir(exist_ok=True)
+    bridge.to_csv(out / "pvm_bridge_2019_2023.csv", index=False)
+    detail.to_csv(out / "pvm_by_item.csv", index=False)
+    cols = ["volume", "mix", "list_price", "trade", "cost"]
+    detail.groupby("category")[cols].sum().reset_index().to_csv(out / "pvm_by_category.csv", index=False)
+    promos.to_csv(out / "promotion_events.csv", index=False)
+    w.to_csv(out / "SYNTHETIC_weekly_shipments.csv", index=False)
+    by_depth = promos.groupby("depth").agg(
+        events=("event", "size"),
+        paid_back=("roi", lambda r: float((r > 0).mean())),
+        median_breakeven=("breakeven_uplift", "median"),
+    )
+    facts = {
+        "bridge": {r.driver: round(float(r.cad), 2) for r in bridge.itertuples()},
+        "events": int(len(promos)),
+        "paid_back": int((promos.roi > 0).sum()),
+        "uplift_mae_pts": round(float(promos.uplift_error_pts.abs().mean()), 2),
+        "median_breakeven_uplift": round(float(promos.breakeven_uplift.median()), 2),
+        "breakeven_by_depth": {f"{k:.2f}": round(float(v), 2) for k, v in by_depth.median_breakeven.items()},
+        "trade_spend_total": round(float(promos.trade_spend.sum()), 2),
+        "net_incremental_margin_total": round(float(promos.net_incremental_margin.sum()), 2),
+        "verdicts": promos.verdict.value_counts().to_dict(),
+    }
+    (out / "rgm_facts.json").write_text(json.dumps(facts, indent=2), encoding="utf-8")
+    ch.pvm_waterfall(bridge, OUT / "img" / "pvm_bridge.png")
+    ch.promo_breakeven(promos, OUT / "img" / "promo_breakeven.png")
+    print(
+        json.dumps(
+            {k: facts[k] for k in ["bridge", "paid_back", "events", "uplift_mae_pts", "breakeven_by_depth"]}, indent=1
+        )
+    )
+    return facts
+
+
 if __name__ == "__main__":
     main()
     charts()
     terms()
+    rgm()

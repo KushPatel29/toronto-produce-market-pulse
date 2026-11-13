@@ -1,0 +1,12 @@
+/// Dynamic role: each signed-in user sees the segments mapped to their email in security_user_segment.
+role 'Segment manager (dynamic)'
+	modelPermission: read
+
+	tablePermission dim_segment =
+			dim_segment[segment_id]
+			    IN CALCULATETABLE (
+			        VALUES ( security_user_segment[segment_id] ),
+			        security_user_segment[user_email] = USERPRINCIPALNAME ()
+			    )
+
+	tablePermission security_user_segment = security_user_segment[user_email] = USERPRINCIPALNAME ()

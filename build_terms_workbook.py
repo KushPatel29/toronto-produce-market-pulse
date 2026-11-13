@@ -6,11 +6,13 @@ from pathlib import Path
 
 import pandas as pd
 from openpyxl import Workbook
+from openpyxl.chart import BarChart, Reference
+from openpyxl.chart.legend import LegendEntry
 from openpyxl.formatting.rule import ColorScaleRule
 from openpyxl.styles import Alignment
 from openpyxl.utils import get_column_letter
 
-from build_workbook import CUR, CUR0, PCT, font, header, title, widths
+from build_workbook import BLUE, CUR, CUR0, PCT, YELLOW, font, header, title, widths
 
 
 def main(out="outputs/Margin_Variance_and_Terms.xlsx"):
@@ -39,6 +41,10 @@ def main(out="outputs/Margin_Variance_and_Terms.xlsx"):
         (
             "Not the pricing desk",
             "These customer types are separate from the synthetic customers in Pricing_Decision_Workbook.xlsx and the app's Customer & pricing desk.",
+        ),
+        (
+            "Price-volume-mix",
+            "PVM_Inputs and PVM_Bridge split gross-margin change 2019 to 2023 into volume, mix, list price, discounts and promotions, and cost (live formulas). Promo_Breakeven is a calculator. Cases and promotions there are SYNTHETIC; costs are real.",
         ),
         (
             "Legend",
@@ -233,11 +239,203 @@ def main(out="outputs/Margin_Variance_and_Terms.xlsx"):
         for col, fmt in zip("BCDEFG", [PCT, PCT, PCT, PCT, CUR0, "0.0"], strict=True):
             w[f"{col}{i}"].number_format = fmt
     widths(w, [18, 16, 16, 18, 16, 13, 16])
+
+    rgm_sheets(wb)
     for sh in wb.worksheets:
         sh.sheet_view.showGridLines = False
     Path(out).parent.mkdir(exist_ok=True)
     wb.save(out)
     print("saved", out)
+
+
+def rgm_sheets(wb):
+    """Price-volume-mix bridge (item inputs, live effect formulas, waterfall) and a promotion break-even calculator."""
+    d = pd.read_csv("outputs/rgm/pvm_by_item.csv")
+    names = pd.read_csv("config/basket.csv").set_index("item_id").display_name
+    wi = wb.create_sheet("PVM_Inputs")
+    title(
+        wi,
+        "Price-volume-mix inputs by item, 2019 (A) vs 2023 (B)",
+        "Blue = values from the pipeline (real terminal costs; SYNTHETIC cases and promotions). Black = formulas. Prices are per case.",
+    )
+    cols = [
+        "Item",
+        "Category",
+        "Cases A",
+        "Cases B",
+        "List A",
+        "List B",
+        "Net A",
+        "Net B",
+        "Cost A",
+        "Cost B",
+        "Margin/case A",
+        "Share A",
+        "Share B",
+        "GM A",
+        "GM B",
+        "Volume",
+        "Mix",
+        "List price",
+        "Discounts & promos",
+        "Cost",
+    ]
+    header(wi, 4, cols)
+    r0 = 5
+    r1 = r0 + len(d) - 1
+    tot = r1 + 1
+    for i, rr in enumerate(d.itertuples(index=False), start=r0):
+        wi.cell(row=i, column=1, value=names.get(rr.item_id, rr.item_id)).font = font()
+        wi.cell(row=i, column=2, value=rr.category).font = font()
+        for j, v in enumerate(
+            [rr.cases_a, rr.cases_b, rr.list_a, rr.list_b, rr.net_a, rr.net_b, rr.cost_a, rr.cost_b], start=3
+        ):
+            wi.cell(row=i, column=j, value=round(float(v), 4)).font = font(color=BLUE)
+        f = {
+            11: f"=G{i}-I{i}",
+            12: f"=C{i}/$C${tot}",
+            13: f"=D{i}/$D${tot}",
+            14: f"=C{i}*K{i}",
+            15: f"=D{i}*(H{i}-J{i})",
+            16: f"=($D${tot}-$C${tot})*L{i}*$N${tot}/$C${tot}",
+            17: f"=$D${tot}*(M{i}-L{i})*K{i}",
+            18: f"=D{i}*(F{i}-E{i})",
+            19: f"=D{i}*((H{i}-F{i})-(G{i}-E{i}))",
+            20: f"=-D{i}*(J{i}-I{i})",
+        }
+        for c, v in f.items():
+            wi.cell(row=i, column=c, value=v)
+        for col, fmt in zip("CDEFGHIJKLMNOPQRST", ["#,##0"] * 2 + [CUR] * 7 + [PCT] * 2 + [CUR0] * 7, strict=True):
+            wi[f"{col}{i}"].number_format = fmt
+    wi.cell(row=tot, column=1, value="Total").font = font(bold=True)
+    for col in "CDLMNOPQRST":
+        wi[f"{col}{tot}"] = f"=SUM({col}{r0}:{col}{r1})"
+        wi[f"{col}{tot}"].font = font(bold=True)
+        wi[f"{col}{tot}"].number_format = "#,##0" if col in "CD" else PCT if col in "LM" else CUR0
+    wi.freeze_panes = "C5"
+    widths(wi, [24, 15] + [10] * 18)
+
+    wbr = wb.create_sheet("PVM_Bridge")
+    title(
+        wbr,
+        "Gross margin bridge, 2023 vs 2019",
+        "Each effect sums its column on PVM_Inputs. Check must be 0. Volumes and promotions are synthetic; costs are real.",
+    )
+    header(wbr, 4, ["Driver", "CAD", "Chart base", "Increase", "Decrease", "Total"])
+    rows = [
+        ("Gross margin 2019", f"=PVM_Inputs!N{tot}"),
+        ("Volume", f"=PVM_Inputs!P{tot}"),
+        ("Mix", f"=PVM_Inputs!Q{tot}"),
+        ("List price", f"=PVM_Inputs!R{tot}"),
+        ("Discounts & promotions", f"=PVM_Inputs!S{tot}"),
+        ("Cost", f"=PVM_Inputs!T{tot}"),
+        ("Gross margin 2023", f"=PVM_Inputs!O{tot}"),
+    ]
+    for i, (k, v) in enumerate(rows, start=5):
+        wbr.cell(row=i, column=1, value=k).font = font(bold=k.startswith("Gross"))
+        wbr.cell(row=i, column=2, value=v)
+        if k.startswith("Gross"):
+            wbr.cell(row=i, column=3, value=0)
+            wbr.cell(row=i, column=4, value=0)
+            wbr.cell(row=i, column=5, value=0)
+            wbr.cell(row=i, column=6, value=f"=B{i}")
+        else:
+            # running total before this effect = B5 + sum of earlier effects
+            prior = f"SUM($B$5:B{i - 1})"
+            wbr.cell(row=i, column=3, value=f"=IF(B{i}>=0,{prior},{prior}+B{i})")
+            wbr.cell(row=i, column=4, value=f"=MAX(B{i},0)")
+            wbr.cell(row=i, column=5, value=f"=MAX(-B{i},0)")
+            wbr.cell(row=i, column=6, value=0)
+        for col in "BCDEF":
+            wbr[f"{col}{i}"].number_format = CUR0
+    wbr["A13"] = "Check (GM 2023 - GM 2019 - effects)"
+    wbr["A13"].font = font(bold=True)
+    wbr["B13"] = "=ROUND(B11-B5-SUM(B6:B10),2)"
+    wbr["B13"].number_format = "0.00"
+    ch = BarChart()
+    ch.type = "col"
+    ch.grouping = "stacked"
+    ch.overlap = 100
+    ch.title = "Gross margin bridge, 2023 vs 2019 (CAD)"
+    data = Reference(wbr, min_col=3, max_col=6, min_row=4, max_row=11)
+    ch.add_data(data, titles_from_data=True)
+    ch.set_categories(Reference(wbr, min_col=1, min_row=5, max_row=11))
+    ch.series[0].graphicalProperties.noFill = True
+    ch.series[0].graphicalProperties.line.noFill = True
+    for srs, color in zip(ch.series[1:], ["1BAF7A", "E34948", "52514E"], strict=True):
+        srs.graphicalProperties.solidFill = color
+        srs.graphicalProperties.line.solidFill = color
+    ch.legend.position = "b"
+    ch.legend.overlay = False
+    ch.legend.legendEntry = [LegendEntry(idx=0, delete=True)]
+    ch.title.overlay = False
+    ch.roundedCorners = False
+    ch.x_axis.delete = False
+    ch.y_axis.delete = False
+    ch.y_axis.numFmt = "$#,##0"
+    ch.y_axis.majorGridlines = None
+    ch.width, ch.height = 22, 9
+    wbr.add_chart(ch, "H4")
+    widths(wbr, [36, 14, 12, 12, 12, 12])
+
+    wc = wb.create_sheet("Promo_Breakeven")
+    title(
+        wc,
+        "Promotion break-even calculator",
+        "Yellow cells are inputs. Lift = how many times baseline volume the promotion must sell to earn the same margin.",
+    )
+    inputs = [
+        ("Regular gross margin (% of net price)", 0.25, PCT),
+        ("Promotion price cut", 0.10, PCT),
+        ("Fixed event cost (CAD)", 150, CUR0),
+        ("Baseline revenue over the promotion weeks (CAD)", 4000, CUR0),
+    ]
+    for i, (k, v, fmt) in enumerate(inputs, start=4):
+        wc.cell(row=i, column=1, value=k).font = font()
+        c = wc.cell(row=i, column=2, value=v)
+        c.font = font(color=BLUE)
+        c.fill = YELLOW
+        c.number_format = fmt
+    wc["A9"] = "Margin per promoted case (% of regular price)"
+    wc["B9"] = "=B4-B5"
+    wc["B9"].number_format = PCT
+    wc["A10"] = "Volume lift needed to break even (x baseline)"
+    wc["A10"].font = font(bold=True)
+    wc["B10"] = '=IF(B9<=0,"No lift breaks even",(B4*B7+B6)/(B9*B7))'
+    wc["B10"].number_format = '0.00"x"'
+    wc["B10"].font = font(bold=True)
+    wc["A11"] = "Extra volume needed"
+    wc["B11"] = '=IF(ISNUMBER(B10),B10-1,"-")'
+    wc["B11"].number_format = PCT
+    wc["A13"] = "Break-even lift by margin (rows) and price cut (columns), no fixed cost"
+    wc["A13"].font = font(bold=True)
+    cuts = [0.05, 0.10, 0.15, 0.20, 0.25]
+    margins = [0.15, 0.20, 0.25, 0.30, 0.35, 0.40]
+    wc.cell(row=14, column=1, value="Margin (rows) vs price cut").font = font(bold=True)
+    for j, cpct in enumerate(cuts, start=2):
+        c = wc.cell(row=14, column=j, value=cpct)
+        c.number_format = "0%"
+        c.font = font(color=BLUE, bold=True)
+    for i, mpct in enumerate(margins, start=15):
+        c = wc.cell(row=i, column=1, value=mpct)
+        c.number_format = "0%"
+        c.font = font(color=BLUE, bold=True)
+        for j in range(2, 2 + len(cuts)):
+            col = get_column_letter(j)
+            wc.cell(
+                row=i, column=j, value=f'=IF($A{i}<={col}$14,"n/a",$A{i}/($A{i}-{col}$14))'
+            ).number_format = '0.00"x"'
+    wc.conditional_formatting.add(
+        f"B15:{get_column_letter(1 + len(cuts))}{14 + len(margins)}",
+        ColorScaleRule(
+            start_type="num", start_value=1, start_color="FFFFFF", end_type="num", end_value=4, end_color="F4B183"
+        ),
+    )
+    wc["A22"] = (
+        "Reading it: a 10% cut on a 25% margin needs 1.67x volume before any fixed cost. In the synthetic events, "
+        "counting the fee and the post-promotion dip, the median promotion needed about 2.5x."
+    )
+    widths(wc, [48, 14, 12, 12, 12, 12])
 
 
 if __name__ == "__main__":

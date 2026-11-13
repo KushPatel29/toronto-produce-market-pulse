@@ -1,0 +1,42 @@
+/// Report week. The April 2021 - November 2022 source gap separates periods A and B.
+table dim_date
+
+	column date_key
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		isKey
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column year
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: year
+
+	column month
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: month
+
+	column year_month
+		dataType: string
+		summarizeBy: none
+		sourceColumn: year_month
+
+	column period
+		dataType: string
+		summarizeBy: none
+		sourceColumn: period
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(SourceRoot, [RelativePath = "star_schema/dim_date.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"date_key", type date}, {"year", Int64.Type}, {"month", Int64.Type}, {"year_month", type text}, {"period", type text}}, "en-US")
+				in
+				    Typed
+

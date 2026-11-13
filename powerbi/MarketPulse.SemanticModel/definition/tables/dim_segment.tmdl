@@ -1,0 +1,46 @@
+/// Customer segment and its pricing terms (assumptions in config/customer_terms.csv).
+table dim_segment
+
+	column segment_id
+		dataType: string
+		isKey
+		summarizeBy: none
+		sourceColumn: segment_id
+
+	column segment
+		dataType: string
+		summarizeBy: none
+		sourceColumn: segment
+
+	column volume_share
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: volume_share
+
+	column margin_adj
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: margin_adj
+
+	column pricing_policy
+		dataType: string
+		summarizeBy: none
+		sourceColumn: pricing_policy
+
+	column terms
+		dataType: string
+		summarizeBy: none
+		sourceColumn: terms
+
+	partition dim_segment = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(SourceRoot, [RelativePath = "star_schema/dim_segment.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"segment_id", type text}, {"segment", type text}, {"volume_share", type number}, {"margin_adj", type number}, {"pricing_policy", type text}, {"terms", type text}}, "en-US")
+				in
+				    Typed
+

@@ -1,0 +1,2 @@
+/// Folder or URL holding the pipeline outputs (must end with a slash). Default: the public GitHub copy.
+expression SourceRoot = "https://raw.githubusercontent.com/KushPatel29/toronto-produce-market-pulse/main/outputs/" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]

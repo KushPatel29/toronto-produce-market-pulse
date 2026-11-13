@@ -1,0 +1,26 @@
+/// Illustrative user-to-segment map for dynamic row-level security. Replace the emails with real accounts.
+table security_user_segment
+	isHidden
+
+	column user_email
+		dataType: string
+		isHidden
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [user_email]
+
+	column segment_id
+		dataType: string
+		isHidden
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [segment_id]
+
+	partition security_user_segment = calculated
+		mode: import
+		source =
+				DATATABLE (
+				    "user_email", STRING,
+				    "segment_id", STRING,
+				    { { "fine.dining.manager@example.com", "fine_dining" }, { "restaurants.manager@example.com", "casual" }, { "hotels.manager@example.com", "hotels" }, { "contracts.manager@example.com", "contract" }, { "pricing.lead@example.com", "fine_dining" }, { "pricing.lead@example.com", "casual" }, { "pricing.lead@example.com", "hotels" }, { "pricing.lead@example.com", "contract" } }
+				)

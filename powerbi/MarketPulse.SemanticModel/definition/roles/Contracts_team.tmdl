@@ -1,0 +1,5 @@
+/// Static role: sees institutional contract customers only.
+role 'Contracts team'
+	modelPermission: read
+
+	tablePermission dim_segment = dim_segment[segment_id] = "contract"

@@ -18,9 +18,10 @@ A distributor's pricing analyst has to answer the same questions every week: *wh
 
 | If you have | Open | You will see |
 |---|---|---|
-| 2 minutes | [Live app](https://toronto-fresh-market-pulse.streamlit.app) | Ten tabs: market overview, weekly update for any of 265 weeks, item explorer, price calculator, pricing policies, budget levers, customer pricing desk, supplier comparison, customer terms and margin variance |
+| 2 minutes | [Live app](https://toronto-fresh-market-pulse.streamlit.app) | Eleven tabs: market overview, weekly update for any of 265 weeks, item explorer, price calculator, pricing policies, budget levers, customer pricing desk, supplier comparison, customer terms and margin variance, price-volume-mix and promotions |
 | 5 minutes | [Stakeholder briefing (7 slides)](outputs/Produce_Pricing_Decision_Brief.pptx) | Pricing cadence, supply-shock lag, customer terms, margin variance, Finance bridge, supplier decisions |
-| 10 minutes | [Excel decision model](outputs/Pricing_Decision_Workbook.xlsx) · [Margin variance workbook](outputs/Margin_Variance_and_Terms.xlsx) | Live scenario formulas, native PivotTable, monthly variance bridge with zero-check columns, ERP price-list upload |
+| 10 minutes | [Excel decision model](outputs/Pricing_Decision_Workbook.xlsx) · [Margin variance workbook](outputs/Margin_Variance_and_Terms.xlsx) · [VBA pack](excel_vba/) | Live scenario formulas, native PivotTable, monthly variance bridge with zero-check columns, price-volume-mix waterfall, promotion break-even calculator, ERP price-list upload, VBA macros that validate and export the monthly pack |
+| 15 minutes | [Power BI model as code](powerbi/) | TMDL semantic model: 8 tables, 38 DAX measures, row-level security, French translations |
 | An interview | [Job-description map and walkthrough](docs/ROLE_COVERAGE.md) | Every responsibility mapped to evidence, with its limits |
 
 ## Results at a glance
@@ -33,6 +34,8 @@ A distributor's pricing analyst has to answer the same questions every week: *wh
 | Which customers carry the risk? | Fixed monthly contract prices: **19%** of weeks >10 points under target vs about 11% for other terms; an escalator clause cuts it to **12%** | `outputs/terms_profitability.csv` |
 | Why did margin miss target? | Mostly timing: quoting on last week's cost is **72%** of the monthly swing; price holds are the rest | `outputs/margin_variance_by_month.csv` |
 | Can the budget forecast beat flat? | 6-month error **24.4% vs 27.0%** on unseen 2023, with seasonal strength chosen on 2019–2020 only | `outputs/budget_horizon_forecast_test_2023.csv` |
+| What drove gross margin, 2019 to 2023? | List price **+$178,920** and cost **−$129,247**; volume −$18,853, mix +$10,190, discounts −$3,705 on synthetic volumes | `outputs/rgm/pvm_bridge_2019_2023.csv` |
+| Do promotions pay back? | Only **12 of 105**: a 10% cut needs **2.23x** baseline volume to break even once the fee and post-promotion dip count; lift estimates land within 7.7 points of the planted truth | `outputs/rgm/promotion_events.csv` |
 | Do the numbers tie out? | Contribution bridge agrees between SQL and Python within CAD 0.001; the margin-variance bridge ties to the dollar in Python, SQL and Excel | `validate_release.py`, `tests/` |
 
 ## How it works
@@ -46,11 +49,12 @@ flowchart LR
     D --> F[Pricing<br/>policy replay, cadence, customer terms]
     D --> G[Forecast and budget<br/>backtests, FY scenarios, sensitivity]
     D --> H[Margin variance<br/>cost timing vs price hold]
+    D --> R[Revenue growth<br/>price-volume-mix, promotion ROI]
     S[Synthetic sales, competitor<br/>and supplier data] --> I[Pricing desk and procurement<br/>net price, contribution, supplier feasibility]
-    E & F & G & H & I --> O[(Validated outputs<br/>CSV, SQLite, JSON<br/>tested and reconciled)]
+    E & F & G & H & I & R --> O[(Validated outputs<br/>CSV, SQLite, JSON<br/>tested and reconciled)]
     O --> J[Streamlit app]
-    O --> K[Excel models]
-    O --> L[SQL star schema +<br/>Power BI measures]
+    O --> K[Excel models +<br/>VBA monthly pack]
+    O --> L[SQL star schema +<br/>Power BI TMDL model]
     O --> M[Weekly market update +<br/>briefing deck]
 ```
 
@@ -94,6 +98,16 @@ Gross margin minus margin at target splits exactly into *cost timing* (quotes go
 
 ![Monthly margin variance by cause](outputs/img/margin_variance.png)
 
+### Price, volume, mix and promotions
+
+Gross margin is bridged from 2019 to 2023 item by item: volume (total cases at the old mix and margin), mix (shifts between items), list price, discounts and promotions, and cost. On real terminal costs and synthetic shipments, list price added $178,920 and cost took $129,247; volume took $18,853, mix added $10,190 and deeper discounts took $3,705. The bridge closes to the cent in Python and in Excel (a native waterfall chart with a zero check), and the Power BI measures implement the same algebra.
+
+![Gross margin bridge](outputs/img/pvm_bridge.png)
+
+Each of 105 synthetic promotions is scored against a baseline of clean weeks either side, net of the post-promotion dip and a fixed event fee. Break-even lift rises steeply with depth: 2.23x baseline volume at 10% off, 2.44x at 12%, 3.03x at 15%. 12 events paid back; the verdicts are 12 repeat, 59 redesign, 34 stop. Because the lift is planted in the simulation, the method can be checked: estimates land within 7.7 points of the truth on average. That validates the method, not any real promotion.
+
+![Promotion lift vs break-even](outputs/img/promo_breakeven.png)
+
 ### Forecasts and the FY budget
 
 In the calendar-2023 budget holdout, half-strength seasonality has 3-month WAPE 27.4% versus flat 29.1%; 6-month WAPE is 24.4% versus flat 27.0%. Strength 0.5 is the narrow joint minimum over 3- and 6-month validation horizons with origins in 2019–2020. Seasonal estimates use complete 12-month item-years with equal month weights. One to four weeks ahead, the latest price is the best forecast (7.2% WAPE one week out), so the operational answer is to react fast. The FY budget runs on the seasonal path with FX, supply-shock, freight and volume scenarios; shock onset and reversal are both lagged.
@@ -111,11 +125,12 @@ The latest synthetic week has CAD 31,947 revenue and CAD 8,076 contribution. Ind
 | Pricing models | Prior-cost policy replay, cadence by item, price calculator, customer-terms replay, ERP-style price-list upload |
 | Market analysis and updates | Public quotes in CAD, matched-month comparison, seasonality, origin shifts, weekly Market Update for any report week |
 | Margin and profitability | Policy and customer-terms margins; revenue-weighted customer and product contribution; monthly margin-variance bridge |
+| Revenue growth management | Price-volume-mix bridge, discount rate, promotion baseline and lift, break-even lift, trade-spend ROI with repeat/redesign/stop verdicts |
 | Forecasting and budgeting | Calendar-origin backtests; FY budget with scenarios and one-at-a-time sensitivity |
 | Scenario planning | Live FX, supply-shock, freight, volume and price-lag levers in the app and the Excel model |
-| Advanced Excel | Decision model with live scenario formulas and a native PivotTable ([verification](docs/EXCEL_MODEL.md)); margin-variance workbook with zero-check columns |
+| Advanced Excel and VBA | Decision model with live scenario formulas and a native PivotTable ([verification](docs/EXCEL_MODEL.md)); margin-variance workbook with zero-check columns, PVM waterfall and break-even grid; [VBA macros](excel_vba/) that validate, summarise, export to PDF and log the monthly pack |
 | SQL and data management | SQLite financial views; star schema (`sql/star_schema/`) with three analysis queries; validated data contract |
-| BI and dashboards | Ten-tab Streamlit/Altair app; Power BI-ready star schema with DAX measures and relationships (`powerbi/`); no .pbix file is claimed |
+| BI and dashboards | Eleven-tab Streamlit/Altair app; [Power BI semantic model as code](powerbi/) (TMDL/PBIP): star schema, 38 DAX measures, dynamic row-level security, fr-CA translations; the report page itself is left blank |
 | Procurement | Yield- and freight-adjusted order costs with capacity, MOQ, lead-time and validity checks |
 | Communication | Generated stakeholder brief and an editable seven-slide PowerPoint briefing |
 | Process improvement | One-command rebuild, deterministic exports, source checksums, regression tests and CI on every push |
@@ -134,9 +149,10 @@ The latest synthetic week has CAD 31,947 revenue and CAD 8,076 contribution. Ind
 
 ```bash
 python -m pip install -r requirements-lock.txt
-python run_pipeline.py            # clean data, analyses, charts, customer terms, star schema
+python run_pipeline.py            # clean data, analyses, charts, customer terms, star schema, PVM and promotions
 python build_commercial_demo.py   # synthetic pricing desk and supplier comparison
-python build_terms_workbook.py    # margin-variance workbook
+python build_terms_workbook.py    # margin-variance workbook (terms, variance, PVM, promotions)
+python build_powerbi_model.py     # Power BI TMDL model
 python add_terms_slides.py        # customer-terms slides in the briefing
 python build_project_docs.py      # this README, numbers synced from outputs
 python build_report_page.py
@@ -157,10 +173,12 @@ src/pulse/report.py       weekly Market Update generator
 src/pulse/commercial.py   net-price comparability and customer contribution
 src/pulse/procurement.py  synthetic supplier feasibility and order cost
 src/pulse/terms.py        customer pricing terms, margin-variance bridge, ERP price list
+src/pulse/rgm.py          price-volume-mix bridge and promotion evaluation
 src/pulse/datamodel.py    star schema -> SQLite and Power BI CSVs
 sql/                      financial views and star-schema queries
-powerbi/                  DAX measures and model notes
-app.py                    Streamlit app (10 tabs)
+powerbi/                  TMDL semantic model (PBIP), DAX measures
+excel_vba/                VBA modules for the monthly pack and ERP export
+app.py                    Streamlit app (11 tabs)
 tests/                    pytest suite, run in CI
 ```
 
@@ -170,6 +188,7 @@ tests/                    pytest suite, run in CI
 - Four anomaly exclusions use a centred window and inferred conversion diagnoses. Backtests are conditional on retrospective cleaning, not fully as-of live simulations.
 - There is a major April 2021–November 2022 gap plus item-specific gaps. No live daily or current-news feed is claimed.
 - Terminal quotes are cost proxies, not invoices or distributor selling prices. Quote counts are not volumes or confirmed availability.
+- Shipment volumes and promotion events in the price-volume-mix and promotion analysis are synthetic, built on real costs, so the method can be checked against a planted truth; they are not a distributor's results.
 - Commercial and supplier data are fictional. No causal elasticity, demand response, split-supplier optimisation or realised savings are inferred.
 - Budget scenarios lag shock multipliers while retaining the baseline seasonal price path. Inventory financing, fixed overhead and customer contracts are excluded.
 

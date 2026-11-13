@@ -1,0 +1,155 @@
+/// Replayed selling price per item, segment and week on real costs; volumes are assumptions.
+table fact_sales_price
+
+	column item_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: item_id
+
+	column segment_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: segment_id
+
+	column date_key
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		isHidden
+		summarizeBy: none
+		sourceColumn: date_key
+
+	column cases
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: cases
+
+	column sell_price
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		summarizeBy: none
+		sourceColumn: sell_price
+
+	column landed_cost
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		summarizeBy: none
+		sourceColumn: landed_cost
+
+	column prior_cost
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		summarizeBy: none
+		sourceColumn: prior_cost
+
+	column target_margin
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: target_margin
+
+	column price_changed
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: price_changed
+
+	/// Selling price x cases.
+	measure Revenue = SUMX ( fact_sales_price, fact_sales_price[sell_price] * fact_sales_price[cases] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Pricing
+
+	/// Landed cost x cases.
+	measure COGS = SUMX ( fact_sales_price, fact_sales_price[landed_cost] * fact_sales_price[cases] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Pricing
+
+	/// Revenue minus landed cost.
+	measure 'Gross Margin' = [Revenue] - [COGS]
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Pricing
+
+	/// Gross margin as a share of revenue.
+	measure 'GM %' = DIVIDE ( [Gross Margin], [Revenue] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pricing
+
+	/// Margin the same revenue would earn at each item's target margin.
+	measure 'GM at Target' =
+			SUMX (
+			    fact_sales_price,
+			    fact_sales_price[sell_price] * fact_sales_price[cases] * fact_sales_price[target_margin]
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Margin variance
+
+	/// Revenue-weighted target margin.
+	measure 'Target GM %' = DIVIDE ( [GM at Target], [Revenue] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Margin variance
+
+	/// Equals Variance - Cost Timing plus Variance - Price Hold.
+	measure 'Margin Variance' = [Gross Margin] - [GM at Target]
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Margin variance
+
+	/// Margin points above (+) or below (-) target.
+	measure 'Margin Gap (pts)' = ( [GM %] - [Target GM %] ) * 100
+		formatString: 0.0
+		displayFolder: Margin variance
+
+	/// Quotes go out on last week's cost.
+	measure 'Variance - Cost Timing' =
+			SUMX (
+			    fact_sales_price,
+			    fact_sales_price[cases] * ( fact_sales_price[prior_cost] - fact_sales_price[landed_cost] )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Margin variance
+
+	/// Cost of keeping a list or band price instead of repricing.
+	measure 'Variance - Price Hold' =
+			SUMX (
+			    fact_sales_price,
+			    fact_sales_price[cases]
+			        * ( fact_sales_price[sell_price] * ( 1 - fact_sales_price[target_margin] ) - fact_sales_price[prior_cost] )
+			)
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Margin variance
+
+	/// Must be 0.
+	measure 'Variance Check' = ROUND ( [Margin Variance] - [Variance - Cost Timing] - [Variance - Price Hold], 2 )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Margin variance
+
+	/// Share of item-weeks more than 10 points under target margin.
+	measure 'Breach Rate' =
+			AVERAGEX (
+			    fact_sales_price,
+			    IF (
+			        1 - DIVIDE ( fact_sales_price[landed_cost], fact_sales_price[sell_price] )
+			            < fact_sales_price[target_margin] - 0.10,
+			        1,
+			        0
+			    )
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Pricing
+
+	/// Number of price changes.
+	measure 'Price Changes' = SUM ( fact_sales_price[price_changed] )
+		formatString: #,0
+		displayFolder: Pricing
+
+	partition fact_sales_price = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(SourceRoot, [RelativePath = "star_schema/fact_sales_price.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"item_id", type text}, {"segment_id", type text}, {"date_key", type date}, {"cases", type number}, {"sell_price", type number}, {"landed_cost", type number}, {"prior_cost", type number}, {"target_margin", type number}, {"price_changed", Int64.Type}}, "en-US")
+				in
+				    Typed
+

@@ -1,0 +1,360 @@
+/// SYNTHETIC weekly shipments by item and channel, 2019 and 2023, on real terminal costs.
+table fact_shipments
+
+	column item_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: item_id
+
+	column category
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category
+
+	column channel
+		dataType: string
+		summarizeBy: none
+		sourceColumn: channel
+
+	column year
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: year
+
+	column date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: date
+
+	column cases
+		dataType: double
+		formatString: #,0.0
+		summarizeBy: none
+		sourceColumn: cases
+
+	column list_price
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		summarizeBy: none
+		sourceColumn: list_price
+
+	column net_price
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		summarizeBy: none
+		sourceColumn: net_price
+
+	column unit_cost
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		summarizeBy: none
+		sourceColumn: unit_cost
+
+	column promo
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: promo
+
+	column promo_depth
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: promo_depth
+
+	column data_status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: data_status
+
+	column revenue
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		summarizeBy: none
+		sourceColumn: revenue
+
+	column list_revenue
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		summarizeBy: none
+		sourceColumn: list_revenue
+
+	column cogs
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		summarizeBy: none
+		sourceColumn: cogs
+
+	column gm
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		summarizeBy: none
+		sourceColumn: gm
+
+	/// After discounts and promotions.
+	measure 'Net Revenue' = SUM ( fact_shipments[revenue] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Revenue growth
+
+	/// Cases at list price.
+	measure 'List Revenue' = SUM ( fact_shipments[list_revenue] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Revenue growth
+
+	/// Price given away below list.
+	measure 'Discounts & Promotions' = [List Revenue] - [Net Revenue]
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Revenue growth
+
+	/// Price investment as a share of list revenue.
+	measure 'Discount Rate' = DIVIDE ( [Discounts & Promotions], [List Revenue] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Revenue growth
+
+	/// Gross margin on synthetic shipments.
+	measure 'Shipment GM' = SUM ( fact_shipments[gm] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Revenue growth
+
+	/// Gross margin on net revenue.
+	measure 'Shipment GM %' = DIVIDE ( [Shipment GM], [Net Revenue] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Revenue growth
+
+	/// Synthetic cases.
+	measure 'Cases Shipped' = SUM ( fact_shipments[cases] )
+		formatString: #,0
+		displayFolder: Revenue growth
+
+	/// Cases sold on promotion.
+	measure 'Promo Share of Cases' = DIVIDE ( CALCULATE ( [Cases Shipped], fact_shipments[promo] = TRUE () ), [Cases Shipped] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Revenue growth
+
+	/// Base-year gross margin, items sold in both years.
+	measure 'PVM GM 2019' =
+			VAR a = 2019
+			VAR b = 2023
+			VAR t =
+			    ADDCOLUMNS (
+			        FILTER (
+			            VALUES ( fact_shipments[item_id] ),
+			            CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ) > 0
+			                && CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ) > 0
+			        ),
+			        "@qa", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ),
+			        "@qb", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ),
+			        "@gma", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = a ),
+			        "@gmb", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = b ),
+			        "@lra", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = a ),
+			        "@lrb", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = b ),
+			        "@ra", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = a ),
+			        "@rb", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = b ),
+			        "@ca", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = a ),
+			        "@cb", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = b )
+			    )
+			VAR QA = SUMX ( t, [@qa] )
+			VAR QB = SUMX ( t, [@qb] )
+			VAR GMA = SUMX ( t, [@gma] )
+			RETURN
+			    GMA
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Price-volume-mix
+
+	/// Compare-year gross margin, items sold in both years.
+	measure 'PVM GM 2023' =
+			VAR a = 2019
+			VAR b = 2023
+			VAR t =
+			    ADDCOLUMNS (
+			        FILTER (
+			            VALUES ( fact_shipments[item_id] ),
+			            CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ) > 0
+			                && CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ) > 0
+			        ),
+			        "@qa", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ),
+			        "@qb", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ),
+			        "@gma", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = a ),
+			        "@gmb", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = b ),
+			        "@lra", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = a ),
+			        "@lrb", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = b ),
+			        "@ra", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = a ),
+			        "@rb", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = b ),
+			        "@ca", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = a ),
+			        "@cb", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = b )
+			    )
+			VAR QA = SUMX ( t, [@qa] )
+			VAR QB = SUMX ( t, [@qb] )
+			VAR GMA = SUMX ( t, [@gma] )
+			RETURN
+			    SUMX ( t, [@gmb] )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Price-volume-mix
+
+	/// Change in total cases at the base-year mix and margin.
+	measure 'PVM Volume' =
+			VAR a = 2019
+			VAR b = 2023
+			VAR t =
+			    ADDCOLUMNS (
+			        FILTER (
+			            VALUES ( fact_shipments[item_id] ),
+			            CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ) > 0
+			                && CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ) > 0
+			        ),
+			        "@qa", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ),
+			        "@qb", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ),
+			        "@gma", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = a ),
+			        "@gmb", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = b ),
+			        "@lra", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = a ),
+			        "@lrb", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = b ),
+			        "@ra", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = a ),
+			        "@rb", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = b ),
+			        "@ca", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = a ),
+			        "@cb", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = b )
+			    )
+			VAR QA = SUMX ( t, [@qa] )
+			VAR QB = SUMX ( t, [@qb] )
+			VAR GMA = SUMX ( t, [@gma] )
+			RETURN
+			    DIVIDE ( QB - QA, QA ) * GMA
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Price-volume-mix
+
+	/// Shift in item shares, valued at base-year margin per case.
+	measure 'PVM Mix' =
+			VAR a = 2019
+			VAR b = 2023
+			VAR t =
+			    ADDCOLUMNS (
+			        FILTER (
+			            VALUES ( fact_shipments[item_id] ),
+			            CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ) > 0
+			                && CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ) > 0
+			        ),
+			        "@qa", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ),
+			        "@qb", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ),
+			        "@gma", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = a ),
+			        "@gmb", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = b ),
+			        "@lra", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = a ),
+			        "@lrb", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = b ),
+			        "@ra", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = a ),
+			        "@rb", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = b ),
+			        "@ca", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = a ),
+			        "@cb", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = b )
+			    )
+			VAR QA = SUMX ( t, [@qa] )
+			VAR QB = SUMX ( t, [@qb] )
+			VAR GMA = SUMX ( t, [@gma] )
+			RETURN
+			    SUMX ( t, [@qb] * DIVIDE ( [@gma], [@qa] ) ) - DIVIDE ( QB, QA ) * GMA
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Price-volume-mix
+
+	/// Change in list price per case on compare-year cases.
+	measure 'PVM List Price' =
+			VAR a = 2019
+			VAR b = 2023
+			VAR t =
+			    ADDCOLUMNS (
+			        FILTER (
+			            VALUES ( fact_shipments[item_id] ),
+			            CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ) > 0
+			                && CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ) > 0
+			        ),
+			        "@qa", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ),
+			        "@qb", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ),
+			        "@gma", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = a ),
+			        "@gmb", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = b ),
+			        "@lra", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = a ),
+			        "@lrb", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = b ),
+			        "@ra", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = a ),
+			        "@rb", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = b ),
+			        "@ca", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = a ),
+			        "@cb", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = b )
+			    )
+			VAR QA = SUMX ( t, [@qa] )
+			VAR QB = SUMX ( t, [@qb] )
+			VAR GMA = SUMX ( t, [@gma] )
+			RETURN
+			    SUMX ( t, [@lrb] - [@qb] * DIVIDE ( [@lra], [@qa] ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Price-volume-mix
+
+	/// Change in discount per case on compare-year cases.
+	measure 'PVM Discounts & Promotions' =
+			VAR a = 2019
+			VAR b = 2023
+			VAR t =
+			    ADDCOLUMNS (
+			        FILTER (
+			            VALUES ( fact_shipments[item_id] ),
+			            CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ) > 0
+			                && CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ) > 0
+			        ),
+			        "@qa", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ),
+			        "@qb", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ),
+			        "@gma", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = a ),
+			        "@gmb", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = b ),
+			        "@lra", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = a ),
+			        "@lrb", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = b ),
+			        "@ra", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = a ),
+			        "@rb", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = b ),
+			        "@ca", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = a ),
+			        "@cb", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = b )
+			    )
+			VAR QA = SUMX ( t, [@qa] )
+			VAR QB = SUMX ( t, [@qb] )
+			VAR GMA = SUMX ( t, [@gma] )
+			RETURN
+			    SUMX ( t, ( [@rb] - [@lrb] ) - [@qb] * DIVIDE ( [@ra] - [@lra], [@qa] ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Price-volume-mix
+
+	/// Change in landed cost per case on compare-year cases (negative when cost rises).
+	measure 'PVM Cost' =
+			VAR a = 2019
+			VAR b = 2023
+			VAR t =
+			    ADDCOLUMNS (
+			        FILTER (
+			            VALUES ( fact_shipments[item_id] ),
+			            CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ) > 0
+			                && CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ) > 0
+			        ),
+			        "@qa", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = a ),
+			        "@qb", CALCULATE ( SUM ( fact_shipments[cases] ), fact_shipments[year] = b ),
+			        "@gma", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = a ),
+			        "@gmb", CALCULATE ( SUM ( fact_shipments[gm] ), fact_shipments[year] = b ),
+			        "@lra", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = a ),
+			        "@lrb", CALCULATE ( SUM ( fact_shipments[list_revenue] ), fact_shipments[year] = b ),
+			        "@ra", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = a ),
+			        "@rb", CALCULATE ( SUM ( fact_shipments[revenue] ), fact_shipments[year] = b ),
+			        "@ca", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = a ),
+			        "@cb", CALCULATE ( SUM ( fact_shipments[cogs] ), fact_shipments[year] = b )
+			    )
+			VAR QA = SUMX ( t, [@qa] )
+			VAR QB = SUMX ( t, [@qb] )
+			VAR GMA = SUMX ( t, [@gma] )
+			RETURN
+			    - SUMX ( t, [@cb] - [@qb] * DIVIDE ( [@ca], [@qa] ) )
+		formatString: \$#,0;(\$#,0);\$#,0
+		displayFolder: Price-volume-mix
+
+	/// Must be 0: the bridge reconciles.
+	measure 'PVM Check' = ROUND ( [PVM GM 2023] - [PVM GM 2019] - [PVM Volume] - [PVM Mix] - [PVM List Price] - [PVM Discounts & Promotions] - [PVM Cost], 2 )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		displayFolder: Price-volume-mix
+
+	partition fact_shipments = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(Web.Contents(SourceRoot, [RelativePath = "rgm/SYNTHETIC_weekly_shipments.csv"]), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Promoted, {{"item_id", type text}, {"category", type text}, {"channel", type text}, {"year", Int64.Type}, {"date", type date}, {"cases", type number}, {"list_price", type number}, {"net_price", type number}, {"unit_cost", type number}, {"promo", type logical}, {"promo_depth", type number}, {"data_status", type text}, {"revenue", type number}, {"list_revenue", type number}, {"cogs", type number}, {"gm", type number}}, "en-US")
+				in
+				    Typed
+

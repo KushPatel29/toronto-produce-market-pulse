@@ -1,0 +1,27 @@
+{
+  "bridge": {
+    "Gross margin 2019": 319120.77,
+    "Volume": -18852.96,
+    "Mix": 10190.03,
+    "List price": 178919.85,
+    "Discounts & promotions": -3704.68,
+    "Cost": -129247.39,
+    "Gross margin 2023": 356425.62
+  },
+  "events": 105,
+  "paid_back": 12,
+  "uplift_mae_pts": 7.68,
+  "median_breakeven_uplift": 2.55,
+  "breakeven_by_depth": {
+    "0.10": 2.23,
+    "0.12": 2.44,
+    "0.15": 3.03
+  },
+  "trade_spend_total": 71830.04,
+  "net_incremental_margin_total": -23174.53,
+  "verdicts": {
+    "Redesign": 59,
+    "Stop": 34,
+    "Repeat": 12
+  }
+}

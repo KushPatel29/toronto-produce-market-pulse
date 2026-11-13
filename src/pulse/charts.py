@@ -279,3 +279,76 @@ def margin_variance(mv: pd.DataFrame, path):
     fig.tight_layout()
     fig.savefig(path, dpi=160)
     plt.close(fig)
+
+
+def pvm_waterfall(bridge: pd.DataFrame, path):
+    """Gross-margin bridge: start and end totals as bars, effects floating between them."""
+    labels = [
+        d.replace("Discounts & promotions", "Discounts &\npromotions").replace("Gross margin ", "GM ")
+        for d in bridge.driver
+    ]
+    vals = bridge.cad.to_numpy() / 1000
+    fig, ax = plt.subplots(figsize=(9, 3.6))
+    run = 0.0
+    for i, v in enumerate(vals):
+        if i in (0, len(vals) - 1):
+            ax.bar(i, v, color=INK2, width=0.62)
+            ax.text(i, v + 6, f"${v:,.0f}K", ha="center", fontsize=9, color=INK)
+            run = v
+            continue
+        bottom = run if v >= 0 else run + v
+        ax.bar(i, abs(v), bottom=bottom, color=AQUA if v >= 0 else RED, width=0.62)
+        fmt = ",.1f" if abs(v) < 10 else ",.0f"
+        sign = "+" if v >= 0 else "-"
+        ax.text(i, run + max(v, 0) + 6, f"{sign}${abs(v):{fmt}}K", ha="center", fontsize=9, color=INK)
+        if i < len(vals) - 1:
+            ax.plot([i + 0.31, i + 0.69], [run + v, run + v], color=INK2, lw=0.7)
+        run += v
+    ax.set_xticks(range(len(vals)), labels, fontsize=9)
+    ax.set_ylabel("Gross margin ($K CAD)")
+    peak = max(np.cumsum(vals[:-1]).max(), vals.max())
+    ax.set_ylim(0, peak * 1.15)
+    ax.grid(axis="x", visible=False)
+    ax.set_title("Gross margin bridge, 2023 vs 2019", loc="left")
+    fig.tight_layout()
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+
+
+def promo_breakeven(promos: pd.DataFrame, path):
+    """Each promotion: measured volume lift vs the lift it needed to break even. Above the line paid back."""
+    fig, ax = plt.subplots(figsize=(9, 3.8))
+    r = promos[np.isfinite(promos.breakeven_uplift)]
+    lim = float(min(4.0, max(r.breakeven_uplift.max(), r.est_uplift.max()) * 1.05))
+    paid = r.roi > 0
+    ax.scatter(
+        r.breakeven_uplift[~paid].clip(upper=lim),
+        r.est_uplift[~paid],
+        s=26,
+        color=RED,
+        label="Lost margin",
+        zorder=3,
+        edgecolor="white",
+        linewidth=0.8,
+    )
+    ax.scatter(
+        r.breakeven_uplift[paid].clip(upper=lim),
+        r.est_uplift[paid],
+        s=26,
+        color=AQUA,
+        label="Paid back",
+        zorder=3,
+        edgecolor="white",
+        linewidth=0.8,
+    )
+    ax.plot([1, lim], [1, lim], color=INK2, lw=1, ls="--")
+    ax.text(lim * 0.98, lim * 0.985, "above the line: paid back", ha="right", va="top", fontsize=8, color=INK2)
+    ax.set_xlim(1, lim)
+    ax.set_ylim(1, lim)
+    ax.set_xlabel("Lift needed to break even, incl. event fee and post-promotion dip (x baseline; capped at 4)")
+    ax.set_ylabel("Measured lift (x baseline)")
+    ax.legend(frameon=False, fontsize=8, loc="upper left")
+    ax.set_title(f"{int(paid.sum())} of {len(r)} promotions paid back their trade spend (synthetic events)", loc="left")
+    fig.tight_layout()
+    fig.savefig(path, dpi=160)
+    plt.close(fig)

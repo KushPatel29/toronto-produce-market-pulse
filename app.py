@@ -19,13 +19,13 @@ from pulse import commercial as cm  # noqa: E402
 from pulse import procurement as pc  # noqa: E402
 from pulse import datamodel as dm  # noqa: E402
 from pulse import terms as ct  # noqa: E402
+from pulse import rgm as rg  # noqa: E402
 
 st.set_page_config(page_title="Toronto Produce Market Pulse", page_icon="🥬", layout="wide")
 
 BLUE, ORANGE, AQUA, RED, MID, INK2 = "#16324f", "#9c6500", "#26734d", "#b32632", "#eef2f4", "#5a6b75"
 OUT = ROOT / "outputs"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-
 
 
 def money(v: float) -> str:
@@ -84,6 +84,15 @@ def star_db(_panel, _basket):
 
 basket, panel, rows, facts, dq = load()
 tfacts = json.loads((OUT / "terms_facts.json").read_text(encoding="utf-8"))
+
+
+@st.cache_data
+def rgm_data(_panel, _basket):
+    w, ev = rg.simulate(_panel, _basket)
+    bridge, detail = rg.pvm(w, 2019, 2023)
+    return w, bridge, detail, rg.promo_eval(w, ev)
+
+
 idx, chg, si, vol, detail, summ, rec = derived(panel, basket)
 names = dict(zip(basket.item_id, basket.display_name, strict=True))
 ids = {v: k for k, v in names.items()}
@@ -106,15 +115,27 @@ with st.sidebar:
     )
     st.markdown("### Project downloads")
     for label, filename, mime in [
-        ("Excel decision model", "Pricing_Decision_Workbook.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
-        ("Stakeholder presentation", "Produce_Pricing_Decision_Brief.pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation"),
+        (
+            "Excel decision model",
+            "Pricing_Decision_Workbook.xlsx",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        ),
+        (
+            "Stakeholder presentation",
+            "Produce_Pricing_Decision_Brief.pptx",
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+        ),
     ]:
         if (OUT / filename).exists():
             st.download_button(label, (OUT / filename).read_bytes(), filename, mime=mime)
-    st.caption("Built for a produce-distributor pricing workflow. Independent portfolio project; no employer affiliation.")
+    st.caption(
+        "Built for a produce-distributor pricing workflow. Independent portfolio project; no employer affiliation."
+    )
 
 st.title("Toronto Produce Market Pulse")
-st.caption("Historical case study through January 2024. Customer, competitor and supplier examples are synthetic. No Bondi company data.")
+st.caption(
+    "Historical case study through January 2024. Customer, competitor and supplier examples are synthetic. No Bondi company data."
+)
 tabs = st.tabs(
     [
         "Market overview",
@@ -127,6 +148,7 @@ tabs = st.tabs(
         "Customer & pricing desk",
         "Supplier comparison",
         "Customer terms & margin variance",
+        "Price, mix & promotions",
     ]
 )
 
@@ -189,7 +211,9 @@ with tabs[0]:
     )
 
     st.subheader("Matched-month CAD price per case, 2023 vs 2019")
-    st.caption("At least 10 calendar months observed in both years per item, with equal month weights. This selected-basket case-price comparison is not a full-year produce inflation estimate.")
+    st.caption(
+        "At least 10 calendar months observed in both years per item, with equal month weights. This selected-basket case-price comparison is not a full-year produce inflation estimate."
+    )
     ch = chg.assign(direction=np.where(chg.pct_chg > 0, "Up", "Down"))
     bars = (
         alt.Chart(ch)
@@ -253,7 +277,9 @@ with tabs[2]:
     band = (
         alt.Chart(s)
         .mark_area(color=BLUE, opacity=0.15)
-        .encode(x=alt.X("date:T", title=None), y=alt.Y("low_cad:Q", title="CAD per case"), y2="high_cad:Q", detail="run:N")
+        .encode(
+            x=alt.X("date:T", title=None), y=alt.Y("low_cad:Q", title="CAD per case"), y2="high_cad:Q", detail="run:N"
+        )
     )
     ln = (
         alt.Chart(s)
@@ -272,7 +298,9 @@ with tabs[2]:
         )
     )
     st.altair_chart((band + ln).properties(height=300, title=f"{nm}: weekly price and low-high range"), width="stretch")
-    st.caption("Breaks in the line are weeks with no Toronto quote for this item, including the April 2021 - November 2022 source gap.")
+    st.caption(
+        "Breaks in the line are weeks with no Toronto quote for this item, including the April 2021 - November 2022 source gap."
+    )
     a, b = st.columns(2)
     if item in si.index:
         sd = pd.DataFrame({"month": MONTHS, "index": si.loc[item].values})
@@ -341,7 +369,15 @@ with tabs[3]:
     suggested = landed / (1 - tm)
     margin_now = 1 - landed / current if current else float("nan")
     gap = margin_now - tm
-    action = "Enter a positive current list price" if not current else "Raise price" if gap < -pr.BAND else "Lower price / promote" if gap > pr.BAND else "Hold"
+    action = (
+        "Enter a positive current list price"
+        if not current
+        else "Raise price"
+        if gap < -pr.BAND
+        else "Lower price / promote"
+        if gap > pr.BAND
+        else "Hold"
+    )
     pctile = float((s.tail(52).price_cad < cost).mean())
     with c2:
         st.metric("Suggested price at target margin", f"${suggested:,.2f}")
@@ -449,7 +485,9 @@ with tabs[5]:
     st.markdown(
         "FY budget, Feb 2024 to Jan 2025. Cost path = recent deseasonalised level × seasonal index. Move the levers; everything recalculates."
     )
-    st.caption("Price delay applies to the scenario cost multiplier at both onset and reversal. A March–April shock with one-month lag affects customer prices in April–May. Demand is fixed apart from the volume control.")
+    st.caption(
+        "Price delay applies to the scenario cost multiplier at both onset and reversal. A March–April shock with one-month lag affects customer prices in April–May. Demand is fixed apart from the volume control."
+    )
     l1, l2, l3 = st.columns(3)
     shrink = l1.slider("Seasonal strength", 0.0, 1.0, 0.5, 0.25, help="0.5 was chosen on 2019-2020 and tested on 2023.")
     fx = l1.slider("CAD weaker vs USD (on imported share)", -0.10, 0.15, 0.0, 0.01, format="%.2f")
@@ -479,7 +517,11 @@ with tabs[5]:
         delta=f"{scen.gross_margin.sum() - base.gross_margin.sum():+,.0f}",
     )
     m[2].metric("Gross margin %", f"{scen.gross_margin.sum() / scen.revenue.sum():.1%}")
-    m[3].metric("Items budgeted", scen.item_id.nunique(), help="Only items with recent cost quotes and complete-year seasonal support are budgeted.")
+    m[3].metric(
+        "Items budgeted",
+        scen.item_id.nunique(),
+        help="Only items with recent cost quotes and complete-year seasonal support are budgeted.",
+    )
     mon = pd.concat(
         [
             base.groupby("month").gross_margin.sum().rename("Base"),
@@ -528,7 +570,9 @@ Week-over-week changes compare identical quotes only (same origin, size, package
 """
     )
     st.subheader("Weeks excluded: suspected currency-conversion anomalies")
-    st.caption("Diagnoses are inferred from the cross-item pattern, not confirmed by USDA. Exclusion uses a centred window with future observations: backtests use retrospectively cleaned data and are not live as-of pricing simulations.")
+    st.caption(
+        "Diagnoses are inferred from the cross-item pattern, not confirmed by USDA. Exclusion uses a centred window with future observations: backtests use retrospectively cleaned data and are not live as-of pricing simulations."
+    )
     st.dataframe(
         dq.assign(date=dq.date.dt.date)[["date", "basket_ratio", "usd_cad", "diagnosis"]].rename(
             columns={"basket_ratio": "Basket vs neighbouring weeks", "usd_cad": "USD/CAD that week"}
@@ -571,9 +615,14 @@ Budget-horizon results and seasonal-strength validation are downloadable from th
 # ---------------------------------------------------------------- 8. commercial decision workflow
 with tabs[7]:
     st.subheader("Customer profitability & pricing decisions")
-    st.warning("SYNTHETIC COMMERCIAL DEMO: customer segments, five competitor comparators, discounts, rebates, volumes, delivery and spoilage are simulated. Public terminal quotes are cost proxies. This is not actual company performance.")
-    commercial_week = st.selectbox("Commercial scenario week", sorted(panel.date.unique(), reverse=True),
-                                   format_func=lambda d: str(pd.Timestamp(d).date()))
+    st.warning(
+        "SYNTHETIC COMMERCIAL DEMO: customer segments, five competitor comparators, discounts, rebates, volumes, delivery and spoilage are simulated. Public terminal quotes are cost proxies. This is not actual company performance."
+    )
+    commercial_week = st.selectbox(
+        "Commercial scenario week",
+        sorted(panel.date.unique(), reverse=True),
+        format_func=lambda d: str(pd.Timestamp(d).date()),
+    )
     sales = cm.demo_sales(panel, basket, commercial_week)
     if sales.empty:
         st.info("No comparable recent prior quotes. Select another report week.")
@@ -587,12 +636,23 @@ with tabs[7]:
         k[0].metric("Demo net revenue", f"CAD {profits.revenue.sum():,.0f}")
         k[1].metric("Contribution after variable service", f"CAD {profits.contribution.sum():,.0f}")
         k[2].metric("Revenue-weighted contribution margin", f"{profits.contribution.sum() / profits.revenue.sum():.1%}")
-        st.caption("Contribution includes 6% handling, 2% spoilage and per-case delivery assumptions; fixed overhead excluded. All prices are CAD per comparable case. Gross margin in the historical backtest excludes these extra service costs.")
+        st.caption(
+            "Contribution includes 6% handling, 2% spoilage and per-case delivery assumptions; fixed overhead excluded. All prices are CAD per comparable case. Gross margin in the historical backtest excludes these extra service costs."
+        )
         group = st.radio("Profitability breakdown", ["customer", "category", "item"], horizontal=True)
         summary = profits.groupby(group)[["revenue", "variable_cost", "contribution", "target_gap_dollars"]].sum()
         summary["margin_pct"] = summary.contribution / summary.revenue
-        st.dataframe(summary.style.format({"revenue": "{:,.0f}", "variable_cost": "{:,.0f}",
-                      "contribution": "{:,.0f}", "target_gap_dollars": "{:,.0f}", "margin_pct": "{:.1%}"}))
+        st.dataframe(
+            summary.style.format(
+                {
+                    "revenue": "{:,.0f}",
+                    "variable_cost": "{:,.0f}",
+                    "contribution": "{:,.0f}",
+                    "target_gap_dollars": "{:,.0f}",
+                    "margin_pct": "{:.1%}",
+                }
+            )
+        )
         st.subheader("Finance: reconciled contribution variance")
         bridge = cm.variance_bridge(sales)
         waterfall = bridge.copy()
@@ -601,39 +661,64 @@ with tabs[7]:
         waterfall.loc[waterfall.index[-1], ["start", "end"]] = [0, waterfall.cad.iloc[-1]]
         waterfall["kind"] = np.where(waterfall.cad >= 0, "Favourable", "Unfavourable")
         waterfall.loc[[0, len(waterfall) - 1], "kind"] = "Total"
-        st.altair_chart(alt.Chart(waterfall).mark_bar().encode(
-            x=alt.X("driver:N", sort=bridge.driver.tolist(), title=None),
-            y=alt.Y("start:Q", title="Contribution (CAD)"), y2="end:Q",
-            color=alt.Color("kind:N", scale=alt.Scale(domain=["Total", "Favourable", "Unfavourable"],
-                                                      range=[BLUE, AQUA, RED]), title=None),
-            tooltip=["driver", alt.Tooltip("cad:Q", format=",.2f", title="CAD")],
-        ).properties(height=300), width="stretch")
+        st.altair_chart(
+            alt.Chart(waterfall)
+            .mark_bar()
+            .encode(
+                x=alt.X("driver:N", sort=bridge.driver.tolist(), title=None),
+                y=alt.Y("start:Q", title="Contribution (CAD)"),
+                y2="end:Q",
+                color=alt.Color(
+                    "kind:N",
+                    scale=alt.Scale(domain=["Total", "Favourable", "Unfavourable"], range=[BLUE, AQUA, RED]),
+                    title=None,
+                ),
+                tooltip=["driver", alt.Tooltip("cad:Q", format=",.2f", title="CAD")],
+            )
+            .properties(height=300),
+            width="stretch",
+        )
         st.dataframe(bridge, hide_index=True)
-        st.caption("Exact bridge: budget contribution + volume/mix + net price/discount + variable cost = actual contribution. Each effect is calculated by item and customer; aggregation preserves mix.")
+        st.caption(
+            "Exact bridge: budget contribution + volume/mix + net price/discount + variable cost = actual contribution. Each effect is calculated by item and customer; aggregation preserves mix."
+        )
         st.subheader("Sales: quote recommendations & approvals")
-        st.caption("Suggested net price preserves the target margin. Competitor quotes are segment-specific and net of discounts/rebates; median +5% and the increase threshold trigger review. Uplift assumes unchanged demand. Contract terms require review.")
+        st.caption(
+            "Suggested net price preserves the target margin. Competitor quotes are segment-specific and net of discounts/rebates; median +5% and the increase threshold trigger review. Uplift assumes unchanged demand. Contract terms require review."
+        )
         st.dataframe(recommendations, hide_index=True)
         st.subheader("Procurement: supply-risk review queue")
-        st.caption("Alerts: quote breadth below 60% of its recent median, lead-origin change or cost jump above 15%. These signals do not confirm a shortage or actual stock availability.")
+        st.caption(
+            "Alerts: quote breadth below 60% of its recent median, lead-origin change or cost jump above 15%. These signals do not confirm a shortage or actual stock availability."
+        )
         st.dataframe(alerts[alerts.review], hide_index=True)
         brief = cm.executive_brief(sales, recommendations, alerts)
         with st.expander("Stakeholder decision brief", expanded=True):
             st.markdown(brief)
         st.download_button("Download stakeholder brief", brief, "commercial_decision_brief.md")
         st.download_button("Download synthetic ERP-style sales", sales.to_csv(index=False), "SYNTHETIC_sales.csv")
-        st.download_button("Download reviewed price candidates", recommendations.to_csv(index=False), "SYNTHETIC_price_candidates.csv")
+        st.download_button(
+            "Download reviewed price candidates", recommendations.to_csv(index=False), "SYNTHETIC_price_candidates.csv"
+        )
         with st.expander("Competitor evidence & comparability"):
             st.dataframe(competitors, hide_index=True)
-            st.caption("Five fictional comparators; only nonfuture CAD quotes with matching case units and age at most 14 days qualify. Replace with lawfully sourced, timestamped observations for a real implementation.")
+            st.caption(
+                "Five fictional comparators; only nonfuture CAD quotes with matching case units and age at most 14 days qualify. Replace with lawfully sourced, timestamped observations for a real implementation."
+            )
 
 # ---------------------------------------------------------------- 9. procurement decisions
 with tabs[8]:
     st.subheader("Supplier bids: cost, yield & availability")
-    st.info("Synthetic procurement case. Three fictional suppliers quote each supported item. Capacities, freight, spoilage, lead times and reliability are assumptions; terminal quotes provide the historical cost anchor.")
+    st.info(
+        "Synthetic procurement case. Three fictional suppliers quote each supported item. Capacities, freight, spoilage, lead times and reliability are assumptions; terminal quotes provide the historical cost anchor."
+    )
     constraints, context = st.columns([1, 2])
     with constraints:
-        supplier_week = st.selectbox("Supplier quote date", sorted(panel.date.unique(), reverse=True),
-                                     format_func=lambda d: str(pd.Timestamp(d).date()))
+        supplier_week = st.selectbox(
+            "Supplier quote date",
+            sorted(panel.date.unique(), reverse=True),
+            format_func=lambda d: str(pd.Timestamp(d).date()),
+        )
         lead_limit = st.slider("Maximum supplier lead time (days)", 0, 7, 2)
         reliability_floor = st.slider("Minimum assumed delivery reliability", 0.80, 1.0, 0.95, 0.01)
     bids = pc.demo_supplier_bids(panel, basket, supplier_week)
@@ -643,18 +728,36 @@ with tabs[8]:
         a, b = st.columns(2)
         a.metric("Items with a feasible single supplier", int(supported.sum()))
         b.metric("Items requiring sourcing review", int((~supported).sum()))
-        st.caption("Weekly demand is usable cases. Orders include expected spoilage and must meet MOQ and capacity constraints. Quotes must match CAD and the case unit and be valid on the selected date.")
-    st.dataframe(supplier_queue.rename(columns={
-        "item": "Item", "supplier": "Supplier for review", "unit": "Case unit",
-        "demand_usable_cases": "Usable cases needed", "order_cases": "Cases to order",
-        "total_order_cost": "Order cost (CAD)", "cost_per_demand_case": "CAD per needed case",
-        "single_supplier_shortfall_cases": "Single-supplier shortfall", "status": "Next action",
-    }), hide_index=True)
-    st.caption("The review choice has the lowest full-order cost among feasible single-supplier bids. MOQ surplus is charged to this week's demand. Split sourcing, shelf-life timing, inventory and customer demand response are outside this model.")
+        st.caption(
+            "Weekly demand is usable cases. Orders include expected spoilage and must meet MOQ and capacity constraints. Quotes must match CAD and the case unit and be valid on the selected date."
+        )
+    st.dataframe(
+        supplier_queue.rename(
+            columns={
+                "item": "Item",
+                "supplier": "Supplier for review",
+                "unit": "Case unit",
+                "demand_usable_cases": "Usable cases needed",
+                "order_cases": "Cases to order",
+                "total_order_cost": "Order cost (CAD)",
+                "cost_per_demand_case": "CAD per needed case",
+                "single_supplier_shortfall_cases": "Single-supplier shortfall",
+                "status": "Next action",
+            }
+        ),
+        hide_index=True,
+    )
+    st.caption(
+        "The review choice has the lowest full-order cost among feasible single-supplier bids. MOQ surplus is charged to this week's demand. Split sourcing, shelf-life timing, inventory and customer demand response are outside this model."
+    )
     with st.expander("Compare bids and exclusion reasons"):
         st.dataframe(evaluated, hide_index=True)
-    st.download_button("Download supplier review queue", supplier_queue.to_csv(index=False), "SYNTHETIC_supplier_review.csv")
-    st.download_button("Download evaluated supplier bids", evaluated.to_csv(index=False), "SYNTHETIC_supplier_evaluation.csv")
+    st.download_button(
+        "Download supplier review queue", supplier_queue.to_csv(index=False), "SYNTHETIC_supplier_review.csv"
+    )
+    st.download_button(
+        "Download evaluated supplier bids", evaluated.to_csv(index=False), "SYNTHETIC_supplier_evaluation.csv"
+    )
 
 # ---------------------------------------------------------------- 10. customer terms & margin variance
 with tabs[9]:
@@ -821,4 +924,167 @@ with tabs[9]:
     st.dataframe(plist, width="stretch", height=300, hide_index=True)
     st.download_button(
         "Download price-list CSV", plist.to_csv(index=False), file_name=f"price_list_{wk}.csv", mime="text/csv"
+    )
+
+# ---------------------------------------------------------------- 11. price, mix & promotions
+with tabs[10]:
+    w_rgm, bridge, pvm_detail, promos = rgm_data(panel, basket)
+    st.markdown(
+        "Gross margin from 2019 to 2023, split into volume, mix, list price, discounts and promotions, and cost; then every "
+        "promotion checked against the volume lift it needed to pay back. **Costs are real Toronto terminal prices; "
+        "volumes, channel discounts and promotions are synthetic**, with a planted lift per promotion so the method can be "
+        "checked against a known answer."
+    )
+    b = bridge.set_index("driver").cad
+    k = st.columns(4)
+    k[0].metric("Gross margin 2019", f"${b.iloc[0] / 1000:,.0f}K")
+    k[1].metric("Gross margin 2023", f"${b.iloc[-1] / 1000:,.0f}K", delta=f"{b.iloc[-1] / b.iloc[0] - 1:+.1%}")
+    k[2].metric("List price effect", f"+${b['List price'] / 1000:,.0f}K")
+    k[3].metric("Cost effect", f"-${abs(b['Cost']) / 1000:,.0f}K")
+    wf = bridge.copy()
+    wf["end"] = wf.cad.cumsum()
+    wf.loc[wf.index[-1], "end"] = wf.cad.iloc[-1]
+    wf["start"] = wf.end - wf.cad
+    wf.loc[wf.index[-1], "start"] = 0
+    wf.loc[wf.index[0], "start"] = 0
+    wf["kind"] = np.where(
+        wf.index.isin([wf.index[0], wf.index[-1]]), "Total", np.where(wf.cad >= 0, "Increase", "Decrease")
+    )
+    wf["order"] = range(len(wf))
+    st.altair_chart(
+        alt.Chart(wf)
+        .mark_bar(size=46)
+        .encode(
+            x=alt.X("driver:N", sort=alt.SortField("order"), title=None, axis=alt.Axis(labelAngle=0, labelLimit=160)),
+            y=alt.Y("start:Q", title="Gross margin (CAD)"),
+            y2="end:Q",
+            color=alt.Color(
+                "kind:N",
+                scale=alt.Scale(domain=["Total", "Increase", "Decrease"], range=[INK2, AQUA, RED]),
+                legend=alt.Legend(orient="bottom", title=None),
+            ),
+            tooltip=["driver", alt.Tooltip("cad:Q", format="$,.0f", title="CAD")],
+        )
+        .properties(height=320),
+        width="stretch",
+    )
+    st.caption(
+        "List prices follow cost at the target margin, so cost inflation becomes margin dollars when prices keep pace. "
+        "The five effects add up exactly to the change in gross margin (tested)."
+    )
+    cat = pvm_detail.groupby("category")[["volume", "mix", "list_price", "trade", "cost"]].sum()
+    cat["total"] = cat.sum(axis=1)
+    st.dataframe(
+        cat.sort_values("total", ascending=False)
+        .rename(
+            columns={
+                "volume": "Volume",
+                "mix": "Mix",
+                "list_price": "List price",
+                "trade": "Discounts & promos",
+                "cost": "Cost",
+                "total": "Total change",
+            }
+        )
+        .style.format(money),
+        width="stretch",
+    )
+
+    st.subheader("Did the promotions pay back?")
+    paid = promos.roi > 0
+    c = st.columns(4)
+    c[0].metric("Promotions evaluated", len(promos))
+    c[1].metric("Paid back", int(paid.sum()))
+    c[2].metric("Median lift needed", f"{promos.breakeven_uplift.median():.1f}x")
+    c[3].metric(
+        "Lift estimate error",
+        f"{promos.uplift_error_pts.abs().mean():.1f} pts",
+        help="Average gap between the measured lift and the planted lift.",
+    )
+    view = promos.assign(
+        outcome=np.where(paid, "Paid back", "Lost margin"), breakeven_plot=promos.breakeven_uplift.clip(upper=4)
+    )
+    pts = (
+        alt.Chart(view)
+        .mark_circle(size=60, stroke="white", strokeWidth=1)
+        .encode(
+            x=alt.X(
+                "breakeven_plot:Q",
+                title="Lift needed to break even (x baseline, capped at 4)",
+                scale=alt.Scale(domain=[1, 4]),
+            ),
+            y=alt.Y("est_uplift:Q", title="Measured lift (x baseline)", scale=alt.Scale(domain=[1, 4])),
+            color=alt.Color(
+                "outcome:N",
+                scale=alt.Scale(domain=["Paid back", "Lost margin"], range=[AQUA, RED]),
+                legend=alt.Legend(orient="bottom", title=None),
+            ),
+            tooltip=[
+                "event",
+                alt.Tooltip("depth:Q", format=".0%"),
+                alt.Tooltip("est_uplift:Q", format=".2f"),
+                alt.Tooltip("breakeven_uplift:Q", format=".2f"),
+                alt.Tooltip("net_incremental_margin:Q", format="$,.0f"),
+                alt.Tooltip("roi:Q", format=".0%"),
+            ],
+        )
+    )
+    line = (
+        alt.Chart(pd.DataFrame({"x": [1, 4], "y": [1, 4]}))
+        .mark_line(strokeDash=[5, 4], color=INK2)
+        .encode(x="x", y="y")
+    )
+    st.altair_chart((line + pts).properties(height=340), width="stretch")
+    st.caption(
+        "Above the dashed line, the promotion sold enough extra volume to cover its price cut, fee and post-promotion dip."
+    )
+
+    st.subheader("Break-even lift calculator")
+    q = st.columns(4)
+    m_pct = q[0].slider("Regular gross margin", 0.10, 0.45, 0.25, 0.01, format="%.2f", key="be_margin")
+    d_pct = q[1].slider("Promotion price cut", 0.05, 0.30, 0.10, 0.01, format="%.2f", key="be_depth")
+    fee = q[2].number_input("Fixed event cost (CAD)", 0, 5000, 150, 50, key="be_fee")
+    base_rev = q[3].number_input("Baseline revenue over the promotion (CAD)", 500, 100000, 4000, 500, key="be_rev")
+    pm = m_pct - d_pct
+    if pm <= 0:
+        st.error("The price cut is at least the margin: every promoted case loses money, so no lift breaks even.")
+    else:
+        be = (m_pct * base_rev + fee) / (pm * base_rev)
+        st.metric("Volume lift needed to break even", f"{be:.2f}x", help="Ignores any post-promotion dip.")
+        st.caption(
+            f"Each promoted case earns {pm:.0%} instead of {m_pct:.0%} of the regular price, so volume must rise "
+            f"{be - 1:.0%} just to stand still."
+        )
+    st.dataframe(
+        promos[
+            [
+                "event",
+                "start",
+                "depth",
+                "baseline_cases",
+                "est_uplift",
+                "planted_uplift",
+                "breakeven_uplift",
+                "trade_spend",
+                "net_incremental_margin",
+                "roi",
+                "verdict",
+            ]
+        ]
+        .sort_values("roi", ascending=False)
+        .style.format(
+            {
+                "depth": "{:.0%}",
+                "baseline_cases": "{:.1f}",
+                "est_uplift": "{:.2f}x",
+                "planted_uplift": "{:.2f}x",
+                "breakeven_uplift": "{:.2f}x",
+                "trade_spend": money,
+                "net_incremental_margin": money,
+                "roi": "{:.0%}",
+            }
+        ),
+        width="stretch",
+        height=300,
+        hide_index=True,
     )
