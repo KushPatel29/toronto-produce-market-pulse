@@ -42,7 +42,8 @@ th,td{{border-bottom:1px solid var(--rule);padding:5px 8px;text-align:left}} th{
 <h1>Toronto Produce Market Pulse</h1>
 <p class="sub">Pricing, margin and market intelligence for a foodservice produce distributor, on real Toronto terminal-market prices (USDA AMS / Infohort, Agriculture and Agri-Food Canada), in CAD. By Kush Patel.</p>
 <div class="kpis">{tiles}</div>
-<h2>Market: what produce costs now</h2><img src="{img("basket_index.png")}" alt="Monthly basket index 2017-2024, 2019 = 100">
+<p class="note">Historical case study: source ends January 2024, not a live market feed. The Streamlit app adds a customer and pricing decision desk using clearly labelled synthetic customers and competitor comparators. Anomaly exclusions use a centred window; backtests are conditional on retrospective cleaning.</p>
+<h2>Market: historical produce costs</h2><img src="{img("basket_index.png")}" alt="Monthly basket index 2017-2024, 2019 = 100">
 <img src="{img("price_change_2019_2023.png")}" alt="Price change by item, 2023 vs 2019">
 <h2>Supply shock: the late-2022 lettuce crisis</h2><img src="{img("lettuce_crisis_2022.png")}" alt="Romaine and iceberg weekly prices Nov 2022 - Jan 2024">
 <details><summary>What the Market Update said the week of December 13, 2022</summary><div class="report">{crisis}</div></details>

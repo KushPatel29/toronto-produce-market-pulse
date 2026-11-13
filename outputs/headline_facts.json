@@ -59,11 +59,11 @@
     "monthly": 3
   },
   "wape_1wk": {
-    "blend": 0.0899,
-    "ma4": 0.1195,
+    "blend": 0.0897,
+    "ma4": 0.1159,
     "naive": 0.0762,
     "seasonal_naive": 0.0956,
-    "ses": 0.0971
+    "ses": 0.0964
   },
   "budget_wape_3m": {
     "flat": 0.2837,

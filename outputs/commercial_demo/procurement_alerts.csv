@@ -1,0 +1,24 @@
+item_id,display_name,lead_origin,quote_breadth_ratio,origin_changed,cost_jump,review,owner,next_step
+blueberries,Blueberries,Mexico,1.0,False,-0.11149028636846725,False,Procurement,Confirm supplier availability and pack comparability before quoting
+tom_field,Field tomatoes,Florida,1.0,False,0.07823188220658861,False,Procurement,Confirm supplier availability and pack comparability before quoting
+cauli,Cauliflower,United States,1.0,False,-0.09200980239669843,False,Procurement,Confirm supplier availability and pack comparability before quoting
+strawberries,Strawberries,Florida,0.6666666666666666,False,,False,Procurement,Confirm supplier availability and pack comparability before quoting
+raspberries,Raspberries,United States,1.0,False,,False,Procurement,Confirm supplier availability and pack comparability before quoting
+celery,Celery,United States,1.0,False,-0.019266103073459995,False,Procurement,Confirm supplier availability and pack comparability before quoting
+potatoes,Potatoes,Canada,1.0,False,-0.0006147460083808509,False,Procurement,Confirm supplier availability and pack comparability before quoting
+broccoli,Broccoli,United States,1.0,False,-0.00044979728314697986,False,Procurement,Confirm supplier availability and pack comparability before quoting
+apples,Apples (tray pack),Washington,1.0,False,-0.00042535091450435214,False,Procurement,Confirm supplier availability and pack comparability before quoting
+parsley,Parsley (bunched),United States,2.0,False,,False,Procurement,Confirm supplier availability and pack comparability before quoting
+onions,Yellow onions,Canada,1.0,False,0.1163680585168192,False,Procurement,Confirm supplier availability and pack comparability before quoting
+cucumbers,English cucumbers,Mexico,1.0,False,-0.0003754048697870438,False,Procurement,Confirm supplier availability and pack comparability before quoting
+mushrooms,Mushrooms,Canada,1.0,False,-0.00034667312523439797,False,Procurement,Confirm supplier availability and pack comparability before quoting
+asparagus,Asparagus,Peru,3.0,False,-0.0005263553650649566,False,Procurement,Confirm supplier availability and pack comparability before quoting
+limes,Limes,Mexico,1.0,False,-0.00038217169063203826,False,Procurement,Confirm supplier availability and pack comparability before quoting
+brussels,Brussels sprouts,Mexico,1.0,False,-0.11004931751819724,False,Procurement,Confirm supplier availability and pack comparability before quoting
+let_rom,Romaine lettuce,United States,1.0,False,,False,Procurement,Confirm supplier availability and pack comparability before quoting
+garlic,Garlic,United States,1.0,False,-0.0004002132915151835,False,Procurement,Confirm supplier availability and pack comparability before quoting
+bananas,Bananas,Ecuador,1.0,False,-0.0004737492174677893,False,Procurement,Confirm supplier availability and pack comparability before quoting
+let_ice,Iceberg lettuce,United States,1.0,False,,False,Procurement,Confirm supplier availability and pack comparability before quoting
+let_green,Green leaf lettuce,United States,1.0,False,,False,Procurement,Confirm supplier availability and pack comparability before quoting
+tom_roma,Roma tomatoes,Mexico,1.0,False,-0.07284047224390122,False,Procurement,Confirm supplier availability and pack comparability before quoting
+zucchini,Zucchini,Mexico,1.0,False,,False,Procurement,Confirm supplier availability and pack comparability before quoting

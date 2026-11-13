@@ -52,7 +52,12 @@ def backtest(panel: pd.DataFrame, windows=None, horizons=(1, 2, 4)) -> pd.DataFr
                     # never forecast across a gap: origin and target must be <= 7*h+7 days apart
                     if (s.date[i] - s.date[o]).days > 7 * h + 7:
                         continue
-                    f = predict(s.iloc[: o + 1], s.date[i], si)
+                    hist = s.iloc[: o + 1]
+                    # Restart model state after a missing-data period.
+                    starts = hist.date.diff().dt.days.gt(14)
+                    if starts.any():
+                        hist = hist.loc[starts[starts].index[-1]:]
+                    f = predict(hist, s.date[i], si)
                     for mname, val in f.items():
                         out.append((item, start[:4], h, s.date[i], mname, val, s.price_cad[i]))
     return pd.DataFrame(out, columns=["item_id", "window", "h", "date", "model", "fcst", "actual"])

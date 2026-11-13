@@ -15,6 +15,7 @@ from pulse import budget as bg  # noqa: E402
 from pulse import market as mk  # noqa: E402
 from pulse import pricing as pr  # noqa: E402
 from pulse import report as rp  # noqa: E402
+from pulse import commercial as cm  # noqa: E402
 
 st.set_page_config(page_title="Toronto Produce Market Pulse", page_icon="🥬", layout="wide")
 
@@ -34,19 +35,19 @@ def load():
 
 
 @st.cache_data
-def derived(_panel, _basket, key="v1"):
-    idx = mk.basket_index(_panel)
-    chg = mk.annual_change(_panel)
-    si = mk.seasonal_index(_panel)
-    vol = mk.volatility(_panel)
-    detail, summ = pr.backtest(_panel, _basket)
+def derived(panel, basket):
+    idx = mk.basket_index(panel)
+    chg = mk.annual_change(panel)
+    si = mk.seasonal_index(panel)
+    vol = mk.volatility(panel)
+    detail, summ = pr.backtest(panel, basket)
     rec = pr.recommend_cadence(summ)
     return idx, chg, si, vol, detail, summ, rec
 
 
 @st.cache_data
-def budget_base(_panel, _rows, _basket, shrink):
-    return bg.build_budget(_panel, _rows, _basket, shrink=shrink)
+def budget_base(panel, rows, basket, shrink):
+    return bg.build_budget(panel, rows, basket, shrink=shrink)
 
 
 basket, panel, rows, facts, dq = load()
@@ -72,6 +73,7 @@ with st.sidebar:
     )
 
 st.title("Toronto Produce Market Pulse")
+st.info("Historical case study · source ends January 2024. Commercial demo uses synthetic customers and competitors. No Bondi company data.")
 tabs = st.tabs(
     [
         "Market overview",
@@ -81,6 +83,7 @@ tabs = st.tabs(
         "Pricing policies",
         "Budget & scenarios",
         "Method & data quality",
+        "Customer & pricing desk",
     ]
 )
 
@@ -292,7 +295,7 @@ with tabs[3]:
     suggested = landed / (1 - tm)
     margin_now = 1 - landed / current if current else float("nan")
     gap = margin_now - tm
-    action = "Raise price" if gap < -pr.BAND else "Lower price / promote" if gap > pr.BAND else "Hold"
+    action = "Enter a positive current list price" if not current else "Raise price" if gap < -pr.BAND else "Lower price / promote" if gap > pr.BAND else "Hold"
     pctile = float((s.tail(52).price_cad < cost).mean())
     with c2:
         st.metric("Suggested price at target margin", f"${suggested:,.2f}")
@@ -476,7 +479,8 @@ back to CAD with the Bank of Canada rate for each report date. The series ended 
 Week-over-week changes compare identical quotes only (same origin, size, package), so a switch from Mexico to Canada is not read as a price change.
 """
     )
-    st.subheader("Weeks excluded: USDA currency-conversion failures")
+    st.subheader("Weeks excluded: suspected currency-conversion anomalies")
+    st.caption("Diagnoses are inferred from the cross-item pattern, not confirmed by USDA. Exclusion uses a centred window with future observations: backtests use retrospectively cleaned data and are not live as-of pricing simulations.")
     st.dataframe(
         dq.assign(date=dq.date.dt.date)[["date", "basket_ratio", "usd_cad", "diagnosis"]].rename(
             columns={"basket_ratio": "Basket vs neighbouring weeks", "usd_cad": "USD/CAD that week"}
@@ -501,3 +505,61 @@ At budget horizons a half-strength seasonal index wins: strength chosen on 2019-
         width="stretch",
     )
     st.caption("Reproduce everything: `python run_pipeline.py && python build_workbook.py && pytest -q`")
+
+# ---------------------------------------------------------------- 8. commercial decision workflow
+with tabs[7]:
+    st.subheader("Customer profitability & pricing decisions")
+    st.warning("SYNTHETIC COMMERCIAL DEMO: customer segments, five competitor comparators, discounts, rebates, volumes, delivery and spoilage are simulated. Public terminal quotes are cost proxies. This is not actual company performance.")
+    commercial_week = st.selectbox("Commercial scenario week", sorted(panel.date.unique(), reverse=True),
+                                   format_func=lambda d: str(pd.Timestamp(d).date()))
+    sales = cm.demo_sales(panel, basket, commercial_week)
+    if sales.empty:
+        st.info("No comparable recent prior quotes. Select another report week.")
+    else:
+        competitors = cm.demo_competitors(sales)
+        threshold = st.slider("Price increase requiring Finance review", 0.0, 0.30, 0.10, 0.01)
+        profits = cm.profitability(sales)
+        recommendations = cm.recommendations(sales, competitors, threshold)
+        alerts = cm.procurement_alerts(panel, commercial_week)
+        k = st.columns(3)
+        k[0].metric("Demo net revenue", f"CAD {profits.revenue.sum():,.0f}")
+        k[1].metric("Contribution after variable service", f"CAD {profits.contribution.sum():,.0f}")
+        k[2].metric("Revenue-weighted contribution margin", f"{profits.contribution.sum() / profits.revenue.sum():.1%}")
+        st.caption("Contribution includes 6% handling, 2% spoilage and per-case delivery assumptions; fixed overhead excluded. All prices are CAD per comparable case. Gross margin in the historical backtest excludes these extra service costs.")
+        group = st.radio("Profitability breakdown", ["customer", "category", "item"], horizontal=True)
+        summary = profits.groupby(group)[["revenue", "variable_cost", "contribution", "target_gap_dollars"]].sum()
+        summary["margin_pct"] = summary.contribution / summary.revenue
+        st.dataframe(summary.style.format({"revenue": "{:,.0f}", "variable_cost": "{:,.0f}",
+                      "contribution": "{:,.0f}", "target_gap_dollars": "{:,.0f}", "margin_pct": "{:.1%}"}))
+        st.subheader("Finance: reconciled contribution variance")
+        bridge = cm.variance_bridge(sales)
+        waterfall = bridge.copy()
+        waterfall["end"] = waterfall.cad.cumsum()
+        waterfall["start"] = waterfall.end - waterfall.cad
+        waterfall.loc[waterfall.index[-1], ["start", "end"]] = [0, waterfall.cad.iloc[-1]]
+        waterfall["kind"] = np.where(waterfall.cad >= 0, "Favourable", "Unfavourable")
+        waterfall.loc[[0, len(waterfall) - 1], "kind"] = "Total"
+        st.altair_chart(alt.Chart(waterfall).mark_bar().encode(
+            x=alt.X("driver:N", sort=bridge.driver.tolist(), title=None),
+            y=alt.Y("start:Q", title="Contribution (CAD)"), y2="end:Q",
+            color=alt.Color("kind:N", scale=alt.Scale(domain=["Total", "Favourable", "Unfavourable"],
+                                                      range=[BLUE, AQUA, RED]), title=None),
+            tooltip=["driver", alt.Tooltip("cad:Q", format=",.2f", title="CAD")],
+        ).properties(height=300), width="stretch")
+        st.dataframe(bridge, hide_index=True)
+        st.caption("Exact bridge: budget contribution + volume/mix + net price/discount + variable cost = actual contribution. Each effect is calculated by item and customer; aggregation preserves mix.")
+        st.subheader("Sales: quote recommendations & approvals")
+        st.caption("Suggested net price preserves the target margin; competitor median +5% and the increase threshold trigger review. Uplift assumes unchanged demand; no price elasticity has been estimated. Contract terms and approvals must be checked before use.")
+        st.dataframe(recommendations, hide_index=True)
+        st.subheader("Procurement: supply-risk review queue")
+        st.caption("Alerts: quote breadth below 60% of its recent median, lead-origin change or cost jump above 15%. These signals do not confirm a shortage or actual stock availability.")
+        st.dataframe(alerts[alerts.review], hide_index=True)
+        brief = cm.executive_brief(sales, recommendations, alerts)
+        with st.expander("Stakeholder decision brief", expanded=True):
+            st.markdown(brief)
+        st.download_button("Download stakeholder brief", brief, "commercial_decision_brief.md")
+        st.download_button("Download synthetic ERP-style sales", sales.to_csv(index=False), "SYNTHETIC_sales.csv")
+        st.download_button("Download reviewed price candidates", recommendations.to_csv(index=False), "SYNTHETIC_price_candidates.csv")
+        with st.expander("Competitor evidence & comparability"):
+            st.dataframe(competitors, hide_index=True)
+            st.caption("Five fictional comparators; only nonfuture CAD quotes with matching case units and age at most 14 days qualify. Replace with lawfully sourced, timestamped observations for a real implementation.")

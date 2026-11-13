@@ -17,7 +17,8 @@ def market_update(panel: pd.DataFrame, basket: pd.DataFrame, week: str, list_pri
     cur = p[p.date == wk].set_index("item_id")
     if cur.empty:
         raise ValueError(f"no report for {week}")
-    hist = p[p.date < wk]
+    # A four-week reference must not borrow quotes from before a source gap.
+    hist = p[(p.date < wk) & (p.date >= wk - pd.Timedelta(days=35))]
     prev4 = hist.groupby("item_id").tail(4).groupby("item_id").price_cad.mean()
     prev1 = hist.groupby("item_id").tail(1).set_index("item_id")
     si = 1 + SHRINK * (seasonal_index(panel[panel.date < wk], (2017, 2018, 2019, 2020)) - 1)
@@ -30,7 +31,11 @@ def market_update(panel: pd.DataFrame, basket: pd.DataFrame, week: str, list_pri
         list_price = (list_prices or {}).get(item, ref_cost / (1 - tm))
         margin_now = 1 - cost / list_price
         m_now, m_next = wk.month, (wk + pd.DateOffset(weeks=4)).month
-        outlook = si.loc[item, m_next] / si.loc[item, m_now] - 1 if item in si.index else np.nan
+        outlook = (
+            si.loc[item, m_next] / si.loc[item, m_now] - 1
+            if item in si.index and m_now in si.columns and m_next in si.columns
+            else np.nan
+        )
         rows.append(
             {
                 "item_id": item,
@@ -57,6 +62,8 @@ def market_update(panel: pd.DataFrame, basket: pd.DataFrame, week: str, list_pri
                     if margin_now < tm - BAND
                     else "Lower price / promote"
                     if margin_now > tm + BAND
+                    else "Insufficient recent history"
+                    if pd.isna(margin_now)
                     else "Hold"
                 ),
                 "seasonal_outlook_4wk": outlook,
@@ -85,7 +92,7 @@ def to_markdown(u: dict) -> str:
     wk = u["week"].strftime("%B %d, %Y")
     up = t[t.wow > 0.005].sort_values("wow", ascending=False).head(5)
     dn = t[t.wow < -0.005].sort_values("wow").head(5)
-    act = t[t.action != "Hold"].sort_values("margin_at_list")
+    act = t[t.action.isin(["Raise price", "Lower price / promote"])].sort_values("margin_at_list")
     nxt = t.dropna(subset=["seasonal_outlook_4wk"]).sort_values("seasonal_outlook_4wk")
     L = [
         f"# Toronto Produce Market Update - week of {wk}",
@@ -116,7 +123,7 @@ def to_markdown(u: dict) -> str:
         "",
         "## Pricing actions (list price built on the average cost of up to 4 prior weeks)",
         "",
-        "| Item | Cost now (CAD/case) | Margin at current list | Target | Action | Suggested price |",
+        "| Item | Terminal quote (CAD/case) | Margin at current list | Target | Action | Suggested price |",
         "|---|---|---|---|---|---|",
     ]
     for _, r in act.iterrows():
@@ -124,7 +131,7 @@ def to_markdown(u: dict) -> str:
             f"| {r['item']} | ${r.price_cad:,.2f} | {r.margin_at_list:.0%} | {r.target_margin:.0%} | {r.action} | ${r.suggested_price:,.2f} |"
         )
     if act.empty:
-        L.append("| All items within +/-5 pts of target | | | | Hold | |")
+        L.append("| No actionable prices (check recent-history coverage) | | | | | |")
     L += [
         "",
         "## Next 4 weeks: seasonal outlook (half-strength seasonal index, 2017-2020)",

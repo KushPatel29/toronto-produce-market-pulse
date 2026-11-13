@@ -20,7 +20,7 @@ Source: USDA AMS Market News, Toronto terminal market (data from Infohort, Agric
 
 ## Pricing actions (list price built on the average cost of up to 4 prior weeks)
 
-| Item | Cost now (CAD/case) | Margin at current list | Target | Action | Suggested price |
+| Item | Terminal quote (CAD/case) | Margin at current list | Target | Action | Suggested price |
 |---|---|---|---|---|---|
 | Zucchini | $59.90 | -33% | 27% | Raise price | $86.97 |
 | Green leaf lettuce | $44.92 | -29% | 27% | Raise price | $65.23 |

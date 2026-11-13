@@ -1,0 +1,116 @@
+item_id,unit,currency,quote_date,competitor,price,data_status
+apples,tray-pack case,CAD,2024-01-30,Demo comparator 1,83.69933041850341,SYNTHETIC; not observed competitor pricing
+apples,tray-pack case,CAD,2024-01-30,Demo comparator 2,87.26100405333335,SYNTHETIC; not observed competitor pricing
+apples,tray-pack case,CAD,2024-01-30,Demo comparator 3,89.04184087074832,SYNTHETIC; not observed competitor pricing
+apples,tray-pack case,CAD,2024-01-30,Demo comparator 4,91.71309609687077,SYNTHETIC; not observed competitor pricing
+apples,tray-pack case,CAD,2024-01-30,Demo comparator 5,96.16518814040819,SYNTHETIC; not observed competitor pricing
+asparagus,11 lb case,CAD,2024-01-30,Demo comparator 1,100.63090593294463,SYNTHETIC; not observed competitor pricing
+asparagus,11 lb case,CAD,2024-01-30,Demo comparator 2,104.91307214285717,SYNTHETIC; not observed competitor pricing
+asparagus,11 lb case,CAD,2024-01-30,Demo comparator 3,107.05415524781344,SYNTHETIC; not observed competitor pricing
+asparagus,11 lb case,CAD,2024-01-30,Demo comparator 4,110.26577990524785,SYNTHETIC; not observed competitor pricing
+asparagus,11 lb case,CAD,2024-01-30,Demo comparator 5,115.61848766763852,SYNTHETIC; not observed competitor pricing
+bananas,40 lb case,CAD,2024-01-30,Demo comparator 1,42.667597359183674,SYNTHETIC; not observed competitor pricing
+bananas,40 lb case,CAD,2024-01-30,Demo comparator 2,44.4832398,SYNTHETIC; not observed competitor pricing
+bananas,40 lb case,CAD,2024-01-30,Demo comparator 3,45.391061020408166,SYNTHETIC; not observed competitor pricing
+bananas,40 lb case,CAD,2024-01-30,Demo comparator 4,46.75279285102041,SYNTHETIC; not observed competitor pricing
+bananas,40 lb case,CAD,2024-01-30,Demo comparator 5,49.022345902040826,SYNTHETIC; not observed competitor pricing
+blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,57.90542035354142,SYNTHETIC; not observed competitor pricing
+blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,60.369480794117656,SYNTHETIC; not observed competitor pricing
+blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,61.60151101440577,SYNTHETIC; not observed competitor pricing
+blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,63.449556344837944,SYNTHETIC; not observed competitor pricing
+blueberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,66.52963189555824,SYNTHETIC; not observed competitor pricing
+broccoli,case,CAD,2024-01-30,Demo comparator 1,65.32450553312833,SYNTHETIC; not observed competitor pricing
+broccoli,case,CAD,2024-01-30,Demo comparator 2,68.10427172602742,SYNTHETIC; not observed competitor pricing
+broccoli,case,CAD,2024-01-30,Demo comparator 3,69.49415482247696,SYNTHETIC; not observed competitor pricing
+broccoli,case,CAD,2024-01-30,Demo comparator 4,71.57897946715127,SYNTHETIC; not observed competitor pricing
+broccoli,case,CAD,2024-01-30,Demo comparator 5,75.05368720827512,SYNTHETIC; not observed competitor pricing
+brussels,25 lb case,CAD,2024-01-30,Demo comparator 1,57.00092665306122,SYNTHETIC; not observed competitor pricing
+brussels,25 lb case,CAD,2024-01-30,Demo comparator 2,59.426497999999995,SYNTHETIC; not observed competitor pricing
+brussels,25 lb case,CAD,2024-01-30,Demo comparator 3,60.639283673469386,SYNTHETIC; not observed competitor pricing
+brussels,25 lb case,CAD,2024-01-30,Demo comparator 4,62.45846218367347,SYNTHETIC; not observed competitor pricing
+brussels,25 lb case,CAD,2024-01-30,Demo comparator 5,65.49042636734694,SYNTHETIC; not observed competitor pricing
+cauli,case,CAD,2024-01-30,Demo comparator 1,60.42032403885938,SYNTHETIC; not observed competitor pricing
+cauli,case,CAD,2024-01-30,Demo comparator 2,62.99140165753425,SYNTHETIC; not observed competitor pricing
+cauli,case,CAD,2024-01-30,Demo comparator 3,64.27694046687168,SYNTHETIC; not observed competitor pricing
+cauli,case,CAD,2024-01-30,Demo comparator 4,66.20524868087783,SYNTHETIC; not observed competitor pricing
+cauli,case,CAD,2024-01-30,Demo comparator 5,69.41909570422142,SYNTHETIC; not observed competitor pricing
+celery,case,CAD,2024-01-30,Demo comparator 1,74.15252377632653,SYNTHETIC; not observed competitor pricing
+celery,case,CAD,2024-01-30,Demo comparator 2,77.30795032,SYNTHETIC; not observed competitor pricing
+celery,case,CAD,2024-01-30,Demo comparator 3,78.88566359183675,SYNTHETIC; not observed competitor pricing
+celery,case,CAD,2024-01-30,Demo comparator 4,81.25223349959185,SYNTHETIC; not observed competitor pricing
+celery,case,CAD,2024-01-30,Demo comparator 5,85.19651667918369,SYNTHETIC; not observed competitor pricing
+cucumbers,case,CAD,2024-01-30,Demo comparator 1,23.650695323455412,SYNTHETIC; not observed competitor pricing
+cucumbers,case,CAD,2024-01-30,Demo comparator 2,24.657107890410963,SYNTHETIC; not observed competitor pricing
+cucumbers,case,CAD,2024-01-30,Demo comparator 3,25.16031417388874,SYNTHETIC; not observed competitor pricing
+cucumbers,case,CAD,2024-01-30,Demo comparator 4,25.915123599105403,SYNTHETIC; not observed competitor pricing
+cucumbers,case,CAD,2024-01-30,Demo comparator 5,27.17313930779984,SYNTHETIC; not observed competitor pricing
+garlic,30 lb case,CAD,2024-01-30,Demo comparator 1,160.05551215564628,SYNTHETIC; not observed competitor pricing
+garlic,30 lb case,CAD,2024-01-30,Demo comparator 2,166.86638501333337,SYNTHETIC; not observed competitor pricing
+garlic,30 lb case,CAD,2024-01-30,Demo comparator 3,170.2718214421769,SYNTHETIC; not observed competitor pricing
+garlic,30 lb case,CAD,2024-01-30,Demo comparator 4,175.37997608544222,SYNTHETIC; not observed competitor pricing
+garlic,30 lb case,CAD,2024-01-30,Demo comparator 5,183.89356715755108,SYNTHETIC; not observed competitor pricing
+let_green,case,CAD,2024-01-30,Demo comparator 1,50.61665404696674,SYNTHETIC; not observed competitor pricing
+let_green,case,CAD,2024-01-30,Demo comparator 2,52.77055421917809,SYNTHETIC; not observed competitor pricing
+let_green,case,CAD,2024-01-30,Demo comparator 3,53.84750430528376,SYNTHETIC; not observed competitor pricing
+let_green,case,CAD,2024-01-30,Demo comparator 4,55.46292943444228,SYNTHETIC; not observed competitor pricing
+let_green,case,CAD,2024-01-30,Demo comparator 5,58.155304649706466,SYNTHETIC; not observed competitor pricing
+let_ice,case,CAD,2024-01-30,Demo comparator 1,58.12850573768707,SYNTHETIC; not observed competitor pricing
+let_ice,case,CAD,2024-01-30,Demo comparator 2,60.60205917333333,SYNTHETIC; not observed competitor pricing
+let_ice,case,CAD,2024-01-30,Demo comparator 3,61.838835891156464,SYNTHETIC; not observed competitor pricing
+let_ice,case,CAD,2024-01-30,Demo comparator 4,63.69400096789116,SYNTHETIC; not observed competitor pricing
+let_ice,case,CAD,2024-01-30,Demo comparator 5,66.78594276244898,SYNTHETIC; not observed competitor pricing
+let_rom,case,CAD,2024-01-30,Demo comparator 1,60.77229878725189,SYNTHETIC; not observed competitor pricing
+let_rom,case,CAD,2024-01-30,Demo comparator 2,63.35835405479453,SYNTHETIC; not observed competitor pricing
+let_rom,case,CAD,2024-01-30,Demo comparator 3,64.65138168856585,SYNTHETIC; not observed competitor pricing
+let_rom,case,CAD,2024-01-30,Demo comparator 4,66.59092313922282,SYNTHETIC; not observed competitor pricing
+let_rom,case,CAD,2024-01-30,Demo comparator 5,69.82349222365112,SYNTHETIC; not observed competitor pricing
+limes,40 lb case,CAD,2024-01-30,Demo comparator 1,74.39682232879821,SYNTHETIC; not observed competitor pricing
+limes,40 lb case,CAD,2024-01-30,Demo comparator 2,77.56264455555558,SYNTHETIC; not observed competitor pricing
+limes,40 lb case,CAD,2024-01-30,Demo comparator 3,79.14555566893426,SYNTHETIC; not observed competitor pricing
+limes,40 lb case,CAD,2024-01-30,Demo comparator 4,81.51992233900229,SYNTHETIC; not observed competitor pricing
+limes,40 lb case,CAD,2024-01-30,Demo comparator 5,85.477200122449,SYNTHETIC; not observed competitor pricing
+mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 1,26.847076334110795,SYNTHETIC; not observed competitor pricing
+mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 2,27.989505114285723,SYNTHETIC; not observed competitor pricing
+mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 3,28.56071950437319,SYNTHETIC; not observed competitor pricing
+mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 4,29.417541089504386,SYNTHETIC; not observed competitor pricing
+mushrooms,5 lb case,CAD,2024-01-30,Demo comparator 5,30.845577064723045,SYNTHETIC; not observed competitor pricing
+onions,50 lb sack,CAD,2024-01-30,Demo comparator 1,41.13512452799581,SYNTHETIC; not observed competitor pricing
+onions,50 lb sack,CAD,2024-01-30,Demo comparator 2,42.885555358974365,SYNTHETIC; not observed competitor pricing
+onions,50 lb sack,CAD,2024-01-30,Demo comparator 3,43.76077077446364,SYNTHETIC; not observed competitor pricing
+onions,50 lb sack,CAD,2024-01-30,Demo comparator 4,45.07359389769755,SYNTHETIC; not observed competitor pricing
+onions,50 lb sack,CAD,2024-01-30,Demo comparator 5,47.26163243642073,SYNTHETIC; not observed competitor pricing
+parsley,case,CAD,2024-01-30,Demo comparator 1,66.36433976260506,SYNTHETIC; not observed competitor pricing
+parsley,case,CAD,2024-01-30,Demo comparator 2,69.18835422058825,SYNTHETIC; not observed competitor pricing
+parsley,case,CAD,2024-01-30,Demo comparator 3,70.60036144957985,SYNTHETIC; not observed competitor pricing
+parsley,case,CAD,2024-01-30,Demo comparator 4,72.71837229306725,SYNTHETIC; not observed competitor pricing
+parsley,case,CAD,2024-01-30,Demo comparator 5,76.24839036554624,SYNTHETIC; not observed competitor pricing
+potatoes,50 lb case,CAD,2024-01-30,Demo comparator 1,35.24084107482994,SYNTHETIC; not observed competitor pricing
+potatoes,50 lb case,CAD,2024-01-30,Demo comparator 2,36.74045133333334,SYNTHETIC; not observed competitor pricing
+potatoes,50 lb case,CAD,2024-01-30,Demo comparator 3,37.490256462585045,SYNTHETIC; not observed competitor pricing
+potatoes,50 lb case,CAD,2024-01-30,Demo comparator 4,38.6149641564626,SYNTHETIC; not observed competitor pricing
+potatoes,50 lb case,CAD,2024-01-30,Demo comparator 5,40.48947697959185,SYNTHETIC; not observed competitor pricing
+raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 1,71.06485900540217,SYNTHETIC; not observed competitor pricing
+raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 2,74.08889555882354,SYNTHETIC; not observed competitor pricing
+raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 3,75.60091383553423,SYNTHETIC; not observed competitor pricing
+raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 4,77.86894125060026,SYNTHETIC; not observed competitor pricing
+raspberries,12 x 6 oz,CAD,2024-01-30,Demo comparator 5,81.64898694237698,SYNTHETIC; not observed competitor pricing
+strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 1,45.111951106122454,SYNTHETIC; not observed competitor pricing
+strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 2,47.031608600000006,SYNTHETIC; not observed competitor pricing
+strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 3,47.99143734693878,SYNTHETIC; not observed competitor pricing
+strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 4,49.43118046734695,SYNTHETIC; not observed competitor pricing
+strawberries,8 x 1 lb,CAD,2024-01-30,Demo comparator 5,51.830752334693884,SYNTHETIC; not observed competitor pricing
+tom_field,25 lb case,CAD,2024-01-30,Demo comparator 1,70.84722217176869,SYNTHETIC; not observed competitor pricing
+tom_field,25 lb case,CAD,2024-01-30,Demo comparator 2,73.86199758333332,SYNTHETIC; not observed competitor pricing
+tom_field,25 lb case,CAD,2024-01-30,Demo comparator 3,75.36938528911564,SYNTHETIC; not observed competitor pricing
+tom_field,25 lb case,CAD,2024-01-30,Demo comparator 4,77.63046684778911,SYNTHETIC; not observed competitor pricing
+tom_field,25 lb case,CAD,2024-01-30,Demo comparator 5,81.3989361122449,SYNTHETIC; not observed competitor pricing
+tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 1,59.84155841411565,SYNTHETIC; not observed competitor pricing
+tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 2,62.38800770833334,SYNTHETIC; not observed competitor pricing
+tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 3,63.66123235544219,SYNTHETIC; not observed competitor pricing
+tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 4,65.57106932610546,SYNTHETIC; not observed competitor pricing
+tom_roma,25 lb case,CAD,2024-01-30,Demo comparator 5,68.75413094387757,SYNTHETIC; not observed competitor pricing
+zucchini,25 lb case,CAD,2024-01-30,Demo comparator 1,73.37768777634892,SYNTHETIC; not observed competitor pricing
+zucchini,25 lb case,CAD,2024-01-30,Demo comparator 2,76.5001425753425,SYNTHETIC; not observed competitor pricing
+zucchini,25 lb case,CAD,2024-01-30,Demo comparator 3,78.06136997483928,SYNTHETIC; not observed competitor pricing
+zucchini,25 lb case,CAD,2024-01-30,Demo comparator 4,80.40321107408447,SYNTHETIC; not observed competitor pricing
+zucchini,25 lb case,CAD,2024-01-30,Demo comparator 5,84.30627957282643,SYNTHETIC; not observed competitor pricing

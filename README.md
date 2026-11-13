@@ -2,6 +2,25 @@
 
 **Pricing, margin and market intelligence for a foodservice produce distributor, built on real Toronto wholesale prices.**
 
+**Historical case study, not a live market feed.** Public quotes end January 2024. The new commercial workflow uses **synthetic** customer records, competitor comparators, discounts, rebates, delivery and spoilage assumptions. No Bondi company data or realised savings are claimed.
+
+## Commercial decision workflow
+
+The eighth app tab, **Customer & pricing desk**, connects the analysis to a pricing meeting:
+
+- Customer, category and item contribution after variable delivery/spoilage, with revenue-weighted margins.
+- Five fictional competitor comparators, screened for matching case units, CAD currency, date and quote age.
+- Cost-plus price candidates with explicit Sales/Finance review thresholds and market conflicts.
+- Procurement alerts from quote breadth, lead-origin shifts and cost spikes. These are proxies, not confirmed shortages.
+- An exact budget-to-actual contribution bridge for volume/mix, net price and variable cost.
+- A downloadable stakeholder decision brief and transparent ERP-style synthetic transaction exports.
+
+Run `python build_commercial_demo.py` to regenerate CSVs, the brief and a queryable SQLite database in `outputs/commercial_demo/`. SQL/Python contribution totals are reconciled during the build.
+
+See [job-description evidence map and interview walkthrough](docs/ROLE_COVERAGE.md) and [review, limitations and operating instructions](docs/REVIEW_AND_OPERATIONS.md). The original Excel model is retained; this upgrade does not claim new Excel validation, a Power BI file, a live ERP connector, causal price elasticity or real competitor intelligence.
+
+**Backtest caveat:** the original anomaly detector uses a centred window. Exclusions use future observations, so results are conditional on retrospective data cleaning. Forecast state now restarts after missing-data gaps, and market reports no longer build list prices from pre-gap quotes.
+
 **[Open the live app](https://toronto-fresh-market-pulse.streamlit.app)**: pick any week from 2017 to 2024 and get that week's Market Update, replay pricing policies item by item, price an item with the calculator, and move budget scenario levers. A static one-page report is in [`outputs/index.html`](outputs/index.html).
 
 I built this to show the work a pricing and data analyst does at a GTA produce distributor: track the market every week, set and defend prices, protect margin when supply breaks, and turn all of it into a budget Finance can use.
@@ -71,11 +90,11 @@ src/pulse/forecast.py        weekly and budget-horizon backtests (no look-ahead)
 src/pulse/budget.py          FY budget, scenarios, sensitivity
 src/pulse/report.py          weekly Market Update generator
 src/pulse/charts.py          static charts for this README and outputs/index.html
-app.py                       Streamlit app (7 tabs) on the processed data
+    app.py                       Streamlit app (8 tabs) on the processed data
 run_pipeline.py              runs everything -> outputs/
 build_workbook.py            Excel model (4,500+ live formulas) -> outputs/Toronto_Produce_Pricing_Model.xlsx
 add_native_pivot.py          adds a native Excel PivotTable via LibreOffice
-tests/                       12 data-quality and logic tests (pytest)
+tests/                       data quality, finance, source-gap and Streamlit interaction tests
 ```
 
 ```bash

@@ -1,0 +1,1864 @@
+item_id,item,customer,current_net_price,target_net_price,suggested_net_price,increase_pct,competitor_median,comparable_quotes,market_guardrail_conflict,approval,reason,indicative_contribution_change
+apples,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           apples
+item                                                  Apples (tray pack)
+category                                                           Fruit
+unit                                                      tray-pack case
+customer                                          Independent restaurant
+target_margin                                                       0.25
+budget_cases                                                         7.5
+actual_cases                                                         6.0
+budget_net_price                                               89.041841
+actual_list_price                                              89.041841
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               88.151422
+budget_unit_cost                                               66.781381
+actual_unit_cost                                               65.803848
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       528.908535
+variable_cost                                                 394.823085
+contribution                                                  134.085449
+margin_pct                                                      0.253513
+margin_gap_pp                                                   0.351349
+target_gap_dollars                                                   0.0
+budget_contribution                                           166.953452
+Name: 0, dtype: object>",Independent restaurant,88.15142246204083,87.73846342857144,88.15142246204083,0.0,89.04184087074832,5,False,Sales review,Hold; target covered,0.0
+apples,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           apples
+item                                                  Apples (tray pack)
+category                                                           Fruit
+unit                                                      tray-pack case
+customer                                                Restaurant group
+target_margin                                                       0.25
+budget_cases                                                         4.5
+actual_cases                                                         4.0
+budget_net_price                                               88.375174
+actual_list_price                                              88.375174
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               82.294962
+budget_unit_cost                                               66.281381
+actual_unit_cost                                               65.303848
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       329.179849
+variable_cost                                                  261.21539
+contribution                                                   67.964459
+margin_pct                                                      0.206466
+margin_gap_pp                                                  -4.353396
+target_gap_dollars                                             14.330504
+budget_contribution                                            99.422071
+Name: 1, dtype: object>",Restaurant group,82.29496221884082,87.07179676190476,87.07179676190476,0.05804528508514606,89.04184087074832,5,False,Sales review,Recover target margin,19.107338172255766
+apples,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           apples
+item                                                  Apples (tray pack)
+category                                                           Fruit
+unit                                                      tray-pack case
+customer                                                        Catering
+target_margin                                                       0.25
+budget_cases                                                         3.0
+actual_cases                                                         3.0
+budget_net_price                                               89.708508
+actual_list_price                                              89.708508
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               86.156051
+budget_unit_cost                                               67.281381
+actual_unit_cost                                               66.303848
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       258.468152
+variable_cost                                                 198.911543
+contribution                                                   59.556609
+margin_pct                                                      0.230421
+margin_gap_pp                                                  -1.957854
+target_gap_dollars                                              5.060429
+budget_contribution                                            67.281381
+Name: 2, dtype: object>",Catering,86.15605063893334,88.4051300952381,88.4051300952381,0.02610471858477248,89.04184087074832,5,False,Sales review,Recover target margin,6.74723836891431
+asparagus,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        asparagus
+item                                                           Asparagus
+category                                                       Specialty
+unit                                                          11 lb case
+customer                                          Independent restaurant
+target_margin                                                        0.3
+budget_cases                                                         7.5
+actual_cases                                                         7.0
+budget_net_price                                              107.054155
+actual_list_price                                             107.054155
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                              105.983614
+budget_unit_cost                                               74.937909
+actual_unit_cost                                               69.018314
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       741.885296
+variable_cost                                                   483.1282
+contribution                                                  258.757096
+margin_pct                                                      0.348783
+margin_gap_pp                                                   4.878316
+target_gap_dollars                                                   0.0
+budget_contribution                                           240.871849
+Name: 3, dtype: object>",Independent restaurant,105.98361369533531,98.59759190962099,105.98361369533531,0.0,107.05415524781344,5,False,Sales review,Hold; target covered,0.0
+asparagus,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        asparagus
+item                                                           Asparagus
+category                                                       Specialty
+unit                                                          11 lb case
+customer                                                Restaurant group
+target_margin                                                        0.3
+budget_cases                                                         4.5
+actual_cases                                                         4.0
+budget_net_price                                               106.33987
+actual_list_price                                              106.33987
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               99.023687
+budget_unit_cost                                               74.437909
+actual_unit_cost                                               68.518314
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       396.094746
+variable_cost                                                 274.073257
+contribution                                                  122.021489
+margin_pct                                                      0.308061
+margin_gap_pp                                                   0.806137
+target_gap_dollars                                                   0.0
+budget_contribution                                           143.558824
+Name: 4, dtype: object>",Restaurant group,99.02368650962103,97.88330619533528,99.02368650962103,0.0,107.05415524781344,5,False,Sales review,Hold; target covered,0.0
+asparagus,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        asparagus
+item                                                           Asparagus
+category                                                       Specialty
+unit                                                          11 lb case
+customer                                                        Catering
+target_margin                                                        0.3
+budget_cases                                                         3.0
+actual_cases                                                         2.0
+budget_net_price                                              107.768441
+actual_list_price                                             107.768441
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                              103.500811
+budget_unit_cost                                               75.437909
+actual_unit_cost                                               69.518314
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       207.001621
+variable_cost                                                 139.036629
+contribution                                                   67.964993
+margin_pct                                                      0.328331
+margin_gap_pp                                                   2.833073
+target_gap_dollars                                                   0.0
+budget_contribution                                            96.991597
+Name: 5, dtype: object>",Catering,103.50081070000003,99.31187762390671,103.50081070000003,0.0,107.05415524781344,5,False,Sales review,Hold; target covered,0.0
+bananas,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          bananas
+item                                                             Bananas
+category                                                           Fruit
+unit                                                          40 lb case
+customer                                          Independent restaurant
+target_margin                                                        0.2
+budget_cases                                                        10.0
+actual_cases                                                         9.0
+budget_net_price                                               45.391061
+actual_list_price                                              45.391061
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                                44.93715
+budget_unit_cost                                               36.312849
+actual_unit_cost                                               35.792483
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       404.434354
+variable_cost                                                 322.132346
+contribution                                                   82.302007
+margin_pct                                                      0.203499
+margin_gap_pp                                                   0.349905
+target_gap_dollars                                                   0.0
+budget_contribution                                            90.782122
+Name: 6, dtype: object>",Independent restaurant,44.93715041020408,44.740603647959176,44.93715041020408,0.0,45.391061020408166,5,False,Sales review,Hold; target covered,0.0
+bananas,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          bananas
+item                                                             Bananas
+category                                                           Fruit
+unit                                                          40 lb case
+customer                                                Restaurant group
+target_margin                                                        0.2
+budget_cases                                                         6.0
+actual_cases                                                         6.0
+budget_net_price                                               44.766061
+actual_list_price                                              44.766061
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               41.686156
+budget_unit_cost                                               35.812849
+actual_unit_cost                                               35.292483
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       250.116936
+variable_cost                                                 211.754898
+contribution                                                   38.362039
+margin_pct                                                      0.153376
+margin_gap_pp                                                  -4.662359
+target_gap_dollars                                             11.661349
+budget_contribution                                            53.719273
+Name: 7, dtype: object>",Restaurant group,41.68615602220408,44.115603647959176,44.115603647959176,0.05827948310851827,45.391061020408166,5,False,Sales review,Recover target margin,14.576685754530573
+bananas,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          bananas
+item                                                             Bananas
+category                                                           Fruit
+unit                                                          40 lb case
+customer                                                        Catering
+target_margin                                                        0.2
+budget_cases                                                         4.0
+actual_cases                                                         3.0
+budget_net_price                                               46.016061
+actual_list_price                                              46.016061
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               44.193825
+budget_unit_cost                                               36.812849
+actual_unit_cost                                               36.292483
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       132.581475
+variable_cost                                                 108.877449
+contribution                                                   23.704026
+margin_pct                                                      0.178788
+margin_gap_pp                                                  -2.121163
+target_gap_dollars                                              2.812269
+budget_contribution                                            36.812849
+Name: 8, dtype: object>",Catering,44.193825004000004,45.365603647959176,45.365603647959176,0.02651453328271791,45.391061020408166,5,False,Sales review,Recover target margin,3.515335931877516
+blueberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                      blueberries
+item                                                         Blueberries
+category                                                         Berries
+unit                                                           12 x 6 oz
+customer                                          Independent restaurant
+target_margin                                                       0.32
+budget_cases                                                         7.5
+actual_cases                                                         7.0
+budget_net_price                                               61.601511
+actual_list_price                                              61.601511
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               60.985496
+budget_unit_cost                                               41.889027
+actual_unit_cost                                               36.866391
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       426.898471
+variable_cost                                                 258.064734
+contribution                                                  168.833737
+margin_pct                                                      0.395489
+margin_gap_pp                                                   7.548921
+target_gap_dollars                                                   0.0
+budget_contribution                                           147.843626
+Name: 9, dtype: object>",Independent restaurant,60.98549590426172,54.21528022208883,60.98549590426172,0.0,61.60151101440577,5,False,Sales review,Hold; target covered,0.0
+blueberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                      blueberries
+item                                                         Blueberries
+category                                                         Berries
+unit                                                           12 x 6 oz
+customer                                                Restaurant group
+target_margin                                                       0.32
+budget_cases                                                         4.5
+actual_cases                                                         5.0
+budget_net_price                                               60.866217
+actual_list_price                                              60.866217
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               56.678621
+budget_unit_cost                                               41.389027
+actual_unit_cost                                               36.366391
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       283.393106
+variable_cost                                                 181.831953
+contribution                                                  101.561153
+margin_pct                                                      0.358376
+margin_gap_pp                                                   3.837553
+target_gap_dollars                                                   0.0
+budget_contribution                                            87.647352
+Name: 10, dtype: object>",Restaurant group,56.678621174261714,53.47998610444177,56.678621174261714,0.0,61.60151101440577,5,False,Sales review,Hold; target covered,0.0
+blueberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                      blueberries
+item                                                         Blueberries
+category                                                         Berries
+unit                                                           12 x 6 oz
+customer                                                        Catering
+target_margin                                                       0.32
+budget_cases                                                         3.0
+actual_cases                                                         3.0
+budget_net_price                                               62.336805
+actual_list_price                                              62.336805
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               59.868268
+budget_unit_cost                                               42.389027
+actual_unit_cost                                               37.366391
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       179.604803
+variable_cost                                                 112.099172
+contribution                                                   67.505631
+margin_pct                                                      0.375856
+margin_gap_pp                                                   5.585649
+target_gap_dollars                                                   0.0
+budget_contribution                                            59.843333
+Name: 11, dtype: object>",Catering,59.86826764882353,54.95057433973589,59.86826764882353,0.0,61.60151101440577,5,False,Sales review,Hold; target covered,0.0
+broccoli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         broccoli
+item                                                            Broccoli
+category                                                       Brassicas
+unit                                                                case
+customer                                          Independent restaurant
+target_margin                                                       0.27
+budget_cases                                                        15.0
+actual_cases                                                        17.0
+budget_net_price                                               69.494155
+actual_list_price                                              69.494155
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               68.799213
+budget_unit_cost                                               50.730733
+actual_unit_cost                                               49.996363
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                      1169.586626
+variable_cost                                                 849.938164
+contribution                                                  319.648462
+margin_pct                                                        0.2733
+margin_gap_pp                                                   0.330037
+target_gap_dollars                                                   0.0
+budget_contribution                                           281.451327
+Name: 12, dtype: object>",Independent restaurant,68.79921327425218,68.48816792703384,68.79921327425218,0.0,69.49415482247696,5,False,Sales review,Hold; target covered,0.0
+broccoli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         broccoli
+item                                                            Broccoli
+category                                                       Brassicas
+unit                                                                case
+customer                                                Restaurant group
+target_margin                                                       0.27
+budget_cases                                                         9.0
+actual_cases                                                        10.0
+budget_net_price                                               68.809223
+actual_list_price                                              68.809223
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               64.075149
+budget_unit_cost                                               50.230733
+actual_unit_cost                                               49.496363
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       640.751488
+variable_cost                                                 494.963626
+contribution                                                  145.787862
+margin_pct                                                      0.227526
+margin_gap_pp                                                  -4.247363
+target_gap_dollars                                              27.21504
+budget_contribution                                           167.206413
+Name: 13, dtype: object>",Restaurant group,64.07514875151246,67.80323642018453,67.80323642018453,0.058183051328212,69.49415482247696,5,False,Sales review,Recover target margin,37.280876686720745
+broccoli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         broccoli
+item                                                            Broccoli
+category                                                       Brassicas
+unit                                                                case
+customer                                                        Catering
+target_margin                                                       0.27
+budget_cases                                                         6.0
+actual_cases                                                         6.0
+budget_net_price                                               70.179086
+actual_list_price                                              70.179086
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               67.399995
+budget_unit_cost                                               51.230733
+actual_unit_cost                                               50.496363
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       404.399967
+variable_cost                                                 302.978176
+contribution                                                  101.421792
+margin_pct                                                      0.250796
+margin_gap_pp                                                  -1.920425
+target_gap_dollars                                                7.7662
+budget_contribution                                            113.69012
+Name: 14, dtype: object>",Catering,67.39999451068495,69.17309943388315,69.17309943388315,0.026307196848764036,69.49415482247696,5,False,Sales review,Recover target margin,10.638629539189225
+brussels,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         brussels
+item                                                    Brussels sprouts
+category                                                       Brassicas
+unit                                                          25 lb case
+customer                                          Independent restaurant
+target_margin                                                       0.28
+budget_cases                                                         5.0
+actual_cases                                                         4.0
+budget_net_price                                               60.639284
+actual_list_price                                              60.639284
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               60.032891
+budget_unit_cost                                               43.660284
+actual_unit_cost                                               38.477252
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       240.131563
+variable_cost                                                 153.909008
+contribution                                                   86.222555
+margin_pct                                                      0.359064
+margin_gap_pp                                                   7.906382
+target_gap_dollars                                                   0.0
+budget_contribution                                            84.894997
+Name: 15, dtype: object>",Independent restaurant,60.032890836734694,53.44062777777778,60.032890836734694,0.0,60.639283673469386,5,False,Sales review,Hold; target covered,0.0
+brussels,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         brussels
+item                                                    Brussels sprouts
+category                                                       Brassicas
+unit                                                          25 lb case
+customer                                                Restaurant group
+target_margin                                                       0.28
+budget_cases                                                         3.0
+actual_cases                                                         3.0
+budget_net_price                                               59.944839
+actual_list_price                                              59.944839
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               55.820634
+budget_unit_cost                                               43.160284
+actual_unit_cost                                               37.977252
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       167.461903
+variable_cost                                                 113.931756
+contribution                                                   53.530147
+margin_pct                                                      0.319656
+margin_gap_pp                                                   3.965567
+target_gap_dollars                                                   0.0
+budget_contribution                                            50.353665
+Name: 16, dtype: object>",Restaurant group,55.82063429006802,52.746183333333335,55.82063429006802,0.0,60.639283673469386,5,False,Sales review,Hold; target covered,0.0
+brussels,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         brussels
+item                                                    Brussels sprouts
+category                                                       Brassicas
+unit                                                          25 lb case
+customer                                                        Catering
+target_margin                                                       0.28
+budget_cases                                                         2.0
+actual_cases                                                         2.0
+budget_net_price                                               61.333728
+actual_list_price                                              61.333728
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               58.904912
+budget_unit_cost                                               44.160284
+actual_unit_cost                                               38.977252
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       117.809825
+variable_cost                                                  77.954504
+contribution                                                   39.855321
+margin_pct                                                      0.338302
+margin_gap_pp                                                   5.830218
+target_gap_dollars                                                   0.0
+budget_contribution                                            34.346888
+Name: 17, dtype: object>",Catering,58.904912484444445,54.13507222222223,58.904912484444445,0.0,60.639283673469386,5,False,Sales review,Hold; target covered,0.0
+cauli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                            cauli
+item                                                         Cauliflower
+category                                                       Brassicas
+unit                                                                case
+customer                                          Independent restaurant
+target_margin                                                       0.27
+budget_cases                                                        10.0
+actual_cases                                                         8.0
+budget_net_price                                                64.27694
+actual_list_price                                               64.27694
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               63.634171
+budget_unit_cost                                               46.922167
+actual_unit_cost                                               41.956568
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       509.073368
+variable_cost                                                 335.652541
+contribution                                                  173.420828
+margin_pct                                                       0.34066
+margin_gap_pp                                                   7.065979
+target_gap_dollars                                                   0.0
+budget_contribution                                           173.547739
+Name: 18, dtype: object>",Independent restaurant,63.63417106220296,57.47475014677103,63.63417106220296,0.0,64.27694046687168,5,False,Sales review,Hold; target covered,0.0
+cauli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                            cauli
+item                                                         Cauliflower
+category                                                       Brassicas
+unit                                                                case
+customer                                                Restaurant group
+target_margin                                                       0.27
+budget_cases                                                         6.0
+actual_cases                                                         7.0
+budget_net_price                                               63.592009
+actual_list_price                                              63.592009
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               59.216879
+budget_unit_cost                                               46.422167
+actual_unit_cost                                               41.456568
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       414.518151
+variable_cost                                                 290.195973
+contribution                                                  124.322178
+margin_pct                                                       0.29992
+margin_gap_pp                                                   2.991974
+target_gap_dollars                                                   0.0
+budget_contribution                                           103.019055
+Name: 19, dtype: object>",Restaurant group,59.21687874357283,56.78981863992171,59.21687874357283,0.0,64.27694046687168,5,False,Sales review,Hold; target covered,0.0
+cauli,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                            cauli
+item                                                         Cauliflower
+category                                                       Brassicas
+unit                                                                case
+customer                                                        Catering
+target_margin                                                       0.27
+budget_cases                                                         4.0
+actual_cases                                                         5.0
+budget_net_price                                               64.961872
+actual_list_price                                              64.961872
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               62.389382
+budget_unit_cost                                               47.422167
+actual_unit_cost                                               42.456568
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       311.946909
+variable_cost                                                 212.282838
+contribution                                                   99.664071
+margin_pct                                                       0.31949
+margin_gap_pp                                                   4.949049
+target_gap_dollars                                                   0.0
+budget_contribution                                            70.158822
+Name: 20, dtype: object>",Catering,62.389381843561644,58.159681653620346,62.389381843561644,0.0,64.27694046687168,5,False,Sales review,Hold; target covered,0.0
+celery,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           celery
+item                                                              Celery
+category                                                         Staples
+unit                                                                case
+customer                                          Independent restaurant
+target_margin                                                       0.25
+budget_cases                                                        15.0
+actual_cases                                                        14.0
+budget_net_price                                               78.885664
+actual_list_price                                              78.885664
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               78.096807
+budget_unit_cost                                               59.164248
+actual_unit_cost                                               57.234355
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                      1093.355297
+variable_cost                                                 801.280969
+contribution                                                  292.074329
+margin_pct                                                      0.267136
+margin_gap_pp                                                   1.713579
+target_gap_dollars                                                   0.0
+budget_contribution                                           295.821238
+Name: 21, dtype: object>",Independent restaurant,78.09680695591838,76.31247321088436,78.09680695591838,0.0,78.88566359183675,5,False,Sales review,Hold; target covered,0.0
+celery,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           celery
+item                                                              Celery
+category                                                         Staples
+unit                                                                case
+customer                                                Restaurant group
+target_margin                                                       0.25
+budget_cases                                                         9.0
+actual_cases                                                         9.0
+budget_net_price                                               78.218997
+actual_list_price                                              78.218997
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                                72.83753
+budget_unit_cost                                               58.664248
+actual_unit_cost                                               56.734355
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       655.537769
+variable_cost                                                 510.609194
+contribution                                                  144.928575
+margin_pct                                                      0.221083
+margin_gap_pp                                                  -2.891651
+target_gap_dollars                                             18.955867
+budget_contribution                                           175.992743
+Name: 22, dtype: object>",Restaurant group,72.83752993671837,75.64580654421769,75.64580654421769,0.03855535202716465,78.88566359183675,5,False,Sales review,Recover target margin,25.274489467493908
+celery,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           celery
+item                                                              Celery
+category                                                         Staples
+unit                                                                case
+customer                                                        Catering
+target_margin                                                       0.25
+budget_cases                                                         6.0
+actual_cases                                                         5.0
+budget_net_price                                                79.55233
+actual_list_price                                               79.55233
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               76.402058
+budget_unit_cost                                               59.664248
+actual_unit_cost                                               57.734355
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                        382.01029
+variable_cost                                                 288.671775
+contribution                                                   93.338515
+margin_pct                                                      0.244335
+margin_gap_pp                                                  -0.566492
+target_gap_dollars                                              2.164057
+budget_contribution                                           119.328495
+Name: 23, dtype: object>",Catering,76.40205798026668,76.97913987755102,76.97913987755102,0.007553224514363244,78.88566359183675,5,False,Sales review,Recover target margin,2.8854094864217217
+cucumbers,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        cucumbers
+item                                                   English cucumbers
+category                                                  Greenhouse veg
+unit                                                                case
+customer                                          Independent restaurant
+target_margin                                                       0.27
+budget_cases                                                        12.5
+actual_cases                                                        13.0
+budget_net_price                                               25.160314
+actual_list_price                                              25.160314
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               24.908711
+budget_unit_cost                                               18.367029
+actual_unit_cost                                               18.116544
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       323.813243
+variable_cost                                                 235.515069
+contribution                                                   88.298174
+margin_pct                                                      0.272682
+margin_gap_pp                                                   0.268241
+target_gap_dollars                                                   0.0
+budget_contribution                                             84.91606
+Name: 24, dtype: object>",Independent restaurant,24.908711032149853,24.81718325412357,24.908711032149853,0.0,25.16031417388874,5,False,Sales review,Hold; target covered,0.0
+cucumbers,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        cucumbers
+item                                                   English cucumbers
+category                                                  Greenhouse veg
+unit                                                                case
+customer                                                Restaurant group
+target_margin                                                       0.27
+budget_cases                                                         7.5
+actual_cases                                                         9.0
+budget_net_price                                               24.475383
+actual_list_price                                              24.475383
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               22.791476
+budget_unit_cost                                               17.867029
+actual_unit_cost                                               17.616544
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       205.123287
+variable_cost                                                 158.548894
+contribution                                                   46.574393
+margin_pct                                                      0.227056
+margin_gap_pp                                                  -4.294439
+target_gap_dollars                                              8.808894
+budget_contribution                                             49.56265
+Name: 25, dtype: object>",Restaurant group,22.79147633954711,24.132251747274253,24.132251747274253,0.05882793144912113,25.16031417388874,5,False,Sales review,Recover target margin,12.06697866954429
+cucumbers,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        cucumbers
+item                                                   English cucumbers
+category                                                  Greenhouse veg
+unit                                                                case
+customer                                                        Catering
+target_margin                                                       0.27
+budget_cases                                                         5.0
+actual_cases                                                         5.0
+budget_net_price                                               25.845246
+actual_list_price                                              25.845246
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               24.821774
+budget_unit_cost                                               18.867029
+actual_unit_cost                                               18.616544
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                        124.10887
+variable_cost                                                  93.082719
+contribution                                                   31.026151
+margin_pct                                                      0.249991
+margin_gap_pp                                                  -2.000859
+target_gap_dollars                                              2.483244
+budget_contribution                                            34.891082
+Name: 26, dtype: object>",Catering,24.821773951780823,25.502114760972884,25.502114760972884,0.02740903250967075,25.16031417388874,5,False,Sales review,Recover target margin,3.401704045960301
+garlic,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           garlic
+item                                                              Garlic
+category                                                         Staples
+unit                                                          30 lb case
+customer                                          Independent restaurant
+target_margin                                                       0.25
+budget_cases                                                         5.0
+actual_cases                                                         5.0
+budget_net_price                                              170.271821
+actual_list_price                                             170.271821
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                              168.569103
+budget_unit_cost                                              127.703866
+actual_unit_cost                                              125.826577
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       842.845516
+variable_cost                                                 629.132884
+contribution                                                  213.712632
+margin_pct                                                      0.253561
+margin_gap_pp                                                   0.356086
+target_gap_dollars                                                   0.0
+budget_contribution                                           212.839777
+Name: 27, dtype: object>",Independent restaurant,168.56910322775514,167.76876917006803,168.56910322775514,0.0,170.2718214421769,5,False,Sales review,Hold; target covered,0.0
+garlic,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           garlic
+item                                                              Garlic
+category                                                         Staples
+unit                                                          30 lb case
+customer                                                Restaurant group
+target_margin                                                       0.25
+budget_cases                                                         3.0
+actual_cases                                                         3.0
+budget_net_price                                              169.605155
+actual_list_price                                             169.605155
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               157.93632
+budget_unit_cost                                              127.203866
+actual_unit_cost                                              125.326577
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                        473.80896
+variable_cost                                                 375.979731
+contribution                                                    97.82923
+margin_pct                                                      0.206474
+margin_gap_pp                                                    -4.3526
+target_gap_dollars                                              20.62301
+budget_contribution                                           127.203866
+Name: 28, dtype: object>",Restaurant group,157.9363201269551,167.10210250340137,167.10210250340137,0.05803467099321091,170.2718214421769,5,False,Sales review,Recover target margin,27.497347129338777
+garlic,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           garlic
+item                                                              Garlic
+category                                                         Staples
+unit                                                          30 lb case
+customer                                                        Catering
+target_margin                                                       0.25
+budget_cases                                                         2.0
+actual_cases                                                         2.0
+budget_net_price                                              170.938488
+actual_list_price                                             170.938488
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                              164.169324
+budget_unit_cost                                              128.203866
+actual_unit_cost                                              126.326577
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       328.338648
+variable_cost                                                 252.653154
+contribution                                                   75.685494
+margin_pct                                                       0.23051
+margin_gap_pp                                                  -1.948954
+target_gap_dollars                                              6.399168
+budget_contribution                                            85.469244
+Name: 29, dtype: object>",Catering,164.16932397973335,168.43543583673468,168.43543583673468,0.025986047536676216,170.2718214421769,5,False,Sales review,Recover target margin,8.532223714002669
+let_green,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        let_green
+item                                                  Green leaf lettuce
+category                                                 Leafy & lettuce
+unit                                                                case
+customer                                          Independent restaurant
+target_margin                                                       0.27
+budget_cases                                                        10.0
+actual_cases                                                         9.0
+budget_net_price                                               53.847504
+actual_list_price                                              53.847504
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               53.309029
+budget_unit_cost                                               39.308678
+actual_unit_cost                                               37.671821
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       479.781263
+variable_cost                                                 339.046391
+contribution                                                  140.734872
+margin_pct                                                      0.293331
+margin_gap_pp                                                   2.333132
+target_gap_dollars                                                   0.0
+budget_contribution                                           145.388262
+Name: 30, dtype: object>",Independent restaurant,53.30902926223092,51.60523462398658,53.30902926223092,0.0,53.84750430528376,5,False,Sales review,Hold; target covered,0.0
+let_green,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        let_green
+item                                                  Green leaf lettuce
+category                                                 Leafy & lettuce
+unit                                                                case
+customer                                                Restaurant group
+target_margin                                                       0.27
+budget_cases                                                         6.0
+actual_cases                                                         6.0
+budget_net_price                                               53.162573
+actual_list_price                                              53.162573
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               49.504988
+budget_unit_cost                                               38.808678
+actual_unit_cost                                               37.171821
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       297.029927
+variable_cost                                                 223.030928
+contribution                                                   73.998999
+margin_pct                                                       0.24913
+margin_gap_pp                                                  -2.087022
+target_gap_dollars                                              6.199081
+budget_contribution                                            86.123368
+Name: 31, dtype: object>",Restaurant group,49.50498778990215,50.920303117137266,50.920303117137266,0.02858934807219171,53.84750430528376,5,False,Sales review,Recover target margin,8.49189196341068
+let_green,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        let_green
+item                                                  Green leaf lettuce
+category                                                 Leafy & lettuce
+unit                                                                case
+customer                                                        Catering
+target_margin                                                       0.27
+budget_cases                                                         4.0
+actual_cases                                                         4.0
+budget_net_price                                               54.532436
+actual_list_price                                              54.532436
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               52.372951
+budget_unit_cost                                               39.808678
+actual_unit_cost                                               38.171821
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       209.491805
+variable_cost                                                 152.687285
+contribution                                                    56.80452
+margin_pct                                                      0.271154
+margin_gap_pp                                                    0.11539
+target_gap_dollars                                                   0.0
+budget_contribution                                            58.895031
+Name: 32, dtype: object>",Catering,52.37295135397261,52.2901661308359,52.37295135397261,0.0,53.84750430528376,5,False,Sales review,Hold; target covered,0.0
+let_ice,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          let_ice
+item                                                     Iceberg lettuce
+category                                                 Leafy & lettuce
+unit                                                                case
+customer                                          Independent restaurant
+target_margin                                                       0.25
+budget_cases                                                        12.5
+actual_cases                                                        10.0
+budget_net_price                                               61.838836
+actual_list_price                                              61.838836
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               61.220448
+budget_unit_cost                                               46.379127
+actual_unit_cost                                               49.060321
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       612.204475
+variable_cost                                                 490.603215
+contribution                                                  121.601261
+margin_pct                                                      0.198629
+margin_gap_pp                                                  -5.137149
+target_gap_dollars                                             31.449858
+budget_contribution                                           193.246362
+Name: 33, dtype: object>",Independent restaurant,61.2204475322449,65.4137619659864,65.4137619659864,0.06849532472843944,61.838835891156464,5,True,Finance + Sales review,Target exceeds market review threshold,41.93314433741499
+let_ice,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          let_ice
+item                                                     Iceberg lettuce
+category                                                 Leafy & lettuce
+unit                                                                case
+customer                                                Restaurant group
+target_margin                                                       0.25
+budget_cases                                                         7.5
+actual_cases                                                         7.0
+budget_net_price                                               61.172169
+actual_list_price                                              61.172169
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               56.963524
+budget_unit_cost                                               45.879127
+actual_unit_cost                                               48.560321
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       398.744668
+variable_cost                                                  339.92225
+contribution                                                   58.822418
+margin_pct                                                      0.147519
+margin_gap_pp                                                 -10.248099
+target_gap_dollars                                             40.863749
+budget_contribution                                           114.697817
+Name: 34, dtype: object>",Restaurant group,56.963523981844894,64.74709529931972,64.74709529931972,0.13664132366451853,61.838835891156464,5,False,Finance + Sales review,Increase exceeds approval threshold,54.484999222323815
+let_ice,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          let_ice
+item                                                     Iceberg lettuce
+category                                                 Leafy & lettuce
+unit                                                                case
+customer                                                        Catering
+target_margin                                                       0.25
+budget_cases                                                         5.0
+actual_cases                                                         6.0
+budget_net_price                                               62.505503
+actual_list_price                                              62.505503
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               60.030285
+budget_unit_cost                                               46.879127
+actual_unit_cost                                               49.560321
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       360.181708
+variable_cost                                                 297.361929
+contribution                                                   62.819779
+margin_pct                                                      0.174411
+margin_gap_pp                                                  -7.558865
+target_gap_dollars                                             27.225648
+budget_contribution                                            78.131878
+Name: 35, dtype: object>",Catering,60.03028465653333,66.08042863265307,66.08042863265307,0.10078486235299366,61.838835891156464,5,True,Finance + Sales review,Target exceeds market review threshold,36.30086385671841
+let_rom,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          let_rom
+item                                                     Romaine lettuce
+category                                                 Leafy & lettuce
+unit                                                                case
+customer                                          Independent restaurant
+target_margin                                                       0.27
+budget_cases                                                        22.5
+actual_cases                                                        20.0
+budget_net_price                                               64.651382
+actual_list_price                                              64.651382
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               64.004868
+budget_unit_cost                                               47.195509
+actual_unit_cost                                               44.369232
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                      1280.097357
+variable_cost                                                 887.384634
+contribution                                                  392.712723
+margin_pct                                                      0.306783
+margin_gap_pp                                                   3.678348
+target_gap_dollars                                                   0.0
+budget_contribution                                           392.757144
+Name: 36, dtype: object>",Independent restaurant,64.00486787168019,60.77976947162427,64.00486787168019,0.0,64.65138168856585,5,False,Sales review,Hold; target covered,0.0
+let_rom,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          let_rom
+item                                                     Romaine lettuce
+category                                                 Leafy & lettuce
+unit                                                                case
+customer                                                Restaurant group
+target_margin                                                       0.27
+budget_cases                                                        13.5
+actual_cases                                                        13.0
+budget_net_price                                                63.96645
+actual_list_price                                               63.96645
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               59.565558
+budget_unit_cost                                               46.695509
+actual_unit_cost                                               43.869232
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       774.352259
+variable_cost                                                 570.300012
+contribution                                                  204.052247
+margin_pct                                                      0.263513
+margin_gap_pp                                                  -0.648653
+target_gap_dollars                                              5.022863
+budget_contribution                                           233.157711
+Name: 37, dtype: object>",Restaurant group,59.56555840921443,60.09483796477496,60.09483796477496,0.008885664294866258,64.65138168856585,5,False,Sales review,Recover target margin,6.880634222286865
+let_rom,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          let_rom
+item                                                     Romaine lettuce
+category                                                 Leafy & lettuce
+unit                                                                case
+customer                                                        Catering
+target_margin                                                       0.27
+budget_cases                                                         9.0
+actual_cases                                                         7.0
+budget_net_price                                               65.336313
+actual_list_price                                              65.336313
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               62.748995
+budget_unit_cost                                               47.695509
+actual_unit_cost                                               44.869232
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       439.242966
+variable_cost                                                 314.084622
+contribution                                                  125.158344
+margin_pct                                                      0.284941
+margin_gap_pp                                                   1.494103
+target_gap_dollars                                                   0.0
+budget_contribution                                           158.767241
+Name: 38, dtype: object>",Catering,62.74899519287672,61.46470097847359,62.74899519287672,0.0,64.65138168856585,5,False,Sales review,Hold; target covered,0.0
+limes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                            limes
+item                                                               Limes
+category                                                           Fruit
+unit                                                          40 lb case
+customer                                          Independent restaurant
+target_margin                                                       0.28
+budget_cases                                                         7.5
+actual_cases                                                         8.0
+budget_net_price                                               79.145556
+actual_list_price                                              79.145556
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                                 78.3541
+budget_unit_cost                                                 56.9848
+actual_unit_cost                                               56.160447
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       626.832801
+variable_cost                                                 449.283578
+contribution                                                  177.549223
+margin_pct                                                      0.283248
+margin_gap_pp                                                   0.324814
+target_gap_dollars                                                   0.0
+budget_contribution                                           166.205667
+Name: 39, dtype: object>",Independent restaurant,78.35410011224492,78.0006212159864,78.35410011224492,0.0,79.14555566893426,5,False,Sales review,Hold; target covered,0.0
+limes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                            limes
+item                                                               Limes
+category                                                           Fruit
+unit                                                          40 lb case
+customer                                                Restaurant group
+target_margin                                                       0.28
+budget_cases                                                         4.5
+actual_cases                                                         4.0
+budget_net_price                                               78.451111
+actual_list_price                                              78.451111
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               73.053675
+budget_unit_cost                                                 56.4848
+actual_unit_cost                                               55.660447
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       292.214699
+variable_cost                                                 222.641789
+contribution                                                    69.57291
+margin_pct                                                      0.238088
+margin_gap_pp                                                  -4.191167
+target_gap_dollars                                             12.247206
+budget_contribution                                              98.8484
+Name: 40, dtype: object>",Restaurant group,73.05367477224492,77.30617677154196,77.30617677154196,0.058210651449838835,79.14555566893426,5,False,Sales review,Recover target margin,17.010007997188154
+limes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                            limes
+item                                                               Limes
+category                                                           Fruit
+unit                                                          40 lb case
+customer                                                        Catering
+target_margin                                                       0.28
+budget_cases                                                         3.0
+actual_cases                                                         3.0
+budget_net_price                                                   79.84
+actual_list_price                                                  79.84
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               76.678336
+budget_unit_cost                                                 57.4848
+actual_unit_cost                                               56.660447
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       230.035008
+variable_cost                                                 169.981342
+contribution                                                   60.053667
+margin_pct                                                      0.261063
+margin_gap_pp                                                  -1.893684
+target_gap_dollars                                              4.356136
+budget_contribution                                              67.0656
+Name: 41, dtype: object>",Catering,76.67833610888891,78.69506566043084,78.69506566043084,0.026301164760252682,79.14555566893426,5,False,Sales review,Recover target margin,6.050188654625785
+mushrooms,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        mushrooms
+item                                                           Mushrooms
+category                                                       Specialty
+unit                                                           5 lb case
+customer                                          Independent restaurant
+target_margin                                                        0.3
+budget_cases                                                        20.0
+actual_cases                                                        18.0
+budget_net_price                                                28.56072
+actual_list_price                                               28.56072
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               28.275112
+budget_unit_cost                                               19.992504
+actual_unit_cost                                               19.720149
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       508.952022
+variable_cost                                                 354.962684
+contribution                                                  153.989338
+margin_pct                                                      0.302562
+margin_gap_pp                                                    0.25616
+target_gap_dollars                                                   0.0
+budget_contribution                                           171.364317
+Name: 42, dtype: object>",Independent restaurant,28.275112309329458,28.171641559766766,28.275112309329458,0.0,28.56071950437319,5,False,Sales review,Hold; target covered,0.0
+mushrooms,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        mushrooms
+item                                                           Mushrooms
+category                                                       Specialty
+unit                                                           5 lb case
+customer                                                Restaurant group
+target_margin                                                        0.3
+budget_cases                                                        12.0
+actual_cases                                                        14.0
+budget_net_price                                               27.846434
+actual_list_price                                              27.846434
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               25.930599
+budget_unit_cost                                               19.492504
+actual_unit_cost                                               19.220149
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       363.028388
+variable_cost                                                 269.082087
+contribution                                                   93.946301
+margin_pct                                                      0.258785
+margin_gap_pp                                                    -4.1215
+target_gap_dollars                                             14.962216
+budget_contribution                                           100.247162
+Name: 43, dtype: object>",Restaurant group,25.930599145329456,27.45735584548105,27.45735584548105,0.058878573981064,28.56071950437319,5,False,Sales review,Recover target margin,21.37459380212232
+mushrooms,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        mushrooms
+item                                                           Mushrooms
+category                                                       Specialty
+unit                                                           5 lb case
+customer                                                        Catering
+target_margin                                                        0.3
+budget_cases                                                         8.0
+actual_cases                                                         9.0
+budget_net_price                                               29.275005
+actual_list_price                                              29.275005
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               28.115715
+budget_unit_cost                                               20.492504
+actual_unit_cost                                               20.220149
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       253.041435
+variable_cost                                                 181.981342
+contribution                                                   71.060093
+margin_pct                                                      0.280824
+margin_gap_pp                                                  -1.917606
+target_gap_dollars                                              4.852337
+budget_contribution                                            70.260013
+Name: 44, dtype: object>",Catering,28.11571501200001,28.88592727405248,28.88592727405248,0.027394368655527357,28.56071950437319,5,False,Sales review,Recover target margin,6.931910358472241
+onions,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           onions
+item                                                       Yellow onions
+category                                                         Staples
+unit                                                          50 lb sack
+customer                                          Independent restaurant
+target_margin                                                       0.22
+budget_cases                                                        25.0
+actual_cases                                                        25.0
+budget_net_price                                               43.760771
+actual_list_price                                              43.760771
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               43.323163
+budget_unit_cost                                               34.133401
+actual_unit_cost                                               37.403344
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                      1083.079077
+variable_cost                                                 935.083609
+contribution                                                  147.995467
+margin_pct                                                      0.136643
+margin_gap_pp                                                  -8.335673
+target_gap_dollars                                             90.281929
+budget_contribution                                           240.684239
+Name: 45, dtype: object>",Independent restaurant,43.323163066719,47.95300559916275,47.95300559916275,0.1068676016410357,43.76077077446364,5,True,Finance + Sales review,Target exceeds market review threshold,115.74606331109382
+onions,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           onions
+item                                                       Yellow onions
+category                                                         Staples
+unit                                                          50 lb sack
+customer                                                Restaurant group
+target_margin                                                       0.22
+budget_cases                                                        15.0
+actual_cases                                                        15.0
+budget_net_price                                               43.119745
+actual_list_price                                              43.119745
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               40.153107
+budget_unit_cost                                               33.633401
+actual_unit_cost                                               36.903344
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                         602.2966
+variable_cost                                                 553.550166
+contribution                                                   48.746435
+margin_pct                                                      0.080934
+margin_gap_pp                                                 -13.906573
+target_gap_dollars                                             83.758817
+budget_contribution                                           142.295159
+Name: 46, dtype: object>",Restaurant group,40.15310666825746,47.31197995813711,47.31197995813711,0.17828939984708603,43.76077077446364,5,True,Finance + Sales review,Target exceeds market review threshold,107.38309934819476
+onions,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                           onions
+item                                                       Yellow onions
+category                                                         Staples
+unit                                                          50 lb sack
+customer                                                        Catering
+target_margin                                                       0.22
+budget_cases                                                        10.0
+actual_cases                                                        11.0
+budget_net_price                                               44.401796
+actual_list_price                                              44.401796
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               42.643485
+budget_unit_cost                                               34.633401
+actual_unit_cost                                               37.903344
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       469.078338
+variable_cost                                                 416.936788
+contribution                                                    52.14155
+margin_pct                                                      0.111157
+margin_gap_pp                                                 -10.884255
+target_gap_dollars                                             51.055684
+budget_contribution                                            97.683952
+Name: 47, dtype: object>",Catering,42.6434852774359,48.59403124018839,48.59403124018839,0.13954173595424035,43.76077077446364,5,True,Finance + Sales review,Target exceeds market review threshold,65.45600559027741
+parsley,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          parsley
+item                                                   Parsley (bunched)
+category                                                           Herbs
+unit                                                                case
+customer                                          Independent restaurant
+target_margin                                                       0.32
+budget_cases                                                         7.5
+actual_cases                                                         6.0
+budget_net_price                                               70.600361
+actual_list_price                                              70.600361
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               69.894358
+budget_unit_cost                                               48.008246
+actual_unit_cost                                               49.862124
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       419.366147
+variable_cost                                                 299.172745
+contribution                                                  120.193402
+margin_pct                                                      0.286607
+margin_gap_pp                                                  -3.339269
+target_gap_dollars                                             14.003765
+budget_contribution                                           169.440867
+Name: 48, dtype: object>",Independent restaurant,69.89435783508405,73.32665313625452,73.32665313625452,0.04910690086414382,70.60036144957985,5,False,Sales review,Recover target margin,20.59377180702282
+parsley,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          parsley
+item                                                   Parsley (bunched)
+category                                                           Herbs
+unit                                                                case
+customer                                                Restaurant group
+target_margin                                                       0.32
+budget_cases                                                         4.5
+actual_cases                                                         4.0
+budget_net_price                                               69.865067
+actual_list_price                                              69.865067
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               65.058351
+budget_unit_cost                                               47.508246
+actual_unit_cost                                               49.362124
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       260.233403
+variable_cost                                                 197.448497
+contribution                                                   62.784906
+margin_pct                                                      0.241264
+margin_gap_pp                                                  -7.873617
+target_gap_dollars                                             20.489783
+budget_contribution                                           100.605697
+Name: 49, dtype: object>",Restaurant group,65.05835069949582,72.59135901860745,72.59135901860745,0.11578849199400332,70.60036144957985,5,False,Finance + Sales review,Increase exceeds approval threshold,30.13203327644652
+parsley,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                          parsley
+item                                                   Parsley (bunched)
+category                                                           Herbs
+unit                                                                case
+customer                                                        Catering
+target_margin                                                       0.32
+budget_cases                                                         3.0
+actual_cases                                                         2.0
+budget_net_price                                               71.335656
+actual_list_price                                              71.335656
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               68.510764
+budget_unit_cost                                               48.508246
+actual_unit_cost                                               50.362124
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       137.021527
+variable_cost                                                 100.724248
+contribution                                                   36.297279
+margin_pct                                                      0.264902
+margin_gap_pp                                                  -5.509798
+target_gap_dollars                                               7.54961
+budget_contribution                                            68.482229
+Name: 50, dtype: object>",Catering,68.51076360676473,74.06194725390158,74.06194725390158,0.08102644540643733,70.60036144957985,5,False,Sales review,Recover target margin,11.102367294273705
+potatoes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         potatoes
+item                                                            Potatoes
+category                                                         Staples
+unit                                                          50 lb case
+customer                                          Independent restaurant
+target_margin                                                       0.22
+budget_cases                                                        22.5
+actual_cases                                                        22.0
+budget_net_price                                               37.490256
+actual_list_price                                              37.490256
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               37.115354
+budget_unit_cost                                                 29.2424
+actual_unit_cost                                               28.833852
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       816.537786
+variable_cost                                                 634.344737
+contribution                                                  182.193048
+margin_pct                                                      0.223129
+margin_gap_pp                                                   0.312874
+target_gap_dollars                                                   0.0
+budget_contribution                                           185.576769
+Name: 51, dtype: object>",Independent restaurant,37.115353897959196,36.966476543694405,37.115353897959196,0.0,37.490256462585045,5,False,Sales review,Hold; target covered,0.0
+potatoes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         potatoes
+item                                                            Potatoes
+category                                                         Staples
+unit                                                          50 lb case
+customer                                                Restaurant group
+target_margin                                                       0.22
+budget_cases                                                        13.5
+actual_cases                                                        13.0
+budget_net_price                                               36.849231
+actual_list_price                                              36.849231
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               34.314004
+budget_unit_cost                                                 28.7424
+actual_unit_cost                                               28.333852
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       446.082049
+variable_cost                                                 368.340072
+contribution                                                   77.741976
+margin_pct                                                      0.174277
+margin_gap_pp                                                   -4.57227
+target_gap_dollars                                             20.396074
+budget_contribution                                           109.442216
+Name: 52, dtype: object>",Restaurant group,34.31400374103611,36.32545090266876,36.32545090266876,0.058618841940241584,37.490256462585045,5,False,Sales review,Recover target margin,26.148813101224484
+potatoes,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         potatoes
+item                                                            Potatoes
+category                                                         Staples
+unit                                                          50 lb case
+customer                                                        Catering
+target_margin                                                       0.22
+budget_cases                                                         9.0
+actual_cases                                                         8.0
+budget_net_price                                               38.131282
+actual_list_price                                              38.131282
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               36.621283
+budget_unit_cost                                                 29.7424
+actual_unit_cost                                               29.333852
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       292.970267
+variable_cost                                                 234.670814
+contribution                                                   58.299453
+margin_pct                                                      0.198994
+margin_gap_pp                                                  -2.100556
+target_gap_dollars                                              6.154006
+budget_contribution                                            75.499939
+Name: 53, dtype: object>",Catering,36.6212833323077,37.60750218472004,37.60750218472004,0.026930210049255443,37.490256462585045,5,False,Sales review,Recover target margin,7.88975081929874
+raspberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                      raspberries
+item                                                         Raspberries
+category                                                         Berries
+unit                                                           12 x 6 oz
+customer                                          Independent restaurant
+target_margin                                                       0.32
+budget_cases                                                         6.0
+actual_cases                                                         7.0
+budget_net_price                                               75.600914
+actual_list_price                                              75.600914
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               74.844905
+budget_unit_cost                                               51.408621
+actual_unit_cost                                               45.174662
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       523.914333
+variable_cost                                                 316.222637
+contribution                                                  207.691696
+margin_pct                                                      0.396423
+margin_gap_pp                                                   7.642301
+target_gap_dollars                                                   0.0
+budget_contribution                                           145.153755
+Name: 54, dtype: object>",Independent restaurant,74.84490469717889,66.43332711584634,74.84490469717889,0.0,75.60091383553423,5,False,Sales review,Hold; target covered,0.0
+raspberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                      raspberries
+item                                                         Raspberries
+category                                                         Berries
+unit                                                           12 x 6 oz
+customer                                                Restaurant group
+target_margin                                                       0.32
+budget_cases                                                         3.6
+actual_cases                                                         4.0
+budget_net_price                                                74.86562
+actual_list_price                                               74.86562
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               69.714865
+budget_unit_cost                                               50.908621
+actual_unit_cost                                               44.674662
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                        278.85946
+variable_cost                                                  178.69865
+contribution                                                  100.160811
+margin_pct                                                       0.35918
+margin_gap_pp                                                   3.918025
+target_gap_dollars                                                   0.0
+budget_contribution                                            86.245194
+Name: 55, dtype: object>",Restaurant group,69.71486508129654,65.69803299819928,69.71486508129654,0.0,75.60091383553423,5,False,Sales review,Hold; target covered,0.0
+raspberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                      raspberries
+item                                                         Raspberries
+category                                                         Berries
+unit                                                           12 x 6 oz
+customer                                                        Catering
+target_margin                                                       0.32
+budget_cases                                                         2.4
+actual_cases                                                         3.0
+budget_net_price                                               76.336208
+actual_list_price                                              76.336208
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               73.313294
+budget_unit_cost                                               51.908621
+actual_unit_cost                                               45.674662
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       219.939882
+variable_cost                                                 137.023987
+contribution                                                   82.915895
+margin_pct                                                      0.376993
+margin_gap_pp                                                   5.699345
+target_gap_dollars                                                   0.0
+budget_contribution                                            58.626208
+Name: 56, dtype: object>",Catering,73.3132941182353,67.1686212334934,73.3132941182353,0.0,75.60091383553423,5,False,Sales review,Hold; target covered,0.0
+strawberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                     strawberries
+item                                                        Strawberries
+category                                                         Berries
+unit                                                            8 x 1 lb
+customer                                          Independent restaurant
+target_margin                                                        0.3
+budget_cases                                                        12.5
+actual_cases                                                        14.0
+budget_net_price                                               47.991437
+actual_list_price                                              47.991437
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               47.511523
+budget_unit_cost                                               33.594006
+actual_unit_cost                                               35.262785
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       665.161322
+variable_cost                                                 493.678993
+contribution                                                  171.482328
+margin_pct                                                      0.257806
+margin_gap_pp                                                  -4.219438
+target_gap_dollars                                             28.066068
+budget_contribution                                            179.96789
+Name: 57, dtype: object>",Independent restaurant,47.51152297346939,50.375407478134115,50.375407478134115,0.06027768266371769,47.99143734693878,5,False,Sales review,Recover target margin,40.09438306530615
+strawberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                     strawberries
+item                                                        Strawberries
+category                                                         Berries
+unit                                                            8 x 1 lb
+customer                                                Restaurant group
+target_margin                                                        0.3
+budget_cases                                                         7.5
+actual_cases                                                         7.0
+budget_net_price                                               47.277152
+actual_list_price                                              47.277152
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               44.024484
+budget_unit_cost                                               33.094006
+actual_unit_cost                                               34.762785
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       308.171385
+variable_cost                                                 243.339497
+contribution                                                   64.831889
+margin_pct                                                      0.210376
+margin_gap_pp                                                  -8.962392
+target_gap_dollars                                             27.619527
+budget_contribution                                           106.373591
+Name: 58, dtype: object>",Restaurant group,44.02448360032654,49.6611217638484,49.6611217638484,0.1280341687751234,47.99143734693878,5,False,Finance + Sales review,Increase exceeds approval threshold,39.45646714465301
+strawberries,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                     strawberries
+item                                                        Strawberries
+category                                                         Berries
+unit                                                            8 x 1 lb
+customer                                                        Catering
+target_margin                                                        0.3
+budget_cases                                                         5.0
+actual_cases                                                         5.0
+budget_net_price                                               48.705723
+actual_list_price                                              48.705723
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               46.776976
+budget_unit_cost                                               34.094006
+actual_unit_cost                                               35.762785
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       233.884882
+variable_cost                                                 178.813926
+contribution                                                   55.070956
+margin_pct                                                      0.235462
+margin_gap_pp                                                   -6.45382
+target_gap_dollars                                             15.094509
+budget_contribution                                            73.058585
+Name: 59, dtype: object>",Catering,46.776976428000005,51.08969319241983,51.08969319241983,0.0921974247535653,47.99143734693878,5,True,Finance + Sales review,Target exceeds market review threshold,21.563583822099126
+tom_field,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        tom_field
+item                                                      Field tomatoes
+category                                                        Tomatoes
+unit                                                          25 lb case
+customer                                          Independent restaurant
+target_margin                                                       0.28
+budget_cases                                                        15.0
+actual_cases                                                        15.0
+budget_net_price                                               75.369385
+actual_list_price                                              75.369385
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               74.615691
+budget_unit_cost                                               54.265957
+actual_unit_cost                                               56.160447
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                      1119.235372
+variable_cost                                                 842.406709
+contribution                                                  276.828662
+margin_pct                                                      0.247337
+margin_gap_pp                                                  -3.266269
+target_gap_dollars                                             36.557242
+budget_contribution                                           316.551418
+Name: 60, dtype: object>",Independent restaurant,74.61569143622448,78.0006212159864,78.0006212159864,0.0453648517437526,75.36938528911564,5,False,Sales review,Recover target margin,50.77394669642878
+tom_field,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        tom_field
+item                                                      Field tomatoes
+category                                                        Tomatoes
+unit                                                          25 lb case
+customer                                                Restaurant group
+target_margin                                                       0.28
+budget_cases                                                         9.0
+actual_cases                                                         8.0
+budget_net_price                                               74.674941
+actual_list_price                                              74.674941
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               69.537305
+budget_unit_cost                                               53.765957
+actual_unit_cost                                               55.660447
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       556.298439
+variable_cost                                                 445.283578
+contribution                                                  111.014861
+margin_pct                                                       0.19956
+margin_gap_pp                                                   -8.04401
+target_gap_dollars                                             44.748702
+budget_contribution                                           188.180851
+Name: 61, dtype: object>",Restaurant group,69.53730491455781,77.30617677154196,77.30617677154196,0.11172236063117413,75.36938528911564,5,False,Finance + Sales review,Increase exceeds approval threshold,62.15097485587319
+tom_field,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                        tom_field
+item                                                      Field tomatoes
+category                                                        Tomatoes
+unit                                                          25 lb case
+customer                                                        Catering
+target_margin                                                       0.28
+budget_cases                                                         6.0
+actual_cases                                                         5.0
+budget_net_price                                                76.06383
+actual_list_price                                               76.06383
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               73.051702
+budget_unit_cost                                               54.765957
+actual_unit_cost                                               56.660447
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                        365.25851
+variable_cost                                                 283.302236
+contribution                                                   81.956274
+margin_pct                                                      0.224379
+margin_gap_pp                                                  -5.562118
+target_gap_dollars                                             20.316109
+budget_contribution                                           127.787234
+Name: 62, dtype: object>",Catering,73.0517020761111,78.69506566043084,78.69506566043084,0.0772516371821157,75.36938528911564,5,False,Sales review,Recover target margin,28.216817921598718
+tom_roma,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         tom_roma
+item                                                       Roma tomatoes
+category                                                        Tomatoes
+unit                                                          25 lb case
+customer                                          Independent restaurant
+target_margin                                                       0.28
+budget_cases                                                        20.0
+actual_cases                                                        18.0
+budget_net_price                                               63.661232
+actual_list_price                                              63.661232
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                                63.02462
+budget_unit_cost                                               45.836087
+actual_unit_cost                                               41.695347
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                      1134.443161
+variable_cost                                                 750.516243
+contribution                                                  383.926918
+margin_pct                                                      0.338428
+margin_gap_pp                                                   5.842764
+target_gap_dollars                                                   0.0
+budget_contribution                                           356.502901
+Name: 63, dtype: object>",Independent restaurant,63.024620031887764,57.91020393282314,63.024620031887764,0.0,63.66123235544219,5,False,Sales review,Hold; target covered,0.0
+tom_roma,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         tom_roma
+item                                                       Roma tomatoes
+category                                                        Tomatoes
+unit                                                          25 lb case
+customer                                                Restaurant group
+target_margin                                                       0.28
+budget_cases                                                        12.0
+actual_cases                                                        12.0
+budget_net_price                                               62.966788
+actual_list_price                                              62.966788
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                               58.634673
+budget_unit_cost                                               45.336087
+actual_unit_cost                                               41.195347
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       703.616075
+variable_cost                                                 494.344162
+contribution                                                  209.271913
+margin_pct                                                      0.297423
+margin_gap_pp                                                   1.742344
+target_gap_dollars                                                   0.0
+budget_contribution                                           211.568407
+Name: 64, dtype: object>",Restaurant group,58.6346729027211,57.21575948837869,58.6346729027211,0.0,63.66123235544219,5,False,Sales review,Hold; target covered,0.0
+tom_roma,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         tom_roma
+item                                                       Roma tomatoes
+category                                                        Tomatoes
+unit                                                          25 lb case
+customer                                                        Catering
+target_margin                                                       0.28
+budget_cases                                                         8.0
+actual_cases                                                         7.0
+budget_net_price                                               64.355677
+actual_list_price                                              64.355677
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               61.807192
+budget_unit_cost                                               46.336087
+actual_unit_cost                                               42.195347
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       432.650344
+variable_cost                                                 295.367428
+contribution                                                  137.282916
+margin_pct                                                      0.317307
+margin_gap_pp                                                   3.730685
+target_gap_dollars                                                   0.0
+budget_contribution                                           144.156716
+Name: 65, dtype: object>",Catering,61.807191998611124,58.60464837726758,61.807191998611124,0.0,63.66123235544219,5,False,Sales review,Hold; target covered,0.0
+zucchini,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         zucchini
+item                                                            Zucchini
+category                                                  Greenhouse veg
+unit                                                          25 lb case
+customer                                          Independent restaurant
+target_margin                                                       0.27
+budget_cases                                                         7.5
+actual_cases                                                         9.0
+budget_net_price                                                78.06137
+actual_list_price                                               78.06137
+discount                                                             0.0
+rebate                                                              0.01
+actual_net_price                                               77.280756
+budget_unit_cost                                                 56.9848
+actual_unit_cost                                               67.944407
+service_cost_per_case                                                1.5
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       695.526806
+variable_cost                                                  611.49966
+contribution                                                   84.027146
+margin_pct                                                      0.120811
+margin_gap_pp                                                 -14.918921
+target_gap_dollars                                            103.765092
+budget_contribution                                           158.074274
+Name: 66, dtype: object>",Independent restaurant,77.28075627509088,93.07452973161867,93.07452973161867,0.20436877455375568,78.06136997483928,5,True,Finance + Sales review,Target exceeds market review threshold,142.1439611087501
+zucchini,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         zucchini
+item                                                            Zucchini
+category                                                  Greenhouse veg
+unit                                                          25 lb case
+customer                                                Restaurant group
+target_margin                                                       0.27
+budget_cases                                                         4.5
+actual_cases                                                         4.0
+budget_net_price                                               77.376438
+actual_list_price                                              77.376438
+discount                                                            0.04
+rebate                                                              0.03
+actual_net_price                                                72.05294
+budget_unit_cost                                                 56.4848
+actual_unit_cost                                               67.444407
+service_cost_per_case                                                1.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       288.211758
+variable_cost                                                 269.777627
+contribution                                                   18.434131
+margin_pct                                                       0.06396
+margin_gap_pp                                                 -20.603963
+target_gap_dollars                                             59.383043
+budget_contribution                                            94.012373
+Name: 67, dtype: object>",Restaurant group,72.05293950139225,92.38959822476936,92.38959822476936,0.28224606607457225,78.06136997483928,5,True,Finance + Sales review,Target exceeds market review threshold,81.34663489350845
+zucchini,"<bound method IndexOpsMixin.item of date                                                 2024-01-30 00:00:00
+item_id                                                         zucchini
+item                                                            Zucchini
+category                                                  Greenhouse veg
+unit                                                          25 lb case
+customer                                                        Catering
+target_margin                                                       0.27
+budget_cases                                                         3.0
+actual_cases                                                         3.0
+budget_net_price                                               78.746301
+actual_list_price                                              78.746301
+discount                                                            0.02
+rebate                                                              0.02
+actual_net_price                                               75.627948
+budget_unit_cost                                                 57.4848
+actual_unit_cost                                               68.444407
+service_cost_per_case                                                2.0
+spoilage_rate                                                       0.02
+data_status              SYNTHETIC commercial records; public cost proxy
+revenue                                                       226.883844
+variable_cost                                                  205.33322
+contribution                                                   21.550624
+margin_pct                                                      0.094985
+margin_gap_pp                                                 -17.501473
+target_gap_dollars                                             39.708014
+budget_contribution                                            63.784504
+Name: 68, dtype: object>",Catering,75.62794794301372,93.75946123846799,93.75946123846799,0.23974620214628217,78.06136997483928,5,True,Finance + Sales review,Target exceeds market review threshold,54.39453988636281

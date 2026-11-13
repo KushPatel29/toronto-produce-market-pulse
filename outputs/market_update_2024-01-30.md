@@ -20,7 +20,7 @@ Source: USDA AMS Market News, Toronto terminal market (data from Infohort, Agric
 
 ## Pricing actions (list price built on the average cost of up to 4 prior weeks)
 
-| Item | Cost now (CAD/case) | Margin at current list | Target | Action | Suggested price |
+| Item | Terminal quote (CAD/case) | Margin at current list | Target | Action | Suggested price |
 |---|---|---|---|---|---|
 | Zucchini | $61.43 | -4% | 27% | Raise price | $89.20 |
 | Yellow onions | $33.19 | 12% | 22% | Raise price | $45.11 |
