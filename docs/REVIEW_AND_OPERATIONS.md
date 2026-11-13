@@ -1,6 +1,6 @@
 # Review and operation
 
-This final upgrade was reviewed against the supplied Bondi Data Analyst job description. The app has nine analytical views plus a native Excel decision model and a five-slide PowerPoint briefing. It uses public historical quotes and clearly labelled synthetic commercial examples.
+This final upgrade was reviewed against the supplied Bondi Data Analyst job description. The app has ten analytical views plus a native Excel decision model, a margin-variance workbook and a seven-slide PowerPoint briefing (two slides on customer terms and margin variance were added after the five-slide snapshot). It uses public historical quotes and clearly labelled synthetic commercial examples.
 
 ## Corrections from the second review
 

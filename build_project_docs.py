@@ -18,84 +18,159 @@ def main():
         f"| {label} | {f['policy'][key]['breach_rate']:.1%} | {f['policy'][key]['changes_per_year']:.1f} |"
         for key, label in [("monthly", "Monthly list"), ("band", "Margin band"), ("weekly", "Weekly repricing")]
     )
+    import pandas as pd
+
+    panel = pd.read_csv(ROOT / "data/processed/weekly_item_panel.csv", parse_dates=["date"])
+    rom = panel[panel.item_id == "let_rom"]
+    rom_2019 = rom[rom.date.dt.year == 2019].price_cad.mean()
+    rom_peak = rom[rom.date.between("2022-11-01", "2023-03-31")].price_cad.max()
+    pol = f["policy"]
+    cad = f["cadence_counts"]
     text = f"""# Toronto Produce Market Pulse
 
-Pricing, market intelligence and procurement decisions for a foodservice produce distributor.
+**Pricing, margin and market intelligence for a foodservice produce distributor, built on {f['quotes_raw']:,} real Toronto wholesale prices.**
 
-[Open the live app](https://toronto-fresh-market-pulse.streamlit.app) · [Stakeholder briefing](outputs/Produce_Pricing_Decision_Brief.pptx) · [Excel decision model](outputs/Pricing_Decision_Workbook.xlsx) · [Margin variance workbook](outputs/Margin_Variance_and_Terms.xlsx) · [Power BI model](powerbi/README.md)
+[![quality](https://github.com/KushPatel29/toronto-produce-market-pulse/actions/workflows/quality.yml/badge.svg)](https://github.com/KushPatel29/toronto-produce-market-pulse/actions/workflows/quality.yml)
+[![Live app](https://img.shields.io/badge/live%20app-Streamlit-ff4b4b)](https://toronto-fresh-market-pulse.streamlit.app)
+![Python 3.12](https://img.shields.io/badge/python-3.12-3776ab)
+![SQL](https://img.shields.io/badge/SQL-SQLite%20star%20schema-003b57)
+![Excel](https://img.shields.io/badge/Excel-scenario%20model%20%2B%20PivotTable-217346)
 
-**Historical portfolio case study.** Public terminal quotes run from {f['date_min']} to {f['date_max']}. Customers, competitors, suppliers, demand, freight and spoilage are synthetic assumptions. No Bondi company data, actual ERP integration or realised business savings are claimed.
+[![The live app: market overview](docs/img/app_overview.jpg)](https://toronto-fresh-market-pulse.streamlit.app)
 
-## A pricing meeting, end to end
+A distributor's pricing analyst has to answer the same questions every week: *what is the market doing, which prices need to move, where is margin leaking, and what does it mean for the budget?* This project answers them end to end on public Toronto terminal-market data (USDA AMS, credited to Infohort / Agriculture and Agri-Food Canada), {f['date_min'][:4]}–{f['date_max'][:4]}, converted to CAD.
 
-1. **Market overview and weekly update:** historical case prices, matched quote movements, origin changes and seasonality. Try the December 2022 lettuce disruption.
-2. **Pricing policies:** compare margin risk with customer price-change frequency. Policies use recent prior cost and restart after item-specific gaps over 14 days.
-3. **Budget & scenarios:** change FX, cost, handling, volume and price delay. Both onset and reversal are delayed: a March–April cost shock with one-month lag affects prices in April–May.
-4. **Customer & pricing desk:** net prices after discounts/rebates, contribution after variable service costs, segment-specific competitor comparisons and explicit review thresholds.
-5. **Supplier comparison:** three fictional suppliers compared on full order cost, usable yield, MOQ, capacity, lead time, reliability and quote validity. Escalate items with no feasible single supplier.
-6. **Finance and stakeholder reporting:** reconciled contribution bridge, generated written brief, SQLite views and editable Excel/PowerPoint deliverables.
-7. **Customer terms & margin variance:** four customer types on weekly, band or fixed monthly terms, replayed on real costs; monthly margin variance split into cost timing and price hold; contract escalator test; ERP-style price-list upload for any week.
+> **Historical portfolio case study.** Public quotes run from {f['date_min']} to {f['date_max']}. Customers, competitors, suppliers, demand, freight and spoilage are synthetic or illustrative assumptions and are labelled as such. No Bondi company data, live ERP integration or realised savings are claimed.
+
+## Start here
+
+| If you have | Open | You will see |
+|---|---|---|
+| 2 minutes | [Live app](https://toronto-fresh-market-pulse.streamlit.app) | Ten tabs: market overview, weekly update for any of {f['report_weeks'] - len(f['excluded_weeks'])} weeks, item explorer, price calculator, pricing policies, budget levers, customer pricing desk, supplier comparison, customer terms and margin variance |
+| 5 minutes | [Stakeholder briefing (7 slides)](outputs/Produce_Pricing_Decision_Brief.pptx) | Pricing cadence, supply-shock lag, customer terms, margin variance, Finance bridge, supplier decisions |
+| 10 minutes | [Excel decision model](outputs/Pricing_Decision_Workbook.xlsx) · [Margin variance workbook](outputs/Margin_Variance_and_Terms.xlsx) | Live scenario formulas, native PivotTable, monthly variance bridge with zero-check columns, ERP price-list upload |
+| An interview | [Job-description map and walkthrough](docs/ROLE_COVERAGE.md) | Every responsibility mapped to evidence, with its limits |
+
+## Results at a glance
+
+| Question | Answer | Evidence |
+|---|---|---|
+| How much has the basket moved? | **{f['basket_change_2019_2023_geo']:+.1%}** from 2019 to 2023 on matched months; {f['items_up_2019_2023']} of {f['items_compared']} items rose | `outputs/price_change_2019_vs_2023.csv` |
+| How fast can supply break? | Romaine reached **{rom_peak / rom_2019:.1f}x** its 2019 average (CAD {rom_peak:,.0f} vs {rom_2019:,.0f} a case) in the late-2022 lettuce crisis | Weekly update for 2022-12-13 |
+| How often should prices change? | A 5-point margin band cuts weeks >10 points under target from **{pol['monthly']['breach_rate']:.1%} to {pol['band']['breach_rate']:.1%}** with {pol['band']['changes_per_year']:.0f} price changes a year, vs {pol['weekly']['changes_per_year']:.0f} for weekly repricing | `outputs/pricing_policy_backtest.csv` |
+| Which customers carry the risk? | Fixed monthly contract prices: **{tc['breach_rate']:.0%}** of weeks >10 points under target vs about {sum(others) / len(others):.0%} for other terms; an escalator clause cuts it to **{t['contract_band_breach_rate']:.0%}** | `outputs/terms_profitability.csv` |
+| Why did margin miss target? | Mostly timing: quoting on last week's cost is **{t['timing_share_of_abs_monthly_variance']:.0%}** of the monthly swing; price holds are the rest | `outputs/margin_variance_by_month.csv` |
+| Can the budget forecast beat flat? | 6-month error **{f['budget_wape_6m']['seasonal']:.1%} vs {f['budget_wape_6m']['flat']:.1%}** on unseen 2023, with seasonal strength chosen on 2019–2020 only | `outputs/budget_horizon_forecast_test_2023.csv` |
+| Do the numbers tie out? | Contribution bridge agrees between SQL and Python within CAD 0.001; the margin-variance bridge ties to the dollar in Python, SQL and Excel | `validate_release.py`, `tests/` |
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[USDA AMS Toronto terminal reports<br/>{f['quotes_raw']:,} quotes, 2017-2024] --> C[Clean and validate<br/>CAD conversion, FX-noise removal,<br/>anomaly and gap detection]
+    B[Bank of Canada USD/CAD] --> C
+    C --> D[Weekly item panel<br/>{f['item_weeks']:,} item-weeks, 30 items]
+    D --> E[Market intelligence<br/>index, seasonality, volatility, origins]
+    D --> F[Pricing<br/>policy replay, cadence, customer terms]
+    D --> G[Forecast and budget<br/>backtests, FY scenarios, sensitivity]
+    D --> H[Margin variance<br/>cost timing vs price hold]
+    S[Synthetic sales, competitor<br/>and supplier data] --> I[Pricing desk and procurement<br/>net price, contribution, supplier feasibility]
+    E & F & G & H & I --> J[Streamlit app]
+    E & F & G & H & I --> K[Excel models]
+    E & F & G & H & I --> L[SQL star schema + Power BI measures]
+    E & F & G & H & I --> M[Weekly market update + briefing deck]
+```
 
 ## What the evidence supports
 
-**Matched-month comparison.** Across {f['items_compared']} items with at least 10 calendar months observed in both 2019 and 2023, case prices changed {f['basket_change_2019_2023_geo']:+.1%} on a geometric-mean basis; {f['items_up_2019_2023']} items rose. Months have equal weight. This selected-basket case-price comparison is not a full-year produce inflation estimate; origin/size mix may differ. Exact support is in `outputs/price_change_2019_vs_2023.csv`.
+### Market: the basket moved, unevenly
+
+Across {f['items_compared']} items with at least 10 calendar months observed in both 2019 and 2023, case prices changed {f['basket_change_2019_2023_geo']:+.1%} on a geometric-mean basis; {f['items_up_2019_2023']} items rose. Months have equal weight. This selected-basket case-price comparison is not a full-year produce inflation estimate; origin and size mix may differ.
 
 ![Matched-month case prices](outputs/img/price_change_2019_2023.png)
 
-**Pricing is a risk/friction tradeoff.** These are equal-item means on retrospectively cleaned costs and fixed illustrative demand.
+### Supply shocks: the late-2022 lettuce crisis
+
+Crop losses in California's Salinas Valley pushed romaine to CAD {rom_peak:,.0f} a case against a 2019 average of {rom_2019:,.0f}. The weekly Market Update for 2022-12-13 flags it with top movers, supply shifts and a reprice list ([report](outputs/market_update_2022-12-13.md)).
+
+![Lettuce crisis](outputs/img/lettuce_crisis_2022.png)
+
+### Pricing: a risk and friction trade-off
+
+Each policy prices from the most recent prior cost and restarts after item-specific gaps over 14 days. Results are equal-item means on retrospectively cleaned costs and fixed illustrative demand.
 
 | Policy | Scored observations >10 margin points below target | Price changes per 52 scored observations |
 |---|---:|---:|
 {policy_rows}
 
-Cadence choices are retrospective selections on the same history, not validated future recommendations.
+The calmest policy that keeps breaches under 10% of weeks is: monthly list for {cad.get('monthly', 0)} items, band rule for {cad.get('band', 0)}, weekly repricing for {cad.get('weekly', 0)}. Cadence choices are retrospective selections on the same history, not validated future recommendations.
 
-**Forecasts versus a baseline.** In the calendar-2023 budget holdout, half-strength seasonality has 3-month WAPE {f['budget_wape_3m']['seasonal']:.1%} versus flat {f['budget_wape_3m']['flat']:.1%}; 6-month WAPE is {f['budget_wape_6m']['seasonal']:.1%} versus flat {f['budget_wape_6m']['flat']:.1%}. Strength 0.5 remains the narrow joint minimum over 3/6-month validation horizons with origins in 2019–2020. Seasonal estimates use complete 12-month item-years with equal month weights. Weekly horizons are calendar days with a two-day report tolerance; training years precede each origin.
+![Pricing policies](outputs/img/pricing_policies.png)
 
-**Customer terms change risk, not margin.** Four customer types buy the basket on different terms, replayed on real weekly costs with the same gap rules as the policy backtest. Each lands within 0.2 points of its target margin over the cycle, but a fixed monthly contract list spends {tc['breach_rate']:.1%} of scored weeks more than 10 points under target, against {min(others):.1%}–{max(others):.1%} for the others, and its monthly margin swings {tc['sd']:.1f} points against about 2. A band-rule escalator clause cuts contract breach weeks to {t['contract_band_breach_rate']:.1%}. Customer shares and terms are assumptions in `config/customer_terms.csv`, separate from the synthetic pricing-desk customers.
+### Customer terms change risk, not margin
+
+Four customer types buy the basket on different terms, replayed on real weekly costs with the same gap rules. Each lands within 0.2 points of its target margin over the cycle, but a fixed monthly contract list spends {tc['breach_rate']:.1%} of scored weeks more than 10 points under target, against {min(others):.1%}–{max(others):.1%} for the others, and its monthly margin swings {tc['sd']:.1f} points against about 2. A band-rule escalator clause cuts contract breach weeks to {t['contract_band_breach_rate']:.1%}. Customer shares and terms are assumptions in `config/customer_terms.csv`, separate from the synthetic pricing-desk customers.
 
 ![Breach weeks and margin swing by customer terms](outputs/img/terms_risk.png)
 
-**Margin variance by cause.** Gross margin minus margin at target splits exactly into *cost timing* (quotes go out on last week's cost) and *price hold* (the extra cost of keeping a list or band price). Month by month, cost timing is {t['timing_share_of_abs_monthly_variance']:.0%} of the absolute swing and the larger cause in {t['months_timing_larger']:.0%} of months. The worst month, {wm['month']}, was {abs(wm['gap_pts']):.1f} points under target when lettuce costs tripled in one week; CAD {-wm['var_cost_timing']:,.0f} of the CAD {-wm['var_total']:,.0f} shortfall was cost timing. The bridge reconciles in Python, SQL and Excel.
+### Margin variance by cause
+
+Gross margin minus margin at target splits exactly into *cost timing* (quotes go out on last week's cost) and *price hold* (the extra cost of keeping a list or band price). Month by month, cost timing is {t['timing_share_of_abs_monthly_variance']:.0%} of the absolute swing and the larger cause in {t['months_timing_larger']:.0%} of months. The worst month, {wm['month']}, was {abs(wm['gap_pts']):.1f} points under target when lettuce costs tripled in one week; CAD {-wm['var_cost_timing']:,.0f} of the CAD {-wm['var_total']:,.0f} shortfall was cost timing.
 
 ![Monthly margin variance by cause](outputs/img/margin_variance.png)
 
-**Commercial reconciliation.** The latest synthetic week has CAD {c['revenue']:,.0f} revenue and CAD {c['contribution']:,.0f} contribution. Independent SQL/Python contribution totals agree within CAD 0.001. Contribution includes variable delivery/spoilage and excludes fixed overhead; historical policy gross margin uses a different cost basis.
+### Forecasts and the FY budget
 
-## Evidence for the role
+In the calendar-2023 budget holdout, half-strength seasonality has 3-month WAPE {f['budget_wape_3m']['seasonal']:.1%} versus flat {f['budget_wape_3m']['flat']:.1%}; 6-month WAPE is {f['budget_wape_6m']['seasonal']:.1%} versus flat {f['budget_wape_6m']['flat']:.1%}. Strength 0.5 is the narrow joint minimum over 3- and 6-month validation horizons with origins in 2019–2020. Seasonal estimates use complete 12-month item-years with equal month weights. One to four weeks ahead, the latest price is the best forecast ({f['wape_1wk']['naive']:.1%} WAPE one week out), so the operational answer is to react fast. The FY budget runs on the seasonal path with FX, supply-shock, freight and volume scenarios; shock onset and reversal are both lagged.
+
+![Budget sensitivity](outputs/img/budget_tornado.png)
+
+### Commercial reconciliation
+
+The latest synthetic week has CAD {c['revenue']:,.0f} revenue and CAD {c['contribution']:,.0f} contribution. Independent SQL and Python contribution totals agree within CAD 0.001. Contribution includes variable delivery and spoilage and excludes fixed overhead; the historical policy gross margin uses a different cost basis.
+
+## Skills for the role
 
 | Skill | Reviewable evidence |
 |---|---|
-| Python, analysis and BI | Ten-tab Streamlit/Altair app; calendar backtests; scenario modules |
-| Power BI-ready model | Star schema (`sql/star_schema/`) exported to CSV with DAX measures and relationships in `powerbi/`; no .pbix file is claimed |
-| Margin variance | Monthly bridge: cost timing + price hold = gross margin − margin at target, tested to reconcile in Python, SQL and Excel |
-| Advanced Excel | New editable decision model, formulas and customer summary; [Excel verification](docs/EXCEL_MODEL.md) |
-| Financial analysis | Reconciled contribution bridge; revenue-weighted customer and product margins |
-| Market/competitor intelligence | Public historical quotes and segment-specific synthetic net-price comparisons |
-| Procurement | Yield/freight-adjusted order costs with capacity and service constraints |
-| ERP-style data / SQL | Validated synthetic sales schema, SQLite facts/dimension and financial views; star-schema queries; ERP-style price-list upload file |
-| Communication | Generated stakeholder brief and editable seven-slide PowerPoint briefing |
-| Automation / detail | Deterministic exports, source checksums, regression tests, app controls and CI |
+| Pricing models | Prior-cost policy replay, cadence by item, price calculator, customer-terms replay, ERP-style price-list upload |
+| Market analysis and updates | Public quotes in CAD, matched-month comparison, seasonality, origin shifts, weekly Market Update for any report week |
+| Margin and profitability | Policy and customer-terms margins; revenue-weighted customer and product contribution; monthly margin-variance bridge |
+| Forecasting and budgeting | Calendar-origin backtests; FY budget with scenarios and one-at-a-time sensitivity |
+| Scenario planning | Live FX, supply-shock, freight, volume and price-lag levers in the app and the Excel model |
+| Advanced Excel | Decision model with live scenario formulas and a native PivotTable ([verification](docs/EXCEL_MODEL.md)); margin-variance workbook with zero-check columns |
+| SQL and data management | SQLite financial views; star schema (`sql/star_schema/`) with three analysis queries; validated data contract |
+| BI and dashboards | Ten-tab Streamlit/Altair app; Power BI-ready star schema with DAX measures and relationships (`powerbi/`); no .pbix file is claimed |
+| Procurement | Yield- and freight-adjusted order costs with capacity, MOQ, lead-time and validity checks |
+| Communication | Generated stakeholder brief and an editable seven-slide PowerPoint briefing |
+| Process improvement | One-command rebuild, deterministic exports, source checksums, regression tests and CI on every push |
 
-[Full JD map and interview walkthrough](docs/ROLE_COVERAGE.md). Work samples cannot establish a degree, industry tenure or real employer collaboration.
+[Full job-description map and interview walkthrough](docs/ROLE_COVERAGE.md). Work samples cannot establish a degree, industry tenure or real employer collaboration.
 
-## Reproduce the analysis
+## Why the numbers can be trusted
+
+- **Source integrity:** SHA-256 checksums of the public snapshot are verified on every release (`config/source_manifest.json`).
+- **Data-quality defects caught, not hidden:** four weeks where USDA's currency conversion failed (prices left in CAD or converted twice) are detected and excluded; exchange-rate noise is removed so an unchanged CAD price reads exactly 0.0%.
+- **No bridged gaps:** the April 2021 – November 2022 source gap and item-specific gaps are never treated as one week, in models or charts.
+- **Reconciliation:** financial identities are tested in Python and re-computed independently in SQL and Excel.
+- **Automated checks:** `pytest` covers financial identities, hand-calculated lag paths, missing calendar periods, future-data invariance, invalid and duplicate records, and the real Streamlit controls; GitHub Actions runs lint, tests and release validation on every push.
+
+## Reproduce it
 
 ```bash
 python -m pip install -r requirements-lock.txt
-python run_pipeline.py
-python build_commercial_demo.py
-python build_terms_workbook.py
-python add_terms_slides.py
-python build_project_docs.py
+python run_pipeline.py            # clean data, analyses, charts, customer terms, star schema
+python build_commercial_demo.py   # synthetic pricing desk and supplier comparison
+python build_terms_workbook.py    # margin-variance workbook
+python add_terms_slides.py        # customer-terms slides in the briefing
+python build_project_docs.py      # this README, numbers synced from outputs
 python build_report_page.py
 python validate_release.py
-python -m pytest -q
-ruff check .
+python -m pytest -q && ruff check .
 streamlit run app.py
 ```
 
-Tested on Python 3.12. CSV/Markdown/SQLite/HTML files regenerate from committed sources. The decision workbook and the five base briefing slides are editable delivery snapshots; the margin-variance workbook and the two customer-terms slides are rebuilt by script. The original 13-sheet workbook is retained separately as a historical artifact.
+Tested on Python 3.12. CSV, Markdown, SQLite and HTML files regenerate from committed sources. The decision workbook and the five base briefing slides are editable delivery snapshots; the margin-variance workbook and the two customer-terms slides are rebuilt by script. The original 13-sheet workbook is kept as a historical artifact.
 
 ```
 src/pulse/panel.py        cleaning, FX and retrospective anomaly detection
@@ -103,14 +178,15 @@ src/pulse/market.py       matched months, complete-year seasonality, calendar ri
 src/pulse/pricing.py      prior-cost policy replay with item-gap resets
 src/pulse/forecast.py     calendar origins and prior-year training
 src/pulse/budget.py       scenarios and lagged shock reversal
+src/pulse/report.py       weekly Market Update generator
 src/pulse/commercial.py   net-price comparability and customer contribution
 src/pulse/procurement.py  synthetic supplier feasibility and order cost
 src/pulse/terms.py        customer pricing terms, margin-variance bridge, ERP price list
 src/pulse/datamodel.py    star schema -> SQLite and Power BI CSVs
-sql/commercial_views.sql financial and customer views
-sql/star_schema/          star schema and three analysis queries
+sql/                      financial views and star-schema queries
 powerbi/                  DAX measures and model notes
-outputs/commercial_demo/ exports and SQLite database
+app.py                    Streamlit app (10 tabs)
+tests/                    pytest suite, run in CI
 ```
 
 ## Sources and limits
@@ -123,6 +199,10 @@ outputs/commercial_demo/ exports and SQLite database
 - Budget scenarios lag shock multipliers while retaining the baseline seasonal price path. Inventory financing, fixed overhead and customer contracts are excluded.
 
 [Review and operation](docs/REVIEW_AND_OPERATIONS.md)
+
+---
+
+Built by **Kush Patel**, data analyst in the Greater Toronto Area · [LinkedIn](https://www.linkedin.com/in/kush-patel-48885719b) · [Portfolio](https://kushpatel29.github.io) · [GitHub](https://github.com/KushPatel29)
 """
     (ROOT / "README.md").write_text(text, encoding="utf-8")
     print("README synchronized with analysis outputs")
