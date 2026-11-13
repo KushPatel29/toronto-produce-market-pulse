@@ -2,7 +2,7 @@
 
 **Pricing, margin and market intelligence for a foodservice produce distributor, built on real Toronto wholesale prices.**
 
-**[Open the live app](https://toronto-produce-market-pulse.streamlit.app)**: pick any week from 2017 to 2024 and get that week's Market Update, replay pricing policies item by item, price an item with the calculator, and move budget scenario levers. A static one-page report is in [`outputs/index.html`](outputs/index.html).
+**[Open the live app](https://toronto-fresh-market-pulse.streamlit.app)**: pick any week from 2017 to 2024 and get that week's Market Update, replay pricing policies item by item, price an item with the calculator, and move budget scenario levers. A static one-page report is in [`outputs/index.html`](outputs/index.html).
 
 I built this to show the work a pricing and data analyst does at a GTA produce distributor: track the market every week, set and defend prices, protect margin when supply breaks, and turn all of it into a budget Finance can use.
 
