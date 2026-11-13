@@ -30,7 +30,7 @@ The original 13-sheet workbook and PDFs remain historical artifacts. Use the new
 
 Sales grain is date/item/customer. Keys must be populated and unique; dates valid; financial fields numeric, finite and nonnegative; prices positive; target margins below 95%. Competitor evidence must match segment, net price basis, CAD and case unit, with an as-of quote no more than 14 days old. Supplier bids additionally require quote validity, feasible order quantity and agreed service thresholds.
 
-Public source byte checksums are in config/source_manifest.json. validate_release.py checks those hashes, panel keys, report coverage and the independent SQL bridge. Checksums prove snapshot integrity, not publisher verification. No personal records, production credentials or customer data are included.
+Public source text checksums (line endings normalized to LF) are in config/source_manifest.json. validate_release.py checks those hashes, panel keys, report coverage and the independent SQL bridge. Checksums prove snapshot integrity, not publisher verification. No personal records, production credentials or customer data are included.
 
 A production rollout would require approved ERP/invoice/inventory data, supplier costs and pack conversions, GL controls, contracts, actual demand response and an audited as-of cleaning process.
 

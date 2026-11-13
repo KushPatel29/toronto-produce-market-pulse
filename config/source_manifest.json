@@ -1,7 +1,7 @@
 {
-  "description": "Public historical snapshot; hashes establish byte integrity, not independent publisher verification.",
+  "description": "SHA-256 of source text with CRLF normalized to LF; establishes content integrity, not publisher verification.",
   "sha256": {
-    "data/raw/boc_usdcad_on_report_dates.csv": "901667065c8061daf212d37567b6d81fc02eebee0bbeff97419539936e5a514c",
-    "data/raw/toronto_terminal_prices_2017_2024.csv": "50f9ec259e1747f904df2b086a6bdaa87213e8d5152f4920138b0c301e0e183f"
+    "data/raw/boc_usdcad_on_report_dates.csv": "c26e8f899f28cce96cfaa9f02259ab506a7c49f237bafe03f62bde5474933b7a",
+    "data/raw/toronto_terminal_prices_2017_2024.csv": "a916f52a267dc773b035108359a8df23d1199ff0375171554cf96e13db0fcc9f"
   }
 }

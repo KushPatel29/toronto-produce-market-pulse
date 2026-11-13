@@ -17,7 +17,9 @@ from pulse import report as rp  # noqa: E402
 def main():
     manifest = json.loads((ROOT / "config/source_manifest.json").read_text(encoding="utf-8"))
     for relative, expected in manifest["sha256"].items():
-        actual = hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+        # Git checks text out with CRLF on Windows and LF on Linux. Canonical
+        # line endings preserve content verification without platform false alarms.
+        actual = hashlib.sha256((ROOT / relative).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
         if actual != expected:
             raise ValueError(f"Source snapshot changed: {relative}")
     p = pd.read_csv(ROOT / "data/processed/weekly_item_panel.csv", parse_dates=["date"])
