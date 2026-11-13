@@ -100,7 +100,7 @@ Gross margin minus margin at target splits exactly into *cost timing* (quotes go
 
 ### Price, volume, mix and promotions
 
-Gross margin is bridged from 2019 to 2023 item by item: volume (total cases at the old mix and margin), mix (shifts between items), list price, discounts and promotions, and cost. On real terminal costs and synthetic shipments, list price added $178,920 and cost took $129,247; volume took $18,853, mix added $10,190 and deeper discounts took $3,705. The bridge closes to the cent in Python and in Excel (a native waterfall chart with a zero check), and the Power BI measures implement the same algebra.
+Gross margin is bridged from 2019 to 2023 item by item: volume (total cases at the old mix and margin), mix (shifts between items), list price, discounts and promotions, and cost. On real terminal costs and synthetic shipments, list price added $178,920 and cost took $129,247; volume took $18,853, mix added $10,190 and deeper discounts took $3,705. The bridge closes to the cent in Python and in Excel (a native waterfall chart with a zero check), and the Power BI measures return the same numbers in Power BI Desktop.
 
 ![Gross margin bridge](outputs/img/pvm_bridge.png)
 

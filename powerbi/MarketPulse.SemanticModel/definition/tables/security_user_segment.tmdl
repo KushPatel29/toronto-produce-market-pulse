@@ -1,6 +1,7 @@
 /// Illustrative user-to-segment map for dynamic row-level security. Replace the emails with real accounts.
 table security_user_segment
 	isHidden
+	lineageTag: 26235027-66c9-5891-afed-2a160127b55a
 
 	column user_email
 		dataType: string

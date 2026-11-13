@@ -1,94 +1,111 @@
 /// SYNTHETIC weekly shipments by item and channel, 2019 and 2023, on real terminal costs.
 table fact_shipments
+	lineageTag: d13e1233-41a4-5410-8ee0-42bf1dfcc505
 
 	column item_id
 		dataType: string
+		lineageTag: f821b62d-f731-5178-a2b4-51dda2f597e9
 		isHidden
 		summarizeBy: none
 		sourceColumn: item_id
 
 	column category
 		dataType: string
+		lineageTag: a7628ea9-df51-5fdb-9102-e48429f27e49
 		summarizeBy: none
 		sourceColumn: category
 
 	column channel
 		dataType: string
+		lineageTag: f6fb5731-d0a2-5b50-a3f2-b4c79bd2eb94
 		summarizeBy: none
 		sourceColumn: channel
 
 	column year
 		dataType: int64
+		lineageTag: 6fd317a2-474b-5e52-be0d-49a28d20b8cd
 		formatString: 0
 		summarizeBy: none
 		sourceColumn: year
 
 	column date
 		dataType: dateTime
+		lineageTag: e29cc82b-947e-5486-aea0-5c534b28c14f
 		formatString: yyyy-mm-dd
 		summarizeBy: none
 		sourceColumn: date
 
 	column cases
 		dataType: double
+		lineageTag: c18b8931-0238-59ca-9b77-3ecfed5244f2
 		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: cases
 
 	column list_price
 		dataType: double
+		lineageTag: 3d4b11fd-57a0-5a83-a8b7-103c8542a68a
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		summarizeBy: none
 		sourceColumn: list_price
 
 	column net_price
 		dataType: double
+		lineageTag: e1f3e257-da1b-5d02-a103-dc9795e1dded
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		summarizeBy: none
 		sourceColumn: net_price
 
 	column unit_cost
 		dataType: double
+		lineageTag: d7dc7764-3bd6-538f-98ea-741a39d61be4
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		summarizeBy: none
 		sourceColumn: unit_cost
 
 	column promo
 		dataType: boolean
+		lineageTag: 1e5c740d-4c83-5b91-95b1-f61fecc2a8a4
 		summarizeBy: none
 		sourceColumn: promo
 
 	column promo_depth
 		dataType: double
+		lineageTag: 334cd002-c8de-5e3e-9892-b96fcc06c894
 		formatString: 0.0%;-0.0%;0.0%
 		summarizeBy: none
 		sourceColumn: promo_depth
 
 	column data_status
 		dataType: string
+		lineageTag: 43ce9256-4278-5bf9-81c8-ef91d86e716b
 		summarizeBy: none
 		sourceColumn: data_status
 
 	column revenue
 		dataType: double
+		lineageTag: 0686ef73-9461-588d-99a7-2599da5bee31
 		formatString: \$#,0;(\$#,0);\$#,0
 		summarizeBy: none
 		sourceColumn: revenue
 
 	column list_revenue
 		dataType: double
+		lineageTag: 62497a11-1428-568d-be87-2ffb77783f16
 		formatString: \$#,0;(\$#,0);\$#,0
 		summarizeBy: none
 		sourceColumn: list_revenue
 
 	column cogs
 		dataType: double
+		lineageTag: d2cb70b7-f416-5ad0-b1cb-f920f2ca1386
 		formatString: \$#,0;(\$#,0);\$#,0
 		summarizeBy: none
 		sourceColumn: cogs
 
 	column gm
 		dataType: double
+		lineageTag: 9775dd2c-18ed-5923-8f67-39cffbc35803
 		formatString: \$#,0;(\$#,0);\$#,0
 		summarizeBy: none
 		sourceColumn: gm
@@ -97,41 +114,49 @@ table fact_shipments
 	measure 'Net Revenue' = SUM ( fact_shipments[revenue] )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Revenue growth
+		lineageTag: 9c946739-60e1-5de1-b360-0d433a2b4062
 
 	/// Cases at list price.
 	measure 'List Revenue' = SUM ( fact_shipments[list_revenue] )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Revenue growth
+		lineageTag: aa1a32b5-b597-54fe-92e2-818e68e483ba
 
 	/// Price given away below list.
 	measure 'Discounts & Promotions' = [List Revenue] - [Net Revenue]
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Revenue growth
+		lineageTag: 7e0ed6dd-d47c-5da3-ad6f-a416f7cb9b57
 
 	/// Price investment as a share of list revenue.
 	measure 'Discount Rate' = DIVIDE ( [Discounts & Promotions], [List Revenue] )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Revenue growth
+		lineageTag: 20bffba0-b3c9-51f6-aba0-da914263d104
 
 	/// Gross margin on synthetic shipments.
 	measure 'Shipment GM' = SUM ( fact_shipments[gm] )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Revenue growth
+		lineageTag: 74d1f0a4-897b-562c-b70f-0ab9a7883557
 
 	/// Gross margin on net revenue.
 	measure 'Shipment GM %' = DIVIDE ( [Shipment GM], [Net Revenue] )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Revenue growth
+		lineageTag: 81d2bdee-9f64-5e64-9f29-eef2076c49e2
 
 	/// Synthetic cases.
 	measure 'Cases Shipped' = SUM ( fact_shipments[cases] )
 		formatString: #,0
 		displayFolder: Revenue growth
+		lineageTag: dd405148-04e5-5677-9446-674181aa1c7c
 
 	/// Cases sold on promotion.
 	measure 'Promo Share of Cases' = DIVIDE ( CALCULATE ( [Cases Shipped], fact_shipments[promo] = TRUE () ), [Cases Shipped] )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Revenue growth
+		lineageTag: 17e01253-18f8-563b-875b-367ae43e317b
 
 	/// Base-year gross margin, items sold in both years.
 	measure 'PVM GM 2019' =
@@ -162,6 +187,7 @@ table fact_shipments
 			    GMA
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Price-volume-mix
+		lineageTag: 276b279e-722a-515c-8813-118126e9bde9
 
 	/// Compare-year gross margin, items sold in both years.
 	measure 'PVM GM 2023' =
@@ -192,6 +218,7 @@ table fact_shipments
 			    SUMX ( t, [@gmb] )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Price-volume-mix
+		lineageTag: 9ef4f195-3738-58af-ad43-3c9ef2a5950f
 
 	/// Change in total cases at the base-year mix and margin.
 	measure 'PVM Volume' =
@@ -222,6 +249,7 @@ table fact_shipments
 			    DIVIDE ( QB - QA, QA ) * GMA
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Price-volume-mix
+		lineageTag: 01a1f73f-503a-51a5-87c4-313d1d10424e
 
 	/// Shift in item shares, valued at base-year margin per case.
 	measure 'PVM Mix' =
@@ -252,6 +280,7 @@ table fact_shipments
 			    SUMX ( t, [@qb] * DIVIDE ( [@gma], [@qa] ) ) - DIVIDE ( QB, QA ) * GMA
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Price-volume-mix
+		lineageTag: 2ad1aa5f-f17d-5ea1-9d87-5d520e2e20a4
 
 	/// Change in list price per case on compare-year cases.
 	measure 'PVM List Price' =
@@ -282,6 +311,7 @@ table fact_shipments
 			    SUMX ( t, [@lrb] - [@qb] * DIVIDE ( [@lra], [@qa] ) )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Price-volume-mix
+		lineageTag: cadc3323-ca95-56ac-9b0a-f07702ba1718
 
 	/// Change in discount per case on compare-year cases.
 	measure 'PVM Discounts & Promotions' =
@@ -312,6 +342,7 @@ table fact_shipments
 			    SUMX ( t, ( [@rb] - [@lrb] ) - [@qb] * DIVIDE ( [@ra] - [@lra], [@qa] ) )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Price-volume-mix
+		lineageTag: 3515a5c8-e2b1-5233-a742-418187b179dd
 
 	/// Change in landed cost per case on compare-year cases (negative when cost rises).
 	measure 'PVM Cost' =
@@ -342,11 +373,13 @@ table fact_shipments
 			    - SUMX ( t, [@cb] - [@qb] * DIVIDE ( [@ca], [@qa] ) )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Price-volume-mix
+		lineageTag: 71cf8a89-66b8-5d3e-b458-0a97530cdf15
 
 	/// Must be 0: the bridge reconciles.
 	measure 'PVM Check' = ROUND ( [PVM GM 2023] - [PVM GM 2019] - [PVM Volume] - [PVM Mix] - [PVM List Price] - [PVM Discounts & Promotions] - [PVM Cost], 2 )
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		displayFolder: Price-volume-mix
+		lineageTag: ae5ad331-ece5-52f0-9367-114b2fe47ce5
 
 	partition fact_shipments = m
 		mode: import

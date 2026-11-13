@@ -129,7 +129,7 @@ Gross margin minus margin at target splits exactly into *cost timing* (quotes go
 
 ### Price, volume, mix and promotions
 
-Gross margin is bridged from 2019 to 2023 item by item: volume (total cases at the old mix and margin), mix (shifts between items), list price, discounts and promotions, and cost. On real terminal costs and synthetic shipments, list price added ${br['List price']:,.0f} and cost took ${-br['Cost']:,.0f}; volume took ${-br['Volume']:,.0f}, mix added ${br['Mix']:,.0f} and deeper discounts took ${-br['Discounts & promotions']:,.0f}. The bridge closes to the cent in Python and in Excel (a native waterfall chart with a zero check), and the Power BI measures implement the same algebra.
+Gross margin is bridged from 2019 to 2023 item by item: volume (total cases at the old mix and margin), mix (shifts between items), list price, discounts and promotions, and cost. On real terminal costs and synthetic shipments, list price added ${br['List price']:,.0f} and cost took ${-br['Cost']:,.0f}; volume took ${-br['Volume']:,.0f}, mix added ${br['Mix']:,.0f} and deeper discounts took ${-br['Discounts & promotions']:,.0f}. The bridge closes to the cent in Python and in Excel (a native waterfall chart with a zero check), and the Power BI measures return the same numbers in Power BI Desktop.
 
 ![Gross margin bridge](outputs/img/pvm_bridge.png)
 

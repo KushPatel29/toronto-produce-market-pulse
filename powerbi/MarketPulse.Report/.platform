@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Market Pulse"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "80170167-4004-59a4-ac62-06db3f3ac563"
+  }
+}

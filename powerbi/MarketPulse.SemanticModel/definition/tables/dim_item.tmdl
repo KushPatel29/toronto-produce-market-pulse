@@ -1,35 +1,42 @@
 /// Basket item: category, unit, target margin and planned weekly cases.
 table dim_item
+	lineageTag: c09f08df-66a2-5d4e-ae91-b596f400cd5c
 
 	column item_id
 		dataType: string
+		lineageTag: e039be48-f1f0-55d6-80ea-b5c0026ef20b
 		isKey
 		summarizeBy: none
 		sourceColumn: item_id
 
 	column item_name
 		dataType: string
+		lineageTag: 40f4d85b-f7ad-53ab-b88a-9e3994e9e460
 		summarizeBy: none
 		sourceColumn: item_name
 
 	column category
 		dataType: string
+		lineageTag: 935e08e1-7883-515d-90a2-609731f5f852
 		summarizeBy: none
 		sourceColumn: category
 
 	column uom
 		dataType: string
+		lineageTag: 1dc901bb-8766-595c-aa49-bb687ed3cec6
 		summarizeBy: none
 		sourceColumn: uom
 
 	column target_margin
 		dataType: double
+		lineageTag: a774c6f7-134c-51f7-9c4e-f225b1a6a230
 		formatString: 0.0%;-0.0%;0.0%
 		summarizeBy: none
 		sourceColumn: target_margin
 
 	column weekly_cases
 		dataType: double
+		lineageTag: 611da082-c4b1-5694-8e9d-8effc81acaa0
 		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: weekly_cases

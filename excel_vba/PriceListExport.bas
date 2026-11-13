@@ -90,7 +90,9 @@ End Sub
 Private Function CsvField(ByVal v As Variant) As String
     Dim s As String
     If IsNumeric(v) And Not IsEmpty(v) And VarType(v) <> vbString Then
-        s = Trim$(Str$(v))                     ' locale-independent decimal point
+        s = Trim$(Str$(Round(CDbl(v), 6)))     ' locale-independent decimal point
+        If Left$(s, 1) = "." Then s = "0" & s
+        If Left$(s, 2) = "-." Then s = "-0" & Mid$(s, 2)
     Else
         s = CStr(v)
     End If

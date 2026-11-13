@@ -1,103 +1,121 @@
 /// One row per SYNTHETIC promotion event: estimated lift, break-even lift, trade spend and verdict.
 table fact_promotion
+	lineageTag: 28bf1b2d-e948-5675-b011-a32dfbb6c889
 
 	column event
 		dataType: string
+		lineageTag: 8431826d-7235-57d5-a13d-4aab6bd3bf2b
 		summarizeBy: none
 		sourceColumn: event
 
 	column item_id
 		dataType: string
+		lineageTag: 5281982f-2b70-5738-82af-7ed2b982b92b
 		isHidden
 		summarizeBy: none
 		sourceColumn: item_id
 
 	column year
 		dataType: int64
+		lineageTag: cee2de01-db35-5323-8821-d77c63f758e3
 		formatString: 0
 		summarizeBy: none
 		sourceColumn: year
 
 	column start
 		dataType: dateTime
+		lineageTag: eaafa300-bef0-5d69-9045-201d13c4667c
 		formatString: yyyy-mm-dd
 		summarizeBy: none
 		sourceColumn: start
 
 	column depth
 		dataType: double
+		lineageTag: 1f443405-ddc9-59db-925d-faac900d8bfd
 		formatString: 0.0%;-0.0%;0.0%
 		summarizeBy: none
 		sourceColumn: depth
 
 	column planted_uplift
 		dataType: double
+		lineageTag: b949cf94-c7d5-5379-9845-ba4db3a89c80
 		formatString: 0.00
 		summarizeBy: none
 		sourceColumn: planted_uplift
 
 	column baseline_cases
 		dataType: double
+		lineageTag: efb037ac-2c54-5671-a4d6-5f5ef60afc13
 		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: baseline_cases
 
 	column promo_cases
 		dataType: double
+		lineageTag: 9a36a4e2-04d0-59d2-8861-af202ce25ad1
 		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: promo_cases
 
 	column est_uplift
 		dataType: double
+		lineageTag: 5dc04e35-2114-506b-9793-a419b068e1d9
 		formatString: 0.00
 		summarizeBy: none
 		sourceColumn: est_uplift
 
 	column incremental_cases
 		dataType: double
+		lineageTag: 0bf64506-bdff-55e1-a437-7c300db0568b
 		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: incremental_cases
 
 	column dip_cases
 		dataType: double
+		lineageTag: f7a87213-0eb4-53c8-b27d-3e4614c575e0
 		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: dip_cases
 
 	column breakeven_uplift
 		dataType: double
+		lineageTag: a73a533b-25d3-5c1d-ac9c-89e7194ff590
 		formatString: 0.00
 		summarizeBy: none
 		sourceColumn: breakeven_uplift
 
 	column trade_spend
 		dataType: double
+		lineageTag: 3bc20c35-85d3-5af3-a506-d518fef85b37
 		formatString: \$#,0;(\$#,0);\$#,0
 		summarizeBy: none
 		sourceColumn: trade_spend
 
 	column net_incremental_margin
 		dataType: double
+		lineageTag: 47f64560-dee6-5969-b73d-657a2b85cf31
 		formatString: \$#,0;(\$#,0);\$#,0
 		summarizeBy: none
 		sourceColumn: net_incremental_margin
 
 	column roi
 		dataType: double
+		lineageTag: 2cb6742e-2f15-5faa-8e5e-04db75fde7be
 		formatString: 0.0%;-0.0%;0.0%
 		summarizeBy: none
 		sourceColumn: roi
 
 	column uplift_error_pts
 		dataType: double
+		lineageTag: 713d7fd6-bd19-5c75-a0b9-e79f1491e63c
 		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: uplift_error_pts
 
 	column verdict
 		dataType: string
+		lineageTag: fbfb4f83-8a40-5bf7-83e2-91c87571a44e
 		summarizeBy: none
 		sourceColumn: verdict
 
@@ -105,36 +123,43 @@ table fact_promotion
 	measure 'Promo Events' = COUNTROWS ( fact_promotion )
 		formatString: #,0
 		displayFolder: Promotions
+		lineageTag: 235e15fc-e848-5c19-91f1-727f07fa283b
 
 	/// Price investment plus fixed promotion fee.
 	measure 'Trade Spend' = SUM ( fact_promotion[trade_spend] )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Promotions
+		lineageTag: fc906711-1900-577a-b98c-9494b5ec48d0
 
 	/// Incremental margin after trade spend and the post-promotion dip.
 	measure 'Net Incremental Margin' = SUM ( fact_promotion[net_incremental_margin] )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Promotions
+		lineageTag: 96df181a-68f6-5a95-a1d1-562991f3e3c5
 
 	/// Net incremental margin per dollar of trade spend.
 	measure 'Promo ROI' = DIVIDE ( [Net Incremental Margin], [Trade Spend] )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Promotions
+		lineageTag: 9ca2dec9-5696-5137-bc89-23f0b37877d0
 
 	/// Events with positive ROI.
 	measure 'Events Paid Back' = COUNTROWS ( FILTER ( fact_promotion, fact_promotion[roi] > 0 ) )
 		formatString: #,0
 		displayFolder: Promotions
+		lineageTag: d6459c05-ab3b-5738-be84-453a506a4a68
 
 	/// Lift needed to pay back the price cut and fee.
 	measure 'Median Break-even Lift' = MEDIAN ( fact_promotion[breakeven_uplift] )
 		formatString: 0.00
 		displayFolder: Promotions
+		lineageTag: 9e08a4fc-b7a5-5335-aaa9-bbaeb240ab40
 
 	/// Mean absolute gap between estimated and planted lift, in points.
 	measure 'Lift Estimate Error (pts)' = AVERAGE ( fact_promotion[uplift_error_pts] )
 		formatString: 0.0
 		displayFolder: Promotions
+		lineageTag: b881eafe-8ca2-5d84-8bdc-27060221540e
 
 	partition fact_promotion = m
 		mode: import

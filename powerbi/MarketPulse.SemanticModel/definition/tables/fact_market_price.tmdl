@@ -1,14 +1,17 @@
 /// Real Toronto terminal price per item and report week, CAD.
 table fact_market_price
+	lineageTag: e9a94ee2-425c-5d5a-929b-b0a467879e71
 
 	column item_id
 		dataType: string
+		lineageTag: 3b161a87-637c-516c-8811-bc11cebd2b56
 		isHidden
 		summarizeBy: none
 		sourceColumn: item_id
 
 	column date_key
 		dataType: dateTime
+		lineageTag: ed42f8b1-3547-5146-bd86-bd9c5b7efbf4
 		formatString: yyyy-mm-dd
 		isHidden
 		summarizeBy: none
@@ -16,18 +19,21 @@ table fact_market_price
 
 	column terminal_cad
 		dataType: double
+		lineageTag: 42eb84ef-4b21-502c-9872-ef1de96783ed
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		summarizeBy: none
 		sourceColumn: terminal_cad
 
 	column landed_cost
 		dataType: double
+		lineageTag: f30245c0-42ca-58f4-8487-cdd59a0ec845
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		summarizeBy: none
 		sourceColumn: landed_cost
 
 	column n_quotes
 		dataType: int64
+		lineageTag: d28f064b-2dad-57b7-ad1c-7adb185bf21f
 		formatString: #,0
 		summarizeBy: none
 		sourceColumn: n_quotes
@@ -36,6 +42,7 @@ table fact_market_price
 	measure 'Avg Terminal Price (CAD)' = AVERAGE ( fact_market_price[terminal_cad] )
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		displayFolder: Market
+		lineageTag: 9d479b81-87f4-5c3c-8ad4-a9fea7eb980b
 
 	/// Change against the prior calendar year.
 	measure 'Terminal Price vs Prior Year' =
@@ -50,6 +57,7 @@ table fact_market_price
 			    DIVIDE ( cur - py, py )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Market
+		lineageTag: 3bc08aca-f4a3-5abe-8ac5-a8ffb3662e4c
 
 	partition fact_market_price = m
 		mode: import

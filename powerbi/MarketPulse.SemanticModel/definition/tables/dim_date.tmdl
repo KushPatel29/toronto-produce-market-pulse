@@ -1,8 +1,10 @@
 /// Report week. The April 2021 - November 2022 source gap separates periods A and B.
 table dim_date
+	lineageTag: f642dd91-3be4-513d-88bd-70a4e37a633b
 
 	column date_key
 		dataType: dateTime
+		lineageTag: 93ea63ab-bbf5-5cf2-becf-cd1ff84905bf
 		formatString: yyyy-mm-dd
 		isKey
 		summarizeBy: none
@@ -10,23 +12,27 @@ table dim_date
 
 	column year
 		dataType: int64
+		lineageTag: fb5f6ff2-3631-5c2e-8d52-accd8cc386e7
 		formatString: 0
 		summarizeBy: none
 		sourceColumn: year
 
 	column month
 		dataType: int64
+		lineageTag: 19987cdc-0e60-559e-ae5e-cf444a71d43b
 		formatString: 0
 		summarizeBy: none
 		sourceColumn: month
 
 	column year_month
 		dataType: string
+		lineageTag: be32d831-93f5-5cf0-bcac-3cb82be938e9
 		summarizeBy: none
 		sourceColumn: year_month
 
 	column period
 		dataType: string
+		lineageTag: c19bb8cc-ba19-57d1-9a46-93f07ff64207
 		summarizeBy: none
 		sourceColumn: period
 

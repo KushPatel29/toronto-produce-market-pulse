@@ -35,6 +35,6 @@ Seven single-direction, many-to-one relationships join the facts to the dimensio
 
 ## How it is checked
 
-`tests/test_powerbi_model.py` checks that the committed TMDL matches the generator, every `table[column]` and `[measure]` reference in the DAX resolves, every relationship key is unique on the one side and complete on the many side, and the PVM measures' algebra reproduces the Python bridge to the cent. Those are static checks; DAX itself is evaluated only when the model is opened in Power BI Desktop.
+`tests/test_powerbi_model.py` checks that the committed TMDL matches the generator, every `table[column]` and `[measure]` reference in the DAX resolves, every relationship key is unique on the one side and complete on the many side, and the PVM measures' algebra reproduces the Python bridge to the cent. The model was also opened in Power BI Desktop (November 2026), refreshed from GitHub (6,555 shipment rows loaded) and queried in DAX query view: the seven PVM measures returned the Python bridge to the cent with `PVM Check` = 0, `Variance Check` = 0, GM % 27%, 105 promotion events and 12 paid back. That run caught one bug the static tests missed (translations use `caption:`, not `translatedCaption:`), now fixed. Row-level security roles loaded; the "View as" behaviour was not tested.
 
 `measures.dax` lists the same measures as plain DAX for reading or for pasting into another model.

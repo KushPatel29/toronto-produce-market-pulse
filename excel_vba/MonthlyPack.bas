@@ -47,6 +47,7 @@ Private Sub RunPack(ByVal draftEmail As Boolean)
         pdfPath = ExportPack()
         WriteLog "OK", 0, pdfPath, Timer - t0
         SpeedUp False
+        ThisWorkbook.Worksheets(SUMMARY_SHEET).Activate
         If draftEmail Then DraftPackEmail pdfPath
         MsgBox "Monthly pack exported:" & vbCrLf & pdfPath, vbInformation, "Margin pack"
     Else

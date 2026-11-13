@@ -9,6 +9,8 @@ local outputs/ folder to load your own rebuild instead.
 
 import csv
 import json
+import shutil
+import uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -256,6 +258,11 @@ SECURITY_ROWS = [
 M_TYPES = {"string": "type text", "int64": "Int64.Type", "double": "type number", "dateTime": "type date", "boolean": "type logical"}
 
 
+def tag(*parts: str) -> str:
+    """Stable lineage tag, so regenerating the model does not churn Git diffs."""
+    return str(uuid.uuid5(uuid.NAMESPACE_URL, "market-pulse/" + "/".join(parts)))
+
+
 def q(name: str) -> str:
     """TMDL object name, quoted when it is not a plain identifier."""
     return name if name.replace("_", "").isalnum() and not name[0].isdigit() else "'" + name.replace("'", "''") + "'"
@@ -275,10 +282,11 @@ def table_tmdl(name: str) -> str:
     header = csv_header(rel)
     if header != list(cols):
         raise ValueError(f"{rel}: CSV columns {header} differ from model columns {list(cols)}")
-    out = [f"/// {desc}", f"table {name}", ""]
+    out = [f"/// {desc}", f"table {name}", f"\tlineageTag: {tag(name)}", ""]
     for c, (dtype, fmt, _) in cols.items():
         out.append(f"\tcolumn {q(c)}")
         out.append(f"\t\tdataType: {dtype}")
+        out.append(f"\t\tlineageTag: {tag(name, c)}")
         if fmt:
             out.append(f"\t\tformatString: {fmt}")
         if KEYS.get(name) == c:
@@ -297,6 +305,7 @@ def table_tmdl(name: str) -> str:
             out.append(f"\tmeasure {q(m_name)} = {dax}")
         out.append(f"\t\tformatString: {fmt}")
         out.append(f"\t\tdisplayFolder: {folder}")
+        out.append(f"\t\tlineageTag: {tag(name, 'measure', m_name)}")
         out.append("")
     types = ", ".join(f'{{"{c}", {M_TYPES[t]}}}' for c, (t, _, _) in cols.items())
     m = (
@@ -317,7 +326,8 @@ def security_tmdl() -> str:
     return (
         "/// Illustrative user-to-segment map for dynamic row-level security. Replace the emails with real accounts.\n"
         "table security_user_segment\n"
-        "\tisHidden\n\n"
+        "\tisHidden\n"
+        f"\tlineageTag: {tag('security_user_segment')}\n\n"
         "\tcolumn user_email\n\t\tdataType: string\n\t\tisHidden\n\t\tisNameInferred\n\t\tsummarizeBy: none\n\t\tsourceColumn: [user_email]\n\n"
         "\tcolumn segment_id\n\t\tdataType: string\n\t\tisHidden\n\t\tisNameInferred\n\t\tsummarizeBy: none\n\t\tsourceColumn: [segment_id]\n\n"
         "\tpartition security_user_segment = calculated\n\t\tmode: import\n\t\tsource =\n"
@@ -329,11 +339,11 @@ def security_tmdl() -> str:
 def culture_tmdl() -> str:
     out = ["cultureInfo fr-CA", "", "\ttranslations", "", "\t\tmodel Model"]
     for name, (_rel, _desc, fr, cols) in TABLES.items():
-        out += ["", f"\t\t\ttable {name}", f"\t\t\t\ttranslatedCaption: {fr}"]
+        out += ["", f"\t\t\ttable {name}", f"\t\t\t\tcaption: {fr}"]
         for c, (_t, _f, cfr) in cols.items():
-            out += ["", f"\t\t\t\tcolumn {q(c)}", f"\t\t\t\t\ttranslatedCaption: {cfr}"]
+            out += ["", f"\t\t\t\tcolumn {q(c)}", f"\t\t\t\t\tcaption: {cfr}"]
         for m_name, *_rest, mfr in MEASURES.get(name, []):
-            out += ["", f"\t\t\t\tmeasure {q(m_name)}", f"\t\t\t\t\ttranslatedCaption: {mfr}"]
+            out += ["", f"\t\t\t\tmeasure {q(m_name)}", f"\t\t\t\t\tcaption: {mfr}"]
     return "\n".join(out) + "\n"
 
 
@@ -345,7 +355,7 @@ def write(path: Path, text: str) -> None:
 def main() -> None:
     d = SM / "definition"
     write(SM / "definition.pbism", json.dumps({"version": "4.0", "settings": {}}, indent=2) + "\n")
-    write(d / "database.tmdl", "database\n\tcompatibilityLevel: 1600\n")
+    write(d / "database.tmdl", "database\n\tcompatibilityLevel: 1567\n")
     write(
         d / "model.tmdl",
         "model Model\n\tculture: en-US\n\tdefaultPowerBIDataSourceVersion: powerBI_V3\n"
@@ -374,19 +384,33 @@ def main() -> None:
     write(d / "cultures" / "fr-CA.tmdl", culture_tmdl())
 
     rp = PBI / "MarketPulse.Report"
-    write(rp / "definition.pbir", json.dumps({"version": "4.0", "datasetReference": {"byPath": {"path": "../MarketPulse.SemanticModel"}}}, indent=2) + "\n")
+    if rp.exists():
+        shutil.rmtree(rp)
+    platform = "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json"
+    for folder, kind, name in [(SM, "SemanticModel", "Market Pulse model"), (rp, "Report", "Market Pulse")]:
+        meta = {"$schema": platform, "metadata": {"type": kind, "displayName": name}, "config": {"version": "2.0", "logicalId": tag(kind)}}
+        write(folder / ".platform", json.dumps(meta, indent=2) + "\n")
+    schema = "https://developer.microsoft.com/json-schemas/fabric/item/report/"
+    write(rp / "definition.pbir", json.dumps({"$schema": schema + "definitionProperties/2.0.0/schema.json", "version": "4.0", "datasetReference": {"byPath": {"path": "../MarketPulse.SemanticModel"}}}, indent=2) + "\n")
+    rd = rp / "definition"
+    write(rd / "version.json", json.dumps({"$schema": schema + "definition/versionMetadata/1.0.0/schema.json", "version": "2.0.0"}, indent=2) + "\n")
     report = {
-        "config": json.dumps({"version": "5.43", "themeCollection": {}}),
-        "layoutOptimization": 0,
-        "resourcePackages": [],
-        "sections": [
-            {"config": "{}", "displayName": "Overview", "displayOption": 1, "filters": "[]", "height": 720.0, "name": "ReportSection", "visualContainers": [], "width": 1280.0}
-        ],
+        "$schema": schema + "definition/report/1.2.0/schema.json",
+        "themeCollection": {"baseTheme": {"name": "CY24SU10", "reportVersionAtImport": "5.61", "type": "SharedResources"}},
+        "layoutOptimization": "None",
+        "resourcePackages": [{"name": "SharedResources", "type": "SharedResources", "items": [{"name": "CY24SU10", "path": "BaseThemes/CY24SU10.json", "type": "BaseTheme"}]}],
+        "settings": {"useStylableVisualContainerHeader": True, "defaultDrillFilterOtherVisuals": True, "useEnhancedTooltips": True},
     }
-    write(rp / "report.json", json.dumps(report, indent=2) + "\n")
+    write(rd / "report.json", json.dumps(report, indent=2) + "\n")
+    page = "overview0000000000000"
+    write(rd / "pages" / "pages.json", json.dumps({"$schema": schema + "definition/pagesMetadata/1.0.0/schema.json", "pageOrder": [page], "activePageName": page}, indent=2) + "\n")
+    write(rd / "pages" / page / "page.json", json.dumps({"$schema": schema + "definition/page/2.1.0/schema.json", "name": page, "displayName": "Overview", "displayOption": "FitToPage", "width": 1280, "height": 720}, indent=2) + "\n")
+    theme = rp / "StaticResources/SharedResources/BaseThemes/CY24SU10.json"
+    theme.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(PBI / "assets/CY24SU10.json", theme)
     write(
         PBI / "MarketPulse.pbip",
-        json.dumps({"version": "1.0", "artifacts": [{"report": {"path": "MarketPulse.Report"}}], "settings": {"enableAutoRecovery": True}}, indent=2) + "\n",
+        json.dumps({"$schema": "https://developer.microsoft.com/json-schemas/fabric/pbip/pbipProperties/1.0.0/schema.json", "version": "1.0", "artifacts": [{"report": {"path": "MarketPulse.Report"}}], "settings": {"enableAutoRecovery": True}}, indent=2) + "\n",
     )
     write(PBI / ".gitignore", "**/.pbi/localSettings.json\n**/.pbi/cache.abf\n")
     dax = ["// Generated by build_powerbi_model.py from the same definitions as the TMDL model.", "// Relationships (single direction, many-to-one):"]

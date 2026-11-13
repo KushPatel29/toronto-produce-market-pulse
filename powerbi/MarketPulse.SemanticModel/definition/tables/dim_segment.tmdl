@@ -1,36 +1,43 @@
 /// Customer segment and its pricing terms (assumptions in config/customer_terms.csv).
 table dim_segment
+	lineageTag: a8c3f94f-7ff5-5dbc-a373-813dce4b0c74
 
 	column segment_id
 		dataType: string
+		lineageTag: 4ea960df-fbc6-539e-9d0d-d8ac21d7d5d3
 		isKey
 		summarizeBy: none
 		sourceColumn: segment_id
 
 	column segment
 		dataType: string
+		lineageTag: f1d3f2c2-911d-504a-b522-e7145276cfbb
 		summarizeBy: none
 		sourceColumn: segment
 
 	column volume_share
 		dataType: double
+		lineageTag: 425de80c-8d51-5778-a74f-0211f369cf1b
 		formatString: 0.0%;-0.0%;0.0%
 		summarizeBy: none
 		sourceColumn: volume_share
 
 	column margin_adj
 		dataType: double
+		lineageTag: 93e2d71f-7e23-5957-9280-4583c09acc14
 		formatString: 0.0%;-0.0%;0.0%
 		summarizeBy: none
 		sourceColumn: margin_adj
 
 	column pricing_policy
 		dataType: string
+		lineageTag: 51875fd5-1fa2-5021-a83a-bda5d76020b2
 		summarizeBy: none
 		sourceColumn: pricing_policy
 
 	column terms
 		dataType: string
+		lineageTag: d19705b1-bcb2-54bd-966d-8139dd1141da
 		summarizeBy: none
 		sourceColumn: terms
 

@@ -1,20 +1,24 @@
 /// Replayed selling price per item, segment and week on real costs; volumes are assumptions.
 table fact_sales_price
+	lineageTag: b738f3c8-c234-50dc-bef3-307fe40aa8b6
 
 	column item_id
 		dataType: string
+		lineageTag: 01950cda-6746-54ea-845d-eb18670b38ff
 		isHidden
 		summarizeBy: none
 		sourceColumn: item_id
 
 	column segment_id
 		dataType: string
+		lineageTag: e690f567-2fa1-5b3c-b7f7-548ac1f8493c
 		isHidden
 		summarizeBy: none
 		sourceColumn: segment_id
 
 	column date_key
 		dataType: dateTime
+		lineageTag: 694168e3-175c-507d-9eee-8ef2eff27004
 		formatString: yyyy-mm-dd
 		isHidden
 		summarizeBy: none
@@ -22,36 +26,42 @@ table fact_sales_price
 
 	column cases
 		dataType: double
+		lineageTag: 94fd3fa8-143f-5b49-b0d6-8cdb509e3bd6
 		formatString: #,0.0
 		summarizeBy: none
 		sourceColumn: cases
 
 	column sell_price
 		dataType: double
+		lineageTag: 52c0d080-170d-534a-95f5-2ac142dfd66b
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		summarizeBy: none
 		sourceColumn: sell_price
 
 	column landed_cost
 		dataType: double
+		lineageTag: b2b0063b-11c0-5ca7-babc-7511534fc8b4
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		summarizeBy: none
 		sourceColumn: landed_cost
 
 	column prior_cost
 		dataType: double
+		lineageTag: 07e4fe2a-9b10-570a-a2bc-3161f09c7dbf
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		summarizeBy: none
 		sourceColumn: prior_cost
 
 	column target_margin
 		dataType: double
+		lineageTag: 7160717e-debb-5f5f-81d6-1af453ff8800
 		formatString: 0.0%;-0.0%;0.0%
 		summarizeBy: none
 		sourceColumn: target_margin
 
 	column price_changed
 		dataType: int64
+		lineageTag: 5aac6f5c-c55b-5c1d-bebf-9e38a9df2b87
 		formatString: 0
 		summarizeBy: none
 		sourceColumn: price_changed
@@ -60,21 +70,25 @@ table fact_sales_price
 	measure Revenue = SUMX ( fact_sales_price, fact_sales_price[sell_price] * fact_sales_price[cases] )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Pricing
+		lineageTag: d89aa54f-4d5e-5df3-9bbf-2f346d067b11
 
 	/// Landed cost x cases.
 	measure COGS = SUMX ( fact_sales_price, fact_sales_price[landed_cost] * fact_sales_price[cases] )
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Pricing
+		lineageTag: 982c9c93-3a74-5cf1-982b-3527cf85737e
 
 	/// Revenue minus landed cost.
 	measure 'Gross Margin' = [Revenue] - [COGS]
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Pricing
+		lineageTag: 74ea3986-8ec5-558e-a63d-f25191edb21b
 
 	/// Gross margin as a share of revenue.
 	measure 'GM %' = DIVIDE ( [Gross Margin], [Revenue] )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Pricing
+		lineageTag: 02e01efd-e920-58b8-bd4b-a1bdea2b22a6
 
 	/// Margin the same revenue would earn at each item's target margin.
 	measure 'GM at Target' =
@@ -84,21 +98,25 @@ table fact_sales_price
 			)
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Margin variance
+		lineageTag: 2bbe9be7-fd5a-5246-99f4-8eb2c8f726d0
 
 	/// Revenue-weighted target margin.
 	measure 'Target GM %' = DIVIDE ( [GM at Target], [Revenue] )
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Margin variance
+		lineageTag: 49d5ff75-a77b-5867-a0e4-0c5ed0ec06b7
 
 	/// Equals Variance - Cost Timing plus Variance - Price Hold.
 	measure 'Margin Variance' = [Gross Margin] - [GM at Target]
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Margin variance
+		lineageTag: c95bcc3d-9793-57dd-8061-fe1e87ad5aa2
 
 	/// Margin points above (+) or below (-) target.
 	measure 'Margin Gap (pts)' = ( [GM %] - [Target GM %] ) * 100
 		formatString: 0.0
 		displayFolder: Margin variance
+		lineageTag: 730b26cb-241f-5bc6-aec3-c713532651a6
 
 	/// Quotes go out on last week's cost.
 	measure 'Variance - Cost Timing' =
@@ -108,6 +126,7 @@ table fact_sales_price
 			)
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Margin variance
+		lineageTag: 27926264-3d51-558f-9ff1-54f14f858be2
 
 	/// Cost of keeping a list or band price instead of repricing.
 	measure 'Variance - Price Hold' =
@@ -118,11 +137,13 @@ table fact_sales_price
 			)
 		formatString: \$#,0;(\$#,0);\$#,0
 		displayFolder: Margin variance
+		lineageTag: c29d9e14-1830-565c-bfed-50fdfd8a08eb
 
 	/// Must be 0.
 	measure 'Variance Check' = ROUND ( [Margin Variance] - [Variance - Cost Timing] - [Variance - Price Hold], 2 )
 		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		displayFolder: Margin variance
+		lineageTag: 4d6823e4-47e6-56a7-97ce-f93d095a9896
 
 	/// Share of item-weeks more than 10 points under target margin.
 	measure 'Breach Rate' =
@@ -137,11 +158,13 @@ table fact_sales_price
 			)
 		formatString: 0.0%;-0.0%;0.0%
 		displayFolder: Pricing
+		lineageTag: 9ce4ab1d-ba33-524f-8111-b008ff22a865
 
 	/// Number of price changes.
 	measure 'Price Changes' = SUM ( fact_sales_price[price_changed] )
 		formatString: #,0
 		displayFolder: Pricing
+		lineageTag: 3b19276f-3161-589d-9b6c-f25242b9e75a
 
 	partition fact_sales_price = m
 		mode: import

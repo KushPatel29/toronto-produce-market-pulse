@@ -16,3 +16,12 @@ Three VBA modules automate the monthly reporting run on `outputs/Margin_Variance
 1. Open `Margin_Variance_and_Terms.xlsx`, press Alt+F11, then File > Import File for each `.bas` file.
 2. Close the editor, run `PackSetup.AddButtons` once (Alt+F8).
 3. Save as **Excel Macro-Enabled Workbook (.xlsm)**.
+
+## Verified in Excel
+
+Imported into Microsoft 365 Excel for Windows (November 2026), compiled without errors, and run on the generated workbook:
+
+- `RunMonthlyPack` passed every check, wrote `Pack_Summary`, exported a 6-page PDF in 1.4 seconds and logged the run.
+- With one cost-timing value set to 0, it found the two failing check cells (the month and the total), listed them on `Pack_Summary` and exported nothing.
+- `ExportERPPriceList` wrote 92 rows and flagged 15 prices that moved more than 15%.
+- `AddButtons` placed the three buttons on the README sheet.
